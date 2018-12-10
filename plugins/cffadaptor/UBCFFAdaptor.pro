@@ -51,11 +51,6 @@ DEFINES += NO_THIRD_PARTY_WARNINGS
 
 INCLUDEPATH += src
 
-DEPENDPATH  += $$THIRD_PARTY_PATH/quazip/
-INCLUDEPATH += $$THIRD_PARTY_PATH/quazip/
-include($$THIRD_PARTY_PATH/quazip/quazip.pri)
-
-
 SOURCES += \
     src/UBCFFAdaptor.cpp
 

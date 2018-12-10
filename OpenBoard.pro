@@ -2,6 +2,7 @@ TARGET = "OpenBoard"
 TEMPLATE = app
 
 CONFIG += c++14
+
 CONFIG -= flat
 CONFIG += debug_and_release \
           no_include_pwd
@@ -42,6 +43,8 @@ QT += printsupport
 QT += core
 
 INCLUDEPATH += src
+
+include(libs.pri)
 
 include(src/adaptors/adaptors.pri)
 include(src/api/api.pri)
@@ -450,7 +453,6 @@ linux-g++* {
     LIBS += -lcrypto
     #LIBS += -lprofiler
     LIBS += -lX11
-    LIBS += -lquazip5
     INCLUDEPATH += "/usr/include/quazip"
 
     LIBS += -lpoppler
