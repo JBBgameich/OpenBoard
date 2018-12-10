@@ -31,6 +31,7 @@
 
 #include <QtGui>
 #include <QApplication>
+#include <QStandardPaths>
 
 #include <unistd.h>
 #include <X11/keysym.h>
@@ -45,7 +46,7 @@ void UBPlatformUtils::init()
 
 QString UBPlatformUtils::applicationResourcesDirectory()
 {
-    return QApplication::applicationDirPath();
+    return QString("/usr/share/openboard/");
 }
 
 void UBPlatformUtils::hideFile(const QString &filePath)
