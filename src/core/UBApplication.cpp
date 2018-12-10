@@ -131,7 +131,7 @@ UBApplication::UBApplication(const QString &id, int &argc, char **argv) : QtSing
     updateProtoActionsState();
 
 #ifndef Q_OS_OSX
-    setWindowIcon(QIcon(":/images/OpenBoard.png"));
+    setWindowIcon(QIcon(":/images/ch.openboard.OpenBoard.png"));
 #endif
 
     setStyle("fusion");
