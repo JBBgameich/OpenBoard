@@ -1,4 +1,4 @@
-TARGET = "OpenBoard"
+TARGET = "openboard"
 TEMPLATE = app
 
 CONFIG -= flat
@@ -83,11 +83,14 @@ FORMS += resources/forms/mainWindow.ui \
    resources/forms/capturePublishing.ui \
    resources/forms/intranetPodcastPublishingDialog.ui
 
+UB_BINARY.files = openboard
 UB_ETC.files = resources/etc
 UB_I18N.files = resources/i18n/*.qm
 UB_LIBRARY.files = resources/library
 UB_FONTS.files = resources/fonts
 UB_THIRDPARTY_INTERACTIVE.files = thirdparty/interactive
+UB_DESKTOP.files = resources/ch.openboard.OpenBoard.desktop
+UB_ICON.files = resources/images/ch.openboard.OpenBoard.png
 
 DEFINES += NO_THIRD_PARTY_WARNINGS
 DEFINES += UBVERSION=\"\\\"$${LONG_VERSION}\"\\\" \
@@ -106,7 +109,6 @@ CONFIG(release, debug|release) {
    CONFIG += warn_off
 }
 
-DESTDIR = $$BUILD_DIR/product
 OBJECTS_DIR = $$BUILD_DIR/objects
 MOC_DIR = $$BUILD_DIR/moc
 RCC_DIR = $$BUILD_DIR/rcc
@@ -181,13 +183,14 @@ macx {
    QMAKE_CXXFLAGS_RELEASE += -gdwarf-2 \
        -mdynamic-no-pic
 
-#    QMAKE_CFLAGS += -fopenmp
- #   QMAKE_CXXFLAGS += -fopenmp
-  #  QMAKE_LFLAGS += -fopenmp
+   # QMAKE_CFLAGS += -fopenmp
+   # QMAKE_CXXFLAGS += -fopenmp
+   # QMAKE_LFLAGS += -fopenmp
 
    CONTENTS_DIR = "Contents"
    RESOURCES_DIR = "Contents/Resources"
    FRAMEWORKS_DIR = "Contents/Frameworks"
+
 
    UB_ETC.files = "resources/etc"
    UB_ETC.path = "$$RESOURCES_DIR"
@@ -416,6 +419,10 @@ macx {
 }
 
 linux-g++* {
+    isEmpty(PREFIX) {
+        PREFIX = "/usr/"
+    }
+
     CONFIG += link_prl
     LIBS += -lcrypto
     #LIBS += -lprofiler
@@ -423,10 +430,12 @@ linux-g++* {
     QMAKE_CFLAGS += -fopenmp
     QMAKE_CXXFLAGS += -fopenmp
     QMAKE_LFLAGS += -fopenmp
-    UB_LIBRARY.path = $$DESTDIR
-    UB_I18N.path = $$DESTDIR/i18n
-    UB_ETC.path = $$DESTDIR
-    UB_THIRDPARTY_INTERACTIVE.path = $$DESTDIR/library
+    UB_BINARY.path = $$INSTALL_ROOT/$$PREFIX/bin/
+    UB_LIBRARY.path = $$INSTALL_ROOT/$$PREFIX/share/OpenBoard/
+    UB_I18N.path = $$INSTALL_ROOT/$$PREFIX/share/OpenBoard/i18n/
+    UB_ETC.path = $$INSTALL_ROOT/$$PREFIX/share/OpenBoard/
+    UB_DESKTOP.path = $$INSTALL_ROOT/$$PREFIX/share/applications/
+    UB_ICON.path = $$INSTALL_ROOT/$$PREFIX/share/icons/hicolor/64x64/apps/
     system(mkdir -p $$BUILD_DIR)
     system(echo "$$VERSION" > $$BUILD_DIR/version)
     system(echo "$$LONG_VERSION" > $$BUILD_DIR/longversion)
@@ -469,12 +478,14 @@ TRANSLATIONS = resources/i18n/OpenBoard_en.ts \
    resources/i18n/OpenBoard_hu.ts \
    resources/i18n/OpenBoard_mg.ts
 
-INSTALLS = UB_ETC \
+INSTALLS = UB_BINARY \
+   UB_ETC \
    UB_I18N \
    UB_LIBRARY \
-   UB_THIRDPARTY_INTERACTIVE
+   UB_THIRDPARTY_INTERACTIVE \
+   UB_DESKTOP \
+   UB_ICON
 
 DISTFILES += \
     resources/images/moveDown.svg \
     resources/images/moveDownDisabled.svg
-
