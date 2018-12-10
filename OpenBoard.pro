@@ -3,7 +3,7 @@ TEMPLATE = app
 
 CONFIG -= flat
 CONFIG += debug_and_release \
-          no_include_pwd qtsingleapplication
+          no_include_pwd
 
 
 VERSION_MAJ = 1
