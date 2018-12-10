@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenBoard
+GenericName=OpenBoard
+Comment=Interactive whiteboard for schools and universities
+Exec=openboard
+Icon=ch.openboard.OpenBoard
+StartupNotify=true
+Terminal=false
+Type=Application
+MimeType=application/x-OpenBoard;
+Categories=Qt;KDE;Education;Engineering;
