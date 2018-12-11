@@ -57,22 +57,13 @@ linux-g++* {
     SOURCES  += src/podcast/ffmpeg/UBFFmpegVideoEncoder.cpp \
                 src/podcast/ffmpeg/UBMicrophoneInput.cpp
 
-
-    DEPENDPATH += /usr/lib/x86_64-linux-gnu
-
-    LIBS += -lavformat -lavcodec -lswscale -lavutil \
-            -lva-x11 \
-            -lva \
-            -lxcb-shm \
-            -lxcb-xfixes \
-            -lxcb-render -lxcb-shape -lxcb -lX11 -lasound -lSDL -lx264 -lpthread -lvpx -lvorbisenc -lvorbis -ltheoraenc -ltheoradec -logg -lopus -lmp3lame -lfreetype -lfdk-aac -lass -llzma -lbz2 -lz -ldl -lswresample -lswscale -lavutil -lm
+    PKGCONFIG += libavformat libavcodec libavutil libswresample libswscale
 
     FFMPEG_VERSION = $$system(ffmpeg --version|& grep -oP "version.*?\K[0-9]\.[0-9]")
     equals(FFMPEG_VERSION, 2.8) {
-        LIBS -= -lswresample
-        LIBS += -lavresample
+        PKGCONFIG -= libswresample
+        PKGCONFIG += libavresample
     }
-
 
     QMAKE_CXXFLAGS += -std=c++11 # move this to OpenBoard.pro when we can use C++11 on all platforms
 }
