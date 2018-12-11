@@ -31,6 +31,7 @@
 
 #include <QtGui>
 #include <QApplication>
+#include <QStandardPaths>
 
 #include <unistd.h>
 #include <X11/keysym.h>
@@ -45,7 +46,13 @@ void UBPlatformUtils::init()
 
 QString UBPlatformUtils::applicationResourcesDirectory()
 {
-    return QApplication::applicationDirPath();
+    QString appDataPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                 QApplication::applicationName() + "/library/applications/",
+                                                 QStandardPaths::LocateDirectory);
+    if (appDataPath.isEmpty())
+        return QApplication::applicationDirPath();
+    else
+        return appDataPath + "../../";
 }
 
 void UBPlatformUtils::hideFile(const QString &filePath)
