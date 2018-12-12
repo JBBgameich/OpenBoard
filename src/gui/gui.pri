@@ -23,7 +23,6 @@ HEADERS += src/gui/UBThumbnailView.h \
     src/gui/UBWebToolsPalette.h \
     src/gui/UBActionPalette.h \
     src/gui/UBFavoriteToolPalette.h \
-    src/gui/UBKeyboardPalette.h \
     src/gui/UBDockPalette.h \
     src/gui/UBPropertyPalette.h \
     src/gui/UBUpdateDlg.h \
@@ -68,7 +67,6 @@ SOURCES += src/gui/UBThumbnailView.cpp \
     src/gui/UBWebToolsPalette.cpp \
     src/gui/UBActionPalette.cpp \
     src/gui/UBFavoriteToolPalette.cpp \
-    src/gui/UBKeyboardPalette.cpp \
     src/gui/UBDockPalette.cpp \
     src/gui/UBPropertyPalette.cpp \
     src/gui/UBUpdateDlg.cpp \
@@ -88,9 +86,3 @@ SOURCES += src/gui/UBThumbnailView.cpp \
     src/gui/UBBackgroundPalette.cpp \
     src/gui/UBBoardThumbnailsView.cpp \
     src/gui/UBDocumentNavigator.cpp
-win32:SOURCES += src/gui/UBKeyboardPalette_win.cpp
-macx:OBJECTIVE_SOURCES += src/gui/UBKeyboardPalette_mac.mm
-linux-g++:SOURCES += src/gui/UBKeyboardPalette_linux.cpp
-linux-g++-32:SOURCES += src/gui/UBKeyboardPalette_linux.cpp
-linux-g++-64:SOURCES += src/gui/UBKeyboardPalette_linux.cpp
-

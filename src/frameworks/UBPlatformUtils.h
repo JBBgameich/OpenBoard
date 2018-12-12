@@ -208,7 +208,6 @@ public:
         static QStringList availableTranslations();
         static void setFrontProcess();
         static void showFullScreen(QWidget * pWidget);
-        static void showOSK(bool show);
 
 #ifdef Q_OS_OSX
         static void SetMacLocaleByIdentifier(const QString& id);

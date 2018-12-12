@@ -438,22 +438,3 @@ void UBPlatformUtils::showFullScreen(QWidget *pWidget)
 {
     pWidget->showFullScreen();
 }
-
-void UBPlatformUtils::showOSK(bool show)
-{
-    if (show) {
-        QString windir = qgetenv("WINDIR");
-        QString osk_path = windir+"\\System32\\osk.exe";
-
-        QProcess oskProcess;
-        // We have to pass by explorer.exe because osk.exe can only be launched
-        // directly with administrator rights
-        oskProcess.startDetached("explorer.exe", QStringList() << osk_path);
-    }
-
-    else {
-        HWND oskWindow = ::FindWindow(TEXT("OSKMainClass"), NULL);
-        if (oskWindow)
-            PostMessage(oskWindow, WM_SYSCOMMAND, SC_CLOSE, 0);
-    }
-}

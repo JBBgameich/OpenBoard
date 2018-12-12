@@ -87,9 +87,6 @@ class UBDesktopAnnotationController : public QObject
         void stylusToolChanged(int tool);
         void updateBackground();
 
-//         void showKeyboard(bool show);
-//         void showKeyboard(); //X11 virtual keyboard working only needed
-
     signals:
         /**
          * This signal is emitted once the screenshot has been performed. This signal is also emitted when user
@@ -102,7 +99,7 @@ class UBDesktopAnnotationController : public QObject
     protected:
         QPixmap getScreenPixmap();
 
-        UBBoardView* mTransparentDrawingView;       
+        UBBoardView* mTransparentDrawingView;
         UBGraphicsScene* mTransparentDrawingScene;
 
     private slots:

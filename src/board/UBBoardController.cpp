@@ -51,7 +51,6 @@
 #include "gui/UBToolbarButtonGroup.h"
 #include "gui/UBMainWindow.h"
 #include "gui/UBToolWidget.h"
-#include "gui/UBKeyboardPalette.h"
 #include "gui/UBMagnifer.h"
 #include "gui/UBDockPaletteWidget.h"
 
@@ -412,7 +411,6 @@ void UBBoardController::connectToolbar()
     connect(mMainWindow->actionForward, SIGNAL(triggered()), this, SLOT(nextScene()));
     connect(mMainWindow->actionSleep, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(mMainWindow->actionSleep, SIGNAL(triggered()), this, SLOT(blackout()));
-    connect(mMainWindow->actionVirtualKeyboard, SIGNAL(triggered(bool)), this, SLOT(showKeyboard(bool)));
     connect(mMainWindow->actionImportPage, SIGNAL(triggered()), this, SLOT(importPage()));
 }
 
@@ -845,18 +843,6 @@ void UBBoardController::libraryDialogClosed(int ret)
 void UBBoardController::blackout()
 {
     UBApplication::applicationController->blackout();
-}
-
-void UBBoardController::showKeyboard(bool show)
-{
-    if(show)
-        UBDrawingController::drawingController()->setStylusTool(UBStylusTool::Selector);
-
-    if(UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool())
-        UBPlatformUtils::showOSK(show);
-    else
-        mPaletteManager->showVirtualKeyboard(show);
-
 }
 
 
@@ -1891,7 +1877,6 @@ void UBBoardController::closing()
     mIsClosing = true;
     lastWindowClosed();
     ClearUndoStack();
-    showKeyboard(false);
 }
 
 void UBBoardController::lastWindowClosed()
@@ -2121,16 +2106,14 @@ void UBBoardController::saveViewState()
 
 void UBBoardController::stylusToolChanged(int tool)
 {
-    if (UBPlatformUtils::hasVirtualKeyboard() && mPaletteManager->mKeyboardPalette)
+    if (UBPlatformUtils::hasVirtualKeyboard())
     {
         UBStylusTool::Enum eTool = (UBStylusTool::Enum)tool;
         if(eTool != UBStylusTool::Selector && eTool != UBStylusTool::Text)
         {
-            if(mPaletteManager->mKeyboardPalette->m_isVisible)
-                UBApplication::mainWindow->actionVirtualKeyboard->activate(QAction::Trigger);
+                qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
         }
     }
-
 }
 
 

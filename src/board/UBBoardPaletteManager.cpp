@@ -40,7 +40,6 @@
 
 #include "gui/UBMainWindow.h"
 #include "gui/UBStylusPalette.h"
-#include "gui/UBKeyboardPalette.h"
 #include "gui/UBToolWidget.h"
 #include "gui/UBZoomPalette.h"
 #include "gui/UBWebToolsPalette.h"
@@ -79,7 +78,6 @@
 
 UBBoardPaletteManager::UBBoardPaletteManager(QWidget* container, UBBoardController* pBoardController)
     : QObject(container)
-    , mKeyboardPalette(0)
     , mWebToolsCurrentPalette(0)
     , mContainer(container)
     , mBoardControler(pBoardController)
@@ -192,13 +190,6 @@ void UBBoardPaletteManager::slot_changeMainMode(UBApplicationController::MainMod
         case UBApplicationController::Document:
             changeMode(eUBDockPaletteWidget_DOCUMENT);
             break;
-
-        default:
-            {
-                if (UBPlatformUtils::hasVirtualKeyboard() && mKeyboardPalette != NULL)
-                    mKeyboardPalette->hide();
-            }
-            break;
     }
 }
 
@@ -223,16 +214,6 @@ void UBBoardPaletteManager::slot_changeDesktopMode(bool isDesktop)
 
 void UBBoardPaletteManager::setupPalettes()
 {
-
-    if (UBPlatformUtils::hasVirtualKeyboard())
-    {
-        mKeyboardPalette = new UBKeyboardPalette(0);
-#ifndef Q_OS_WIN
-        connect(mKeyboardPalette, SIGNAL(closed()), mKeyboardPalette, SLOT(onDeactivated()));
-#endif
-    }
-
-
     setupDockPaletteWidgets();
 
 
@@ -504,14 +485,6 @@ void UBBoardPaletteManager::containerResized()
         mZoomPalette->refreshPalette();
     }
 
-    if (isFirstResized && mKeyboardPalette && mKeyboardPalette->parent() == UBApplication::boardController->controlContainer())
-    {
-        isFirstResized = false;
-        mKeyboardPalette->move(userLeft + (userWidth - mKeyboardPalette->width())/2,
-                               userTop + (userHeight - mKeyboardPalette->height())/2);
-        mKeyboardPalette->adjustSizeAndPosition();
-    }
-
     if(mLeftPalette)
     {
         mLeftPalette->resize(mLeftPalette->width()-1, mContainer->height());
@@ -680,18 +653,6 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mRightPalette->assignParent(mContainer);
                 mRightPalette->stackUnder(mStylusPalette);
                 mLeftPalette->stackUnder(mStylusPalette);
-                if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
-                    && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
-                {
-                    if(mKeyboardPalette->m_isVisible) {
-                        mKeyboardPalette->hide();
-                        mKeyboardPalette->setParent(UBApplication::boardController->controlContainer());
-                        mKeyboardPalette->show();
-                    }
-                    else
-                        mKeyboardPalette->setParent(UBApplication::boardController->controlContainer());
-                }
 
                 mLeftPalette->setVisible(leftPaletteVisible);
                 mRightPalette->setVisible(rightPaletteVisible);
@@ -714,37 +675,6 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mRightPalette->assignParent((QWidget*)UBApplication::applicationController->uninotesController()->drawingView());
                 mStylusPalette->raise();
 
-                if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
-                    && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
-                {
-
-                    if(mKeyboardPalette->m_isVisible)
-                    {
-                        mKeyboardPalette->hide();
-#ifndef Q_OS_LINUX
-                        mKeyboardPalette->setParent((QWidget*)UBApplication::applicationController->uninotesController()->drawingView());
-#else
-                        mKeyboardPalette->setParent(0);
-#endif
-#ifdef Q_OS_OSX
-                        mKeyboardPalette->setWindowFlags(Qt::Dialog | Qt::Popup | Qt::FramelessWindowHint);
-#endif
-                        mKeyboardPalette->show();
-                    }
-                    else
-// In linux keyboard in desktop mode have to allways be with null parent
-#ifdef Q_OS_LINUX
-                        mKeyboardPalette->setParent(0);
-#else
-                        mKeyboardPalette->setParent((QWidget*)UBApplication::applicationController->uninotesController()->drawingView());
-#endif //Q_OS_LINUX
-#ifdef Q_OS_OSX
-                        mKeyboardPalette->setWindowFlags(Qt::Dialog | Qt::Popup | Qt::FramelessWindowHint);
-#endif
-
-                }
-
                 mLeftPalette->setVisible(leftPaletteVisible);
                 mRightPalette->setVisible(rightPaletteVisible);
 #ifdef Q_OS_WIN
@@ -763,23 +693,6 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
         case eUBDockPaletteWidget_WEB:
             {
                 mAddItemPalette->setParent(UBApplication::mainWindow);
-                if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
-                    && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
-                {
-//                    tmp variable?
-//                    WBBrowserWindow* brWnd = UBApplication::webController->GetCurrentWebBrowser();
-
-                    if(mKeyboardPalette->m_isVisible)
-                    {
-                        mKeyboardPalette->hide();
-                        mKeyboardPalette->setParent(UBApplication::mainWindow);
-                        mKeyboardPalette->show();
-                    }
-                    else
-                        mKeyboardPalette->setParent(UBApplication::mainWindow);
-                }
-
             }
             break;
 
@@ -789,20 +702,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mRightPalette->setVisible(rightPaletteVisible);
                 mLeftPalette->assignParent(UBApplication::documentController->controlView());
                 mRightPalette->assignParent(UBApplication::documentController->controlView());
-                if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
-                    && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
-                {
 
-                    if(mKeyboardPalette->m_isVisible)
-                    {
-                        mKeyboardPalette->hide();
-                        mKeyboardPalette->setParent(UBApplication::documentController->controlView());
-                        mKeyboardPalette->show();
-                    }
-                    else
-                        mKeyboardPalette->setParent(UBApplication::documentController->controlView());
-                }
                 if (mWebToolsCurrentPalette)
                     mWebToolsCurrentPalette->hide();
             }
@@ -814,20 +714,6 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mRightPalette->setVisible(rightPaletteVisible);
                 mLeftPalette->assignParent(0);
                 mRightPalette->assignParent(0);
-                if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
-                    && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
-                {
-
-                    if(mKeyboardPalette->m_isVisible)
-                    {
-                        mKeyboardPalette->hide();
-                        mKeyboardPalette->setParent(0);
-                        mKeyboardPalette->show();
-                    }
-                    else
-                        mKeyboardPalette->setParent(0);
-                }
             }
             break;
     }
@@ -952,11 +838,6 @@ void UBBoardPaletteManager::panButtonReleased()
     }
 }
 
-void UBBoardPaletteManager::showVirtualKeyboard(bool show)
-{
-    if (mKeyboardPalette)
-        mKeyboardPalette->setVisible(show);
-}
 
 void UBBoardPaletteManager::changeStylusPaletteOrientation(QVariant var)
 {

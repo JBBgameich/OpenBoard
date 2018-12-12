@@ -55,7 +55,6 @@
 #include "UBDesktopPalette.h"
 #include "UBDesktopPropertyPalette.h"
 
-#include "gui/UBKeyboardPalette.h"
 #include "gui/UBResources.h"
 
 #include "core/memcheck.h"
@@ -105,18 +104,6 @@ UBDesktopAnnotationController::UBDesktopAnnotationController(QObject *parent, UB
     mDesktopPalette = new UBDesktopPalette(mTransparentDrawingView, rightPalette); 
     // This was not fix, parent reverted
     // FIX #633: The palette must be 'floating' in order to stay on top of the library palette
-
-    if (UBPlatformUtils::hasVirtualKeyboard())
-    {
-        connect( UBApplication::boardController->paletteManager()->mKeyboardPalette, SIGNAL(keyboardActivated(bool)), 
-                 mTransparentDrawingView, SLOT(virtualKeyboardActivated(bool)));
-
-#ifdef Q_OS_LINUX
-        connect(UBApplication::boardController->paletteManager()->mKeyboardPalette, SIGNAL(moved(QPoint)), this, SLOT(refreshMask()));
-        connect(UBApplication::mainWindow->actionVirtualKeyboard, SIGNAL(triggered(bool)), this, SLOT(refreshMask()));
-        connect(mDesktopPalette,SIGNAL(refreshMask()), this, SLOT(refreshMask()));
-#endif
-    }
 
     connect(mDesktopPalette, SIGNAL(uniboardClick()), this, SLOT(goToUniboard()));
     connect(mDesktopPalette, SIGNAL(customClick()), this, SLOT(customCapture()));
@@ -869,11 +856,6 @@ void UBDesktopAnnotationController::updateMask(bool bTransparent)
         if(mDesktopPalette->isVisible())
         {
             p.drawRect(mDesktopPalette->geometry().x(), mDesktopPalette->geometry().y(), mDesktopPalette->width(), mDesktopPalette->height());
-        }
-        if(UBApplication::boardController->paletteManager()->mKeyboardPalette->isVisible())
-        {
-            p.drawRect(UBApplication::boardController->paletteManager()->mKeyboardPalette->geometry().x(), UBApplication::boardController->paletteManager()->mKeyboardPalette->geometry().y(),
-                       UBApplication::boardController->paletteManager()->mKeyboardPalette->width(), UBApplication::boardController->paletteManager()->mKeyboardPalette->height());
         }
 
         if(UBApplication::boardController->paletteManager()->leftPalette()->isVisible())

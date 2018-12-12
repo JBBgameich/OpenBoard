@@ -195,7 +195,6 @@ class UBBoardController : public UBDocumentContainer
 
     public slots:
         void showDocumentsDialog();
-        void showKeyboard(bool show);
         void togglePodcast(bool checked);
         void blackout();
         void addScene();

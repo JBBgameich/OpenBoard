@@ -51,7 +51,6 @@ class UBActionPalette;
 class UBBackgroundPalette;
 class UBBoardController;
 class UBServerXMLHttpRequest;
-class UBKeyboardPalette;
 class UBMainWindow;
 class UBApplicationController;
 class UBStartupHintsPalette;
@@ -69,11 +68,8 @@ class UBBoardPaletteManager : public QObject
         UBRightPalette* rightPalette(){return mRightPalette;}
         UBStylusPalette* stylusPalette(){return mStylusPalette;}
         UBActionPalette *addItemPalette() {return mAddItemPalette;}
-        void showVirtualKeyboard(bool show = true);
         void initPalettesPosAtStartup();
         void refreshPalettes();
-
-        UBKeyboardPalette *mKeyboardPalette;
 
         void setCurrentWebToolsPalette(UBWebToolsPalette *palette) {mWebToolsCurrentPalette = palette;}
         UBWebToolsPalette* mWebToolsCurrentPalette;

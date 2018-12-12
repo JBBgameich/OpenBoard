@@ -49,7 +49,6 @@
 #include "gui/UBWidgetMirror.h"
 #include "gui/UBMainWindow.h"
 #include "gui/UBWebToolsPalette.h"
-#include "gui/UBKeyboardPalette.h"
 
 #include "core/UBSettings.h"
 #include "core/UBSetting.h"
@@ -301,11 +300,6 @@ void UBWebController::setupPalettes()
     {
         mToolsCurrentPalette = new UBWebToolsPalette(UBApplication::mainWindow);
         UBApplication::boardController->paletteManager()->setCurrentWebToolsPalette(mToolsCurrentPalette);
-#ifndef Q_OS_WIN
-        if (UBPlatformUtils::hasVirtualKeyboard() && UBApplication::boardController->paletteManager()->mKeyboardPalette)
-            connect(UBApplication::boardController->paletteManager()->mKeyboardPalette, SIGNAL(closed()),
-                    UBApplication::boardController->paletteManager()->mKeyboardPalette, SLOT(onDeactivated()));
-#endif
 
         connect(mMainWindow->actionWebTrapFlash, SIGNAL(triggered()), this, SLOT(trapFlash()));
         connect(mMainWindow->actionWebCustomCapture, SIGNAL(triggered()), this, SLOT(customCapture()));
