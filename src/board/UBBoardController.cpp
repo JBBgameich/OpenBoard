@@ -2106,14 +2106,6 @@ void UBBoardController::saveViewState()
 
 void UBBoardController::stylusToolChanged(int tool)
 {
-    if (UBPlatformUtils::hasVirtualKeyboard())
-    {
-        UBStylusTool::Enum eTool = (UBStylusTool::Enum)tool;
-        if(eTool != UBStylusTool::Selector && eTool != UBStylusTool::Text)
-        {
-                qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
-        }
-    }
 }
 
 

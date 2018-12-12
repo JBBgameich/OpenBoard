@@ -97,6 +97,9 @@ int main(int argc, char *argv[])
     if (qEnvironmentVariableIsSet("QT_NO_GLIB"))
         qunsetenv("QT_NO_GLIB");
 
+    // Enable virtual keyboard
+    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+
     Q_INIT_RESOURCE(OpenBoard);
 
     qInstallMessageHandler(ub_message_output);
