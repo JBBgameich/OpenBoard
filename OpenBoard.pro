@@ -28,7 +28,7 @@ VERSION_RC = $$replace(VERSION_RC, "b", "176") # 0xB0
 VERSION_RC = $$replace(VERSION_RC, "rc", "192" ) # 0xC0
 VERSION_RC = $$replace(VERSION_RC, "r", "240") # 0xF0
 
-QT += webkit
+#QT += webkit
 QT += svg
 QT += network
 QT += xml
@@ -36,7 +36,7 @@ QT += script
 QT += xmlpatterns
 QT += uitools
 QT += multimedia
-QT += webkitwidgets
+#QT += webkitwidgets
 QT += multimediawidgets
 QT += printsupport
 QT += core
