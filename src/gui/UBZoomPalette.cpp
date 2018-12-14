@@ -31,7 +31,7 @@
 
 #include <QtGui>
 #include <QPushButton>
-#include <math.h>
+#include <cmath>
 
 #include "core/UBApplication.h"
 

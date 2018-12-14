@@ -37,7 +37,7 @@ The file defines some classes for transformation of PDF content stream.
 
 #include <sstream>
 #include <string>
-#include <math.h>
+#include <cmath>
 #include <vector>
 #include <iostream>
 #include "Utils.h"

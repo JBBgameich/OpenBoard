@@ -32,10 +32,10 @@
 
 #include "Config.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
-#include <time.h>
-#include <stdio.h>
+#include <ctime>
+#include <cstdio>
 
 namespace merge_lib
 {
