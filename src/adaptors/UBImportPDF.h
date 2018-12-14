@@ -41,14 +41,14 @@ class UBImportPDF : public UBPageBasedImportAdaptor
 
     public:
         UBImportPDF(QObject *parent = 0);
-        virtual ~UBImportPDF();
+        ~UBImportPDF() override;
 
-        virtual QStringList supportedExtentions();
-        virtual QString importFileFilter();
+        QStringList supportedExtentions() override;
+        QString importFileFilter() override;
 
-        virtual QList<UBGraphicsItem*> import(const QUuid& uuid, const QString& filePath);
-        virtual void placeImportedItemToScene(UBGraphicsScene* scene, UBGraphicsItem* item);
-        virtual const QString& folderToCopy();
+        QList<UBGraphicsItem*> import(const QUuid& uuid, const QString& filePath) override;
+        void placeImportedItemToScene(UBGraphicsScene* scene, UBGraphicsItem* item) override;
+        const QString& folderToCopy() override;
 
     private:
         int dpi;

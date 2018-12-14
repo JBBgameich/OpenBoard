@@ -48,9 +48,9 @@ class UBPageNavigationWidget : public UBDockPaletteWidget
     Q_OBJECT
 public:
     UBPageNavigationWidget(QWidget* parent=0, const char* name="UBPageNavigationWidget");
-    ~UBPageNavigationWidget();
+    ~UBPageNavigationWidget() override;
 
-    bool visibleInMode(eUBDockPaletteWidgetMode mode)
+    bool visibleInMode(eUBDockPaletteWidgetMode mode) override
     {
         return mode == eUBDockPaletteWidget_BOARD;
     }
@@ -62,7 +62,7 @@ public slots:
     void setPageNumber(int current, int total);
 
 protected:
-    virtual void timerEvent(QTimerEvent *event);
+    void timerEvent(QTimerEvent *event) override;
 
 
 private:

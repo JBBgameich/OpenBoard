@@ -38,8 +38,8 @@ class UBBlackoutWidget : public QWidget
 
     public:
         UBBlackoutWidget(QWidget *parent = 0);
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void keyPressEvent(QKeyEvent *event);
+        void mousePressEvent(QMouseEvent *event) override;
+        void keyPressEvent(QKeyEvent *event) override;
 
     signals:
         void activity();

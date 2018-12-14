@@ -41,7 +41,7 @@ class UBHttpGet : public QObject
 
     public:
         UBHttpGet(QObject* parent = 0);
-        virtual ~UBHttpGet();
+        ~UBHttpGet() override;
 
         QNetworkReply* get(QUrl pUrl, QPointF pPoint = QPointF(0, 0), QSize pSize = QSize(0, 0), bool isBackground = false);
 //        QNetworkReply* get(const sDownloadFileDesc &downlinfo);

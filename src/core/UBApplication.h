@@ -61,7 +61,7 @@ class UBApplication : public QtSingleApplication
     public:
 
         UBApplication(const QString &id, int &argc, char **argv);
-        virtual ~UBApplication();
+        ~UBApplication() override;
 
         int exec(const QString& pFileToImport);
 
@@ -95,7 +95,7 @@ class UBApplication : public QtSingleApplication
         void insertSpaceToToolbarBeforeAction(QToolBar* toolbar, QAction* action, int width = -1);
 
         int toolBarHeight();
-        bool eventFilter(QObject *obj, QEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event) override;
 
         bool isVerbose() { return mIsVerbose;}
         void setVerbose(bool verbose){mIsVerbose = verbose;}

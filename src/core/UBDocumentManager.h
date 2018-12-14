@@ -43,7 +43,7 @@ class UBDocumentManager : public QObject
 
     public:
         static UBDocumentManager* documentManager();
-        virtual ~UBDocumentManager();
+        ~UBDocumentManager() override;
 
 
         QString importFileFilter(bool notUbx = false);

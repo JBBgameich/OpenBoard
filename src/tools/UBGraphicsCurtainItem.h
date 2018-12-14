@@ -46,23 +46,23 @@ class UBGraphicsCurtainItem : public QObject, public QGraphicsRectItem, public U
 
     public:
         UBGraphicsCurtainItem(QGraphicsItem* parent = 0);
-        virtual ~UBGraphicsCurtainItem();
+        ~UBGraphicsCurtainItem() override;
 
         enum { Type = UBGraphicsItemType::CurtainItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
-        virtual UBItem* deepCopy() const;
-        virtual void copyItemParameters(UBItem *copy) const;
+        UBItem* deepCopy() const override;
+        void copyItemParameters(UBItem *copy) const override;
 
         //TODO UB 4.x not nice ...
         void triggerRemovedSignal();
-        virtual void clearSource(){;}
+        void clearSource() override{;}
 
-        virtual void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
      signals:
 
@@ -70,13 +70,13 @@ class UBGraphicsCurtainItem : public QObject, public QGraphicsRectItem, public U
 
      protected:
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
         QColor  drawColor() const;
         QColor  opaqueControlColor() const;

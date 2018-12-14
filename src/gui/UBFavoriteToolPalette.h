@@ -40,7 +40,7 @@ class UBFavoriteToolPalette : public UBActionPalette
 
     public:
         UBFavoriteToolPalette(QWidget* parent = 0);
-        virtual ~UBFavoriteToolPalette();
+        ~UBFavoriteToolPalette() override;
 
     private slots:
         void addFavorite();

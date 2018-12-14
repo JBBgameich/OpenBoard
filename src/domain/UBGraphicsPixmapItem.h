@@ -44,38 +44,38 @@ class UBGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem, public 
 
     public:
         UBGraphicsPixmapItem(QGraphicsItem* parent = 0);
-        virtual ~UBGraphicsPixmapItem();
+        ~UBGraphicsPixmapItem() override;
 
         enum { Type = UBGraphicsItemType::PixmapItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
+        void copyItemParameters(UBItem *copy) const override;
 
-        virtual UBGraphicsScene* scene();
+        UBGraphicsScene* scene() override;
 
         Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 
         void setOpacity(qreal op);
         qreal opacity() const;
 
-        virtual void clearSource();
+        void clearSource() override;
 
-        virtual void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
 protected:
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 };
 
 #endif /* UBGRAPHICSPIXMAPITEM_H_ */

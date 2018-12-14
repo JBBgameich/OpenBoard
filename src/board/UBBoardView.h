@@ -51,7 +51,7 @@ public:
 
     UBBoardView(UBBoardController* pController, QWidget* pParent = 0, bool isControl = false, bool isDesktop = false);
     UBBoardView(UBBoardController* pController, int pStartLayer, int pEndLayer, QWidget* pParent = 0, bool isControl = false, bool isDesktop = false);
-    virtual ~UBBoardView();
+    ~UBBoardView() override;
 
     UBGraphicsScene* scene();
 
@@ -89,30 +89,30 @@ protected:
     void handleItemMousePress(QMouseEvent *event);
     void handleItemMouseMove(QMouseEvent *event);
 
-    virtual bool event (QEvent * e);
+    bool event (QEvent * e) override;
 
-    virtual void keyPressEvent(QKeyEvent *event);
-    virtual void keyReleaseEvent(QKeyEvent *event);
-    virtual void tabletEvent(QTabletEvent * event);
-    virtual void mouseDoubleClickEvent(QMouseEvent *event);
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
-    virtual void wheelEvent(QWheelEvent *event);
-    virtual void leaveEvent ( QEvent * event);
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void tabletEvent(QTabletEvent * event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
+    void leaveEvent ( QEvent * event) override;
 
-    virtual void focusOutEvent ( QFocusEvent * event );
+    void focusOutEvent ( QFocusEvent * event ) override;
 
-    virtual void drawItems(QPainter *painter, int numItems,
+    void drawItems(QPainter *painter, int numItems,
                            QGraphicsItem *items[],
-                           const QStyleOptionGraphicsItem options[]);
+                           const QStyleOptionGraphicsItem options[]) override;
 
-    virtual void dropEvent(QDropEvent *event);
-    virtual void dragMoveEvent(QDragMoveEvent *event);
+    void dropEvent(QDropEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
 
-    virtual void resizeEvent(QResizeEvent * event);
+    void resizeEvent(QResizeEvent * event) override;
 
-    virtual void drawBackground(QPainter *painter, const QRectF &rect);
+    void drawBackground(QPainter *painter, const QRectF &rect) override;
 
 private:
 

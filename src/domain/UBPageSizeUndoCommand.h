@@ -40,13 +40,13 @@ class UBPageSizeUndoCommand : public UBUndoCommand
 {
     public:
         UBPageSizeUndoCommand(UBGraphicsScene* pScene, const QSize& previousSize, const QSize& newSize);
-        virtual ~UBPageSizeUndoCommand();
+        ~UBPageSizeUndoCommand() override;
 
         virtual int getType() { return UBUndoType::undotype_PAGESIZE; };
 
     protected:
-        virtual void undo();
-        virtual void redo();
+        void undo() override;
+        void redo() override;
 
     private:
         UBGraphicsScene* mScene;

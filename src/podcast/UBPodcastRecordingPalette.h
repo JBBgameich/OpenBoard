@@ -44,7 +44,7 @@ class UBPodcastRecordingPalette : public UBActionPalette
 
     public:
         UBPodcastRecordingPalette(QWidget *parent = 0);
-        virtual ~UBPodcastRecordingPalette();
+        ~UBPodcastRecordingPalette() override;
 
     public slots:
 
@@ -63,12 +63,12 @@ class UBVuMeter : public QWidget
 
     public:
         UBVuMeter(QWidget* pParent);
-        virtual ~UBVuMeter();
+        ~UBVuMeter() override;
 
         void setVolume(quint8 pVolume);
     protected:
 
-        virtual void paintEvent(QPaintEvent* e);
+        void paintEvent(QPaintEvent* e) override;
 
     private:
         quint8 mVolume;

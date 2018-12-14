@@ -106,10 +106,10 @@ class UBCookieJar : public QNetworkCookieJar
         };
 
         UBCookieJar(QObject *parent = 0);
-        ~UBCookieJar();
+        ~UBCookieJar() override;
 
-        QList<QNetworkCookie> cookiesForUrl(const QUrl &url) const;
-        bool setCookiesFromUrl(const QList<QNetworkCookie> &cookieList, const QUrl &url);
+        QList<QNetworkCookie> cookiesForUrl(const QUrl &url) const override;
+        bool setCookiesFromUrl(const QList<QNetworkCookie> &cookieList, const QUrl &url) override;
 
         AcceptPolicy acceptPolicy() const;
         void setAcceptPolicy(AcceptPolicy policy);

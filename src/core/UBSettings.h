@@ -50,7 +50,7 @@ class UBSettings : public QObject
     private:
 
         UBSettings(QObject *parent = 0);
-        virtual ~UBSettings();
+        ~UBSettings() override;
         void cleanNonPersistentSettings();
         bool checkSystemOnScreenKeyboardAvailable();
 

@@ -52,7 +52,7 @@ public:
     UBDownloadProgressDelegate(QObject* parent=0);
 
 protected:
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 };
 
 class UBDownloadWidget : public QWidget
@@ -60,7 +60,7 @@ class UBDownloadWidget : public QWidget
     Q_OBJECT
 public:
     UBDownloadWidget(QWidget* parent=0, const char* name="UBDownloadWidget");
-    ~UBDownloadWidget();
+    ~UBDownloadWidget() override;
 
 private slots:
     void onFileAddedToDownload();

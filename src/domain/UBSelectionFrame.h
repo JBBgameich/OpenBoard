@@ -47,9 +47,9 @@ public:
 
     UBSelectionFrame();
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QRectF boundingRect() const;
-    QPainterPath shape() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
 
     void setLocalBrush(const QBrush &pBrush) {mLocalBrush = pBrush;}
     QBrush localBrush() const {return mLocalBrush;}
@@ -58,12 +58,12 @@ public:
     void updateRect();
     void updateScale();
     bool isEmpty() const {return this->rect().isEmpty();}
-    virtual int type() const {return Type;}
+    int type() const override {return Type;}
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private slots:
     void setAntiScaleRatio(qreal pAntiscaleRatio) {mAntiscaleRatio = pAntiscaleRatio;}

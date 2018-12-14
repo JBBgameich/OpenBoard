@@ -87,7 +87,7 @@ class UBDownloadHttpFile : public UBHttpGet
     Q_OBJECT
 public:
     UBDownloadHttpFile(int fileId, QObject* parent=0);
-    ~UBDownloadHttpFile();
+    ~UBDownloadHttpFile() override;
 
 signals:
     void downloadProgress(int id, qint64 current,qint64 total);
@@ -109,7 +109,7 @@ public:
     UBAsyncLocalFileDownloader(sDownloadFileDesc desc, QObject *parent = 0);
 
     UBAsyncLocalFileDownloader *download();    
-    void run();
+    void run() override;
     void abort();
 
 signals:
@@ -129,7 +129,7 @@ class UBDownloadManager : public QObject
     Q_OBJECT
 public:
     UBDownloadManager(QObject* parent=0, const char* name="UBDownloadManager");
-    ~UBDownloadManager();
+    ~UBDownloadManager() override;
     static UBDownloadManager* downloadManager();
     int addFileToDownload(sDownloadFileDesc desc);
     QVector<sDownloadFileDesc> currentDownloads();

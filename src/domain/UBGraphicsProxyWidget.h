@@ -41,30 +41,30 @@ class UBGraphicsItemDelegate;
 class UBGraphicsProxyWidget: public QGraphicsProxyWidget, public UBItem, public UBResizableGraphicsItem, public UBGraphicsItem
 {
     public:
-        virtual ~UBGraphicsProxyWidget();
+        ~UBGraphicsProxyWidget() override;
 
-        virtual void resize(qreal w, qreal h);
-        virtual void resize(const QSizeF & size);
+        void resize(qreal w, qreal h) override;
+        void resize(const QSizeF & size) override;
 
-        virtual QSizeF size() const;
+        QSizeF size() const override;
 
-        virtual UBGraphicsScene* scene();
+        UBGraphicsScene* scene() override;
 
-        virtual void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
     protected:
         UBGraphicsProxyWidget(QGraphicsItem* parent = 0);
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
-        virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void wheelEvent(QGraphicsSceneWheelEvent *event) override;
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 };
 

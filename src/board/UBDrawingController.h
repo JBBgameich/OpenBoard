@@ -42,7 +42,7 @@ class UBDrawingController : public QObject
 
     private:
         UBDrawingController(QObject * parent = 0);
-        virtual ~UBDrawingController();
+        ~UBDrawingController() override;
 
     public:
 

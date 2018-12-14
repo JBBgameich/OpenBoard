@@ -43,18 +43,18 @@ class UBGraphicsDelegateFrame: public QGraphicsRectItem, public QObject
     public:
 
         UBGraphicsDelegateFrame(UBGraphicsItemDelegate* pDelegate, QRectF pRect, qreal pFrameWidth, bool respectRatio = true, bool hasTitleBar = false);
-        virtual ~UBGraphicsDelegateFrame();
+        ~UBGraphicsDelegateFrame() override;
 
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-        QPainterPath shape() const;
+        QPainterPath shape() const override;
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
         QPointF getFixedPointFromPos();
         QSizeF getResizeVector(qreal moveX, qreal moveY);
         QSizeF resizeDelegate(qreal moveX, qreal moveY);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
         void positionHandles();
         void setVisible(bool visible);

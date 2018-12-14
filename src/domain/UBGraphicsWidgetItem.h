@@ -61,17 +61,17 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
 
     public:
         UBGraphicsWidgetItem(const QUrl &pWidgetUrl = QUrl(), QGraphicsItem *parent = 0);
-        ~UBGraphicsWidgetItem();
+        ~UBGraphicsWidgetItem() override;
 
         enum { Type = UBGraphicsItemType::GraphicsWidgetItemType };
 
-        virtual int type() const { return Type; }
+        int type() const override { return Type; }
 
         virtual void initialize();
 
-        virtual void resize(qreal w, qreal h);
-        virtual void resize(const QSizeF & size);
-        virtual QSizeF size() const;
+        void resize(qreal w, qreal h) override;
+        void resize(const QSizeF & size) override;
+        QSizeF size() const override;
 
         QUrl mainHtml();
         void loadMainHtml();
@@ -104,9 +104,9 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         virtual void setSnapshotPath(const QUrl &newFilePath);
         virtual QUrl getSnapshotPath();
 
-        virtual void clearSource();
+        void clearSource() override;
 
-        virtual void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
         QSize nominalSize() const;
 
@@ -120,8 +120,8 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         void setSnapshot(const QPixmap& pix);
         QPixmap takeSnapshot();
 
-        virtual UBItem* deepCopy() const = 0;
-        virtual UBGraphicsScene* scene();
+        UBItem* deepCopy() const override = 0;
+        UBGraphicsScene* scene() override;
 
         static int widgetType(const QUrl& pUrl);
         static QString widgetName(const QUrl& pUrl);
@@ -157,18 +157,18 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         QMap<QString, QString> mPreferences;
 
 
-        virtual bool event(QEvent *event);
-        virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        bool event(QEvent *event) override;
+        void dropEvent(QGraphicsSceneDragDropEvent *event) override;
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
         virtual void sendJSEnterEvent();
         virtual void sendJSLeaveEvent();
         virtual void injectInlineJavaScript();
-        virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+        void wheelEvent(QGraphicsSceneWheelEvent *event) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) override;
 
     protected slots:
         void geometryChangeRequested(const QRect& geom);
@@ -199,11 +199,11 @@ class UBGraphicsAppleWidgetItem : public UBGraphicsWidgetItem
 
     public:
         UBGraphicsAppleWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = 0);
-        ~UBGraphicsAppleWidgetItem();
+        ~UBGraphicsAppleWidgetItem() override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
-        virtual void setUuid(const QUuid &pUuid);
-        virtual UBItem* deepCopy() const;
+        void copyItemParameters(UBItem *copy) const override;
+        void setUuid(const QUuid &pUuid) override;
+        UBItem* deepCopy() const override;
 };
 
 class UBGraphicsW3CWidgetItem : public UBGraphicsWidgetItem
@@ -244,11 +244,11 @@ class UBGraphicsW3CWidgetItem : public UBGraphicsWidgetItem
         };
 
         UBGraphicsW3CWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = 0);
-        ~UBGraphicsW3CWidgetItem();
+        ~UBGraphicsW3CWidgetItem() override;
 
-        virtual void setUuid(const QUuid &pUuid);
-        virtual UBItem* deepCopy() const;
-        virtual void copyItemParameters(UBItem *copy) const;
+        void setUuid(const QUuid &pUuid) override;
+        UBItem* deepCopy() const override;
+        void copyItemParameters(UBItem *copy) const override;
         QMap<QString, PreferenceValue> preferences();
         Metadata metadatas() const;
 
@@ -262,7 +262,7 @@ class UBGraphicsW3CWidgetItem : public UBGraphicsWidgetItem
         Metadata mMetadatas;
 
     private slots:
-        virtual void javaScriptWindowObjectCleared();
+        void javaScriptWindowObjectCleared() override;
 
     private:
         static void loadNPAPIWrappersTemplates();

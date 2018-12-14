@@ -53,7 +53,7 @@ public:
     };
 
     AlignTextButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = 0, Qt::WindowFrameSection section = Qt::TopLeftSection);
-    virtual ~AlignTextButton();
+    ~AlignTextButton() override;
 
     void setKind(int pKind);
     int kind() {return mKind;}
@@ -109,31 +109,31 @@ class UBGraphicsTextItemDelegate : public UBGraphicsItemDelegate
 
     public:
         UBGraphicsTextItemDelegate(UBGraphicsTextItem* pDelegated, QObject * parent = 0);
-        virtual ~UBGraphicsTextItemDelegate();
+        ~UBGraphicsTextItemDelegate() override;
         bool isEditable();
         void scaleTextSize(qreal multiplyer);
         void recolor();
-        virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
-        virtual void createControls();
+        QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
+        void createControls() override;
         qreal titleBarWidth();
 
     public slots:
         void contentsChanged();
         virtual void setEditable(bool);
-        virtual void remove(bool canUndo);
+        void remove(bool canUndo) override;
 
     protected:
-        virtual void decorateMenu(QMenu *menu);
-        virtual void updateMenuActionState();
+        void decorateMenu(QMenu *menu) override;
+        void updateMenuActionState() override;
 
-        virtual void freeButtons();
+        void freeButtons() override;
 
-        virtual bool mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual bool mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual bool mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        bool mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        bool mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        bool mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-        virtual bool keyPressEvent(QKeyEvent *event);
-        virtual bool keyReleaseEvent(QKeyEvent *event);
+        bool keyPressEvent(QKeyEvent *event) override;
+        bool keyReleaseEvent(QKeyEvent *event) override;
 
     private:
         UBGraphicsTextItem* delegated();

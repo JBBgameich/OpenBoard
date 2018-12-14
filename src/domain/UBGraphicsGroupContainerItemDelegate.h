@@ -43,13 +43,13 @@ public:
     UBGraphicsGroupContainerItem *delegated();
 
 protected:
-    virtual void decorateMenu(QMenu *menu);
-    virtual void buildButtons();
-    virtual void freeButtons();
+    void decorateMenu(QMenu *menu) override;
+    void buildButtons() override;
+    void freeButtons() override;
 
-    virtual bool mousePressEvent(QGraphicsSceneMouseEvent *event);
-    virtual bool mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    virtual bool mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    bool mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    bool mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    bool mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 
 private slots:

@@ -37,14 +37,14 @@ class UBCircleFrame : public QFrame
 {
     public:
         UBCircleFrame(QWidget* parent);
-        virtual ~UBCircleFrame();
+        ~UBCircleFrame() override;
 
         qreal currentPenWidth;
         qreal maxPenWidth;
 
     protected:
 
-        virtual void paintEvent (QPaintEvent * event);
+        void paintEvent (QPaintEvent * event) override;
 };
 
 #endif /* UBCIRCLEFRAME_H_ */

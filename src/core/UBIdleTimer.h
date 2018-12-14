@@ -42,12 +42,12 @@ class UBIdleTimer : public QObject
     public:
 
         UBIdleTimer(QObject *parent = 0);
-        virtual ~UBIdleTimer();
+        ~UBIdleTimer() override;
 
     protected:
 
-        bool eventFilter(QObject *obj, QEvent *event);
-        virtual void timerEvent(QTimerEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event) override;
+        void timerEvent(QTimerEvent *event) override;
 
     private:
 

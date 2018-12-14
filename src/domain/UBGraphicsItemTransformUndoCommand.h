@@ -44,13 +44,13 @@ class UBGraphicsItemTransformUndoCommand : public UBUndoCommand
                                                 const qreal& prevZValue,
                                                 const QSizeF& prevSize = QSizeF(),
                                                 bool setToBackground = false);
-        virtual ~UBGraphicsItemTransformUndoCommand();
+        ~UBGraphicsItemTransformUndoCommand() override;
 
-        virtual int getType() const { return UBUndoType::undotype_GRAPHICITEMTRANSFORM; }
+        int getType() const override { return UBUndoType::undotype_GRAPHICITEMTRANSFORM; }
 
     protected:
-        virtual void undo();
-        virtual void redo();
+        void undo() override;
+        void redo() override;
 
     private:
         QGraphicsItem* mItem;

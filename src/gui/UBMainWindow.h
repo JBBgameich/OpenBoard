@@ -46,7 +46,7 @@ class UBMainWindow : public QMainWindow, public Ui::MainWindow
     public:
 
         UBMainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
-        virtual ~UBMainWindow();
+        ~UBMainWindow() override;
 
         void addBoardWidget(QWidget *pWidget);
         void switchToBoardWidget();
@@ -73,10 +73,10 @@ class UBMainWindow : public QMainWindow, public Ui::MainWindow
     protected:
         void oneButtonMessageBox(QString windowTitle, QString text, QMessageBox::Icon type);
 
-        virtual void keyPressEvent(QKeyEvent *event);
-        virtual void closeEvent (QCloseEvent *event);
+        void keyPressEvent(QKeyEvent *event) override;
+        void closeEvent (QCloseEvent *event) override;
 
-        virtual QMenu* createPopupMenu ()
+        QMenu* createPopupMenu () override
         {
             // no pop up on toolbar
             return 0;

@@ -51,7 +51,7 @@ class UBPersistenceManager : public QObject
 
     public:
 
-        virtual ~UBPersistenceManager();
+        ~UBPersistenceManager() override;
 
         static const QString imageDirectory;
         static const QString objectDirectory;

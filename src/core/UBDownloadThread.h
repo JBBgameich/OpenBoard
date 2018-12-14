@@ -40,7 +40,7 @@ class UBDownloadThread : public QThread
     Q_OBJECT
 public:
     UBDownloadThread(QObject* parent=0, const char* name="UBDownloadThread");
-    ~UBDownloadThread();
+    ~UBDownloadThread() override;
     void stopDownload();
     void startDownload(int id, QString url);
 
@@ -49,7 +49,7 @@ signals:
     void downloadProgress(int id, qint64 current, qint64 total);
 
 protected:
-    virtual void run();
+    void run() override;
 
 private slots:
     void onDownloadProgress(qint64 received, qint64 total);

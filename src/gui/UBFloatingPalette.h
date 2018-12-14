@@ -50,9 +50,9 @@ class UBFloatingPalette : public QWidget
 
         UBFloatingPalette(Qt::Corner = Qt::TopLeftCorner, QWidget *parent = 0);
 
-        virtual void mouseMoveEvent(QMouseEvent *event);
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent *event);
+        void mouseMoveEvent(QMouseEvent *event) override;
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
 
         /**
          * Add another floating palette to the associated palette. All associated palettes will have the same width
@@ -74,9 +74,9 @@ class UBFloatingPalette : public QWidget
 
     protected:
 
-        virtual void enterEvent(QEvent *event);
-        virtual void showEvent(QShowEvent *event);
-        virtual void paintEvent(QPaintEvent *event);
+        void enterEvent(QEvent *event) override;
+        void showEvent(QShowEvent *event) override;
+        void paintEvent(QPaintEvent *event) override;
 
         virtual int radius();
         virtual int border();

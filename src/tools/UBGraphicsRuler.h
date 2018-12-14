@@ -45,35 +45,35 @@ class UBGraphicsRuler : public UBAbstractDrawRuler, public QGraphicsRectItem, pu
 
     public:
         UBGraphicsRuler();
-        virtual ~UBGraphicsRuler();
+        ~UBGraphicsRuler() override;
 
         enum { Type = UBGraphicsItemType::RulerItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
-        virtual UBItem* deepCopy() const;
-        virtual void copyItemParameters(UBItem *copy) const;
+        UBItem* deepCopy() const override;
+        void copyItemParameters(UBItem *copy) const override;
 
-        virtual void StartLine(const QPointF& position, qreal width);
-        virtual void DrawLine(const QPointF& position, qreal width);
-        virtual void EndLine();
+        void StartLine(const QPointF& position, qreal width) override;
+        void DrawLine(const QPointF& position, qreal width) override;
+        void EndLine() override;
 
     protected:
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
         // Events
-        virtual void    mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void    hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        virtual void    hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-        void paintGraduations(QPainter *painter);
+        void    mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void    mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void    mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void    hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void    hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void    hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+        void paintGraduations(QPainter *painter) override;
 
     private:
 
@@ -84,7 +84,7 @@ class UBGraphicsRuler : public UBAbstractDrawRuler, public QGraphicsRectItem, pu
         // Helpers
         void    fillBackground(QPainter *painter);
         void    paintRotationCenter(QPainter *painter);
-        virtual void    rotateAroundCenter(qreal angle);
+        void    rotateAroundCenter(qreal angle) override;
 
         QGraphicsSvgItem* mRotateSvgItem;
         QGraphicsSvgItem* mResizeSvgItem;
@@ -92,11 +92,11 @@ class UBGraphicsRuler : public UBAbstractDrawRuler, public QGraphicsRectItem, pu
         void updateResizeCursor();
         QCursor resizeCursor() const{return mResizeCursor;}
 
-        virtual QPointF             rotationCenter() const;
+        QPointF             rotationCenter() const override;
         virtual QRectF           resizeButtonRect() const;
-        virtual QRectF            closeButtonRect() const;
+        QRectF            closeButtonRect() const override;
         virtual QRectF           rotateButtonRect() const;
-        virtual UBGraphicsScene*            scene() const;
+        UBGraphicsScene*            scene() const override;
 
         QCursor mResizeCursor;
 

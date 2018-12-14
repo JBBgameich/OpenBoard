@@ -50,20 +50,20 @@ class XPDFRenderer : public PDFRenderer
 
     public:
         XPDFRenderer(const QString &filename, bool importingFile = false);
-        virtual ~XPDFRenderer();
+        ~XPDFRenderer() override;
 
-        bool isValid() const;
+        bool isValid() const override;
 
-        virtual int pageCount() const;
+        int pageCount() const override;
 
-        virtual QSizeF pageSizeF(int pageNumber) const;
+        QSizeF pageSizeF(int pageNumber) const override;
 
-        virtual int pageRotation(int pageNumber) const;
+        int pageRotation(int pageNumber) const override;
 
-        virtual QString title() const;
+        QString title() const override;
 
     public slots:
-        void render(QPainter *p, int pageNumber, const QRectF &bounds = QRectF());
+        void render(QPainter *p, int pageNumber, const QRectF &bounds = QRectF()) override;
 
     private:
         void init();

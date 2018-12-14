@@ -40,13 +40,13 @@ class UBImportCFF : public UBDocumentBasedImportAdaptor
 
     public:
         UBImportCFF(QObject *parent = 0);
-        virtual ~UBImportCFF();
+        ~UBImportCFF() override;
 
-        virtual QStringList supportedExtentions();
-        virtual QString importFileFilter();
+        QStringList supportedExtentions() override;
+        QString importFileFilter() override;
 
-        virtual bool addFileToDocument(UBDocumentProxy* pDocument, const QFile& pFile);
-        virtual UBDocumentProxy* importFile(const QFile& pFile, const QString& pGroup);
+        bool addFileToDocument(UBDocumentProxy* pDocument, const QFile& pFile) override;
+        UBDocumentProxy* importFile(const QFile& pFile, const QString& pGroup) override;
 
     private:
         QString expandFileToDir(const QFile& pZipFile, const QString& pDir);

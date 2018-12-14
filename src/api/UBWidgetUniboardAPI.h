@@ -88,7 +88,7 @@ class UBWidgetUniboardAPI : public QObject
     public:
 
         UBWidgetUniboardAPI(UBGraphicsScene *pScene, UBGraphicsWidgetItem *widget = 0);
-        ~UBWidgetUniboardAPI();
+        ~UBWidgetUniboardAPI() override;
 
         QObject* messages();
 
@@ -307,7 +307,7 @@ class UBDatastoreAPI : public QObject
 
     public:
         UBDatastoreAPI(UBGraphicsW3CWidgetItem *widget);
-        virtual ~UBDatastoreAPI(){;}
+        ~UBDatastoreAPI() override{;}
 
         QObject* document();
 
@@ -325,18 +325,18 @@ class UBDocumentDatastoreAPI : public UBW3CWebStorage
     public:
         UBDocumentDatastoreAPI(UBGraphicsW3CWidgetItem *graphicsWidget);
 
-        virtual ~UBDocumentDatastoreAPI();
+        ~UBDocumentDatastoreAPI() override;
 
     public slots:
 
-        virtual QString key(int index);
-        virtual QString getItem(const QString& key);
-        virtual void setItem(const QString& key, const QString& value);
-        virtual void removeItem(const QString& key);
-        virtual void clear();
+        QString key(int index) override;
+        QString getItem(const QString& key) override;
+        void setItem(const QString& key, const QString& value) override;
+        void removeItem(const QString& key) override;
+        void clear() override;
 
     protected:
-        virtual int length();
+        int length() override;
 
     private:
         UBGraphicsW3CWidgetItem* mGraphicsW3CWidget;

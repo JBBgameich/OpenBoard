@@ -47,12 +47,12 @@ class UBPodcastController : public QObject
 
     private:
         UBPodcastController(QObject* pParent = 0);
-        virtual ~UBPodcastController();
+        ~UBPodcastController() override;
 
     public:
         static UBPodcastController* instance();
 
-        virtual bool eventFilter(QObject *obj, QEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event) override;
 
         virtual QStringList audioRecordingDevices();
 
@@ -89,7 +89,7 @@ class UBPodcastController : public QObject
 
         virtual void setSourceWidget(QWidget* pWidget);
 
-        virtual void timerEvent(QTimerEvent *event);
+        void timerEvent(QTimerEvent *event) override;
 
     private slots:
 

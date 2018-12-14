@@ -42,7 +42,7 @@ class UBServerXMLHttpRequest : public QObject
     public:
         UBServerXMLHttpRequest(UBNetworkAccessManager* pNam, const QString& contentType = "application/xml");
 
-        virtual ~UBServerXMLHttpRequest();
+        ~UBServerXMLHttpRequest() override;
 
         void post(const QUrl& pUrl, const QByteArray& payload);
         void put(const QUrl& pUrl, const QByteArray& payload);

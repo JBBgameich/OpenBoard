@@ -42,10 +42,10 @@ class UBIconButton : public QAbstractButton
         void setToggleable(bool pToggleable) {mToggleable = pToggleable;}
 
     protected:
-        virtual void paintEvent(QPaintEvent *);
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseDoubleClickEvent(QMouseEvent *event);
-        QSize minimumSizeHint () const;
+        void paintEvent(QPaintEvent *) override;
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseDoubleClickEvent(QMouseEvent *event) override;
+        QSize minimumSizeHint () const override;
 
     private:
         QSize mIconSize;

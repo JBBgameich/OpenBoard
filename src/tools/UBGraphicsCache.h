@@ -46,15 +46,15 @@ class UBGraphicsCache : public QGraphicsRectItem, public UBItem
 {
 public:
     static UBGraphicsCache* instance(UBGraphicsScene *scene);
-    ~UBGraphicsCache();
+    ~UBGraphicsCache() override;
 
     enum { Type = UBGraphicsItemType::cacheItemType };
 
-    virtual int type() const{ return Type;}
+    int type() const override{ return Type;}
 
-    virtual UBItem* deepCopy() const;
+    UBItem* deepCopy() const override;
 
-    virtual void copyItemParameters(UBItem *copy) const;
+    void copyItemParameters(UBItem *copy) const override;
 
     QColor maskColor();
     void setMaskColor(QColor color);
@@ -64,10 +64,10 @@ public:
     void setShapeWidth(int width);
 
 protected:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
     static QMap<UBGraphicsScene*, UBGraphicsCache*> sInstances;

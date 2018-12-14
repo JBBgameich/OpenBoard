@@ -129,11 +129,11 @@ class UBGraphicsScene: public UBCoreGraphicsScene, public UBItem
         bool isURStackIsEnabled(){return mUndoRedoStackEnabled;}
 
         UBGraphicsScene(UBDocumentProxy *parent, bool enableUndoRedoStack = true);
-        virtual ~UBGraphicsScene();
+        ~UBGraphicsScene() override;
 
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const {Q_UNUSED(copy);}
+        void copyItemParameters(UBItem *copy) const override {Q_UNUSED(copy);}
 
         UBGraphicsScene* sceneDeepCopy() const;
 
@@ -145,7 +145,7 @@ class UBGraphicsScene: public UBCoreGraphicsScene, public UBItem
 
         void leaveEvent (QEvent* event);
 
-        void addItem(QGraphicsItem* item);
+        void addItem(QGraphicsItem* item) override;
         void removeItem(QGraphicsItem* item);
 
         void addItems(const QSet<QGraphicsItem*>& item);
@@ -295,7 +295,7 @@ class UBGraphicsScene: public UBCoreGraphicsScene, public UBItem
             mViewState = pViewState;
         }
 
-        virtual void setRenderingQuality(UBItem::RenderingQuality pRenderingQuality);
+        void setRenderingQuality(UBItem::RenderingQuality pRenderingQuality) override;
 
         QList<QUrl> relativeDependencies() const;
 
@@ -404,16 +404,16 @@ public slots:
         void DisposeMagnifierQWidgets();
 
 
-        virtual void keyReleaseEvent(QKeyEvent * keyEvent);
+        void keyReleaseEvent(QKeyEvent * keyEvent) override;
 
         void recolorAllItems();
 
-        virtual void drawItems (QPainter * painter, int numItems,
-                               QGraphicsItem * items[], const QStyleOptionGraphicsItem options[], QWidget * widget = 0);
+        void drawItems (QPainter * painter, int numItems,
+                               QGraphicsItem * items[], const QStyleOptionGraphicsItem options[], QWidget * widget = 0) override;
 
         QGraphicsItem* rootItem(QGraphicsItem* item) const;
 
-        virtual void drawBackground(QPainter *painter, const QRectF &rect);
+        void drawBackground(QPainter *painter, const QRectF &rect) override;
 
 
     private:

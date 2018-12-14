@@ -36,7 +36,7 @@ class UBMicrophoneInput : public QObject
 
 public:
     UBMicrophoneInput();
-    virtual ~UBMicrophoneInput();
+    ~UBMicrophoneInput() override;
 
     bool init();
     void start();

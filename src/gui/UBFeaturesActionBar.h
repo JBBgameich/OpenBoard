@@ -54,7 +54,7 @@ class UBActionButton : public QToolButton
 {
 public:
     UBActionButton(QWidget* parent=0, QAction* action=0, const char* name="UBActionButton");
-    ~UBActionButton();
+    ~UBActionButton() override;
 };
 
 enum UBFeaturesActionBarState
@@ -71,7 +71,7 @@ class UBFeaturesActionBar : public QWidget
     Q_OBJECT
 public:
     UBFeaturesActionBar(UBFeaturesController *controller, QWidget* parent=0, const char* name="UBFeaturesActionBar");
-    ~UBFeaturesActionBar();
+    ~UBFeaturesActionBar() override;
     
     void setCurrentState( UBFeaturesActionBarState state );
     void cleanText(){ mSearchBar->clear(); }
@@ -98,8 +98,8 @@ private slots:
     void unlockIt();
 
 protected:
-    void dragEnterEvent( QDragEnterEvent *event );
-    void dropEvent( QDropEvent *event );
+    void dragEnterEvent( QDragEnterEvent *event ) override;
+    void dropEvent( QDropEvent *event ) override;
 
 private:
     void setButtons();

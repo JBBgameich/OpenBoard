@@ -40,7 +40,7 @@ class UBDocumentThumbnailWidget: public UBThumbnailWidget
 
     public:
         UBDocumentThumbnailWidget(QWidget* parent);
-        virtual ~UBDocumentThumbnailWidget();
+        ~UBDocumentThumbnailWidget() override;
 
         void setDragEnabled(bool enabled);
         bool dragEnabled() const;
@@ -48,9 +48,9 @@ class UBDocumentThumbnailWidget: public UBThumbnailWidget
         void hightlightItem(int index);
 
     public slots:
-        virtual void setGraphicsItems(const QList<QGraphicsItem*>& pGraphicsItems,
+        void setGraphicsItems(const QList<QGraphicsItem*>& pGraphicsItems,
             const QList<QUrl>& pItemPaths, const QStringList pLabels = QStringList(),
-            const QString& pMimeType = QString(""));
+            const QString& pMimeType = QString("")) override;
 
     signals:
         void sceneDropped(UBDocumentProxy* proxy, int source, int target);
@@ -60,12 +60,12 @@ class UBDocumentThumbnailWidget: public UBThumbnailWidget
 
     protected:
 
-        virtual void mouseMoveEvent(QMouseEvent *event);
+        void mouseMoveEvent(QMouseEvent *event) override;
 
-        virtual void dragEnterEvent(QDragEnterEvent *event);
-        virtual void dragLeaveEvent(QDragLeaveEvent *event);
-        virtual void dragMoveEvent(QDragMoveEvent *event);
-        virtual void dropEvent(QDropEvent *event);
+        void dragEnterEvent(QDragEnterEvent *event) override;
+        void dragLeaveEvent(QDragLeaveEvent *event) override;
+        void dragMoveEvent(QDragMoveEvent *event) override;
+        void dropEvent(QDropEvent *event) override;
 
     private:
         void deleteDropCaret();

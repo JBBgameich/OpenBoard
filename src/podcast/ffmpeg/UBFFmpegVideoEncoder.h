@@ -78,18 +78,18 @@ class UBFFmpegVideoEncoder : public UBAbstractVideoEncoder
 public:
 
     UBFFmpegVideoEncoder(QObject* parent = NULL);
-    virtual ~UBFFmpegVideoEncoder();
+    ~UBFFmpegVideoEncoder() override;
 
-    bool start();
-    bool stop();
+    bool start() override;
+    bool stop() override;
 
-    void newPixmap(const QImage& pImage, long timestamp);
+    void newPixmap(const QImage& pImage, long timestamp) override;
 
-    QString videoFileExtension() const { return "mp4"; }
+    QString videoFileExtension() const override { return "mp4"; }
 
-    QString lastErrorMessage() { return mLastErrorMessage; }
+    QString lastErrorMessage() override { return mLastErrorMessage; }
 
-    void setRecordAudio(bool pRecordAudio) { mShouldRecordAudio = pRecordAudio; }
+    void setRecordAudio(bool pRecordAudio) override { mShouldRecordAudio = pRecordAudio; }
 
 private slots:
 
@@ -152,7 +152,7 @@ class UBFFmpegVideoEncoderWorker : public QObject
 
 public:
     UBFFmpegVideoEncoderWorker(UBFFmpegVideoEncoder* controller);
-    ~UBFFmpegVideoEncoderWorker();
+    ~UBFFmpegVideoEncoderWorker() override;
 
     bool isRunning() { return mIsRunning; }
 

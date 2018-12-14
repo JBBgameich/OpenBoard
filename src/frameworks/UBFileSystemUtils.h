@@ -45,7 +45,7 @@ class UBFileSystemUtils : public QObject
     public:
 
         UBFileSystemUtils();
-        virtual ~UBFileSystemUtils();
+        ~UBFileSystemUtils() override;
 
         static QString removeLocalFilePrefix(QString input);
 

@@ -38,10 +38,10 @@ class UBMousePressFilter : public QObject
 
     public:
         UBMousePressFilter(QObject* parent = 0);
-        virtual ~UBMousePressFilter();
+        ~UBMousePressFilter() override;
 
     protected:
-        bool eventFilter(QObject *obj, QEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event) override;
 
     protected slots:
         void mouseDownElapsed();

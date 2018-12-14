@@ -48,16 +48,16 @@ class UBExportDocumentSetAdaptor : public UBExportAdaptor
 
     public:
         UBExportDocumentSetAdaptor(QObject *parent = 0);
-        virtual ~UBExportDocumentSetAdaptor();
+        ~UBExportDocumentSetAdaptor() override;
 
-        virtual QString exportName();
-        virtual QString exportExtention();
+        QString exportName() override;
+        QString exportExtention() override;
 
-        virtual void persist(UBDocumentProxy* pDocument);
+        void persist(UBDocumentProxy* pDocument) override;
         bool persistData(const QModelIndex &pRootIndex, QString filename);
         bool addDocumentToZip(const QModelIndex &pIndex, UBDocumentTreeModel *model, QuaZip &zip);
 
-        virtual bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex);
+        bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex) override;
 
 
 };

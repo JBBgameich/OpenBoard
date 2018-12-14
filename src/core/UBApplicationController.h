@@ -63,7 +63,7 @@ class UBApplicationController : public QObject
     public:
 
         UBApplicationController(UBBoardView *pControlView, UBBoardView *pDisplayView, UBMainWindow *pMainWindow, QObject* parent, UBRightPalette* rightPalette);
-        virtual ~UBApplicationController();
+        ~UBApplicationController() override;
 
         int initialHScroll() { return mInitialHScroll; }
         int initialVScroll() { return mInitialVScroll; }

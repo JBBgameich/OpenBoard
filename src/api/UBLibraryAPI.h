@@ -40,7 +40,7 @@ class UBLibraryAPI : public QObject
 
     public:
         UBLibraryAPI(QWebView *pWebView = 0);
-        virtual ~UBLibraryAPI();
+        ~UBLibraryAPI() override;
 
     public slots:
 

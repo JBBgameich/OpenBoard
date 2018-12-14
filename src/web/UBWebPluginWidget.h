@@ -42,15 +42,15 @@ class UBWebPluginWidget : public QWidget
 
     public:
         UBWebPluginWidget(const QUrl &url, QWidget *parent = 0);
-        virtual ~UBWebPluginWidget();
+        ~UBWebPluginWidget() override;
 
         virtual QString title() const;
 
     protected:
         virtual void handleFile(const QString &filePath) = 0;
 
-        virtual void paintEvent(QPaintEvent *paintEvent) = 0;
-        virtual void resizeEvent(QResizeEvent *event);
+        void paintEvent(QPaintEvent *paintEvent) override = 0;
+        void resizeEvent(QResizeEvent *event) override;
 
     private slots:
         void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);

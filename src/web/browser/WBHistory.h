@@ -116,10 +116,10 @@ class WBHistoryManager : public QWebHistoryInterface
 
     public:
         WBHistoryManager(QObject *parent = 0);
-        ~WBHistoryManager();
+        ~WBHistoryManager() override;
 
-        bool historyContains(const QString &url) const;
-        void addHistoryEntry(const QString &url);
+        bool historyContains(const QString &url) const override;
+        void addHistoryEntry(const QString &url) override;
 
         void updateHistoryItem(const QUrl &url, const QString &title);
 
@@ -177,11 +177,11 @@ class WBHistoryModel : public QAbstractTableModel
         };
 
         WBHistoryModel(WBHistoryManager *history, QObject *parent = 0);
-        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-        int columnCount(const QModelIndex &parent = QModelIndex()) const;
-        int rowCount(const QModelIndex &parent = QModelIndex()) const;
-        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+        int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
     private:
         WBHistoryManager *m_history;
@@ -203,16 +203,16 @@ public:
         { load(); return m_historyHash.contains(url); }
     int historyLocation(const QString &url) const;
 
-    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
-    QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
-    void setSourceModel(QAbstractItemModel *sourceModel);
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex index(int, int, const QModelIndex& = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex& index= QModelIndex()) const;
-    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
+    QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex index(int, int, const QModelIndex& = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex& index= QModelIndex()) const override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 private slots:
     void sourceReset();
@@ -242,12 +242,12 @@ class WBHistoryMenuModel : public QAbstractProxyModel
 
     public:
         WBHistoryMenuModel(WBHistoryTreeModel *sourceModel, QObject *parent = 0);
-        int columnCount(const QModelIndex &parent) const;
-        int rowCount(const QModelIndex &parent = QModelIndex()) const;
-        QModelIndex mapFromSource(const QModelIndex & sourceIndex) const;
-        QModelIndex mapToSource(const QModelIndex & proxyIndex) const;
-        QModelIndex index(int, int, const QModelIndex &parent = QModelIndex()) const;
-        QModelIndex parent(const QModelIndex &index = QModelIndex()) const;
+        int columnCount(const QModelIndex &parent) const override;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex mapFromSource(const QModelIndex & sourceIndex) const override;
+        QModelIndex mapToSource(const QModelIndex & proxyIndex) const override;
+        QModelIndex index(int, int, const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex parent(const QModelIndex &index = QModelIndex()) const override;
 
         int bumpedRows() const;
 
@@ -268,8 +268,8 @@ class WBHistoryMenu : public WBModelMenu
          void setInitialActions(QList<QAction*> actions);
 
     protected:
-        bool prePopulated();
-        void postPopulated();
+        bool prePopulated() override;
+        void postPopulated() override;
 
     private slots:
         void activated(const QModelIndex &index);
@@ -289,14 +289,14 @@ class WBHistoryCompletionModel : public QAbstractProxyModel
 
     public:
         WBHistoryCompletionModel(QObject *parent = 0);
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-        int rowCount(const QModelIndex &parent = QModelIndex()) const;
-        int columnCount(const QModelIndex &parent = QModelIndex()) const;
-        QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
-        QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
-        QModelIndex index(int, int, const QModelIndex& = QModelIndex()) const;
-        QModelIndex parent(const QModelIndex& index= QModelIndex()) const;
-        void setSourceModel(QAbstractItemModel *sourceModel);
+        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
+        QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
+        QModelIndex index(int, int, const QModelIndex& = QModelIndex()) const override;
+        QModelIndex parent(const QModelIndex& index= QModelIndex()) const override;
+        void setSourceModel(QAbstractItemModel *sourceModel) override;
 
     private slots:
         void sourceReset();
@@ -312,19 +312,19 @@ class WBHistoryTreeModel : public QAbstractProxyModel
 
     public:
         WBHistoryTreeModel(QAbstractItemModel *sourceModel, QObject *parent = 0);
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-        int columnCount(const QModelIndex &parent) const;
-        int rowCount(const QModelIndex &parent = QModelIndex()) const;
-        QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
-        QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
-        QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-        QModelIndex parent(const QModelIndex &index= QModelIndex()) const;
-        bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
-        Qt::ItemFlags flags(const QModelIndex &index) const;
-        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
-        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+        int columnCount(const QModelIndex &parent) const override;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
+        QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
+        QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex parent(const QModelIndex &index= QModelIndex()) const override;
+        bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
+        Qt::ItemFlags flags(const QModelIndex &index) const override;
+        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-        void setSourceModel(QAbstractItemModel *sourceModel);
+        void setSourceModel(QAbstractItemModel *sourceModel) override;
 
     private slots:
         void sourceReset();
@@ -348,7 +348,7 @@ class WBTreeProxyModel : public QSortFilterProxyModel
         WBTreeProxyModel(QObject *parent = 0);
 
     protected:
-        bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+        bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 };
 
 

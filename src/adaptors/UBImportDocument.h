@@ -41,14 +41,14 @@ class UBImportDocument : public UBDocumentBasedImportAdaptor
 
     public:
         UBImportDocument(QObject *parent = 0);
-        virtual ~UBImportDocument();
+        ~UBImportDocument() override;
 
 
-        virtual QStringList supportedExtentions();
-        virtual QString importFileFilter();
+        QStringList supportedExtentions() override;
+        QString importFileFilter() override;
 
-        virtual UBDocumentProxy* importFile(const QFile& pFile, const QString& pGroup);
-        virtual bool addFileToDocument(UBDocumentProxy* pDocument, const QFile& pFile);
+        UBDocumentProxy* importFile(const QFile& pFile, const QString& pGroup) override;
+        bool addFileToDocument(UBDocumentProxy* pDocument, const QFile& pFile) override;
 
     private:
         bool extractFileToDir(const QFile& pZipFile, const QString& pDir, QString& documentRoot);

@@ -95,7 +95,7 @@ class UBToolsManager : public QObject
 
     private:
         UBToolsManager(QObject *parent = 0);
-        virtual ~UBToolsManager();
+        ~UBToolsManager() override;
 
         static UBToolsManager* sManager;
 

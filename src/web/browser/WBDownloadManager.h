@@ -139,7 +139,7 @@ class WBDownloadManager : public QDialog, public Ui_DownloadDialog
         };
 
         WBDownloadManager(QWidget *parent = 0);
-        ~WBDownloadManager();
+        ~WBDownloadManager() override;
         int activeDownloads() const;
 
         RemovePolicy removePolicy() const;
@@ -180,9 +180,9 @@ class WBDownloadModel : public QAbstractListModel
 
     public:
         WBDownloadModel(WBDownloadManager *downloadManager, QObject *parent = 0);
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-        int rowCount(const QModelIndex &parent = QModelIndex()) const;
-        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
     private:
         WBDownloadManager *mDownloadManager;

@@ -47,27 +47,27 @@ public:
     };
 
     UBGraphicsStrokesGroup(QGraphicsItem* parent = 0);
-    ~UBGraphicsStrokesGroup();
-    virtual UBItem* deepCopy() const;
-    virtual void copyItemParameters(UBItem *copy) const;
+    ~UBGraphicsStrokesGroup() override;
+    UBItem* deepCopy() const override;
+    void copyItemParameters(UBItem *copy) const override;
     enum { Type = UBGraphicsItemType::StrokeItemType };
-    virtual int type() const
+    int type() const override
     {
         return Type;
     }
-    virtual void setUuid(const QUuid &pUuid);
+    void setUuid(const QUuid &pUuid) override;
     void setColor(const QColor &color, colorType pColorType = currentColor);
     QColor color(colorType pColorType = currentColor) const;
 
 protected:
 
-    virtual QPainterPath shape () const;
+    QPainterPath shape () const override;
 
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
     // Graphical display of stroke Z-level
     bool debugTextEnabled;

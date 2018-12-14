@@ -41,7 +41,7 @@ class UBStylusPalette : public UBActionPalette
 
     public:
         UBStylusPalette(QWidget *parent = 0, Qt::Orientation orient = Qt::Vertical);
-        virtual ~UBStylusPalette();
+        ~UBStylusPalette() override;
 
         void initPosition();
 

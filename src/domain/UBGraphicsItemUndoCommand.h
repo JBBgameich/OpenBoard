@@ -49,16 +49,16 @@ class UBGraphicsItemUndoCommand : public UBUndoCommand
         UBGraphicsItemUndoCommand(UBGraphicsScene* pScene, QGraphicsItem* pRemovedItem,
                         QGraphicsItem* pAddedItem);
 
-        virtual ~UBGraphicsItemUndoCommand();
+        ~UBGraphicsItemUndoCommand() override;
 
         QSet<QGraphicsItem*> GetAddedList() const { return mAddedItems; }
         QSet<QGraphicsItem*> GetRemovedList() const { return mRemovedItems; }
 
-        virtual int getType() const { return UBUndoType::undotype_GRAPHICITEM; }
+        int getType() const override { return UBUndoType::undotype_GRAPHICITEM; }
 
     protected:
-        virtual void undo();
-        virtual void redo();
+        void undo() override;
+        void redo() override;
 
     private:
         UBGraphicsScene* mScene;

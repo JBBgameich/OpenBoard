@@ -52,9 +52,9 @@ namespace merge_lib
 
       Exception(const std::string & message) : _message(message) {}
       
-      virtual ~Exception() throw () {}
+      ~Exception() throw () override {}
       
-      virtual const char * what() const throw() { return _message.c_str(); }
+      const char * what() const throw() override { return _message.c_str(); }
 
       void show() const {}
 

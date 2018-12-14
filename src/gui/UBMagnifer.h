@@ -56,7 +56,7 @@ public:
 
 public:
     UBMagnifier(QWidget *parent = 0, bool isInteractive = false);
-    ~UBMagnifier();
+    ~UBMagnifier() override;
 
     void setSize(qreal percentFromScene);
     void createMask();
@@ -86,11 +86,11 @@ public slots:
 private:
     void calculateButtonsPositions();
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *) override;
 
-    virtual void mousePressEvent ( QMouseEvent * event );
-    virtual void mouseMoveEvent ( QMouseEvent * event );
-    virtual void mouseReleaseEvent ( QMouseEvent * event );
+    void mousePressEvent ( QMouseEvent * event ) override;
+    void mouseMoveEvent ( QMouseEvent * event ) override;
+    void mouseReleaseEvent ( QMouseEvent * event ) override;
 
     QPoint mMousePressPos;
     qreal mMousePressDelta;

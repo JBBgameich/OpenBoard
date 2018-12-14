@@ -44,36 +44,36 @@ class UBGraphicsPDFItem: public GraphicsPDFItem, public UBItem, public UBGraphic
 {
     public:
         UBGraphicsPDFItem(PDFRenderer *renderer, int pageNumber, QGraphicsItem* parent = 0);
-        virtual ~UBGraphicsPDFItem();
+        ~UBGraphicsPDFItem() override;
 
         enum { Type = UBGraphicsItemType::PDFItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
+        void copyItemParameters(UBItem *copy) const override;
 
-        virtual void setRenderingQuality(RenderingQuality pRenderingQuality);
+        void setRenderingQuality(RenderingQuality pRenderingQuality) override;
 
-        virtual UBGraphicsScene* scene();
+        UBGraphicsScene* scene() override;
 
         virtual UBGraphicsPixmapItem* toPixmapItem() const;
 
-        virtual void clearSource(){;}
-        virtual void setUuid(const QUuid &pUuid);
+        void clearSource() override{;}
+        void setUuid(const QUuid &pUuid) override;
 
     protected:
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 };
 

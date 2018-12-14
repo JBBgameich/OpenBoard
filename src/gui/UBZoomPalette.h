@@ -41,7 +41,7 @@ class UBZoomPalette : public UBFloatingPalette
 
     public:
         UBZoomPalette(QWidget *parent);
-        virtual ~UBZoomPalette();
+        ~UBZoomPalette() override;
 
     public slots:
         void hide();

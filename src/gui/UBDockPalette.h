@@ -78,13 +78,13 @@ class UBTabDockPalette : public QWidget
 public:
 
     UBTabDockPalette(UBDockPalette *dockPalette, QWidget *parent = 0);
-    ~UBTabDockPalette();
+    ~UBTabDockPalette() override;
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
-    virtual void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     UBDockPalette *dock;
@@ -107,7 +107,7 @@ class UBDockPalette : public QWidget
 
 public:
     UBDockPalette(eUBDockPaletteType paletteType, QWidget* parent=0, const char* name="UBDockPalette");
-    ~UBDockPalette();
+    ~UBDockPalette() override;
 
     eUBDockOrientation orientation();
     void setOrientation(eUBDockOrientation orientation);
@@ -116,11 +116,11 @@ public:
     QRect getTabPaletteRect();
 
     virtual void assignParent(QWidget *widget);
-    virtual void setVisible(bool visible);
+    void setVisible(bool visible) override;
 
-    virtual void paintEvent(QPaintEvent *event);
-    virtual void enterEvent(QEvent *);
-    virtual void leaveEvent(QEvent *);
+    void paintEvent(QPaintEvent *event) override;
+    void enterEvent(QEvent *) override;
+    void leaveEvent(QEvent *) override;
 
     void setBackgroundBrush(const QBrush& brush);
     void registerWidget(UBDockPaletteWidget* widget);
@@ -159,7 +159,7 @@ protected:
     virtual int radius();
     virtual int customMargin();
     virtual void updateMaxWidth();
-    virtual void resizeEvent(QResizeEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
     virtual int collapseWidth();
 
     /** The current dock orientation */

@@ -47,7 +47,7 @@ class UBDocumentNavigator : public QGraphicsView
     Q_OBJECT
 public:
     UBDocumentNavigator(QWidget* parent=0, const char* name="documentNavigator");
-    ~UBDocumentNavigator();
+    ~UBDocumentNavigator() override;
 
     void setNbColumns(int nbColumns);
     int nbColumns();
@@ -64,13 +64,13 @@ public slots:
     void mousePressAndHoldEvent();
 
 protected:
-    virtual void resizeEvent(QResizeEvent *event);
-    virtual void mousePressEvent(QMouseEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
-    virtual void dragEnterEvent(QDragEnterEvent* event);
-    virtual void dragMoveEvent(QDragMoveEvent* event);
-    virtual void dropEvent(QDropEvent* event);
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dragMoveEvent(QDragMoveEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 
 signals:
     void mousePressAndHoldEventRequired();

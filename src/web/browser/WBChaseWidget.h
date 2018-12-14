@@ -83,11 +83,11 @@ class WBChaseWidget : public QWidget
 
         void setAnimated(bool value);
         void setPixmapEnabled(bool enable);
-        QSize sizeHint() const;
+        QSize sizeHint() const override;
 
     protected:
-        void paintEvent(QPaintEvent *event);
-        void timerEvent(QTimerEvent *event);
+        void paintEvent(QPaintEvent *event) override;
+        void timerEvent(QTimerEvent *event) override;
 
     private:
         int segmentCount() const;

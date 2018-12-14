@@ -44,7 +44,7 @@ class UBDocumentToolsPalette : public UBActionPalette
 
     public:
         UBDocumentToolsPalette(QWidget *parent = 0);
-        virtual ~UBDocumentToolsPalette();
+        ~UBDocumentToolsPalette() override;
         bool isEmpty() { return actions().count() == 0; }
 
 };

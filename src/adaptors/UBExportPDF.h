@@ -41,14 +41,14 @@ class UBExportPDF : public UBExportAdaptor
 
     public:
         UBExportPDF(QObject *parent = 0);
-        virtual ~UBExportPDF();
+        ~UBExportPDF() override;
 
-        virtual QString exportName();
-        virtual QString exportExtention();
-        virtual void persist(UBDocumentProxy* pDocument);
-        virtual bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex);
+        QString exportName() override;
+        QString exportExtention() override;
+        void persist(UBDocumentProxy* pDocument) override;
+        bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex) override;
 
-        virtual bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename);
+        bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename) override;
 };
 
 #endif /* UBEXPORTPDF_H_ */

@@ -63,7 +63,7 @@ class UBW3CWidgetAPI : public QObject
 
         UBW3CWidgetAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = 0);
 
-        virtual ~UBW3CWidgetAPI();
+        ~UBW3CWidgetAPI() override;
 
         QString uuid();
 
@@ -101,7 +101,7 @@ class UBW3CWebStorage : public QObject
     public:
         UBW3CWebStorage(QObject *parent = 0)
         : QObject(parent){/* NOOP */}
-        virtual ~UBW3CWebStorage(){/* NOOP */}
+        ~UBW3CWebStorage() override{/* NOOP */}
 
     public slots:
 
@@ -124,18 +124,18 @@ class UBW3CWidgetPreferenceAPI : public UBW3CWebStorage
     public:
         UBW3CWidgetPreferenceAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = 0);
 
-        virtual ~UBW3CWidgetPreferenceAPI();
+        ~UBW3CWidgetPreferenceAPI() override;
 
     public slots:
 
-        virtual QString key(int index);
-        virtual QString getItem(const QString& key);
-        virtual void setItem(const QString& key, const QString& value);
-        virtual void removeItem(const QString& key);
-        virtual void clear();
+        QString key(int index) override;
+        QString getItem(const QString& key) override;
+        void setItem(const QString& key, const QString& value) override;
+        void removeItem(const QString& key) override;
+        void clear() override;
 
     protected:
-        virtual int length();
+        int length() override;
 
     private:
 

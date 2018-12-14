@@ -52,7 +52,7 @@ class UBDockPaletteWidget : public QWidget
     Q_OBJECT
 public:
     UBDockPaletteWidget(QWidget* parent=0, const char* name="UBDockPaletteWidget");
-    ~UBDockPaletteWidget();
+    ~UBDockPaletteWidget() override;
 
     QPixmap iconToRight();
     QPixmap iconToLeft();

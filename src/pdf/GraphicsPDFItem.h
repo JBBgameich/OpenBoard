@@ -42,11 +42,11 @@ class GraphicsPDFItem : public QObject, public QGraphicsItem
 
     public:
         GraphicsPDFItem(PDFRenderer *renderer, int pageNumber, QGraphicsItem *parentItem = 0);
-        virtual ~GraphicsPDFItem();
+        ~GraphicsPDFItem() override;
 
-        virtual QRectF boundingRect() const;
+        QRectF boundingRect() const override;
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) override;
 
         int pageNumber() const { return mPageNumber; }
         QUuid fileUuid() const { return mRenderer->fileUuid(); }

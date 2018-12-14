@@ -45,7 +45,7 @@ class UBDesktopPalette : public UBActionPalette
 
     public:
         UBDesktopPalette(QWidget *parent, UBRightPalette* rightPalette);
-        virtual ~UBDesktopPalette();
+        ~UBDesktopPalette() override;
 
         void disappearForCapture();
         void appear();
@@ -72,10 +72,10 @@ class UBDesktopPalette : public UBActionPalette
         void parentResized();
 
 protected:
-        void showEvent(QShowEvent *event);
-        void hideEvent(QHideEvent *event);
+        void showEvent(QShowEvent *event) override;
+        void hideEvent(QHideEvent *event) override;
 
-        virtual int getParentRightOffset();
+        int getParentRightOffset() override;
 
 private:
         QAction *mShowHideAction;

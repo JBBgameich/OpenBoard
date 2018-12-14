@@ -42,11 +42,11 @@ class UBExportWeb : public UBExportAdaptor
 
     public:
         UBExportWeb(QObject *parent = 0);
-        virtual ~UBExportWeb();
+        ~UBExportWeb() override;
 
-        virtual QString exportName();
+        QString exportName() override;
 
-        virtual void persist(UBDocumentProxy* pDocument);
+        void persist(UBDocumentProxy* pDocument) override;
 
 };
 

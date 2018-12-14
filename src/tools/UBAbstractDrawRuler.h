@@ -43,7 +43,7 @@ class UBAbstractDrawRuler : public QObject
 
 public:
     UBAbstractDrawRuler();
-    ~UBAbstractDrawRuler();
+    ~UBAbstractDrawRuler() override;
 
     void create(QGraphicsItem& item);
 

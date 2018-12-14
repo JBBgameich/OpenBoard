@@ -62,7 +62,7 @@ class UBBoardPaletteManager : public QObject
 
     public:
         UBBoardPaletteManager(QWidget* container, UBBoardController* controller);
-        virtual ~UBBoardPaletteManager();
+        ~UBBoardPaletteManager() override;
 
         void setupLayout();
         UBLeftPalette* leftPalette(){return mLeftPalette;}

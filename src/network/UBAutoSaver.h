@@ -84,14 +84,14 @@ class UBAutoSaver : public QObject {
 
     public:
         UBAutoSaver(QObject *parent);
-        ~UBAutoSaver();
+        ~UBAutoSaver() override;
         void saveIfNeccessary();
 
     public slots:
         void changeOccurred();
 
     protected:
-        void timerEvent(QTimerEvent *event);
+        void timerEvent(QTimerEvent *event) override;
 
     private:
         QBasicTimer mTimer;

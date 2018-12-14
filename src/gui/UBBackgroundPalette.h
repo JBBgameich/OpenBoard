@@ -15,13 +15,13 @@ class UBBackgroundPalette : public UBActionPalette
         UBBackgroundPalette(QList<QAction*> actions, QWidget* parent = 0);
         UBBackgroundPalette(QWidget* parent = 0);
 
-        void addAction(QAction *action);
-        void setActions(QList<QAction *> actions);
-        void clearLayout();
+        void addAction(QAction *action) override;
+        void setActions(QList<QAction *> actions) override;
+        void clearLayout() override;
 
 
     public slots:
-        void showEvent(QShowEvent* event);
+        void showEvent(QShowEvent* event) override;
         void backgroundChanged();
         void refresh();
 
@@ -30,7 +30,7 @@ class UBBackgroundPalette : public UBActionPalette
         void defaultBackgroundGridSize();
 
     protected:
-        virtual void updateLayout();
+        void updateLayout() override;
         void init();
 
 

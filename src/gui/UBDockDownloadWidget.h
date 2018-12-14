@@ -41,9 +41,9 @@ class UBDockDownloadWidget : public UBDockPaletteWidget
     Q_OBJECT
 public:
     UBDockDownloadWidget(QWidget* parent=0, const char* name="UBDockDownloadWidget");
-    ~UBDockDownloadWidget();
+    ~UBDockDownloadWidget() override;
 
-    bool visibleInMode(eUBDockPaletteWidgetMode mode)
+    bool visibleInMode(eUBDockPaletteWidgetMode mode) override
     {
         return mode == eUBDockPaletteWidget_BOARD;
     }

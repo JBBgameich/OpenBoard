@@ -43,7 +43,7 @@ class UBSetting : public QObject
         UBSetting(UBSettings* owner, const QString& pDomain, const QString& pKey,
                         const QVariant& pDefaultValue);
 
-        virtual ~UBSetting();
+        ~UBSetting() override;
 
         virtual void set(const QVariant& pValue);
         virtual QVariant get();
@@ -99,9 +99,9 @@ class UBColorListSetting : public UBSetting
         UBColorListSetting(UBSettings* owner, const QString& pDomain,
                 const QString& pKey, const QVariant& pDefaultValue, qreal pAlpha = 1.0);
 
-        virtual ~UBColorListSetting();
+        ~UBColorListSetting() override;
 
-        virtual QVariant reset();
+        QVariant reset() override;
 
         QList<QColor> colors() const;
 

@@ -53,10 +53,10 @@ class UBPreferencesDialog : public QDialog
 
 public:
     UBPreferencesDialog(UBPreferencesController* prefController, QWidget* parent = 0,Qt::WindowFlags f = 0 );
-    ~UBPreferencesDialog();
+    ~UBPreferencesDialog() override;
 
 protected:
-    void closeEvent(QCloseEvent* e);
+    void closeEvent(QCloseEvent* e) override;
     UBPreferencesController *mPreferencesController;
 };
 
@@ -67,7 +67,7 @@ class UBPreferencesController : public QObject
 
     public:
         UBPreferencesController(QWidget *parent);
-        virtual ~UBPreferencesController();
+        ~UBPreferencesController() override;
 
 
     public slots:

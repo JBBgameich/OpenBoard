@@ -42,8 +42,8 @@ public:
     QPushButton* proceedButton(){return mProceedButton;}
 
 protected:
-    void showEvent(QShowEvent *event);
-    int border();
+    void showEvent(QShowEvent *event) override;
+    int border() override;
 
     QCheckBox* mDisplayOnNextRestart;
     QPushButton* mProceedButton;

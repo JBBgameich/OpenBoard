@@ -146,8 +146,8 @@ namespace merge_lib
          _tm.setParameters(cosValue, sinValue, -sinValue, cosValue, 0, 0);
 
       };
-      virtual ~Rotation(){};
-      virtual Transformation * getClone() const
+      ~Rotation() override{};
+      Transformation * getClone() const override
       {
          return new Rotation(_angle);
       }   
@@ -164,8 +164,8 @@ namespace merge_lib
       {
          _tm.setParameters(1, 0, 0, 1, _x, _y);
       };
-      virtual ~Translation(){};
-      virtual Transformation * getClone() const
+      ~Translation() override{};
+      Transformation * getClone() const override
       {
          return new Translation(_x, _y);
       }   
@@ -182,7 +182,7 @@ namespace merge_lib
       {      
          _tm.setParameters(_x, 0, 0, _x, 0, 0);
       };
-      virtual Transformation * getClone() const
+      Transformation * getClone() const override
       {
          return new Scaling(_x);
       }   

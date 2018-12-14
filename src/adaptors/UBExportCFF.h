@@ -42,12 +42,12 @@ class UBExportCFF : public UBExportAdaptor
 
 public:
     UBExportCFF(QObject *parent = 0);
-    virtual ~UBExportCFF();
+    ~UBExportCFF() override;
 
-    virtual QString exportName();
-    virtual QString exportExtention();
-    virtual void persist(UBDocumentProxy* pDocument);
-    virtual bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex);
+    QString exportName() override;
+    QString exportExtention() override;
+    void persist(UBDocumentProxy* pDocument) override;
+    bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex) override;
 };
 
 #endif /* UBExportCFF_H_ */

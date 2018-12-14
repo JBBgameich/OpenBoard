@@ -87,9 +87,9 @@ class UBFeaturesWidget : public UBDockPaletteWidget
     Q_OBJECT
 public:
     UBFeaturesWidget(QWidget* parent=0, const char* name="UBFeaturesWidget");
-    virtual ~UBFeaturesWidget();
+    ~UBFeaturesWidget() override;
 
-    bool visibleInMode(eUBDockPaletteWidgetMode mode)
+    bool visibleInMode(eUBDockPaletteWidgetMode mode) override
     {
         return mode == eUBDockPaletteWidget_BOARD
             || mode == eUBDockPaletteWidget_DESKTOP;
@@ -147,7 +147,7 @@ class UBFeaturesMimeData : public QMimeData
     Q_OBJECT
 
 public:
-    virtual QStringList formats() const;
+    QStringList formats() const override;
     QList<UBFeature> features() const {return mFeatures;}
     void setFeatures(const QList<UBFeature> &fList) {mFeatures = fList;}
 
@@ -162,12 +162,12 @@ class UBFeaturesListView : public QListView
 
 public:
     UBFeaturesListView( QWidget* parent=0, const char* name="UBFeaturesListView" );
-    virtual ~UBFeaturesListView() {;}
+    ~UBFeaturesListView() override {;}
 
 protected:
-    virtual void dragEnterEvent( QDragEnterEvent *event );
-    virtual void dropEvent( QDropEvent *event );
-    virtual void dragMoveEvent( QDragMoveEvent *event );
+    void dragEnterEvent( QDragEnterEvent *event ) override;
+    void dropEvent( QDropEvent *event ) override;
+    void dragMoveEvent( QDragMoveEvent *event ) override;
 
 private slots:
     void thumbnailSizeChanged(int);
@@ -309,7 +309,7 @@ class UBFeaturesWebView : public QWidget
     Q_OBJECT
 public:
     UBFeaturesWebView(QWidget* parent = 0, const char* name = "UBFeaturesWebView");
-    virtual ~UBFeaturesWebView();
+    ~UBFeaturesWebView() override;
 
     void showElement(const UBFeature &elem);
 
@@ -329,7 +329,7 @@ class UBFeatureProperties : public QWidget
     Q_OBJECT
 public:
     UBFeatureProperties(QWidget* parent=0, const char* name="UBFeatureProperties");
-    ~UBFeatureProperties();
+    ~UBFeatureProperties() override;
 
     void showElement(const UBFeature &elem);
     UBFeature getCurrentElement() const;
@@ -337,8 +337,8 @@ public:
     void setThumbnail(const QPixmap &pix);
 
 protected:
-    void resizeEvent(QResizeEvent *event);
-    void showEvent(QShowEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void onAddToPage();
@@ -368,7 +368,7 @@ class UBFeatureItemButton : public QPushButton
 {
 public:
     UBFeatureItemButton(QWidget* parent=0, const char* name="UBFeatureItemButton");
-    ~UBFeatureItemButton();
+    ~UBFeatureItemButton() override;
 };
 
 class UBFeaturesModel : public QAbstractListModel
@@ -380,26 +380,26 @@ signals:
 
 public:
     UBFeaturesModel(QList<UBFeature> *pFeaturesList, QObject *parent = 0) : QAbstractListModel(parent), featuresList(pFeaturesList) {;}
-    virtual ~UBFeaturesModel(){;}
+    ~UBFeaturesModel() override{;}
 
     void deleteFavoriteItem( const QString &path );
     void deleteItem( const QString &path );
     void deleteItem(const UBFeature &feature);
 
-    QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
-    QMimeData *mimeData( const QModelIndexList &indexes ) const;
-    QStringList mimeTypes() const;
-    int rowCount( const QModelIndex &parent ) const;
-    Qt::ItemFlags flags( const QModelIndex &index ) const;
-    bool dropMimeData(const QMimeData *mimeData, Qt::DropAction action, int row, int column, const QModelIndex &parent);
-    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+    QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const override;
+    QMimeData *mimeData( const QModelIndexList &indexes ) const override;
+    QStringList mimeTypes() const override;
+    int rowCount( const QModelIndex &parent ) const override;
+    Qt::ItemFlags flags( const QModelIndex &index ) const override;
+    bool dropMimeData(const QMimeData *mimeData, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     bool removeRow(int row, const QModelIndex &parent = QModelIndex());
     //bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex());
     //bool insertRow(int row, const QModelIndex &parent = QModelIndex());
 
     void moveData(const UBFeature &source, const UBFeature &destination, Qt::DropAction action, bool deleteManualy = false);
-    Qt::DropActions supportedDropActions() const { return Qt::MoveAction | Qt::CopyAction; }
-    Qt::DropActions supportedDragActions() const { return Qt::MoveAction | Qt::CopyAction; }
+    Qt::DropActions supportedDropActions() const override { return Qt::MoveAction | Qt::CopyAction; }
+    Qt::DropActions supportedDragActions() const override { return Qt::MoveAction | Qt::CopyAction; }
 
 //    void setFeaturesList(QList <UBFeature> *flist ) { featuresList = flist; }
 
@@ -415,9 +415,9 @@ class UBFeaturesProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 public:
     UBFeaturesProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent) {;}
-    virtual ~UBFeaturesProxyModel() {}
+    ~UBFeaturesProxyModel() override {}
 protected:
-    virtual bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const;
+    bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const override;
 };
 
 class UBFeaturesSearchProxyModel : public QSortFilterProxyModel
@@ -425,10 +425,10 @@ class UBFeaturesSearchProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 public:
     UBFeaturesSearchProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent), mFilterPrefix() {;}
-    virtual ~UBFeaturesSearchProxyModel() {}
+    ~UBFeaturesSearchProxyModel() override {}
     void setFilterPrefix(const QString &newPrefix) {mFilterPrefix = newPrefix;}
 protected:
-    virtual bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const;
+    bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const override;
 private:
     QString mFilterPrefix;
 };
@@ -438,10 +438,10 @@ class UBFeaturesPathProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 public:
     UBFeaturesPathProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent) {;}
-    virtual ~UBFeaturesPathProxyModel() {}
+    ~UBFeaturesPathProxyModel() override {}
     void setPath( const QString &p ) { path = p; }
 protected:
-    virtual bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const;
+    bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const override;
 private:
     QString path;
 };
@@ -451,11 +451,11 @@ class UBFeaturesItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 public:
     UBFeaturesItemDelegate(QObject *parent = 0, const QListView *lw = 0) : QStyledItemDelegate(parent) { listView = lw; }
-    ~UBFeaturesItemDelegate() {}
+    ~UBFeaturesItemDelegate() override {}
     //UBFeaturesItemDelegate(const QListView *lw = 0) { listView = lw; };
     //void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     //QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    virtual QString    displayText ( const QVariant & value, const QLocale & locale ) const;
+    QString    displayText ( const QVariant & value, const QLocale & locale ) const override;
 private:
     const QListView *listView;
 };
@@ -465,9 +465,9 @@ class UBFeaturesPathItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 public:
     UBFeaturesPathItemDelegate(QObject *parent = 0);
-    ~UBFeaturesPathItemDelegate();
-    virtual QString    displayText ( const QVariant & value, const QLocale & locale ) const;
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    ~UBFeaturesPathItemDelegate() override;
+    QString    displayText ( const QVariant & value, const QLocale & locale ) const override;
+    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 private:
     QPixmap *arrowPixmap;
 };

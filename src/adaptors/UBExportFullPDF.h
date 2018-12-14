@@ -42,14 +42,14 @@ class UBExportFullPDF : public UBExportAdaptor
 
     public:
         UBExportFullPDF(QObject *parent = 0);
-        virtual ~UBExportFullPDF();
+        ~UBExportFullPDF() override;
 
-        virtual QString exportName();
-        virtual QString exportExtention();
-        virtual void persist(UBDocumentProxy* pDocument);
-        virtual bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex);
+        QString exportName() override;
+        QString exportExtention() override;
+        void persist(UBDocumentProxy* pDocument) override;
+        bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex) override;
 
-        virtual bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename);
+        bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename) override;
 
     protected:
         void saveOverlayPdf(UBDocumentProxy* pDocumentProxy, const QString& filename);

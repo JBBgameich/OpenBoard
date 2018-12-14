@@ -40,7 +40,7 @@ class UBGraphicsGroupContainerItem : public QGraphicsItem, public UBItem, public
 
 public:
     UBGraphicsGroupContainerItem (QGraphicsItem *parent = 0);
-    virtual ~UBGraphicsGroupContainerItem();
+    ~UBGraphicsGroupContainerItem() override;
 
     void addToGroup(QGraphicsItem *item);
     void removeFromGroup(QGraphicsItem *item);
@@ -48,32 +48,32 @@ public:
     QGraphicsItem *getCurrentItem() const {return mCurrentItem;}
     void deselectCurrentItem();
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     virtual UBCoreGraphicsScene *corescene();
     UBGraphicsGroupContainerItem *deepCopyNoChildDuplication() const;
-    virtual UBGraphicsGroupContainerItem *deepCopy() const;
-    virtual void copyItemParameters(UBItem *copy) const;
+    UBGraphicsGroupContainerItem *deepCopy() const override;
+    void copyItemParameters(UBItem *copy) const override;
 
     enum { Type = UBGraphicsItemType::groupContainerType };
 
-    virtual int type() const
+    int type() const override
     {
         return Type;
     }
 
-    virtual void setUuid(const QUuid &pUuid);
+    void setUuid(const QUuid &pUuid) override;
     void destroy(bool canUndo = true);
 
-    virtual void clearSource();
+    void clearSource() override;
 
 protected:
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
     void pRemoveFromGroup(QGraphicsItem *item);
 

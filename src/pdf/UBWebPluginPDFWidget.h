@@ -41,20 +41,20 @@ class UBWebPluginPDFWidget : public UBWebPluginWidget
 
     public:
         UBWebPluginPDFWidget(const QUrl &url, QWidget *parent = 0);
-        virtual ~UBWebPluginPDFWidget();
+        ~UBWebPluginPDFWidget() override;
 
-        virtual QString title() const;
+        QString title() const override;
 
     public slots:
         virtual void zoomIn();
         virtual void zoomOut();
 
     protected:
-        virtual void handleFile(const QString &filePath);
+        void handleFile(const QString &filePath) override;
 
-        virtual void paintEvent(QPaintEvent *paintEvent);
+        void paintEvent(QPaintEvent *paintEvent) override;
 
-        virtual void keyReleaseEvent(QKeyEvent *keyEvent);
+        void keyReleaseEvent(QKeyEvent *keyEvent) override;
 
     protected slots:
         virtual bool previousPage();

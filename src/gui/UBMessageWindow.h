@@ -44,14 +44,14 @@ class UBMessageWindow  : public UBFloatingPalette
 
     public:
         UBMessageWindow(QWidget *parent = 0);
-        virtual ~UBMessageWindow();
+        ~UBMessageWindow() override;
 
         void showMessage(const QString& message, bool showSpinningWheel = false);
 
         void hideMessage();
 
     protected:
-        void timerEvent(QTimerEvent *event);
+        void timerEvent(QTimerEvent *event) override;
 
     private:
         QHBoxLayout *mLayout;

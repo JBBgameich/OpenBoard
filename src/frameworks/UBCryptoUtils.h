@@ -52,7 +52,7 @@ class UBCryptoUtils : public QObject
     private:
 
         UBCryptoUtils(QObject * pParent = 0);
-        virtual ~UBCryptoUtils();
+        ~UBCryptoUtils() override;
 
         static UBCryptoUtils* sInstance;
         static QString sAESKey;

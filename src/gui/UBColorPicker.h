@@ -41,7 +41,7 @@ class UBColorPicker : public QFrame
     public:
         UBColorPicker(QWidget* parent);
         UBColorPicker(QWidget* parent, const QList<QColor>& colors, int pSelectedColorIndex = 0);
-        virtual ~UBColorPicker();
+        ~UBColorPicker() override;
         QList<QColor> getColors() const
         {
             return mColors;
@@ -69,8 +69,8 @@ class UBColorPicker : public QFrame
 
     protected:
 
-        virtual void paintEvent ( QPaintEvent * event );
-        virtual void mousePressEvent ( QMouseEvent * event );
+        void paintEvent ( QPaintEvent * event ) override;
+        void mousePressEvent ( QMouseEvent * event ) override;
 
 
     private:

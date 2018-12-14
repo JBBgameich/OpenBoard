@@ -100,8 +100,8 @@ class WBTabBar : public QTabBar
         WBTabBar(QWidget *parent = 0);
 
     protected:
-        void mousePressEvent(QMouseEvent* event);
-        void mouseMoveEvent(QMouseEvent* event);
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseMoveEvent(QMouseEvent* event) override;
 
     private slots:
         void selectTabAction();
@@ -199,10 +199,10 @@ class WBTabWidget : public QTabWidget
 
         void setLineEditStackVisible(bool visible) {mLineEdits->setVisible(visible);mLineEdits->hide();}
     protected:
-        void mouseDoubleClickEvent(QMouseEvent *event);
-        void contextMenuEvent(QContextMenuEvent *event);
-        void mouseReleaseEvent(QMouseEvent *event);
-        void paintEvent(QPaintEvent * event);
+        void mouseDoubleClickEvent(QMouseEvent *event) override;
+        void contextMenuEvent(QContextMenuEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
+        void paintEvent(QPaintEvent * event) override;
         QRect addTabButtonRect();
 
     public slots:

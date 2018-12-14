@@ -43,7 +43,7 @@ class UBStartupHintsPalette : public UBFloatingPalette
     Q_OBJECT;
 public:
     UBStartupHintsPalette(QWidget *parent = 0);
-    ~UBStartupHintsPalette();
+    ~UBStartupHintsPalette() override;
 
 
 signals:
@@ -51,13 +51,13 @@ signals:
 public slots:
 
 protected:
-    virtual void paintEvent(QPaintEvent *event);
-    virtual void mouseReleaseEvent(QMouseEvent * event);
-    virtual void showEvent(QShowEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
     void close();
-    int border();
+    int border() override;
     QCheckBox* mShowNextTime;
     QVBoxLayout* mLayout;
     QHBoxLayout* mButtonLayout;

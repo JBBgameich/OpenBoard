@@ -41,7 +41,7 @@ class WBWebTrapWebView : public QWebView
 
     public:
         WBWebTrapWebView(QWidget* parent = 0);
-        virtual ~WBWebTrapWebView();
+        ~WBWebTrapWebView() override;
 
         void setIsTrapping(bool pIsTrapping);
 
@@ -63,12 +63,12 @@ class WBWebTrapWebView : public QWebView
 
     protected:
 
-        virtual void mousePressEvent(QMouseEvent* event);
-        virtual void mouseMoveEvent ( QMouseEvent * event );
-        virtual void mouseReleaseEvent ( QMouseEvent * event );
-        virtual void hideEvent ( QHideEvent * event );
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseMoveEvent ( QMouseEvent * event ) override;
+        void mouseReleaseEvent ( QMouseEvent * event ) override;
+        void hideEvent ( QHideEvent * event ) override;
 
-        virtual void paintEvent ( QPaintEvent * event );
+        void paintEvent ( QPaintEvent * event ) override;
 
         QString potentialEmbedCodeAtPos(const QPoint& pos);
 
@@ -97,14 +97,14 @@ class UBWebTrapMouseEventMask : public QWidget
 {
     public:
         UBWebTrapMouseEventMask(WBWebTrapWebView* pWebView);
-        virtual ~UBWebTrapMouseEventMask();
+        ~UBWebTrapMouseEventMask() override;
 
     protected:
 
-        virtual void mousePressEvent(QMouseEvent* event);
-        virtual void mouseMoveEvent ( QMouseEvent * event );
-        virtual void mouseReleaseEvent ( QMouseEvent * event );
-        virtual void paintEvent(QPaintEvent *);
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseMoveEvent ( QMouseEvent * event ) override;
+        void mouseReleaseEvent ( QMouseEvent * event ) override;
+        void paintEvent(QPaintEvent *) override;
 
    private:
        WBWebTrapWebView *mTrappedWebView;

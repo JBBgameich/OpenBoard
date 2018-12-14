@@ -37,13 +37,13 @@ class UBGraphicsItemZLevelUndoCommand : public UBUndoCommand{
 public:
     UBGraphicsItemZLevelUndoCommand(UBGraphicsScene* _scene, const QList<QGraphicsItem*>& _items, qreal _previousZLevel, UBZLayerController::moveDestination dest);
     UBGraphicsItemZLevelUndoCommand(UBGraphicsScene* _scene, QGraphicsItem* _item, qreal _previousZLevel, UBZLayerController::moveDestination dest);
-    ~UBGraphicsItemZLevelUndoCommand();
+    ~UBGraphicsItemZLevelUndoCommand() override;
 
-    virtual int getType() const { return UBUndoType::undotype_GRAPHICITEMZVALUE; }
+    int getType() const override { return UBUndoType::undotype_GRAPHICITEMZVALUE; }
 
 protected:
-    virtual void undo();
-    virtual void redo();
+    void undo() override;
+    void redo() override;
 
 private:
     void updateLazyScene();

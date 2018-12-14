@@ -48,11 +48,11 @@ class UBGraphicsCurtainItemDelegate : public UBGraphicsItemDelegate
 
     public:
         UBGraphicsCurtainItemDelegate(UBGraphicsCurtainItem* pDelegated, QObject * parent = 0);
-        virtual ~UBGraphicsCurtainItemDelegate();
+        ~UBGraphicsCurtainItemDelegate() override;
 
-        virtual bool mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
-        virtual void positionHandles();
+        bool mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
+        void positionHandles() override;
 
         virtual void init();
 

@@ -42,7 +42,7 @@ class UBIntranetPodcastPublisher : public QObject
 
     public:
         UBIntranetPodcastPublisher(QObject* pParent = 0);
-        virtual ~UBIntranetPodcastPublisher();
+        ~UBIntranetPodcastPublisher() override;
 
     public slots:
 
@@ -73,7 +73,7 @@ class UBIntranetPodcastPublishingDialog : public QDialog, public Ui::IntranetPod
 
     public:
         UBIntranetPodcastPublishingDialog(const QString& videoFilePath, QWidget *parent = 0);
-        ~UBIntranetPodcastPublishingDialog(){};
+        ~UBIntranetPodcastPublishingDialog() override{};
 
     private slots:
         void updateUIState(const QString& = QString(""));

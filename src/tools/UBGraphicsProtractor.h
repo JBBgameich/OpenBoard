@@ -58,30 +58,30 @@ class UBGraphicsProtractor : public UBAbstractDrawRuler, public QGraphicsEllipse
         void  setAngle (qreal angle) { mStartAngle = angle; setStartAngle(mStartAngle * 16); }
         void  setMarkerAngle (qreal angle) { mCurrentAngle = angle; }
 
-        virtual UBItem* deepCopy() const;
-        virtual void copyItemParameters(UBItem *copy) const;
+        UBItem* deepCopy() const override;
+        void copyItemParameters(UBItem *copy) const override;
 
         enum { Type = UBGraphicsItemType::ProtractorItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
     protected:
-        virtual void paint (QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget);
+        void paint (QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget) override;
 
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-        virtual void   mousePressEvent (QGraphicsSceneMouseEvent *event);
-        virtual void    mouseMoveEvent (QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent (QGraphicsSceneMouseEvent *event);
-        virtual void   hoverEnterEvent (QGraphicsSceneHoverEvent *event);
-        virtual void   hoverLeaveEvent (QGraphicsSceneHoverEvent *event);
-        virtual void    hoverMoveEvent (QGraphicsSceneHoverEvent *event);
-        virtual QPainterPath shape() const;
-        QRectF boundingRect() const;
-        void paintGraduations(QPainter *painter);        
+        void   mousePressEvent (QGraphicsSceneMouseEvent *event) override;
+        void    mouseMoveEvent (QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent (QGraphicsSceneMouseEvent *event) override;
+        void   hoverEnterEvent (QGraphicsSceneHoverEvent *event) override;
+        void   hoverLeaveEvent (QGraphicsSceneHoverEvent *event) override;
+        void    hoverMoveEvent (QGraphicsSceneHoverEvent *event) override;
+        QPainterPath shape() const override;
+        QRectF boundingRect() const override;
+        void paintGraduations(QPainter *painter) override;        
 
 
     private:
@@ -90,14 +90,14 @@ class UBGraphicsProtractor : public UBAbstractDrawRuler, public QGraphicsEllipse
         void paintAngleMarker (QPainter *painter);
         Tool toolFromPos (QPointF pos);
         qreal antiScale () const;
-        UBGraphicsScene*            scene() const;
+        UBGraphicsScene*            scene() const override;
         QBrush                  fillBrush() const;
 
         QSizeF buttonSizeReference () const{return QSizeF(radius() / 10, mCloseSvgItem->boundingRect().height() * radius()/(10 * mCloseSvgItem->boundingRect().width()));}
         QSizeF markerSizeReference () const{return QSizeF(radius() / 10, mMarkerSvgItem->boundingRect().height() * radius()/(10 * mMarkerSvgItem->boundingRect().width()));}
         QRectF    resetButtonRect () const;
 
-        QRectF    closeButtonRect () const;
+        QRectF    closeButtonRect () const override;
         QRectF    resizeButtonRect () const;
         QRectF    rotateButtonRect () const;
         QRectF    markerButtonRect () const;
@@ -121,8 +121,8 @@ class UBGraphicsProtractor : public UBAbstractDrawRuler, public QGraphicsEllipse
         static const QRectF sDefaultRect;
         static const qreal minRadius;
 
-        virtual void rotateAroundCenter(qreal angle);
-        virtual QPointF    rotationCenter() const;
+        void rotateAroundCenter(qreal angle) override;
+        QPointF    rotationCenter() const override;
 
         int    sFillTransparency;
         int    sDrawTransparency;

@@ -45,17 +45,17 @@ class UBExportDocument : public UBExportAdaptor, public UBProcessingProgressList
 
     public:
         UBExportDocument(QObject *parent = 0);
-        virtual ~UBExportDocument();
+        ~UBExportDocument() override;
 
-        virtual QString exportName();
-        virtual QString exportExtention();
-        virtual void persist(UBDocumentProxy* pDocument);
+        QString exportName() override;
+        QString exportExtention() override;
+        void persist(UBDocumentProxy* pDocument) override;
 
-        virtual bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename);
+        bool persistsDocument(UBDocumentProxy* pDocument, const QString& filename) override;
 
-        virtual void processing(const QString& pObjectName, int pCurrent, int pTotal);
+        void processing(const QString& pObjectName, int pCurrent, int pTotal) override;
 
-        virtual bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex);
+        bool associatedActionactionAvailableFor(const QModelIndex &selectedIndex) override;
 };
 
 #endif /* UBEXPORTDOCUMENT_H_ */

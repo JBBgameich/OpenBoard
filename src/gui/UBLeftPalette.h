@@ -36,16 +36,16 @@ class UBLeftPalette : public UBDockPalette
 {
 public:
     UBLeftPalette(QWidget* parent=0, const char* name="UBLeftPalette");
-    ~UBLeftPalette();
+    ~UBLeftPalette() override;
 
     bool switchMode(eUBDockPaletteWidgetMode mode);
 
 public slots:
-    void onDocumentSet(UBDocumentProxy* documentProxy);
+    void onDocumentSet(UBDocumentProxy* documentProxy) override;
 
 protected:
-    void updateMaxWidth();
-    void resizeEvent(QResizeEvent *event);
+    void updateMaxWidth() override;
+    void resizeEvent(QResizeEvent *event) override;
 };
 
 #endif // UBLEFTPALETTE_H

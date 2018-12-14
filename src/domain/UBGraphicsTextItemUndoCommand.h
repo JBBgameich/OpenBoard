@@ -40,13 +40,13 @@ class UBGraphicsTextItemUndoCommand : public UBUndoCommand
 {
     public:
         UBGraphicsTextItemUndoCommand(UBGraphicsTextItem *textItem);
-        virtual ~UBGraphicsTextItemUndoCommand();
+        ~UBGraphicsTextItemUndoCommand() override;
 
-        virtual int getType() const { return UBUndoType::undotype_GRAPHICTEXTITEM; };
+        int getType() const override { return UBUndoType::undotype_GRAPHICTEXTITEM; };
 
     protected:
-        virtual void undo();
-        virtual void redo();
+        void undo() override;
+        void redo() override;
 
     private:
         QPointer<UBGraphicsTextItem> mTextItem;

@@ -39,7 +39,7 @@ class UBWebToolsPalette : public UBActionPalette
 
     public:
         UBWebToolsPalette(QWidget *parent);
-        virtual ~UBWebToolsPalette();
+        ~UBWebToolsPalette() override;
 
 };
 

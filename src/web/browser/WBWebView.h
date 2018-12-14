@@ -91,9 +91,9 @@ class WBWebPage : public UBWebPage
         WBBrowserWindow *mainWindow();
 
     protected:
-        bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
-        QWebPage *createWindow(QWebPage::WebWindowType type);
-        QObject *createPlugin(const QString &classId, const QUrl &url, const QStringList &paramNames, const QStringList &paramValues);
+        bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type) override;
+        QWebPage *createWindow(QWebPage::WebWindowType type) override;
+        QObject *createPlugin(const QString &classId, const QUrl &url, const QStringList &paramNames, const QStringList &paramValues) override;
 
         bool supportsExtension(Extension extension) const {
             if (extension == QWebPage::ErrorPageExtension)
@@ -152,10 +152,10 @@ class WBWebView : public WBWebTrapWebView
         inline int progress() const { return mProgress; }
 
     protected:
-        void mousePressEvent(QMouseEvent *event);
-        void mouseReleaseEvent(QMouseEvent *event);
-        void contextMenuEvent(QContextMenuEvent *event);
-        void wheelEvent(QWheelEvent *event);
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
+        void contextMenuEvent(QContextMenuEvent *event) override;
+        void wheelEvent(QWheelEvent *event) override;
 
     private slots:
         void setProgress(int progress);

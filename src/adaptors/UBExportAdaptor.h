@@ -40,7 +40,7 @@ class UBExportAdaptor : public QObject
 
     public:
         UBExportAdaptor(QObject *parent = 0);
-        virtual ~UBExportAdaptor();
+        ~UBExportAdaptor() override;
 
         virtual QString exportName() = 0;
         virtual QString exportExtention() { return "";}

@@ -93,20 +93,20 @@ class WBExLineEdit : public QWidget
         void setLeftWidget(QWidget *widget);
         QWidget *leftWidget() const;
 
-        QSize sizeHint() const;
+        QSize sizeHint() const override;
 
-        QVariant inputMethodQuery(Qt::InputMethodQuery property) const;
+        QVariant inputMethodQuery(Qt::InputMethodQuery property) const override;
 
-        void setVisible(bool pVisible);
+        void setVisible(bool pVisible) override;
 
     protected:
-        void focusInEvent(QFocusEvent *event);
-        void focusOutEvent(QFocusEvent *event);
-        void keyPressEvent(QKeyEvent *event);
-        void paintEvent(QPaintEvent *event);
-        void resizeEvent(QResizeEvent *event);
-        void inputMethodEvent(QInputMethodEvent *e);
-        bool event(QEvent *event);
+        void focusInEvent(QFocusEvent *event) override;
+        void focusOutEvent(QFocusEvent *event) override;
+        void keyPressEvent(QKeyEvent *event) override;
+        void paintEvent(QPaintEvent *event) override;
+        void resizeEvent(QResizeEvent *event) override;
+        void inputMethodEvent(QInputMethodEvent *e) override;
+        bool event(QEvent *event) override;
 
     protected:
         void updateGeometries();
@@ -130,7 +130,7 @@ class WBUrlLineEdit : public WBExLineEdit
 
     protected:
 
-        void focusOutEvent(QFocusEvent *event);
+        void focusOutEvent(QFocusEvent *event) override;
 
     private slots:
         void webViewUrlChanged(const QUrl &url);

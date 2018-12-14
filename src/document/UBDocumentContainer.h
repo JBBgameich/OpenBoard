@@ -39,7 +39,7 @@ class UBDocumentContainer : public QObject
 
     public:
         UBDocumentContainer(QObject * parent = 0);
-        virtual ~UBDocumentContainer();
+        ~UBDocumentContainer() override;
 
         void setDocument(UBDocumentProxy* document, bool forceReload = false);
         void pureSetDocument(UBDocumentProxy *document) {mCurrentDocument = document;}

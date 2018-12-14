@@ -72,7 +72,7 @@ class UBBoardController : public UBDocumentContainer
 
     public:
         UBBoardController(UBMainWindow *mainWindow);
-        virtual ~UBBoardController();
+        ~UBBoardController() override;
 
         void init();
         void setupLayout();

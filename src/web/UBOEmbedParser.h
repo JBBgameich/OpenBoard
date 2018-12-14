@@ -83,7 +83,7 @@ class UBOEmbedParser : public QObject
     Q_OBJECT
 public:
     UBOEmbedParser(QObject* parent=0, const char* name="UBOEmbedParser");
-    ~UBOEmbedParser();
+    ~UBOEmbedParser() override;
     void parse(const QString& html);
     void setNetworkAccessManager(QNetworkAccessManager* nam);
 

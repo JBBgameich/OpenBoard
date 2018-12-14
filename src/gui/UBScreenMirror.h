@@ -39,10 +39,10 @@ class UBScreenMirror : public QWidget
 
     public:
         UBScreenMirror(QWidget* parent = 0);
-        virtual ~UBScreenMirror();
+        ~UBScreenMirror() override;
 
-        virtual void paintEvent (QPaintEvent * event);
-        virtual void timerEvent(QTimerEvent *event);
+        void paintEvent (QPaintEvent * event) override;
+        void timerEvent(QTimerEvent *event) override;
 
     public slots:
 

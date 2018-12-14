@@ -44,7 +44,7 @@ class UBCustomCaptureWindow : public QDialog
 
     public:
         UBCustomCaptureWindow(QWidget *parent = 0);
-        virtual ~UBCustomCaptureWindow();
+        ~UBCustomCaptureWindow() override;
 
         // launch the custom capture window based on pSreenPixmap.
         // The function returns a DialogCode result.
@@ -53,12 +53,12 @@ class UBCustomCaptureWindow : public QDialog
         QPixmap getSelectedPixmap();
 
     protected:
-        virtual void showEvent ( QShowEvent * event );
-        virtual void mouseMoveEvent ( QMouseEvent * event );
-        virtual void mousePressEvent ( QMouseEvent * event );
-        virtual void mouseReleaseEvent ( QMouseEvent * event );
-        virtual void keyPressEvent ( QKeyEvent * event );
-        virtual void paintEvent(QPaintEvent *event);
+        void showEvent ( QShowEvent * event ) override;
+        void mouseMoveEvent ( QMouseEvent * event ) override;
+        void mousePressEvent ( QMouseEvent * event ) override;
+        void mouseReleaseEvent ( QMouseEvent * event ) override;
+        void keyPressEvent ( QKeyEvent * event ) override;
+        void paintEvent(QPaintEvent *event) override;
 
         QPixmap mWholeScreenPixmap;
         QRubberBand *mSelectionBand;

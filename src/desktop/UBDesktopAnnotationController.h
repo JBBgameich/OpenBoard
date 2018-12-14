@@ -62,7 +62,7 @@ class UBDesktopAnnotationController : public QObject
 
     public:
         UBDesktopAnnotationController(QObject *parent, UBRightPalette* rightPalette);
-        virtual ~UBDesktopAnnotationController();
+        ~UBDesktopAnnotationController() override;
         void showWindow();
         void hideWindow();
 

@@ -72,8 +72,8 @@ signals:
     void closeDialog();
 
 private slots:
-    void accept();
-    void reject();
+    void accept() override;
+    void reject() override;
 
     void reactOnTextChanged(const QString &pStr);
 
@@ -171,21 +171,21 @@ public:
     };
 
     UBDocumentTreeModel(QObject *parent = 0);
-    ~UBDocumentTreeModel();
+    ~UBDocumentTreeModel() override;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent) const;
-    QModelIndex parent(const QModelIndex &child) const;
+    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
+    QModelIndex parent(const QModelIndex &child) const override;
 
-    int rowCount(const QModelIndex &parent) const;
-    int columnCount(const QModelIndex &parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    bool setData(const QModelIndex &index, const QVariant &value, int role);
-    Qt::ItemFlags flags ( const QModelIndex & index ) const;
-    Qt::DropActions supportedDropActions() const {return Qt::MoveAction | Qt::CopyAction;}
-    QStringList mimeTypes() const;
-    QMimeData *mimeData (const QModelIndexList &indexes) const;
-    bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
-    bool removeRows(int row, int count, const QModelIndex &parent);
+    int rowCount(const QModelIndex &parent) const override;
+    int columnCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+    Qt::ItemFlags flags ( const QModelIndex & index ) const override;
+    Qt::DropActions supportedDropActions() const override {return Qt::MoveAction | Qt::CopyAction;}
+    QStringList mimeTypes() const override;
+    QMimeData *mimeData (const QModelIndexList &indexes) const override;
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
+    bool removeRows(int row, int count, const QModelIndex &parent) override;
 
     bool containsDocuments(const QModelIndex& index);
 
@@ -305,15 +305,15 @@ public slots:
     void hSliderRangeChanged(int min, int max);
 
 protected:
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragLeaveEvent(QDragLeaveEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
-    void paintEvent(QPaintEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragLeaveEvent(QDragLeaveEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 
     UBDocumentTreeModel *fullModel() {return qobject_cast<UBDocumentTreeModel*>(model());}
-    void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);
+    void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;
 
 private:
     bool isAcceptable(const QModelIndex &dragIndex, const QModelIndex &atIndex);
@@ -334,10 +334,10 @@ private slots:
     bool validateString(const QString &str) const;
 
 protected:
-    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
-    void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &index) const;
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
+    void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex &index) const override;
 
 private:
     mutable QStringList mExistingFileNames;
@@ -377,7 +377,7 @@ class UBDocumentController : public UBDocumentContainer
     };
 
         UBDocumentController(UBMainWindow* mainWindow);
-        virtual ~UBDocumentController();
+        ~UBDocumentController() override;
 
         void closing();
         QWidget* controlView();

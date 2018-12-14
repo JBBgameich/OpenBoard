@@ -44,30 +44,30 @@ class UBGraphicsCompass: public QObject, public QGraphicsRectItem, public UBItem
 
     public:
         UBGraphicsCompass();
-        virtual ~UBGraphicsCompass();
+        ~UBGraphicsCompass() override;
 
         enum { Type = UBGraphicsItemType::CompassItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
+        void copyItemParameters(UBItem *copy) const override;
 
     protected:
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
         // Events
-        virtual void   mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void   hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void   hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        virtual void    hoverMoveEvent(QGraphicsSceneHoverEvent *event);
+        void   mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void    mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void   hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void   hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void    hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 
     private slots:
         void penColorChanged();
@@ -93,7 +93,7 @@ class UBGraphicsCompass: public QObject, public QGraphicsRectItem, public UBItem
         QPointF            pencilPosition() const;
         QRectF            closeButtonRect() const;
         QRectF           resizeButtonRect() const;
-        virtual QPainterPath        shape() const;
+        QPainterPath        shape() const override;
         QPainterPath          needleShape() const;
         QPainterPath          pencilShape() const;
         QPainterPath      needleBaseShape() const;

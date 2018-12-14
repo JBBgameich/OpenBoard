@@ -99,13 +99,13 @@ friend class UBKeyButton;
 
 public:
     UBKeyboardPalette(QWidget *parent);
-    ~UBKeyboardPalette();
+    ~UBKeyboardPalette() override;
 
     BTNImages *currBtnImages;
 
     bool isEnabled(){return locales!= NULL;}
-    virtual QSize  sizeHint () const;
-    virtual void adjustSizeAndPosition(bool pUp = true);
+    QSize  sizeHint () const override;
+    void adjustSizeAndPosition(bool pUp = true) override;
     QString getKeyButtonSize() const {QString res; res.sprintf("%dx%d", btnWidth, btnHeight); return res;}
     void setKeyButtonSize(const QString& strSize);
 
@@ -143,10 +143,10 @@ protected:
     bool languagePopupActive;
     bool keyboardActive;
 // 
-    virtual void  enterEvent ( QEvent * event );
-    virtual void  leaveEvent ( QEvent * event );
-    virtual void  paintEvent(QPaintEvent *event);
-    virtual void  moveEvent ( QMoveEvent * event );
+    void  enterEvent ( QEvent * event ) override;
+    void  leaveEvent ( QEvent * event ) override;
+    void  paintEvent(QPaintEvent *event) override;
+    void  moveEvent ( QMoveEvent * event ) override;
 
     void sendKeyEvent(KEYCODE keyCode);
 
@@ -188,7 +188,7 @@ class UBKeyboardButton : public QWidget
 
 public:
     UBKeyboardButton(UBKeyboardPalette* parent, QString contentImagePath);
-    ~UBKeyboardButton();
+    ~UBKeyboardButton() override;
 
 protected:
 
@@ -196,12 +196,12 @@ protected:
     ContentImage *imgContent;
     QString m_contentImagePath;
 
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) override;
 
-    virtual void  enterEvent ( QEvent * event );
-    virtual void  leaveEvent ( QEvent * event );
-    virtual void  mousePressEvent ( QMouseEvent * event );
-    virtual void  mouseReleaseEvent ( QMouseEvent * event );
+    void  enterEvent ( QEvent * event ) override;
+    void  leaveEvent ( QEvent * event ) override;
+    void  mousePressEvent ( QMouseEvent * event ) override;
+    void  mouseReleaseEvent ( QMouseEvent * event ) override;
 
     virtual void onPress() = 0;
     virtual void onRelease() = 0;
@@ -225,13 +225,13 @@ class UBKeyButton : public UBKeyboardButton
 
 public:
     UBKeyButton(UBKeyboardPalette* parent);
-    ~UBKeyButton();
+    ~UBKeyButton() override;
 
     void setKeyBt(const KEYBT* keybt){this->keybt = keybt;}
 
-    virtual void onPress();
-    virtual void onRelease();
-    virtual void paintContent(QPainter& painter);
+    void onPress() override;
+    void onRelease() override;
+    void paintContent(QPainter& painter) override;
 
 private:
     bool shifted();
@@ -245,11 +245,11 @@ class UBCntrlButton : public UBKeyboardButton
 public:
     UBCntrlButton(UBKeyboardPalette* parent, int _code, const QString& _contentImagePath );
     UBCntrlButton(UBKeyboardPalette* parent, const QString& _label, int _code );
-    ~UBCntrlButton();
+    ~UBCntrlButton() override;
 
-    virtual void onPress();
-    virtual void onRelease();
-    virtual void paintContent(QPainter& painter);
+    void onPress() override;
+    void onRelease() override;
+    void paintContent(QPainter& painter) override;
 
 private:
     QString label;
@@ -262,14 +262,14 @@ class UBCapsLockButton : public UBKeyboardButton
 
 public:
     UBCapsLockButton(UBKeyboardPalette* parent, const QString _contentImagePath);
-    ~UBCapsLockButton();
+    ~UBCapsLockButton() override;
 
-    virtual void onPress();
-    virtual void onRelease();
-    virtual void paintContent(QPainter& painter);
+    void onPress() override;
+    void onRelease() override;
+    void paintContent(QPainter& painter) override;
 
 protected:
-    virtual bool isPressed();
+    bool isPressed() override;
 };
 
 class UBShiftButton : public UBKeyboardButton
@@ -278,14 +278,14 @@ class UBShiftButton : public UBKeyboardButton
 
 public:
     UBShiftButton(UBKeyboardPalette* parent, const QString _contentImagePath);
-    ~UBShiftButton();
+    ~UBShiftButton() override;
 
-    virtual void onPress();
-    virtual void onRelease();
-    virtual void paintContent(QPainter& painter);
+    void onPress() override;
+    void onRelease() override;
+    void paintContent(QPainter& painter) override;
 
 protected:
-    virtual bool isPressed();
+    bool isPressed() override;
 };
 
 
@@ -295,11 +295,11 @@ class UBLocaleButton : public UBKeyboardButton
 
 public:
     UBLocaleButton(UBKeyboardPalette* parent);
-    ~UBLocaleButton();
+    ~UBLocaleButton() override;
 
-    virtual void onPress();
-    virtual void onRelease();
-    virtual void paintContent(QPainter& painter);
+    void onPress() override;
+    void onRelease() override;
+    void paintContent(QPainter& painter) override;
 
 protected:
     QMenu* localeMenu;

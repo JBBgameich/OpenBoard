@@ -62,11 +62,11 @@ class UBFeaturesComputingThread : public QThread
     Q_OBJECT
 public:
     explicit UBFeaturesComputingThread(QObject *parent = 0);
-    virtual ~UBFeaturesComputingThread();
+    ~UBFeaturesComputingThread() override;
         void compute(const QList<QPair<QUrl, UBFeature> > &pScanningData, QSet<QUrl> *pFavoritesSet);
 
 protected:
-    void run();
+    void run() override;
 
 signals:
     void sendFeature(UBFeature pFeature);
@@ -166,7 +166,7 @@ Q_OBJECT
 
 public:
     UBFeaturesController(QWidget *parentWidget);
-    virtual ~UBFeaturesController();
+    ~UBFeaturesController() override;
 
     QList <UBFeature>* getFeatures() const {return featuresList;}
 

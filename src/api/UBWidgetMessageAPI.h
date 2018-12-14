@@ -40,7 +40,7 @@ class UBWidgetMessageAPI : public QObject
 
     public:
         UBWidgetMessageAPI(UBGraphicsWidgetItem *graphicsWidgetItem, QObject *parent = 0);
-        virtual ~UBWidgetMessageAPI();
+        ~UBWidgetMessageAPI() override;
 
     public slots:
 
@@ -74,7 +74,7 @@ class UBWidgetAPIMessageBroker : public QObject
     private:
 
         UBWidgetAPIMessageBroker(QObject *parent = 0);
-        ~UBWidgetAPIMessageBroker();
+        ~UBWidgetAPIMessageBroker() override;
 
     public:
         static UBWidgetAPIMessageBroker* instance();

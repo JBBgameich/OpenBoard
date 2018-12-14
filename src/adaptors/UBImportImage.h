@@ -41,14 +41,14 @@ class UBImportImage : public UBPageBasedImportAdaptor
 
     public:
         UBImportImage(QObject *parent = 0);
-        virtual ~UBImportImage();
+        ~UBImportImage() override;
 
-        virtual QStringList supportedExtentions();
-        virtual QString importFileFilter();
+        QStringList supportedExtentions() override;
+        QString importFileFilter() override;
 
-        virtual QList<UBGraphicsItem*> import(const QUuid& uuid, const QString& filePath);
-        virtual void placeImportedItemToScene(UBGraphicsScene* scene, UBGraphicsItem* item);
-        virtual const QString& folderToCopy();
+        QList<UBGraphicsItem*> import(const QUuid& uuid, const QString& filePath) override;
+        void placeImportedItemToScene(UBGraphicsScene* scene, UBGraphicsItem* item) override;
+        const QString& folderToCopy() override;
 };
 
 #endif /* UBIMPORTIMAGE_H_ */

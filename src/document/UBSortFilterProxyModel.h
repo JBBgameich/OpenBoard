@@ -9,7 +9,7 @@ class UBSortFilterProxyModel : public QSortFilterProxyModel
 public:
     UBSortFilterProxyModel();
 
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 };
 
 #endif // UBSORTFILTERPROXYMODEL_H

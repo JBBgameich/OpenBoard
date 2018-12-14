@@ -40,13 +40,13 @@ class UBGraphicsItemGroupUndoCommand : public UBUndoCommand
 {
 public:
     UBGraphicsItemGroupUndoCommand(UBGraphicsScene *pScene, UBGraphicsGroupContainerItem *pGroupCreated);
-    virtual ~UBGraphicsItemGroupUndoCommand();
+    ~UBGraphicsItemGroupUndoCommand() override;
 
-    virtual int getType() const { return UBUndoType::undotype_GRAPHICSGROUPITEM; }
+    int getType() const override { return UBUndoType::undotype_GRAPHICSGROUPITEM; }
 
 protected:
-    virtual void undo();
-    virtual void redo();
+    void undo() override;
+    void redo() override;
 
 private:
     UBGraphicsScene *mScene;

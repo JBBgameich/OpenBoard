@@ -49,11 +49,11 @@ class UBGraphicsPolygonItem : public QGraphicsPolygonItem, public UBItem
         UBGraphicsPolygonItem(const QLineF& pLine, qreal pStartWidth, qreal pEndWidth);
         UBGraphicsPolygonItem(const QPolygonF & polygon, QGraphicsItem * parent = 0);
 
-        ~UBGraphicsPolygonItem();
+        ~UBGraphicsPolygonItem() override;
 
         void initialize();
 
-        void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
         void setStrokesGroup(UBGraphicsStrokesGroup* group);
         UBGraphicsStrokesGroup* strokesGroup() const{return mpGroup;}
@@ -61,7 +61,7 @@ class UBGraphicsPolygonItem : public QGraphicsPolygonItem, public UBItem
 
         QColor color() const;
 
-        virtual UBGraphicsScene* scene();
+        UBGraphicsScene* scene() override;
 
         inline void subtract(UBGraphicsPolygonItem *pi)
         {
@@ -90,7 +90,7 @@ class UBGraphicsPolygonItem : public QGraphicsPolygonItem, public UBItem
 
         enum { Type = UBGraphicsItemType::PolygonItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
@@ -101,9 +101,9 @@ class UBGraphicsPolygonItem : public QGraphicsPolygonItem, public UBItem
             QGraphicsPolygonItem::setPolygon(pPolygon);
         }
 
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
+        void copyItemParameters(UBItem *copy) const override;
 
         QLineF originalLine() { return mOriginalLine;}
         qreal originalWidth() { return mOriginalWidth;}
@@ -135,7 +135,7 @@ class UBGraphicsPolygonItem : public QGraphicsPolygonItem, public UBItem
         UBGraphicsStroke* stroke() const;
 
     protected:
-        void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+        void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) override;
 
 
     private:

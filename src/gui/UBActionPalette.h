@@ -49,7 +49,7 @@ class UBActionPalette : public UBFloatingPalette
         UBActionPalette(Qt::Corner corner, QWidget* parent = 0, Qt::Orientation orient = Qt::Vertical);
         UBActionPalette(QWidget* parent = 0);
 
-        virtual ~UBActionPalette();
+        ~UBActionPalette() override;
 
         void setButtonIconSize(const QSize& size);
         void setToolButtonStyle(Qt::ToolButtonStyle);
@@ -71,7 +71,7 @@ class UBActionPalette : public UBFloatingPalette
         }
         bool m_customCloseProcessing;
 
-        virtual int border();
+        int border() override;
         virtual void clearLayout();
         QSize buttonSize();
 
@@ -87,8 +87,8 @@ class UBActionPalette : public UBFloatingPalette
         void customMouseReleased();
 
     protected:
-        virtual void paintEvent(QPaintEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent * event);
+        void paintEvent(QPaintEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent * event) override;
         virtual void init(Qt::Orientation orientation);
 
         virtual void updateLayout();
@@ -117,14 +117,14 @@ class UBActionPaletteButton : public QToolButton
 
     public:
         UBActionPaletteButton(QAction* action, QWidget * parent = 0);
-        virtual ~UBActionPaletteButton();
+        ~UBActionPaletteButton() override;
 
     signals:
         void doubleClicked();
 
     protected:
-        virtual void mouseDoubleClickEvent(QMouseEvent *event);
-        virtual bool hitButton(const QPoint &pos) const;
+        void mouseDoubleClickEvent(QMouseEvent *event) override;
+        bool hitButton(const QPoint &pos) const override;
 
 };
 

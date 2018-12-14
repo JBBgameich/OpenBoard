@@ -43,14 +43,14 @@ class UBToolbarButtonGroup : public QWidget
 
     public:
         UBToolbarButtonGroup(QToolBar *toolbar, const QList<QAction*> &actions = QList<QAction*>());
-        virtual ~UBToolbarButtonGroup();
+        ~UBToolbarButtonGroup() override;
 
         void setIcon(const QIcon &icon, int index);
         void setColor(const QColor &color, int index);
         int currentIndex() const;
 
     protected:
-        void paintEvent(QPaintEvent *);
+        void paintEvent(QPaintEvent *) override;
 
     private:
         QToolButton         *mToolButton; // The first button in the toolbar

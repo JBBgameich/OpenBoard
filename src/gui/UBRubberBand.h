@@ -38,7 +38,7 @@ class UBRubberBand : public QRubberBand
 
     public:
         UBRubberBand(Shape s, QWidget * p = 0);
-        virtual ~UBRubberBand();
+        ~UBRubberBand() override;
 
     private:
         enum enm_resizingMode
@@ -55,9 +55,9 @@ class UBRubberBand : public QRubberBand
         };
 
         enm_resizingMode determineResizingMode(QPoint pos);
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseMoveEvent(QMouseEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseMoveEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
 
     private:
         QStyle* customStyle;

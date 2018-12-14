@@ -44,7 +44,7 @@ class UBTrapFlashController : public QObject
     Q_OBJECT;
     public:
         UBTrapFlashController(QWidget* parent = 0);
-        virtual ~UBTrapFlashController();
+        ~UBTrapFlashController() override;
 
         void showTrapFlash();
         void hideTrapFlash();

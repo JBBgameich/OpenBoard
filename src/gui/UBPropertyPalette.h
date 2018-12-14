@@ -41,7 +41,7 @@ class UBPropertyPalette : public UBActionPalette
 public:
     UBPropertyPalette(QWidget* parent=0, const char* name="propertyPalette");
     UBPropertyPalette(Qt::Orientation orientation, QWidget* parent = 0);
-    ~UBPropertyPalette();
+    ~UBPropertyPalette() override;
 
 private slots:
     void onMouseRelease();

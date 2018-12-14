@@ -52,22 +52,22 @@ class UBGraphicsTriangle : public UBAbstractDrawRuler, public QGraphicsPolygonIt
 
     public:
         UBGraphicsTriangle();
-        virtual ~UBGraphicsTriangle();
+        ~UBGraphicsTriangle() override;
 
         enum { Type = UBGraphicsItemType::TriangleItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
 
-        virtual UBItem* deepCopy(void) const;
-        virtual void copyItemParameters(UBItem *copy) const;
+        UBItem* deepCopy(void) const override;
+        void copyItemParameters(UBItem *copy) const override;
 
-        virtual void StartLine(const QPointF& scenePos, qreal width);
-        virtual void DrawLine(const QPointF& position, qreal width);
-        virtual void EndLine();
+        void StartLine(const QPointF& scenePos, qreal width) override;
+        void DrawLine(const QPointF& position, qreal width) override;
+        void EndLine() override;
 
         enum UBGraphicsTriangleOrientation
         {
@@ -107,20 +107,20 @@ class UBGraphicsTriangle : public UBAbstractDrawRuler, public QGraphicsPolygonIt
         UBGraphicsTriangleOrientation getOrientation() const {return mOrientation;}
         QRectF rect() const {return boundingRect();}
 
-        UBGraphicsScene* scene() const;
+        UBGraphicsScene* scene() const override;
 
     protected:
 
         void updateResizeCursor();
 
-        virtual void paint (QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget);
-        virtual QPainterPath shape() const;
+        void paint (QPainter *painter, const QStyleOptionGraphicsItem *styleOption, QWidget *widget) override;
+        QPainterPath shape() const override;
 
-        virtual void rotateAroundCenter(qreal angle);
+        void rotateAroundCenter(qreal angle) override;
 
-        virtual QPointF    rotationCenter() const;
+        QPointF    rotationCenter() const override;
 
-        virtual QRectF    closeButtonRect() const;
+        QRectF    closeButtonRect() const override;
         QPolygonF resize1Polygon() const;
         QPolygonF resize2Polygon() const;
         QRectF    hFlipRect() const;
@@ -134,13 +134,13 @@ class UBGraphicsTriangle : public UBAbstractDrawRuler, public QGraphicsPolygonIt
 
         QCursor    flipCursor() const;
 
-        virtual void    mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void    hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void    hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        virtual void    hoverMoveEvent(QGraphicsSceneHoverEvent *event);
-        void paintGraduations(QPainter *painter);
+        void    mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void    mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void    mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void    hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void    hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void    hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+        void paintGraduations(QPainter *painter) override;
 
     private:
 

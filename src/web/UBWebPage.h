@@ -43,11 +43,11 @@ class UBWebPage : public QWebPage
 
     public:
         UBWebPage(QObject *parent = 0);
-        virtual ~UBWebPage();
+        ~UBWebPage() override;
 
-        virtual void javaScriptConsoleMessage(const QString &message, int lineNumber, const QString &sourceID);
+        void javaScriptConsoleMessage(const QString &message, int lineNumber, const QString &sourceID) override;
 
-        virtual QString userAgentForUrl(const QUrl& url) const;
+        QString userAgentForUrl(const QUrl& url) const override;
 
     private:
         QString mCachedUserAgentString;

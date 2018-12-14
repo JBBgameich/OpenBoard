@@ -46,7 +46,7 @@ class UBDesktopPropertyPalette : public UBPropertyPalette
     private:
         UBRightPalette* rightPalette;
     protected:
-        virtual int getParentRightOffset();
+        int getParentRightOffset() override;
 };
 
 class UBDesktopPenPalette : public UBDesktopPropertyPalette
@@ -54,7 +54,7 @@ class UBDesktopPenPalette : public UBDesktopPropertyPalette
     Q_OBJECT
     public:
         UBDesktopPenPalette(QWidget *parent, UBRightPalette* rightPalette);
-        virtual ~UBDesktopPenPalette(){}
+        ~UBDesktopPenPalette() override{}
     public slots:
         void onParentMinimized();
         void onParentMaximized();
@@ -68,14 +68,14 @@ class UBDesktopEraserPalette : public UBDesktopPropertyPalette
 {
     public:
         UBDesktopEraserPalette(QWidget *parent, UBRightPalette* rightPalette);
-        virtual ~UBDesktopEraserPalette(){}
+        ~UBDesktopEraserPalette() override{}
 };
 
 class UBDesktopMarkerPalette : public UBDesktopPropertyPalette
 {
     public:
         UBDesktopMarkerPalette(QWidget *parent, UBRightPalette* rightPalette);
-        virtual ~UBDesktopMarkerPalette(){}
+        ~UBDesktopMarkerPalette() override{}
 };
 
 

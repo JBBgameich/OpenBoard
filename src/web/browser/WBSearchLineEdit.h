@@ -89,7 +89,7 @@ class WBClearButton : public QAbstractButton
 
     public:
         WBClearButton(QWidget *parent = 0);
-        void paintEvent(QPaintEvent *event);
+        void paintEvent(QPaintEvent *event) override;
 
     public slots:
         void textChanged(const QString &text);
@@ -113,11 +113,11 @@ class WBSearchLineEdit : public WBExLineEdit
         QMenu *menu() const;
         void setMenu(QMenu *menu);
 
-        void setVisible(bool pVisible);
+        void setVisible(bool pVisible) override;
 
     protected:
-        void resizeEvent(QResizeEvent *event);
-        void paintEvent(QPaintEvent *event);
+        void resizeEvent(QResizeEvent *event) override;
+        void paintEvent(QPaintEvent *event) override;
 
     private:
         void updateGeometries();

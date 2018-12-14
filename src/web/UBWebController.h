@@ -51,7 +51,7 @@ class UBWebController : public QObject
 
     public:
         UBWebController(UBMainWindow* mainWindow);
-        virtual ~UBWebController();
+        ~UBWebController() override;
         void closing();
         void adaptToolBar();
 

@@ -95,8 +95,8 @@ class WBBrowserWindow : public QWidget
 
     public:
         WBBrowserWindow(QWidget *parent = 0, Ui::MainWindow* uniboardMainWindow = 0);
-        ~WBBrowserWindow();
-        QSize sizeHint() const;
+        ~WBBrowserWindow() override;
+        QSize sizeHint() const override;
 
     public:
         static QUrl guessUrlFromString(const QString &url);
@@ -137,7 +137,7 @@ class WBBrowserWindow : public QWidget
         void mirroringEnabled(bool checked);
 
     protected:
-        void closeEvent(QCloseEvent *event);
+        void closeEvent(QCloseEvent *event) override;
 
     private slots:
 

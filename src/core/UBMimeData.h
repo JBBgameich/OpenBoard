@@ -56,7 +56,7 @@ class UBMimeDataGraphicsItem : public QMimeData
 
     public:
             UBMimeDataGraphicsItem(QList<UBItem*> pItems);
-        virtual ~UBMimeDataGraphicsItem();
+        ~UBMimeDataGraphicsItem() override;
 
         QList<UBItem*> items() const { return mItems; }
 
@@ -74,7 +74,7 @@ class UBMimeData : public QMimeData
 
     public:
         UBMimeData(const QList<UBMimeDataItem> &items);
-        virtual ~UBMimeData();
+        ~UBMimeData() override;
 
         QList<UBMimeDataItem> items() const { return mItems; }
 

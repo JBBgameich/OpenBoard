@@ -62,10 +62,10 @@ class DelegateButton: public QGraphicsSvgItem
     public:
         DelegateButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = 0, Qt::WindowFrameSection section = Qt::TopLeftSection);
 
-        virtual ~DelegateButton();
+        ~DelegateButton() override;
 
         enum { Type = UBGraphicsItemType::DelegateButtonType };
-        virtual int type() const { return Type; }
+        int type() const override { return Type; }
 
         void setTransparentToMouseEvent(bool tr)
         {
@@ -82,10 +82,10 @@ class DelegateButton: public QGraphicsSvgItem
 
     protected:
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        void timerEvent(QTimerEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+        void timerEvent(QTimerEvent *event) override;
 
         void modified();
 
@@ -118,11 +118,11 @@ class MediaTimer: public QGraphicsRectItem
 {
 public:
     MediaTimer(QGraphicsItem * parent = 0);
-    ~MediaTimer();
+    ~MediaTimer() override;
 
     void positionHandles();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                QWidget *widget);
+                QWidget *widget) override;
 
     void display(const QString &str);
     void setNumDigits(int nDigits);
@@ -163,19 +163,19 @@ class DelegateMediaControl: public QObject, public QGraphicsRectItem
 
         DelegateMediaControl(UBGraphicsMediaItem* pDelegated, QGraphicsItem * parent = 0);
 
-        virtual ~DelegateMediaControl()
+        ~DelegateMediaControl() override
         {
             // NOOP
         }
 
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                QWidget *widget);
+                QWidget *widget) override;
 
-        QPainterPath shape() const;
+        QPainterPath shape() const override;
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
         virtual void update();
 
         void positionHandles();
@@ -210,7 +210,7 @@ class UBGraphicsToolBarItem : public QGraphicsRectItem, public QObject
 {
     public:
         UBGraphicsToolBarItem(QGraphicsItem * parent = 0);
-        virtual ~UBGraphicsToolBarItem() {;}
+        ~UBGraphicsToolBarItem() override {;}
 
         bool isVisibleOnBoard() const { return mVisible; }
         void setVisibleOnBoard(bool visible) { mVisible = visible; }
@@ -225,7 +225,7 @@ class UBGraphicsToolBarItem : public QGraphicsRectItem, public QObject
 
     private:
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                QWidget *widget);
+                QWidget *widget) override;
 
     private:
         bool mShifting;
@@ -243,7 +243,7 @@ class UBGraphicsItemDelegate : public QObject
     public:
     UBGraphicsItemDelegate(QGraphicsItem* pDelegated, QObject * parent = 0, UBGraphicsFlags fls = 0);
 
-        virtual ~UBGraphicsItemDelegate();
+        ~UBGraphicsItemDelegate() override;
 
         virtual void createControls();
         virtual void freeControls();

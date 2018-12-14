@@ -38,7 +38,7 @@ class UBCoreGraphicsScene : public QGraphicsScene
 {
     public:
         UBCoreGraphicsScene(QObject * parent = 0);
-        virtual ~UBCoreGraphicsScene();
+        ~UBCoreGraphicsScene() override;
 
         virtual void addItem(QGraphicsItem* item);
 

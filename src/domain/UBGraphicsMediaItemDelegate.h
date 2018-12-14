@@ -46,26 +46,26 @@ class UBGraphicsMediaItemDelegate :  public UBGraphicsItemDelegate
 
     public:
         UBGraphicsMediaItemDelegate(UBGraphicsMediaItem* pDelegated, QObject * parent = 0);
-        virtual ~UBGraphicsMediaItemDelegate();
+        ~UBGraphicsMediaItemDelegate() override;
 
-        virtual void positionHandles();
+        void positionHandles() override;
 
-        bool mousePressEvent(QGraphicsSceneMouseEvent* event);
+        bool mousePressEvent(QGraphicsSceneMouseEvent* event) override;
 
-        void showToolBar(bool autohide = true);
+        void showToolBar(bool autohide = true) override;
 
     public slots:
 
         void toggleMute();
         void updateTicker(qint64 time);
-        virtual void showHide(bool show);
+        void showHide(bool show) override;
 
         void mediaStatusChanged(QMediaPlayer::MediaStatus status);
         void mediaStateChanged(QMediaPlayer::State state);
 
     protected slots:
 
-        virtual void remove(bool canUndo = true);
+        void remove(bool canUndo = true) override;
 
         void togglePlayPause();
 
@@ -77,7 +77,7 @@ class UBGraphicsMediaItemDelegate :  public UBGraphicsItemDelegate
 
 
     protected:
-        virtual void buildButtons();
+        void buildButtons() override;
 
         UBGraphicsMediaItem* delegated();
 

@@ -40,14 +40,14 @@ class UBWidgetMirror : public QWidget
 
     public:
         UBWidgetMirror(QWidget* sourceWidget, QWidget* parent = 0);
-        virtual ~UBWidgetMirror();
+        ~UBWidgetMirror() override;
 
     public slots:
         void setSourceWidget(QWidget *sourceWidget);
 
     protected:
-        bool eventFilter(QObject *obj, QEvent *event);
-        virtual void paintEvent ( QPaintEvent * event );
+        bool eventFilter(QObject *obj, QEvent *event) override;
+        void paintEvent ( QPaintEvent * event ) override;
 
     private:
         QWidget* mSourceWidget;

@@ -61,7 +61,7 @@ class UBThumbnailWidget : public QGraphicsView
 
     public:
         UBThumbnailWidget(QWidget* parent);
-        virtual ~UBThumbnailWidget();
+        ~UBThumbnailWidget() override;
 
         QList<QGraphicsItem*> selectedItems();
         void selectItemAt(int pIndex, bool extend = false);
@@ -92,14 +92,14 @@ class UBThumbnailWidget : public QGraphicsView
 
 
     protected:
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseMoveEvent(QMouseEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent *event);
-        virtual void resizeEvent(QResizeEvent * event);
-        void mouseDoubleClickEvent(QMouseEvent * event);
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseMoveEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
+        void resizeEvent(QResizeEvent * event) override;
+        void mouseDoubleClickEvent(QMouseEvent * event) override;
 
-        virtual void keyPressEvent(QKeyEvent *event);
-        virtual void focusInEvent(QFocusEvent *event);
+        void keyPressEvent(QKeyEvent *event) override;
+        void focusInEvent(QFocusEvent *event) override;
 
         QList<QGraphicsItem*> mGraphicItems;
         QList<UBThumbnailTextItem*> mLabelsItems;
@@ -232,7 +232,7 @@ class UBThumbnailTextItem : public QGraphicsTextItem
             setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         }
 
-        QRectF boundingRect() const { return QRectF(QPointF(0.0, 0.0), QSize(mWidth, QFontMetricsF(font()).height() + 5));}
+        QRectF boundingRect() const override { return QRectF(QPointF(0.0, 0.0), QSize(mWidth, QFontMetricsF(font()).height() + 5));}
 
         void setWidth(qreal pWidth)
         {
@@ -287,12 +287,12 @@ class UBThumbnailPixmap : public QGraphicsPixmapItem, public UBThumbnail
             setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
         }
 
-        virtual ~UBThumbnailPixmap()
+        ~UBThumbnailPixmap() override
         {
             // NOOP
         }
 
-        virtual QPainterPath shape () const
+        QPainterPath shape () const override
         {
             QPainterPath path;
             path.addRect(boundingRect());
@@ -300,13 +300,13 @@ class UBThumbnailPixmap : public QGraphicsPixmapItem, public UBThumbnail
         }
 
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
         {
             QStyleOptionGraphicsItem styleOption = UBThumbnail::muteStyleOption(option);
             QGraphicsPixmapItem::paint(painter, &styleOption, widget);
         }
 
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value)
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override
         {
             UBThumbnail::itemChange(this, change, value);
             return QGraphicsPixmapItem::itemChange(change, value);
@@ -324,7 +324,7 @@ class UBSceneThumbnailPixmap : public UBThumbnailPixmap
             // NOOP
         }
 
-        virtual ~UBSceneThumbnailPixmap()
+        ~UBSceneThumbnailPixmap() override
         {
             // NOOP
         }
@@ -353,7 +353,7 @@ class UBSceneThumbnailNavigPixmap : public UBSceneThumbnailPixmap
 {
     public:
         UBSceneThumbnailNavigPixmap(const QPixmap& pix, UBDocumentProxy* proxy, int pSceneIndex);
-        ~UBSceneThumbnailNavigPixmap();
+        ~UBSceneThumbnailNavigPixmap() override;
 
         bool editable()
         {
@@ -391,10 +391,10 @@ class UBSceneThumbnailNavigPixmap : public UBSceneThumbnailPixmap
         }
 
     protected:
-        void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
     private:
         void deletePage();
@@ -473,7 +473,7 @@ class UBDraggableThumbnail : public UBThumbnailProxyWidget
 
         }
 
-        ~UBDraggableThumbnail()
+        ~UBDraggableThumbnail() override
         {
             delete mPageNumber; // not a child of "this" QObject so it has to be deleted manually
         }
@@ -531,11 +531,11 @@ class UBDraggableThumbnail : public UBThumbnailProxyWidget
         virtual void updatePos(qreal w, qreal h);
 
     protected:
-        void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
         UBThumbnailTextItem* mPageNumber;
     private:
@@ -559,7 +559,7 @@ class UBDraggableThumbnailPixmap : public UBDraggableThumbnail
             setAcceptDrops(true);
         }
 
-        ~UBDraggableThumbnailPixmap()
+        ~UBDraggableThumbnailPixmap() override
         {
 
         }
@@ -569,7 +569,7 @@ class UBDraggableThumbnailPixmap : public UBDraggableThumbnail
             return mThumbnailPixmap;
         }
 
-        void updatePos(qreal w, qreal h);
+        void updatePos(qreal w, qreal h) override;
 
     private:
         UBThumbnailPixmap* mThumbnailPixmap;
@@ -588,7 +588,7 @@ class UBDraggableThumbnailView : public UBDraggableThumbnail
             setAcceptDrops(true);            
         }
 
-        ~UBDraggableThumbnailView()
+        ~UBDraggableThumbnailView() override
         {
             delete mPageNumber; // not a child of "this" QObject so it has to be deleted manually
         }

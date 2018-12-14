@@ -51,7 +51,7 @@ class UBDocumentProxy : public QObject
         UBDocumentProxy(const QString& pPersistencePath);
         UBDocumentProxy(const QString& pPersistencePath, QMap<QString, QVariant> metadatas);
 
-        virtual ~UBDocumentProxy();
+        ~UBDocumentProxy() override;
 
         UBDocumentProxy * deepCopy() const;
         bool theSameDocument(UBDocumentProxy *proxy);

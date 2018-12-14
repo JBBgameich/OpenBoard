@@ -39,10 +39,10 @@ class UBImportDocumentSetAdaptor : public UBImportAdaptor
 
     public:
         UBImportDocumentSetAdaptor(QObject *parent = 0);
-        virtual ~UBImportDocumentSetAdaptor();
+        ~UBImportDocumentSetAdaptor() override;
 
-        virtual QStringList supportedExtentions();
-        virtual QString importFileFilter();
+        QStringList supportedExtentions() override;
+        QString importFileFilter() override;
 
         QFileInfoList importData(const QString &zipFile, const QString &destination);
 

@@ -48,7 +48,7 @@ class UBGraphicsSvgItem: public QGraphicsSvgItem, public UBItem, public UBGraphi
 
         void init();
 
-        virtual ~UBGraphicsSvgItem();
+        ~UBGraphicsSvgItem() override;
 
         QByteArray fileData() const;
 
@@ -59,34 +59,34 @@ class UBGraphicsSvgItem: public QGraphicsSvgItem, public UBItem, public UBGraphi
 
         enum { Type = UBGraphicsItemType::SvgItemType };
 
-        virtual int type() const
+        int type() const override
         {
             return Type;
         }
 
-        virtual UBItem* deepCopy() const;
+        UBItem* deepCopy() const override;
 
-        virtual void copyItemParameters(UBItem *copy) const;
+        void copyItemParameters(UBItem *copy) const override;
 
-        virtual void setRenderingQuality(RenderingQuality pRenderingQuality);
+        void setRenderingQuality(RenderingQuality pRenderingQuality) override;
 
-        virtual UBGraphicsScene* scene();
+        UBGraphicsScene* scene() override;
 
         virtual UBGraphicsPixmapItem* toPixmapItem() const;
 
-        virtual void setUuid(const QUuid &pUuid);
+        void setUuid(const QUuid &pUuid) override;
 
-        virtual void clearSource();
+        void clearSource() override;
 
     protected:
 
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
         QByteArray mFileData;
 };

@@ -38,7 +38,7 @@ class UBAbstractVideoEncoder : public QObject
 
     public:
         UBAbstractVideoEncoder(QObject *pParent = 0);
-        virtual ~UBAbstractVideoEncoder();
+        ~UBAbstractVideoEncoder() override;
 
         virtual bool start() = 0;
 

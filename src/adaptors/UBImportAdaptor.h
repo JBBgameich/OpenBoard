@@ -42,7 +42,7 @@ class UBImportAdaptor : public QObject
 
     protected:
         UBImportAdaptor(bool _documentBased, QObject *parent = 0);
-        virtual ~UBImportAdaptor();
+        ~UBImportAdaptor() override;
 
     public:
 

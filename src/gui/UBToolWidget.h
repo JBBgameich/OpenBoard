@@ -45,7 +45,7 @@ class UBToolWidget : public QWidget
     public:
         UBToolWidget(const QUrl& pUrl, QWidget* pParent = 0);
         UBToolWidget(UBGraphicsWidgetItem* pWidget, QWidget* pParent = 0);
-        virtual ~UBToolWidget();
+        ~UBToolWidget() override;
 
         void remove();
         void centerOn(const QPoint& pos);
@@ -56,13 +56,13 @@ class UBToolWidget : public QWidget
 
     protected:
         void initialize();
-        virtual void paintEvent(QPaintEvent *event);
+        void paintEvent(QPaintEvent *event) override;
 
-        virtual void mousePressEvent(QMouseEvent *event);
-        virtual void mouseMoveEvent(QMouseEvent *event);
-        virtual void mouseReleaseEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseMoveEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
 
-        virtual bool eventFilter(QObject *obj, QEvent *event);
+        bool eventFilter(QObject *obj, QEvent *event) override;
 
     private slots:
         void javaScriptWindowObjectCleared();
