@@ -194,7 +194,7 @@ namespace merge_lib
 
    // transformation can consist of one or several 
    // operations like rotation, scaling, translation
-   typedef std::vector<Transformation *> PageTransformations;
+   using PageTransformations = std::vector<Transformation *>;
 
    // This is interface class for setting transformation parameters
    // 

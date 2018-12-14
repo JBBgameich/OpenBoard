@@ -120,7 +120,7 @@ namespace merge_lib
    };
 
    // array of merge descriptions - allows to merge selected pages
-   typedef std::vector<MergePageDescription> MergeDescription;
+   using MergeDescription = std::vector<MergePageDescription>;
 }
 
 #endif

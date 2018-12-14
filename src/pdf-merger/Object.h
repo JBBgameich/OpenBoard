@@ -56,7 +56,7 @@ namespace merge_lib
     {
     public:
        friend class PageElementHandler;       
-       typedef std::vector<unsigned int> ReferencePositionsInContent;
+       using ReferencePositionsInContent = std::vector<unsigned int>;
        typedef std::pair<Object *, ReferencePositionsInContent > ChildAndItPositionInContent;
        typedef std::map <unsigned int, ChildAndItPositionInContent> Children;
        Object(unsigned int objectNumber, unsigned int generationNumber, const std::string & objectContent, 

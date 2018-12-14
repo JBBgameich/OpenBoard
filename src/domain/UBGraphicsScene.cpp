@@ -1000,7 +1000,7 @@ void UBGraphicsScene::eraseLineTo(const QPointF &pEndPoint, const qreal &pWidth)
 
     QList<UBGraphicsPolygonItem*> intersectedItems;
 
-    typedef QList<QPolygonF> POLYGONSLIST;
+    using POLYGONSLIST = QList<QPolygonF>;
     QList<POLYGONSLIST> intersectedPolygons;
 
     #pragma omp parallel for
