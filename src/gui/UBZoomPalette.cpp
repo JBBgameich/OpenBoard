@@ -42,7 +42,7 @@
 
 UBZoomPalette::UBZoomPalette(QWidget* parent)
     : UBFloatingPalette(Qt::BottomRightCorner, parent)
-    , mIsExpanded(1)
+    , mIsExpanded(true)
 {
     mBoardController = UBApplication::boardController;
     QLayout* layout = new QVBoxLayout(this);

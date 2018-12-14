@@ -1293,7 +1293,7 @@ void MediaTimer::setNumDigits(int numDigits)
     if (digitStr.isNull()) {                  // from constructor
         ndigits = numDigits + numDigits/2 - 1;
         digitStr.fill(QLatin1Char(' '), ndigits);
-        points.fill(0, ndigits);
+        points.fill(false, ndigits);
         digitStr[ndigits - 1] = QLatin1Char('0');            // "0" is the default number
     } else {
         if (numDigits == ndigits)             // no change
