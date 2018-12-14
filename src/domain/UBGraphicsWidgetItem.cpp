@@ -1052,7 +1052,7 @@ QString UBGraphicsW3CWidgetItem::createHtmlWrapperInDir(const QString& html, con
 
     QTextStream outConfig(&configFile);
     outConfig.setCodec("UTF-8");
-    outConfig << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+    outConfig << R"(<?xml version="1.0" encoding="UTF-8"?>)" << endl;
     outConfig << "<widget xmlns=\"http://www.w3.org/ns/widgets\"" << endl;
     outConfig << "    xmlns:ub=\"http://uniboard.mnemis.com/widgets\"" << endl;
     outConfig << "    id=\"http://uniboard.mnemis.com/" << pName << "\"" <<endl;
@@ -1082,10 +1082,10 @@ QString UBGraphicsW3CWidgetItem::createHtmlWrapperInDir(const QString& html, con
     QTextStream outStartFile(&widgetHtmlFile);
     outStartFile.setCodec("UTF-8");
 
-    outStartFile << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">" << endl;
+    outStartFile << R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">)" << endl;
     outStartFile << "<html>" << endl;
     outStartFile << "<head>" << endl;
-    outStartFile << "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">" << endl;
+    outStartFile << R"(    <meta http-equiv="content-type" content="text/html; charset=utf-8">)" << endl;
     outStartFile << "</head>" << endl;
     outStartFile << "  <body>" << endl;
     outStartFile << html << endl;

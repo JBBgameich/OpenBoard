@@ -114,7 +114,7 @@ void UBTrapFlashController::text_Changed(const QString &newText)
 
 #ifdef Q_OS_LINUX // Defined on X11.
     QString illegalCharList("      < > : \" / \\ | ? * ");
-    QRegExp regExp("[<>:\"/\\\\|?*]");
+    QRegExp regExp(R"([<>:"/\\|?*])");
 #endif
 
     if(new_text.indexOf(regExp) > -1)
@@ -309,7 +309,7 @@ void UBTrapFlashController::generateConfig(int pWidth, int pHeight, const QStrin
 
     QTextStream out(&configFile);
     out.setCodec("UTF-8");
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+    out << R"(<?xml version="1.0" encoding="UTF-8"?>)" << endl;
     out << "<widget xmlns=\"http://www.w3.org/ns/widgets\"" << endl;
     out << "        xmlns:ub=\"http://uniboard.mnemis.com/widgets\"" << endl;
     out << "        identifier=\"http://uniboard.mnemis.com/" << mTrapFlashUi->widgetNameLineEdit->text() << "\"" <<endl;
@@ -337,7 +337,7 @@ QString UBTrapFlashController::generateFullPageHtml(const QString& pDirPath, boo
     htmlContentString += "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\r\n";
     htmlContentString += "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n";
     htmlContentString += "  <head>\r\n";
-    htmlContentString += "    <meta http-equiv=\"refresh\" content=\"0; " + mCurrentWebFrame->url().toString() + "\">\r\n";
+    htmlContentString += R"(    <meta http-equiv="refresh" content="0; )" + mCurrentWebFrame->url().toString() + "\">\r\n";
     htmlContentString += "  </head>\r\n";
     htmlContentString += "  <body>\r\n";
     htmlContentString += "    Redirect to target...\r\n";

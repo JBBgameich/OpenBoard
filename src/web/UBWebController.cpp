@@ -456,7 +456,7 @@ void UBWebController::lookForEmbedContent(QString* pHtml, QString tag, QString a
             // Here we call this regular expression:
             // src\s?=\s?['"]([^'"]*)['"]
             // It says: give me all characters that are after src=" (or src = ")
-            QRegExp src(QString("%0\\s?=\\s?['\"]([^'\"]*)['\"]").arg(attribute));
+            QRegExp src(QString(R"(%0\s?=\s?['"]([^'"]*)['"])").arg(attribute));
             for(int i=1; i<strl.size(); i++){
                 src.indexIn(strl.at(i));
                 QStringList urls = src.capturedTexts();

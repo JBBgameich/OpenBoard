@@ -584,7 +584,7 @@ QString UBFeaturesController::adjustName(const QString &str)
     }
 
     QString resultStr = str;
-    QRegExp invalidSymbols("[\\/\\s\\:\\?\\*\\|\\<\\>\\\"]+");
+    QRegExp invalidSymbols(R"([\/\s\:\?\*\|\<\>\"]+)");
 
     return resultStr.replace(invalidSymbols, "_");
 }

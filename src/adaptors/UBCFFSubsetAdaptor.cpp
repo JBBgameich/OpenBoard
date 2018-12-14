@@ -1427,7 +1427,7 @@ QTransform UBCFFSubsetAdaptor::UBCFFSubsetReader::transformFromString(const QStr
     foreach(QString trStr, trString.split(" ", QString::SkipEmptyParts))
     {
         //check pattern for strings like 'rotate(10)'
-        QRegExp regexp("rotate\\( *([-+]{0,1}[0-9]*\\.{0,1}[0-9]*) *\\)");
+        QRegExp regexp(R"(rotate\( *([-+]{0,1}[0-9]*\.{0,1}[0-9]*) *\))");
         if (regexp.exactMatch(trStr)) {
             angle = regexp.capturedTexts().at(1).toDouble();
             if (item)
@@ -1439,7 +1439,7 @@ QTransform UBCFFSubsetAdaptor::UBCFFSubsetReader::transformFromString(const QStr
         };
         
         //check pattern for strings like 'rotate(10,20,20)' or 'rotate(10.1,10.2,34.2)'
-        regexp.setPattern("rotate\\( *([-+]{0,1}[0-9]*\\.{0,1}[0-9]*) *, *([-+]{0,1}[0-9]*\\.{0,1}[0-9]*) *, *([-+]{0,1}[0-9]*\\.{0,1}[0-9]*) *\\)");
+        regexp.setPattern(R"(rotate\( *([-+]{0,1}[0-9]*\.{0,1}[0-9]*) *, *([-+]{0,1}[0-9]*\.{0,1}[0-9]*) *, *([-+]{0,1}[0-9]*\.{0,1}[0-9]*) *\))");
         if (regexp.exactMatch(trStr)) {
             angle = regexp.capturedTexts().at(1).toDouble();
             dxr = regexp.capturedTexts().at(2).toDouble();
@@ -1453,7 +1453,7 @@ QTransform UBCFFSubsetAdaptor::UBCFFSubsetReader::transformFromString(const QStr
         }
 
         //check pattern for strings like 'translate(11.0, 12.34)'
-        regexp.setPattern("translate\\( *([-+]{0,1}[0-9]*\\.{0,1}[0-9]*) *,*([-+]{0,1}[0-9]*\\.{0,1}[0-9]*)*\\)");
+        regexp.setPattern(R"(translate\( *([-+]{0,1}[0-9]*\.{0,1}[0-9]*) *,*([-+]{0,1}[0-9]*\.{0,1}[0-9]*)*\))");
         if (regexp.exactMatch(trStr)) {
             dx = regexp.capturedTexts().at(1).toDouble();
             dy = regexp.capturedTexts().at(2).toDouble();
