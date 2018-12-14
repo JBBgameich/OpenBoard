@@ -62,7 +62,7 @@ class UBGraphicsTriangle : public UBAbstractDrawRuler, public QGraphicsPolygonIt
         }
 
 
-        UBItem* deepCopy(void) const override;
+        UBItem* deepCopy() const override;
         void copyItemParameters(UBItem *copy) const override;
 
         void StartLine(const QPointF& scenePos, qreal width) override;

@@ -105,7 +105,7 @@ UBGraphicsTriangle::~UBGraphicsTriangle()
 {
 }
 
-UBItem* UBGraphicsTriangle::deepCopy(void) const
+UBItem* UBGraphicsTriangle::deepCopy() const
 {
     UBGraphicsTriangle* copy = new UBGraphicsTriangle();
 
