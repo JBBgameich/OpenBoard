@@ -43,7 +43,7 @@
 
 #include "core/memcheck.h"
 
-QPointer<UBSettings> UBSettings::sSingleton = 0;
+QPointer<UBSettings> UBSettings::sSingleton = nullptr;
 
 int UBSettings::pointerDiameter = 40;
 int UBSettings::crossSize = 24;
@@ -101,7 +101,7 @@ QColor UBSettings::opaquePaletteColor = QColor(66, 66, 66, 200);
 
 QColor UBSettings::documentViewLightColor = QColor(241, 241, 241);
 
-QPointer<QSettings> UBSettings::sAppSettings = 0;
+QPointer<QSettings> UBSettings::sAppSettings = nullptr;
 
 const int UBSettings::maxThumbnailWidth = 400;
 const int UBSettings::defaultThumbnailWidth = 150;
@@ -148,7 +148,7 @@ void UBSettings::destroy()
 {
     if (sSingleton)
         delete sSingleton;
-    sSingleton = NULL;
+    sSingleton = nullptr;
 }
 
 
@@ -165,7 +165,7 @@ QSettings* UBSettings::getAppSettings()
             QFile::rename(tmpSettings, appSettings);
         }
 
-        UBSettings::sAppSettings = new QSettings(appSettings, QSettings::IniFormat, 0);
+        UBSettings::sAppSettings = new QSettings(appSettings, QSettings::IniFormat, nullptr);
         UBSettings::sAppSettings->setIniCodec("utf-8");
 
         qDebug() << "sAppSettings location: " << appSettings;
@@ -1256,7 +1256,7 @@ QString UBSettings::userInteractiveFavoritesDirectory()
 
 QNetworkProxy* UBSettings::httpProxy()
 {
-    QNetworkProxy* proxy = 0;
+    QNetworkProxy* proxy = nullptr;
 
     if (mAppSettings->value("Proxy/Enabled", false).toBool()) {
 

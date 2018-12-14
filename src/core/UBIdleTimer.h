@@ -41,7 +41,7 @@ class UBIdleTimer : public QObject
 
     public:
 
-        UBIdleTimer(QObject *parent = 0);
+        UBIdleTimer(QObject *parent = nullptr);
         ~UBIdleTimer() override;
 
     protected:

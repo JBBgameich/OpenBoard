@@ -39,7 +39,7 @@ class UBFavoriteToolPalette : public UBActionPalette
     Q_OBJECT;
 
     public:
-        UBFavoriteToolPalette(QWidget* parent = 0);
+        UBFavoriteToolPalette(QWidget* parent = nullptr);
         ~UBFavoriteToolPalette() override;
 
     private slots:

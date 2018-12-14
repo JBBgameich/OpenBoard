@@ -43,7 +43,7 @@ class UBGraphicsTextItem : public QGraphicsTextItem, public UBItem, public UBRes
     Q_OBJECT
 
     public:
-        UBGraphicsTextItem(QGraphicsItem * parent = 0);
+        UBGraphicsTextItem(QGraphicsItem * parent = nullptr);
         ~UBGraphicsTextItem() override;
 
         enum { Type = UBGraphicsItemType::TextItemType };

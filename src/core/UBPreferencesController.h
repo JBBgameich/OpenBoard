@@ -52,7 +52,7 @@ class UBPreferencesDialog : public QDialog
     Q_OBJECT;
 
 public:
-    UBPreferencesDialog(UBPreferencesController* prefController, QWidget* parent = 0,Qt::WindowFlags f = 0 );
+    UBPreferencesDialog(UBPreferencesController* prefController, QWidget* parent = nullptr,Qt::WindowFlags f = nullptr );
     ~UBPreferencesDialog() override;
 
 protected:

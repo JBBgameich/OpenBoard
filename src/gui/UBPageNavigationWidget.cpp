@@ -41,11 +41,11 @@
  * @param name as the object name
  */
 UBPageNavigationWidget::UBPageNavigationWidget(QWidget *parent, const char *name):UBDockPaletteWidget(parent)
-  , mNavigator(NULL)
-  , mLayout(NULL)
-  , mHLayout(NULL)
-  , mPageNbr(NULL)
-  , mClock(NULL)
+  , mNavigator(nullptr)
+  , mLayout(nullptr)
+  , mHLayout(nullptr)
+  , mPageNbr(nullptr)
+  , mClock(nullptr)
 {
     setObjectName(name);
     mName = "PageNavigator";
@@ -95,30 +95,30 @@ UBPageNavigationWidget::~UBPageNavigationWidget()
 {
     killTimer(mTimerID);
 
-    if(NULL != mClock)
+    if(nullptr != mClock)
     {
         delete mClock;
-        mClock = NULL;
+        mClock = nullptr;
     }
-    if(NULL != mPageNbr)
+    if(nullptr != mPageNbr)
     {
         delete mPageNbr;
-        mPageNbr = NULL;
+        mPageNbr = nullptr;
     }
-    if(NULL != mHLayout)
+    if(nullptr != mHLayout)
     {
         delete mHLayout;
-        mHLayout = NULL;
+        mHLayout = nullptr;
     }
-    if(NULL != mLayout)
+    if(nullptr != mLayout)
     {
         delete mLayout;
-        mLayout = NULL;
+        mLayout = nullptr;
     }
-    if(NULL != mNavigator)
+    if(nullptr != mNavigator)
     {
         delete mNavigator;
-        mNavigator = NULL;
+        mNavigator = nullptr;
     }
 }
 

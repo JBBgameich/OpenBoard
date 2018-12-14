@@ -61,7 +61,7 @@ class UBFeaturesComputingThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit UBFeaturesComputingThread(QObject *parent = 0);
+    explicit UBFeaturesComputingThread(QObject *parent = nullptr);
     ~UBFeaturesComputingThread() override;
         void compute(const QList<QPair<QUrl, UBFeature> > &pScanningData, QSet<QUrl> *pFavoritesSet);
 

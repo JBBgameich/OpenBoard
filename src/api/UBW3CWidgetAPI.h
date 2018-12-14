@@ -61,7 +61,7 @@ class UBW3CWidgetAPI : public QObject
 
     public:
 
-        UBW3CWidgetAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = 0);
+        UBW3CWidgetAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = nullptr);
 
         ~UBW3CWidgetAPI() override;
 
@@ -99,7 +99,7 @@ class UBW3CWebStorage : public QObject
     Q_PROPERTY(int length READ length SCRIPTABLE true);
 
     public:
-        UBW3CWebStorage(QObject *parent = 0)
+        UBW3CWebStorage(QObject *parent = nullptr)
         : QObject(parent){/* NOOP */}
         ~UBW3CWebStorage() override{/* NOOP */}
 
@@ -122,7 +122,7 @@ class UBW3CWidgetPreferenceAPI : public UBW3CWebStorage
     Q_OBJECT;
 
     public:
-        UBW3CWidgetPreferenceAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = 0);
+        UBW3CWidgetPreferenceAPI(UBGraphicsW3CWidgetItem *graphicsWidget, QObject *parent = nullptr);
 
         ~UBW3CWidgetPreferenceAPI() override;
 

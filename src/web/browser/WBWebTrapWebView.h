@@ -40,7 +40,7 @@ class WBWebTrapWebView : public QWebView
     Q_OBJECT;
 
     public:
-        WBWebTrapWebView(QWidget* parent = 0);
+        WBWebTrapWebView(QWidget* parent = nullptr);
         ~WBWebTrapWebView() override;
 
         void setIsTrapping(bool pIsTrapping);

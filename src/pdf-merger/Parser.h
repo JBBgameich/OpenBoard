@@ -47,7 +47,7 @@ namespace merge_lib
    class Parser
    {
    public:   
-      Parser(): _root(0), _fileContent(), _objects(), _document(0)  {};
+      Parser(): _root(nullptr), _fileContent(), _objects(), _document(nullptr)  {};
       Document * parseDocument(const char * fileName);
 
       static const std::string WHITESPACES;
@@ -55,7 +55,7 @@ namespace merge_lib
       static const std::string NUMBERS;
       static const std::string WHITESPACES_AND_DELIMETERS;
 
-      static bool getNextWord(std::string & out, const std::string &in, size_t &nextPosition,size_t *found = NULL);
+      static bool getNextWord(std::string & out, const std::string &in, size_t &nextPosition,size_t *found = nullptr);
       static std::string getNextToken( const std::string &in, unsigned &position);
       static void trim(std::string &str);
       static std::string findTokenStr(const std::string &content, const std::string &pattern, size_t start,size_t &foundStart, size_t &foundEnd); 

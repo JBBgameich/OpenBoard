@@ -41,7 +41,7 @@ class UBDisplayManager : public QObject
     Q_OBJECT;
 
     public:
-        UBDisplayManager(QObject *parent = 0);
+        UBDisplayManager(QObject *parent = nullptr);
         ~UBDisplayManager() override;
 
         int numScreens();

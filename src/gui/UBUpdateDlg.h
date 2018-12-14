@@ -44,7 +44,7 @@ class UBUpdateDlg : public QDialog
     Q_OBJECT
 
 public:
-    UBUpdateDlg(QWidget *parent = 0, int nbFiles = 0, const QString& bkpPath = "");
+    UBUpdateDlg(QWidget *parent = nullptr, int nbFiles = 0, const QString& bkpPath = "");
     ~UBUpdateDlg() override;
     QString backupPath();
 

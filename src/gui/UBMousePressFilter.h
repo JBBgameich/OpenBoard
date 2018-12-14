@@ -37,7 +37,7 @@ class UBMousePressFilter : public QObject
     Q_OBJECT;
 
     public:
-        UBMousePressFilter(QObject* parent = 0);
+        UBMousePressFilter(QObject* parent = nullptr);
         ~UBMousePressFilter() override;
 
     protected:

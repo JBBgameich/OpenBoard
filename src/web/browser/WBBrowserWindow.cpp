@@ -96,16 +96,16 @@
 
 #include "core/memcheck.h"
 
-WBDownloadManager *WBBrowserWindow::sDownloadManager = 0;
-WBHistoryManager *WBBrowserWindow::sHistoryManager = 0;
+WBDownloadManager *WBBrowserWindow::sDownloadManager = nullptr;
+WBHistoryManager *WBBrowserWindow::sHistoryManager = nullptr;
 
 
 WBBrowserWindow::WBBrowserWindow(QWidget *parent, Ui::MainWindow* uniboardMainWindow)
         : QWidget(parent)
-        , mWebToolBar(0)
-        , mSearchToolBar(0)
+        , mWebToolBar(nullptr)
+        , mSearchToolBar(nullptr)
         , mTabWidget(new WBTabWidget(this))
-        , mSearchAction(0)
+        , mSearchAction(nullptr)
         , mUniboardMainWindow(uniboardMainWindow)
 {
     QWebSettings *defaultSettings = QWebSettings::globalSettings();
@@ -150,7 +150,7 @@ WBBrowserWindow::~WBBrowserWindow()
 {
     if(mTabWidget){
         delete mTabWidget;
-        mTabWidget = NULL;
+        mTabWidget = nullptr;
     }
 
     //Explanation mSearchToolBar has a parent so it's automatically freed

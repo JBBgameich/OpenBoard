@@ -37,7 +37,7 @@ class UBOpenSankoreImporter : public QObject
 {
     Q_OBJECT
 public:
-    explicit UBOpenSankoreImporter(QWidget *mainWidget, QObject *parent = 0);
+    explicit UBOpenSankoreImporter(QWidget *mainWidget, QObject *parent = nullptr);
 
 signals:
 

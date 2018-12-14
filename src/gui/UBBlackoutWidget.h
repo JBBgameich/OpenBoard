@@ -37,7 +37,7 @@ class UBBlackoutWidget : public QWidget
     Q_OBJECT
 
     public:
-        UBBlackoutWidget(QWidget *parent = 0);
+        UBBlackoutWidget(QWidget *parent = nullptr);
         void mousePressEvent(QMouseEvent *event) override;
         void keyPressEvent(QKeyEvent *event) override;
 

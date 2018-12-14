@@ -37,7 +37,7 @@ class UBIconButton : public QAbstractButton
     Q_OBJECT;
 
     public:
-        UBIconButton(QWidget *parent = 0, const QIcon &iconOn = QIcon());
+        UBIconButton(QWidget *parent = nullptr, const QIcon &iconOn = QIcon());
 
         void setToggleable(bool pToggleable) {mToggleable = pToggleable;}
 

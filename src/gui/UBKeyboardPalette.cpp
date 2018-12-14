@@ -68,7 +68,7 @@ UBKeyboardPalette::UBKeyboardPalette(QWidget *parent)
     btnWidth = btnHeight = 16;
     strSize = "16x16";
     currBtnImages = new BTNImages("16", btnWidth, btnHeight);
-    storage = NULL;
+    storage = nullptr;
 
 
     buttons = new UBKeyButton*[47];
@@ -84,7 +84,7 @@ UBKeyboardPalette::UBKeyboardPalette(QWidget *parent)
     nCurrentLocale = UBSettings::settings()->KeyboardLocale->get().toInt();
     if (nCurrentLocale < 0 || nCurrentLocale >= nLocalesCount)
         nCurrentLocale = 0;
-    if (locales!=NULL)
+    if (locales!=nullptr)
         setInput(locales[nCurrentLocale]);
 
     setContentsMargins( 22, 22, 22, 22 );
@@ -140,7 +140,7 @@ void UBKeyboardPalette::keyboardPaletteButtonSizeChanged(QVariant size)
 
 void UBKeyboardPalette::setInput(const UBKeyboardLocale* locale)
 {
-    if (locale!=NULL)
+    if (locale!=nullptr)
     {
         for (int i=0; i<47; i++)
             buttons[i]->setKeyBt((*locale)[i]);
@@ -168,10 +168,10 @@ UBKeyboardPalette::~UBKeyboardPalette()
     //    delete [] locales;
     //}
 
-    if(currBtnImages != NULL)
+    if(currBtnImages != nullptr)
     {
         delete currBtnImages;
-        currBtnImages = NULL;
+        currBtnImages = nullptr;
     }
 
     onActivated(false);
@@ -186,12 +186,12 @@ QSize  UBKeyboardPalette::sizeHint () const
 
 const QString* UBKeyboardPalette::getLocaleName()
 {
-    return locales == NULL ? NULL : &(locales[nCurrentLocale]->name);
+    return locales == nullptr ? nullptr : &(locales[nCurrentLocale]->name);
 }
 
 void UBKeyboardPalette::setLocale(int nLocale)
 {
-    if (locales != NULL)
+    if (locales != nullptr)
     {
         nCurrentLocale = nLocale;
 
@@ -214,7 +214,7 @@ void UBKeyboardPalette::setKeyButtonSize(const QString& _strSize)
         btnWidth = strs[0].toInt();
         btnHeight = strs[1].toInt();
 
-        if(currBtnImages != NULL)
+        if(currBtnImages != nullptr)
             delete currBtnImages;
         currBtnImages = new BTNImages(strs[1], btnWidth, btnHeight);
 
@@ -442,17 +442,17 @@ UBKeyboardButton::UBKeyboardButton(UBKeyboardPalette* parent, QString contentIma
     m_parent = parent;
 
     m_contentImagePath = contentImagePath;
-    imgContent = NULL;
+    imgContent = nullptr;
 
     setCursor(Qt::PointingHandCursor);
 }
 
 UBKeyboardButton::~UBKeyboardButton()
 {
-    if(imgContent != NULL)
+    if(imgContent != nullptr)
     {
         delete imgContent;
-        imgContent = NULL;
+        imgContent = nullptr;
     }
 }
 
@@ -468,7 +468,7 @@ void UBKeyboardButton::paintEvent(QPaintEvent*)
 
     //--------------------------
 
-    if(imgContent != NULL)
+    if(imgContent != nullptr)
     {
         if(imgContent->m_height != m_parent->currBtnImages->m_height)
         {
@@ -532,7 +532,7 @@ void  UBKeyboardButton::mouseReleaseEvent ( QMouseEvent * )
 
 UBKeyButton::UBKeyButton(UBKeyboardPalette* parent)
         :UBKeyboardButton(parent),
-        keybt(0)
+        keybt(nullptr)
 {}
 
 UBKeyButton::~UBKeyButton()
@@ -548,7 +548,7 @@ bool UBKeyButton::shifted()
 
 void UBKeyButton::onPress()
 {
-    if (keybt!=NULL)
+    if (keybt!=nullptr)
     {
         int codeIndex = keyboard->nSpecialModifierIndex * 2 + shifted();
 
@@ -633,7 +633,7 @@ void UBCntrlButton::paintContent(QPainter& painter)
         painter.drawText(rect(), Qt::AlignCenter, label);
     }
     else
-    if(imgContent != NULL)
+    if(imgContent != nullptr)
     {
         painter.drawImage(( rect().width() - imgContent->m_btnContent.width() ) / 2, ( rect().height() - imgContent->m_btnContent.height() ) / 2,
             imgContent->m_btnContent, 0,0, imgContent->m_btnContent.width(), imgContent->m_btnContent.height());
@@ -663,7 +663,7 @@ bool UBCapsLockButton::isPressed()
 
 void UBCapsLockButton::paintContent(QPainter& painter)
 {
-    if(imgContent != NULL)
+    if(imgContent != nullptr)
     {
         painter.drawImage(( rect().width() - imgContent->m_btnContent.width() ) / 2, ( rect().height() - imgContent->m_btnContent.height() ) / 2,
             imgContent->m_btnContent, 0,0, imgContent->m_btnContent.width(), imgContent->m_btnContent.height());
@@ -696,7 +696,7 @@ bool UBShiftButton::isPressed()
 
 void UBShiftButton::paintContent(QPainter& painter)
 {
-    if(imgContent != NULL)
+    if(imgContent != nullptr)
     {
         painter.drawImage(( rect().width() - imgContent->m_btnContent.width() ) / 2, ( rect().height() - imgContent->m_btnContent.height() ) / 2,
             imgContent->m_btnContent, 0,0, imgContent->m_btnContent.width(), imgContent->m_btnContent.height());
@@ -714,7 +714,7 @@ UBLocaleButton::UBLocaleButton(UBKeyboardPalette* parent)
 
     for (int i=0; i<parent->nLocalesCount; i++)
     {
-        QAction* action = (parent->locales[i]->icon!=NULL) ?
+        QAction* action = (parent->locales[i]->icon!=nullptr) ?
                           localeMenu->addAction(*parent->locales[i]->icon, parent->locales[i]->fullName)
                           : localeMenu->addAction(parent->locales[i]->fullName);
         action->setData(QVariant(i));
@@ -735,7 +735,7 @@ void UBLocaleButton::onRelease()
     keyboard->languagePopupActive = true;
     QAction* action = localeMenu->exec(mapToGlobal(QPoint(0,0)));
     keyboard->languagePopupActive = false;
-    if (action!=NULL)
+    if (action!=nullptr)
     {
         int nLocale = action->data().toInt();
         keyboard->setLocale(nLocale);
@@ -745,6 +745,6 @@ void UBLocaleButton::onRelease()
 void UBLocaleButton::paintContent(QPainter& painter)
 {
     const QString* localeName = keyboard->getLocaleName();
-    if (localeName!=NULL)
+    if (localeName!=nullptr)
         painter.drawText(rect(), Qt::AlignCenter, *localeName);
 }

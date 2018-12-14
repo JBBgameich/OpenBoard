@@ -46,7 +46,7 @@ WBWebTrapWebView::WBWebTrapWebView(QWidget* parent)
     : QWebView(parent)
     , mCurrentContentType(Unknown)
     , mIsTrapping(false)
-    , mTrapingWidget(0)
+    , mTrapingWidget(nullptr)
 {
     connect(this, SIGNAL(loadFinished ( bool)), this, SLOT(viewLoadFinished(bool)));
 }

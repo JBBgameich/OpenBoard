@@ -73,7 +73,7 @@ void UBWidgetMessageAPI::onNewMessage(const QString& pTopicName, const QString& 
 
 
 
-UBWidgetAPIMessageBroker* UBWidgetAPIMessageBroker::sInstance = 0;
+UBWidgetAPIMessageBroker* UBWidgetAPIMessageBroker::sInstance = nullptr;
 
 
 UBWidgetAPIMessageBroker::UBWidgetAPIMessageBroker(QObject *parent)

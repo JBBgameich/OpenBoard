@@ -48,7 +48,7 @@ class UBFloatingPalette : public QWidget
 
     public:
 
-        UBFloatingPalette(Qt::Corner = Qt::TopLeftCorner, QWidget *parent = 0);
+        UBFloatingPalette(Qt::Corner = Qt::TopLeftCorner, QWidget *parent = nullptr);
 
         void mouseMoveEvent(QMouseEvent *event) override;
         void mousePressEvent(QMouseEvent *event) override;

@@ -56,7 +56,7 @@
 
 #include "core/memcheck.h"
 
-UBDocumentManager* UBDocumentManager::sDocumentManager = 0;
+UBDocumentManager* UBDocumentManager::sDocumentManager = nullptr;
 
 UBDocumentManager* UBDocumentManager::documentManager()
 {
@@ -204,7 +204,7 @@ UBDocumentProxy* UBDocumentManager::importFile(const QFile& pFile, const QString
                     if (!b)
                     {
                         UBApplication::setDisabled(false);
-                        return NULL;
+                        return nullptr;
                     }
                 }
 
@@ -233,7 +233,7 @@ UBDocumentProxy* UBDocumentManager::importFile(const QFile& pFile, const QString
         }
 
     }
-    return NULL;
+    return nullptr;
 }
 
 

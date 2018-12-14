@@ -41,7 +41,7 @@ class UBExportCFF : public UBExportAdaptor
     Q_OBJECT
 
 public:
-    UBExportCFF(QObject *parent = 0);
+    UBExportCFF(QObject *parent = nullptr);
     ~UBExportCFF() override;
 
     QString exportName() override;

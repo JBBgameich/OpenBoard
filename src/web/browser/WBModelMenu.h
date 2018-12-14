@@ -84,7 +84,7 @@ class WBModelMenu : public QMenu
         void hovered(const QString &text);
 
     public:
-        WBModelMenu(QWidget *parent = 0);
+        WBModelMenu(QWidget *parent = nullptr);
 
         void setModel(QAbstractItemModel *model);
         QAbstractItemModel *model() const;
@@ -112,7 +112,7 @@ class WBModelMenu : public QMenu
         // add any actions after the tree
         virtual void postPopulated();
         // put all of the children of parent into menu up to max
-        void createMenu(const QModelIndex &parent, int max, QMenu *parentMenu = 0, QMenu *menu = 0);
+        void createMenu(const QModelIndex &parent, int max, QMenu *parentMenu = nullptr, QMenu *menu = nullptr);
 
     private slots:
         void aboutToShow();

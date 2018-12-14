@@ -78,7 +78,7 @@ class WBSqueezeLabel : public QLabel
     Q_OBJECT;
 
     public:
-        WBSqueezeLabel(QWidget *parent = 0);
+        WBSqueezeLabel(QWidget *parent = nullptr);
 
     protected:
         void paintEvent(QPaintEvent *event) override;

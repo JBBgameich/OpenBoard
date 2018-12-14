@@ -40,7 +40,7 @@ class UBWindowCapture : public QObject
     Q_OBJECT;
 
     public:
-        UBWindowCapture(UBDesktopAnnotationController *parent = 0);
+        UBWindowCapture(UBDesktopAnnotationController *parent = nullptr);
         ~UBWindowCapture() override;
         int execute();
         const QPixmap getCapturedWindow();

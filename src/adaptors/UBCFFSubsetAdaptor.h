@@ -95,7 +95,7 @@ private:
         void addExtentionsToHash(QDomElement *parent, QDomElement *topGroup);
 
         void hashSvg(QDomNode *parent, QString prefix = "");
-        void hashSiblingIwbElements(QDomElement *parent, QDomElement *topGroup = 0);
+        void hashSiblingIwbElements(QDomElement *parent, QDomElement *topGroup = nullptr);
 
         inline void parseSvgSectionAttr(const QDomElement &);
         bool parseSvgPage(const QDomElement &parent);
@@ -146,7 +146,7 @@ private:
                                qreal x, qreal y,
                                QTransform &transform);
         QColor colorFromString(const QString& clrString);
-        QTransform transformFromString(const QString trString, QGraphicsItem *item = 0);
+        QTransform transformFromString(const QString trString, QGraphicsItem *item = nullptr);
         bool getViewBoxDimenstions(const QString& viewBox);
         QSvgGenerator* createSvgGenerator(qreal width, qreal height);
         bool getTempFileName();

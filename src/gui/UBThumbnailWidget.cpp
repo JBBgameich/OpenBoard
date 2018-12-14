@@ -52,10 +52,10 @@ UBThumbnailWidget::UBThumbnailWidget(QWidget* parent)
     : QGraphicsView(parent)
     , mThumbnailWidth(UBSettings::defaultThumbnailWidth)
     , mSpacing(UBSettings::thumbnailSpacing)
-    , mLastSelectedThumbnail(0)
+    , mLastSelectedThumbnail(nullptr)
     , mSelectionSpan(0)
     , mPrevLassoRect(QRect())
-    , mLassoRectItem(0)
+    , mLassoRectItem(nullptr)
 
 {
     // By default, the drag is possible
@@ -110,7 +110,7 @@ void UBThumbnailWidget::setGraphicsItems(const QList<QGraphicsItem*>& pGraphicsI
     }
 
     // set lasso to 0 as it has been cleared as well
-    mLassoRectItem = 0;
+    mLassoRectItem = nullptr;
 
     foreach (QGraphicsItem* item, pGraphicsItems)
     {
@@ -133,7 +133,7 @@ void UBThumbnailWidget::setGraphicsItems(const QList<QGraphicsItem*>& pGraphicsI
 
     refreshScene();
 
-    mLastSelectedThumbnail = 0;
+    mLastSelectedThumbnail = nullptr;
 }
 
 
@@ -230,7 +230,7 @@ void UBThumbnailWidget::mousePressEvent(QMouseEvent *event)
     mMousePressPos = event->pos();
 
     UBThumbnailPixmap* sceneItem = dynamic_cast<UBThumbnailPixmap*>(itemAt(mMousePressPos));
-    if(sceneItem==NULL)
+    if(sceneItem==nullptr)
     {
         event->ignore();
         return;
@@ -249,7 +249,7 @@ void UBThumbnailWidget::mousePressEvent(QMouseEvent *event)
         option.initFrom(&rubberBand);
 
         mPrevLassoRect = QRect();
-        mLassoRectItem = new QGraphicsRectItem(0);
+        mLassoRectItem = new QGraphicsRectItem(nullptr);
         scene()->addItem(mLassoRectItem);
 
 #ifdef Q_OS_OSX
@@ -657,7 +657,7 @@ void UBThumbnailWidget::sceneSelectionChanged()
 
 void UBThumbnailWidget::selectItemAt(int pIndex, bool extend)
 {
-    QGraphicsItem* itemToSelect = 0;
+    QGraphicsItem* itemToSelect = nullptr;
 
     if (pIndex >= 0 && pIndex < mGraphicItems.size())
         itemToSelect = mGraphicItems.at(pIndex);
@@ -752,7 +752,7 @@ void UBThumbnailWidget::deleteLasso()
     {
         scene()->removeItem(mLassoRectItem);
         delete mLassoRectItem;
-        mLassoRectItem = 0;
+        mLassoRectItem = nullptr;
     }
 }
 

@@ -50,10 +50,10 @@ UBCoreGraphicsScene::~UBCoreGraphicsScene()
     {
         if (item)
         {
-            if (item->scene() == NULL || item->scene() == this)
+            if (item->scene() == nullptr || item->scene() == this)
             {
                 delete item;
-                item = NULL;
+                item = nullptr;
             }
         }
     }
@@ -92,12 +92,12 @@ bool UBCoreGraphicsScene::deleteItem(QGraphicsItem* item)
     if(mItemsToDelete.contains(item))
     {
         UBGraphicsItem *item_casted = dynamic_cast<UBGraphicsItem *>(item);
-        if (item_casted != NULL)
+        if (item_casted != nullptr)
             item_casted->clearSource();
 
         mItemsToDelete.remove(item);
         delete item;
-        item = NULL;
+        item = nullptr;
         return true;
     }
     else
@@ -106,7 +106,7 @@ bool UBCoreGraphicsScene::deleteItem(QGraphicsItem* item)
 
 void UBCoreGraphicsScene::removeItemFromDeletion(QGraphicsItem *item)
 {
-    if(NULL != item){
+    if(nullptr != item){
         mItemsToDelete.remove(item);
     }
 }

@@ -42,8 +42,8 @@
 
 UBDocumentThumbnailWidget::UBDocumentThumbnailWidget(QWidget* parent)
     : UBThumbnailWidget(parent)
-    , mDropCaretRectItem(0)
-    , mClosestDropItem(0)
+    , mDropCaretRectItem(nullptr)
+    , mClosestDropItem(nullptr)
     , mDragEnabled(true)
     , mScrollMagnitude(0)
 {
@@ -75,7 +75,7 @@ void UBDocumentThumbnailWidget::mouseMoveEvent(QMouseEvent *event)
 
     QList<QGraphicsItem*> graphicsItems = items(mMousePressPos);
 
-    UBSceneThumbnailPixmap* sceneItem = 0;
+    UBSceneThumbnailPixmap* sceneItem = nullptr;
 
     while (!graphicsItems.isEmpty() && !sceneItem)
         sceneItem = dynamic_cast<UBSceneThumbnailPixmap*>(graphicsItems.takeFirst());
@@ -192,7 +192,7 @@ void UBDocumentThumbnailWidget::dragMoveEvent(QDragMoveEvent *event)
 
         if (!mDropCaretRectItem && selectedItems().count() < mGraphicItems.count())
         {
-            mDropCaretRectItem = new QGraphicsRectItem(0);
+            mDropCaretRectItem = new QGraphicsRectItem(nullptr);
             scene()->addItem(mDropCaretRectItem);
             mDropCaretRectItem->setPen(QPen(Qt::darkGray));
             mDropCaretRectItem->setBrush(QBrush(Qt::lightGray));
@@ -274,7 +274,7 @@ void UBDocumentThumbnailWidget::deleteDropCaret()
     {
         scene()->removeItem(mDropCaretRectItem);
         delete mDropCaretRectItem;
-        mDropCaretRectItem = 0;
+        mDropCaretRectItem = nullptr;
     }
 }
 

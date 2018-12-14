@@ -315,31 +315,31 @@ bool UBZLayerController::zLevelAvailable(qreal z)
 
 UBGraphicsScene::UBGraphicsScene(UBDocumentProxy* parent, bool enableUndoRedoStack)
     : UBCoreGraphicsScene(parent)
-    , mEraser(0)
-    , mPointer(0)
-    , mMarkerCircle(0)
-    , mPenCircle(0)
+    , mEraser(nullptr)
+    , mPointer(nullptr)
+    , mMarkerCircle(nullptr)
+    , mPenCircle(nullptr)
     , mDocument(parent)
     , mDarkBackground(false)
     , mPageBackground(UBPageBackground::plain)
     , mIsDesktopMode(false)
     , mZoomFactor(1)
-    , mBackgroundObject(0)
+    , mBackgroundObject(nullptr)
     , mPreviousWidth(0)
     , mDistanceFromLastStrokePoint(0)
     , mInputDeviceIsPressed(false)
-    , mArcPolygonItem(0)
+    , mArcPolygonItem(nullptr)
     , mRenderingContext(Screen)
-    , mCurrentStroke(0)
+    , mCurrentStroke(nullptr)
     , mItemCount(0)
     , mUndoRedoStackEnabled(enableUndoRedoStack)
-    , magniferControlViewWidget(0)
-    , magniferDisplayViewWidget(0)
+    , magniferControlViewWidget(nullptr)
+    , magniferDisplayViewWidget(nullptr)
     , mZLayerController(new UBZLayerController(this))
-    , mpLastPolygon(NULL)
-    , mCurrentPolygon(0)
-    , mTempPolygon(NULL)
-    , mSelectionFrame(0)
+    , mpLastPolygon(nullptr)
+    , mCurrentPolygon(nullptr)
+    , mTempPolygon(nullptr)
+    , mSelectionFrame(nullptr)
 {
     UBCoreGraphicsScene::setObjectName("BoardScene");
     setItemIndexMethod(BspTreeIndex);
@@ -369,7 +369,7 @@ UBGraphicsScene::~UBGraphicsScene()
 {
     if (mCurrentStroke && mCurrentStroke->polygons().empty()){
         delete mCurrentStroke;
-        mCurrentStroke = NULL;
+        mCurrentStroke = nullptr;
     }
 
     if (mZLayerController)
@@ -417,7 +417,7 @@ bool UBGraphicsScene::inputDevicePress(const QPointF& scenePos, const qreal& pre
             // delete current stroke, if not assigned to any polygon
             if (mCurrentStroke && mCurrentStroke->polygons().empty()){
                 delete mCurrentStroke;
-                mCurrentStroke = NULL;
+                mCurrentStroke = nullptr;
             }
 
             // hide the marker preview circle
@@ -480,7 +480,7 @@ bool UBGraphicsScene::inputDevicePress(const QPointF& scenePos, const qreal& pre
 
     if (mCurrentStroke && mCurrentStroke->polygons().empty()){
         delete mCurrentStroke;
-        mCurrentStroke = NULL;
+        mCurrentStroke = nullptr;
     }
 
     return accepted;
@@ -539,13 +539,13 @@ bool UBGraphicsScene::inputDeviceMove(const QPointF& scenePos, const qreal& pres
             if (currentTool == UBStylusTool::Line || dc->mActiveRuler)
             {
                 if (UBDrawingController::drawingController()->stylusTool() != UBStylusTool::Marker)
-                if(NULL != mpLastPolygon && NULL != mCurrentStroke && mAddedItems.size() > 0){
+                if(nullptr != mpLastPolygon && nullptr != mCurrentStroke && mAddedItems.size() > 0){
                     UBCoreGraphicsScene::removeItemFromDeletion(mpLastPolygon);
                     mAddedItems.remove(mpLastPolygon);
                     mCurrentStroke->remove(mpLastPolygon);
                     if (mCurrentStroke->polygons().empty()){
                         delete mCurrentStroke;
-                        mCurrentStroke = NULL;
+                        mCurrentStroke = nullptr;
                     }
                     removeItem(mpLastPolygon);
                     mPreviousPolygonItems.removeAll(mpLastPolygon);
@@ -613,7 +613,7 @@ bool UBGraphicsScene::inputDeviceMove(const QPointF& scenePos, const qreal& pres
 
                     if (mTempPolygon) {
                         removeItem(mTempPolygon);
-                        mTempPolygon = NULL;
+                        mTempPolygon = nullptr;
                     }
 
                     QPointF lastDrawnPoint = mCurrentStroke->points().last().first;
@@ -694,7 +694,7 @@ bool UBGraphicsScene::inputDeviceRelease()
             if (mTempPolygon) {
                 UBGraphicsPolygonItem * poly = dynamic_cast<UBGraphicsPolygonItem*>(mTempPolygon->deepCopy());
                 removeItem(mTempPolygon);
-                mTempPolygon = NULL;
+                mTempPolygon = nullptr;
                 addPolygonItemToCurrentStroke(poly);
             }
 
@@ -725,9 +725,9 @@ bool UBGraphicsScene::inputDeviceRelease()
 
             if (mCurrentStroke->polygons().empty()){
                 delete mCurrentStroke;
-                mCurrentStroke = 0;
+                mCurrentStroke = nullptr;
             }
-            mCurrentPolygon = 0;
+            mCurrentPolygon = nullptr;
         }
     }
 
@@ -754,7 +754,7 @@ bool UBGraphicsScene::inputDeviceRelease()
         delete mCurrentStroke;
     }
 
-    mCurrentStroke = NULL;
+    mCurrentStroke = nullptr;
     return accepted;
 }
 
@@ -872,17 +872,17 @@ void UBGraphicsScene::DisposeMagnifierQWidgets()
     if(magniferControlViewWidget)
     {
         magniferControlViewWidget->hide();
-        magniferControlViewWidget->setParent(0);
+        magniferControlViewWidget->setParent(nullptr);
         delete magniferControlViewWidget;
-        magniferControlViewWidget = NULL;
+        magniferControlViewWidget = nullptr;
     }
 
     if(magniferDisplayViewWidget)
     {
         magniferDisplayViewWidget->hide();
-        magniferDisplayViewWidget->setParent(0);
+        magniferDisplayViewWidget->setParent(nullptr);
         delete magniferDisplayViewWidget;
-        magniferDisplayViewWidget = NULL;
+        magniferDisplayViewWidget = nullptr;
     }
     // some time have crash here on access to app (when call from destructor when close OpenBoard app)
     // so i just add try/catch section here
@@ -901,7 +901,7 @@ void UBGraphicsScene::moveTo(const QPointF &pPoint)
     mPreviousPoint = pPoint;
     mPreviousWidth = -1.0;
     mPreviousPolygonItems.clear();
-    mArcPolygonItem = 0;
+    mArcPolygonItem = nullptr;
     mDrawWithCompass = false;
 }
 void UBGraphicsScene::drawLineTo(const QPointF &pEndPoint, const qreal &pWidth, bool bLineStyle)
@@ -1007,7 +1007,7 @@ void UBGraphicsScene::eraseLineTo(const QPointF &pEndPoint, const qreal &pWidth)
     for(int i=0; i<collidItems.size(); i++)
     {
         UBGraphicsPolygonItem *pi = qgraphicsitem_cast<UBGraphicsPolygonItem*>(collidItems[i]);
-        if(pi == NULL)
+        if(pi == nullptr)
             continue;
 
         QPainterPath itemPainterPath;
@@ -1087,7 +1087,7 @@ void UBGraphicsScene::drawArcTo(const QPointF& pCenterPoint, qreal pSpanAngle)
     {
         mAddedItems.remove(mArcPolygonItem);
         removeItem(mArcPolygonItem);
-        mArcPolygonItem = 0;
+        mArcPolygonItem = nullptr;
     }
     qreal penWidth = UBSettings::settings()->currentPenWidth();
     penWidth /= UBApplication::boardController->systemScaleFactor();
@@ -1276,7 +1276,7 @@ void UBGraphicsScene::clearSelectionFrame()
 
 UBBoardView *UBGraphicsScene::controlView()
 {
-    UBBoardView *result = 0;
+    UBBoardView *result = nullptr;
     foreach (QGraphicsView *view, views()) {
         if (view->objectName() == CONTROLVIEW_OBJ_NAME) {
             result = static_cast<UBBoardView*>(view);
@@ -1365,7 +1365,7 @@ UBGraphicsScene* UBGraphicsScene::sceneDeepCopy() const
     while (itItems.hasNext())
     {
         QGraphicsItem* item = itItems.next();
-        QGraphicsItem* cloneItem = 0;
+        QGraphicsItem* cloneItem = nullptr;
         UBItem* ubItem = dynamic_cast<UBItem*>(item);
         UBGraphicsStroke* stroke = dynamic_cast<UBGraphicsStroke*>(item);
         UBGraphicsGroupContainerItem* group = dynamic_cast<UBGraphicsGroupContainerItem*>(item);
@@ -1511,7 +1511,7 @@ void UBGraphicsScene::clearContent(clearCase pCase)
     }
 
     if (pCase == clearBackground) {
-        mBackgroundObject = 0;
+        mBackgroundObject = nullptr;
     }
 
     setDocumentUpdated();
@@ -1586,7 +1586,7 @@ UBGraphicsMediaItem* UBGraphicsScene::addMedia(const QUrl& pMediaFileUrl, bool s
     qDebug() << pMediaFileUrl.toLocalFile();
     if (!QFile::exists(pMediaFileUrl.toLocalFile()))
     if (!QFile::exists(pMediaFileUrl.toString()))
-        return NULL;
+        return nullptr;
 
     UBGraphicsMediaItem * mediaItem = UBGraphicsMediaItem::createMediaItem(pMediaFileUrl);
 
@@ -1603,7 +1603,7 @@ UBGraphicsMediaItem* UBGraphicsScene::addMedia(const QUrl& pMediaFileUrl, bool s
     mediaItem->show();
 
     if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, mediaItem);
+        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, mediaItem);
         UBApplication::undoStack->push(uc);
     }
 
@@ -1640,7 +1640,7 @@ UBGraphicsWidgetItem* UBGraphicsScene::addWidget(const QUrl& pWidgetUrl, const Q
     else
     {
         qDebug() << "UBGraphicsScene::addWidget: Unknown widget Type";
-        return 0;
+        return nullptr;
     }
 }
 
@@ -1655,7 +1655,7 @@ UBGraphicsAppleWidgetItem* UBGraphicsScene::addAppleWidget(const QUrl& pWidgetUr
 
 UBGraphicsW3CWidgetItem* UBGraphicsScene::addW3CWidget(const QUrl& pWidgetUrl, const QPointF& pPos)
 {
-    UBGraphicsW3CWidgetItem *w3CWidget = new UBGraphicsW3CWidgetItem(pWidgetUrl, 0);
+    UBGraphicsW3CWidgetItem *w3CWidget = new UBGraphicsW3CWidgetItem(pWidgetUrl, nullptr);
 
     addGraphicsWidget(w3CWidget, pPos);
 
@@ -1681,7 +1681,7 @@ void UBGraphicsScene::addGraphicsWidget(UBGraphicsWidgetItem* graphicsWidget, co
 
         graphicsWidget->setSelected(true);
         if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-            UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, graphicsWidget);
+            UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, graphicsWidget);
             UBApplication::undoStack->push(uc);
         }
 
@@ -1701,7 +1701,7 @@ UBGraphicsW3CWidgetItem* UBGraphicsScene::addOEmbed(const QUrl& pContentUrl, con
 {
     QStringList widgetPaths = UBPersistenceManager::persistenceManager()->allWidgets(UBSettings::settings()->applicationApplicationsLibraryDirectory());
 
-    UBGraphicsW3CWidgetItem *widget = 0;
+    UBGraphicsW3CWidgetItem *widget = nullptr;
 
     foreach(QString widgetPath, widgetPaths)
     {
@@ -1776,7 +1776,7 @@ void UBGraphicsScene::addGroup(UBGraphicsGroupContainerItem *groupItem)
     }
 
     if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, groupItem);
+        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, groupItem);
         UBApplication::undoStack->push(uc);
     }
 
@@ -1806,7 +1806,7 @@ UBGraphicsSvgItem* UBGraphicsScene::addSvg(const QUrl& pSvgFileUrl, const QPoint
     addItem(svgItem);
 
     if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, svgItem);
+        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, svgItem);
         UBApplication::undoStack->push(uc);
     }
 
@@ -1827,7 +1827,7 @@ UBGraphicsSvgItem* UBGraphicsScene::addSvg(const QUrl& pSvgFileUrl, const QPoint
         if (!file.open(QIODevice::WriteOnly))
         {
             qWarning() << "cannot open file for writing embeded svg content " << completePath;
-            return NULL;
+            return nullptr;
         }
 
         file.write(svgItem->fileData());
@@ -1887,7 +1887,7 @@ UBGraphicsTextItem* UBGraphicsScene::addTextWithFont(const QString& pString, con
     textItem->show();
 
     if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, textItem);
+        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, textItem);
         UBApplication::undoStack->push(uc);
     }
 
@@ -1911,7 +1911,7 @@ UBGraphicsTextItem *UBGraphicsScene::addTextHtml(const QString &pString, const Q
     textItem->show();
 
     if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
-        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, 0, textItem);
+        UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, textItem);
         UBApplication::undoStack->push(uc);
     }
 
@@ -2039,7 +2039,7 @@ QGraphicsItem* UBGraphicsScene::setAsBackgroundObject(QGraphicsItem* item, bool 
     if (mBackgroundObject)
     {
         removeItem(mBackgroundObject);
-        mBackgroundObject = 0;
+        mBackgroundObject = nullptr;
     }
 
     if (item)
@@ -2079,7 +2079,7 @@ void UBGraphicsScene::unsetBackgroundObject()
     // Item zLayer and Layer Type should be set by the caller of this function, as
     // it may depend on the object type, where it was before, etc.
 
-    mBackgroundObject = 0;
+    mBackgroundObject = nullptr;
 }
 
 QRectF UBGraphicsScene::normalizedSceneRect(qreal ratio)
@@ -2123,7 +2123,7 @@ QRectF UBGraphicsScene::normalizedSceneRect(qreal ratio)
 
 QGraphicsItem *UBGraphicsScene::itemForUuid(QUuid uuid)
 {
-    QGraphicsItem *result = 0;
+    QGraphicsItem *result = nullptr;
     QString ui = uuid.toString();
 
     //simple search before implementing container for fast access
@@ -2706,7 +2706,7 @@ void UBGraphicsScene::keyReleaseEvent(QKeyEvent * keyEvent)
                 case UBGraphicsWidgetItem::Type:
                     {
                         UBGraphicsW3CWidgetItem *wc3_widget = dynamic_cast<UBGraphicsW3CWidgetItem*>(item);
-                        if (0 != wc3_widget)
+                        if (nullptr != wc3_widget)
                         if (!wc3_widget->hasFocus())
                             ubItemsToRemove << wc3_widget;
                         break;
@@ -2714,7 +2714,7 @@ void UBGraphicsScene::keyReleaseEvent(QKeyEvent * keyEvent)
                 case UBGraphicsTextItem::Type:
                     {
                         UBGraphicsTextItem *text_item = dynamic_cast<UBGraphicsTextItem*>(item);
-                        if (0 != text_item){
+                        if (nullptr != text_item){
                             if (!text_item->hasFocus())
                                 ubItemsToRemove << text_item;
                             else
@@ -2726,7 +2726,7 @@ void UBGraphicsScene::keyReleaseEvent(QKeyEvent * keyEvent)
                 case UBGraphicsGroupContainerItem::Type:
                 {
                     UBGraphicsGroupContainerItem* group_item = dynamic_cast<UBGraphicsGroupContainerItem*>(item);
-                    if(NULL != group_item){
+                    if(nullptr != group_item){
                         if(!hasTextItemWithFocus(group_item))
                             ubItemsToRemove << group_item;
                         else
@@ -2738,7 +2738,7 @@ void UBGraphicsScene::keyReleaseEvent(QKeyEvent * keyEvent)
                 default:
                     {
                         UBGraphicsItem *ubgi = dynamic_cast<UBGraphicsItem*>(item);
-                        if (0 != ubgi)
+                        if (nullptr != ubgi)
                             ubItemsToRemove << ubgi;
                         else
                             itemToRemove << item;
@@ -2767,7 +2767,7 @@ bool UBGraphicsScene::hasTextItemWithFocus(UBGraphicsGroupContainerItem *item){
 
     foreach(QGraphicsItem* pItem, item->childItems()){
         UBGraphicsTextItem *text_item = dynamic_cast<UBGraphicsTextItem*>(pItem);
-        if (NULL != text_item){
+        if (nullptr != text_item){
             if(text_item->hasFocus()){
                 bHasFocus = true;
                 break;
@@ -2950,7 +2950,7 @@ void UBGraphicsScene::setToolCursor(int tool)
 
     if (mCurrentStroke && mCurrentStroke->polygons().empty()){
         delete mCurrentStroke;
-        mCurrentStroke = NULL;
+        mCurrentStroke = nullptr;
     }
 
 }

@@ -43,8 +43,8 @@ class UBToolWidget : public QWidget
     Q_OBJECT;
 
     public:
-        UBToolWidget(const QUrl& pUrl, QWidget* pParent = 0);
-        UBToolWidget(UBGraphicsWidgetItem* pWidget, QWidget* pParent = 0);
+        UBToolWidget(const QUrl& pUrl, QWidget* pParent = nullptr);
+        UBToolWidget(UBGraphicsWidgetItem* pWidget, QWidget* pParent = nullptr);
         ~UBToolWidget() override;
 
         void remove();

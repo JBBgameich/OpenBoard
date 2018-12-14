@@ -37,7 +37,7 @@
 
 UBOpenSankoreImporter::UBOpenSankoreImporter(QWidget* mainWidget, QObject *parent) :
     QObject(parent)
-  , mImporterWidget(NULL)
+  , mImporterWidget(nullptr)
 {
     if(UBSettings::settings()->appLookForOpenSankoreInstall->get().toBool() &&
             QDir(UBSettings::userDataDirectory().replace(qApp->applicationName(),"Sankore")).exists()){

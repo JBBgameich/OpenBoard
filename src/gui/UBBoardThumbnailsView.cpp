@@ -53,9 +53,9 @@ UBBoardThumbnailsView::UBBoardThumbnailsView(QWidget *parent, const char *name)
     , mThumbnailWidth(0)
     , mThumbnailMinWidth(100)
     , mMargin(20)
-    , mDropSource(NULL)
-    , mDropTarget(NULL)
-    , mDropBar(new QGraphicsRectItem(0))
+    , mDropSource(nullptr)
+    , mDropTarget(nullptr)
+    , mDropBar(new QGraphicsRectItem(nullptr))
     , mLongPressInterval(350)
 {
     setScene(new QGraphicsScene(this));    
@@ -331,8 +331,8 @@ void UBBoardThumbnailsView::dropEvent(QDropEvent *event)
     if (mDropSource->sceneIndex() != mDropTarget->sceneIndex())
         UBApplication::boardController->moveSceneToIndex(mDropSource->sceneIndex(), mDropTarget->sceneIndex());
 
-    mDropSource = NULL;
-    mDropTarget = NULL;
+    mDropSource = nullptr;
+    mDropTarget = nullptr;
 
     mDropBar->setRect(QRectF());
     mDropBar->hide();

@@ -45,12 +45,12 @@ UBSelectionFrame::UBSelectionFrame()
     : mThickness(UBSettings::settings()->objectFrameWidth)
     , mAntiscaleRatio(1.0)
     , mRotationAngle(0)
-    , mDeleteButton(0)
-    , mDuplicateButton(0)
-    , mZOrderUpButton(0)
-    , mZOrderDownButton(0)
-    , mGroupButton(0)
-    , mRotateButton(0)
+    , mDeleteButton(nullptr)
+    , mDuplicateButton(nullptr)
+    , mZOrderUpButton(nullptr)
+    , mZOrderDownButton(nullptr)
+    , mGroupButton(nullptr)
+    , mRotateButton(nullptr)
 {
     setLocalBrush(QBrush(UBSettings::paletteColor));
     setPen(Qt::NoPen);
@@ -424,7 +424,7 @@ void UBSelectionFrame::clearButtons()
 {
     foreach (DelegateButton *b, mButtons)
     {
-        b->setParentItem(0);
+        b->setParentItem(nullptr);
         b->hide();
     }
 
@@ -488,14 +488,14 @@ QList<DelegateButton*> UBSelectionFrame::buttonsForFlags(UBGraphicsFlags fls) {
     QList<DelegateButton*> result;
 
     if (!mDeleteButton) {
-        mDeleteButton = new DelegateButton(":/images/close.svg", this, 0, Qt::TopLeftSection);
+        mDeleteButton = new DelegateButton(":/images/close.svg", this, nullptr, Qt::TopLeftSection);
         connect(mDeleteButton, SIGNAL(clicked()), this, SLOT(remove()));
     }
     result << mDeleteButton;
 
     if (fls | GF_DUPLICATION_ENABLED) {
         if (!mDuplicateButton) {
-            mDuplicateButton = new DelegateButton(":/images/duplicate.svg", this, 0, Qt::TopLeftSection);
+            mDuplicateButton = new DelegateButton(":/images/duplicate.svg", this, nullptr, Qt::TopLeftSection);
             connect(mDuplicateButton, SIGNAL(clicked(bool)), this, SLOT(duplicate()));
         }
         result <<  mDuplicateButton;
@@ -503,7 +503,7 @@ QList<DelegateButton*> UBSelectionFrame::buttonsForFlags(UBGraphicsFlags fls) {
 
     if (mEnclosedtems.count() >= 1) {
         if (!mGroupButton) {
-            mGroupButton = new DelegateButton(":/images/groupItems.svg", this, 0, Qt::TopLeftSection);
+            mGroupButton = new DelegateButton(":/images/groupItems.svg", this, nullptr, Qt::TopLeftSection);
             mGroupButton->setShowProgressIndicator(false);
             connect(mGroupButton, SIGNAL(clicked()), this, SLOT(groupItems()));
         }
@@ -512,14 +512,14 @@ QList<DelegateButton*> UBSelectionFrame::buttonsForFlags(UBGraphicsFlags fls) {
 
     if (fls | GF_ZORDER_MANIPULATIONS_ALLOWED) {
         if (!mZOrderUpButton) {
-            mZOrderUpButton = new DelegateButton(":/images/z_layer_up.svg", this, 0, Qt::BottomLeftSection);
+            mZOrderUpButton = new DelegateButton(":/images/z_layer_up.svg", this, nullptr, Qt::BottomLeftSection);
             mZOrderUpButton->setShowProgressIndicator(true);
             connect(mZOrderUpButton, SIGNAL(clicked()), this, SLOT(increaseZlevelUp()));
             connect(mZOrderUpButton, SIGNAL(longClicked()), this, SLOT(increaseZlevelTop()));
         }
 
         if (!mZOrderDownButton) {
-            mZOrderDownButton = new DelegateButton(":/images/z_layer_down.svg", this, 0, Qt::BottomLeftSection);
+            mZOrderDownButton = new DelegateButton(":/images/z_layer_down.svg", this, nullptr, Qt::BottomLeftSection);
             mZOrderDownButton->setShowProgressIndicator(true);
             connect(mZOrderDownButton, SIGNAL(clicked()), this, SLOT(increaseZlevelDown()));
             connect(mZOrderDownButton, SIGNAL(longClicked()), this, SLOT(increaseZlevelBottom()));
@@ -531,7 +531,7 @@ QList<DelegateButton*> UBSelectionFrame::buttonsForFlags(UBGraphicsFlags fls) {
 
     if (fls | GF_REVOLVABLE) {
         if (!mRotateButton) {
-            mRotateButton = new DelegateButton(":/images/rotate.svg", this, 0, Qt::NoSection);
+            mRotateButton = new DelegateButton(":/images/rotate.svg", this, nullptr, Qt::NoSection);
             mRotateButton->setCursor(UBResources::resources()->rotateCursor);
             mRotateButton->setShowProgressIndicator(false);
             mRotateButton->setTransparentToMouseEvent(true);

@@ -256,7 +256,7 @@ UBDocumentProxy* UBImportCFF::importFile(const QFile& pFile, const QString& pGro
 
     if(!contentFile.length()){
             UBApplication::showMessage(tr("Import of file %1 failed.").arg(fi.baseName()));
-            return 0;
+            return nullptr;
     }
     else{
         //create destination document proxy
@@ -266,13 +266,13 @@ UBDocumentProxy* UBImportCFF::importFile(const QFile& pFile, const QString& pGro
         dir.mkdir(destDocument->persistencePath());
         if (pGroup.length() > 0)
             destDocument->setMetaData(UBSettings::documentGroupName, pGroup);
-        if (fi.baseName() > 0)
+        if (fi.baseName() > nullptr)
             destDocument->setMetaData(UBSettings::documentName, fi.baseName());
 
         destDocument->setMetaData(UBSettings::documentVersion, UBSettings::currentFileVersion);
         destDocument->setMetaData(UBSettings::documentUpdatedAt, UBStringUtils::toUtcIsoDateTime(QDateTime::currentDateTime()));
 
-        UBDocumentProxy* newDocument = NULL;
+        UBDocumentProxy* newDocument = nullptr;
         //try to import cff to document
         if (UBCFFSubsetAdaptor::ConvertCFFFileToUbz(contentFile, destDocument))
         {

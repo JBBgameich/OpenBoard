@@ -42,7 +42,7 @@ class UBResources : public QObject
 
 
     private:
-         UBResources(QObject* pParent = 0);
+         UBResources(QObject* pParent = nullptr);
          ~UBResources() override;
 
          void init();

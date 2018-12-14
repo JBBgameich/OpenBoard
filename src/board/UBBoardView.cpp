@@ -91,7 +91,7 @@ UBBoardView::UBBoardView (UBBoardController* pController, QWidget* pParent, bool
     , mIsCreatingTextZone (false)
     , mIsCreatingSceneGrabZone (false)
     , mOkOnWidget(false)
-    , suspendedMousePressEvent(NULL)
+    , suspendedMousePressEvent(nullptr)
     , mLongPressInterval(1000)
     , mIsDragInProgress(false)
     , mMultipleSelectionIsEnabled(false)
@@ -115,7 +115,7 @@ UBBoardView::UBBoardView (UBBoardController* pController, QWidget* pParent, bool
 UBBoardView::UBBoardView (UBBoardController* pController, int pStartLayer, int pEndLayer, QWidget* pParent, bool isControl, bool isDesktop)
     : QGraphicsView (pParent)
     , mController (pController)
-    , suspendedMousePressEvent(NULL)
+    , suspendedMousePressEvent(nullptr)
     , mLongPressInterval(1000)
     , mIsDragInProgress(false)
     , mMultipleSelectionIsEnabled(false)
@@ -137,7 +137,7 @@ UBBoardView::~UBBoardView ()
 {
     if (suspendedMousePressEvent){
         delete suspendedMousePressEvent;
-        suspendedMousePressEvent = NULL;
+        suspendedMousePressEvent = nullptr;
     }
 }
 
@@ -169,8 +169,8 @@ void UBBoardView::init ()
 
     mUsingTabletEraser = false;
     mIsCreatingTextZone = false;
-    mRubberBand = 0;
-    mUBRubberBand = 0;
+    mRubberBand = nullptr;
+    mUBRubberBand = nullptr;
 
     mVirtualKeyboardActive = false;
 
@@ -178,7 +178,7 @@ void UBBoardView::init ()
 
     unsetCursor();
 
-    movingItem = NULL;
+    movingItem = nullptr;
     mWidgetMoved = false;
 }
 
@@ -578,7 +578,7 @@ Here we determines cases when items should to get mouse press event at pressing 
     case UBGraphicsGroupContainerItem::Type:
         if(currentTool == UBStylusTool::Play)
         {
-            movingItem = NULL;
+            movingItem = nullptr;
             return true;
         }
         return false;
@@ -736,7 +736,7 @@ QGraphicsItem* UBBoardView::determineItemToMove(QGraphicsItem *item)
                 return item;
 
             if (item->isSelected())
-                return NULL;
+                return nullptr;
 
             return item->parentItem();
         }
@@ -792,7 +792,7 @@ void UBBoardView::handleItemMousePress(QMouseEvent *event)
         if (suspendedMousePressEvent)
         {
             delete suspendedMousePressEvent;
-            suspendedMousePressEvent = NULL;
+            suspendedMousePressEvent = nullptr;
         }
 
         if (itemShouldReceiveSuspendedMousePressEvent(movingItem))
@@ -1021,7 +1021,7 @@ void UBBoardView::mousePressEvent (QMouseEvent *event)
             }
 
             if (scene()->backgroundObject() == movingItem)
-                movingItem = NULL;
+                movingItem = nullptr;
 
             connect(&mLongPressTimer, SIGNAL(timeout()), this, SLOT(longPressEvent()));
             if (!movingItem && !mController->cacheIsVisible())
@@ -1036,7 +1036,7 @@ void UBBoardView::mousePressEvent (QMouseEvent *event)
             QRectF fuzzyRect (0, 0, frameWidth * 4, frameWidth * 4);
             fuzzyRect.moveCenter (mapToScene (mMouseDownPos));
 
-            UBGraphicsTextItem* foundTextItem = 0;
+            UBGraphicsTextItem* foundTextItem = nullptr;
             QListIterator<QGraphicsItem *> it (scene ()->items (fuzzyRect));
 
             while (it.hasNext () && !foundTextItem)
@@ -1075,7 +1075,7 @@ void UBBoardView::mousePressEvent (QMouseEvent *event)
             break;
 
         default:
-            if(UBDrawingController::drawingController()->mActiveRuler==NULL) {
+            if(UBDrawingController::drawingController()->mActiveRuler==nullptr) {
                 viewport()->setCursor (QCursor (Qt::BlankCursor));
             }
             if (scene () && !mTabletStylusIsPressed) {
@@ -1248,13 +1248,13 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
         bool bReleaseIsNeed = true;
         if (movingItem != determineItemToPress(scene()->itemAt(this->mapToScene(event->localPos().toPoint()), QTransform())))
         {
-            movingItem = NULL;
+            movingItem = nullptr;
             bReleaseIsNeed = false;
         }
         if (mWidgetMoved)
         {
             mWidgetMoved = false;
-            movingItem = NULL;
+            movingItem = nullptr;
         }
         else
             if (movingItem && (!isCppTool(movingItem) || UBGraphicsCurtainItem::Type == movingItem->type()))
@@ -1262,9 +1262,9 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
                 if (suspendedMousePressEvent)
                 {
                     QGraphicsView::mousePressEvent(suspendedMousePressEvent);     // suspendedMousePressEvent is deleted by old Qt event loop
-                    movingItem = NULL;
+                    movingItem = nullptr;
                     delete suspendedMousePressEvent;
-                    suspendedMousePressEvent = NULL;
+                    suspendedMousePressEvent = nullptr;
                     bReleaseIsNeed = true;
                 }
                 else
@@ -1313,7 +1313,7 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
         bool bReleaseIsNeed = true;
         if (movingItem != determineItemToPress(scene()->itemAt(this->mapToScene(event->localPos().toPoint()), QTransform())))
         {
-            movingItem = NULL;
+            movingItem = nullptr;
             bReleaseIsNeed = false;
         }
 
@@ -1324,7 +1324,7 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
         if (mWidgetMoved)
         {
             mWidgetMoved = false;
-            movingItem = NULL;
+            movingItem = nullptr;
             if (scene () && mRubberBand && mIsCreatingTextZone) {
                 QRect rubberRect = mRubberBand->geometry ();
 
@@ -1344,9 +1344,9 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
             if (suspendedMousePressEvent)
             {
                 QGraphicsView::mousePressEvent(suspendedMousePressEvent);     // suspendedMousePressEvent is deleted by old Qt event loop
-                movingItem = NULL;
+                movingItem = nullptr;
                 delete suspendedMousePressEvent;
-                suspendedMousePressEvent = NULL;
+                suspendedMousePressEvent = nullptr;
                 bReleaseIsNeed = true;
             }
             else{
@@ -1391,15 +1391,15 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
 
         if (mWidgetMoved) {
             movingItem->setSelected(false);
-            movingItem = NULL;
+            movingItem = nullptr;
             mWidgetMoved = false;
         }
         else {
             if (suspendedMousePressEvent) {
                 QGraphicsView::mousePressEvent(suspendedMousePressEvent);     // suspendedMousePressEvent is deleted by old Qt event loop
-                movingItem = NULL;
+                movingItem = nullptr;
                 delete suspendedMousePressEvent;
-                suspendedMousePressEvent = NULL;
+                suspendedMousePressEvent = nullptr;
             }
         }
         QGraphicsView::mouseReleaseEvent (event);
@@ -1437,19 +1437,19 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
     if (mUBRubberBand) {
         mUBRubberBand->hide();
         delete mUBRubberBand;
-        mUBRubberBand = NULL;
+        mUBRubberBand = nullptr;
     }
 
     if (mRubberBand) {
         mRubberBand->hide();
         delete mRubberBand;
-        mRubberBand = NULL;
+        mRubberBand = nullptr;
     }
 
     mMouseButtonIsPressed = false;
     mPendingStylusReleaseEvent = false;
     mTabletStylusIsPressed = false;
-    movingItem = NULL;
+    movingItem = nullptr;
 
     mLongPressTimer.stop();
     emit mouseReleased();
@@ -1766,7 +1766,7 @@ bool UBBoardView::hasSelectedParents(QGraphicsItem * item)
 {
     if (item->isSelected())
         return true;
-    if (item->parentItem()==NULL)
+    if (item->parentItem()==nullptr)
         return false;
     return hasSelectedParents(item->parentItem());
 }

@@ -51,7 +51,7 @@ class UBCryptoUtils : public QObject
 
     private:
 
-        UBCryptoUtils(QObject * pParent = 0);
+        UBCryptoUtils(QObject * pParent = nullptr);
         ~UBCryptoUtils() override;
 
         static UBCryptoUtils* sInstance;

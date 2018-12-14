@@ -69,7 +69,7 @@ UBGraphicsMediaItem::UBGraphicsMediaItem(const QUrl& pMediaFileUrl, QGraphicsIte
         , mMutedByUserAction(sIsMutedByDefault)
         , mStopped(false)
         , mMediaFileUrl(pMediaFileUrl)
-        , mLinkedImage(NULL)
+        , mLinkedImage(nullptr)
         , mInitialPos(0)
 {
 

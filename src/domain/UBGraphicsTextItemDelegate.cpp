@@ -100,12 +100,12 @@ int AlignTextButton::nextKind() const
 }
 
 UBGraphicsTextItemDelegate::UBGraphicsTextItemDelegate(UBGraphicsTextItem* pDelegated, QObject *)
-    : UBGraphicsItemDelegate(pDelegated,0, GF_COMMON | GF_REVOLVABLE | GF_TITLE_BAR_USED)
-    , mFontButton(0)
-    , mColorButton(0)
-    , mDecreaseSizeButton(0)
-    , mIncreaseSizeButton(0)
-    , mAlignButton(0)
+    : UBGraphicsItemDelegate(pDelegated,nullptr, GF_COMMON | GF_REVOLVABLE | GF_TITLE_BAR_USED)
+    , mFontButton(nullptr)
+    , mColorButton(nullptr)
+    , mDecreaseSizeButton(nullptr)
+    , mIncreaseSizeButton(nullptr)
+    , mAlignButton(nullptr)
     , mLastFontPixelSize(-1)
     , delta(5)
 {
@@ -247,23 +247,23 @@ void UBGraphicsTextItemDelegate::freeButtons()
 {
     mButtons.removeOne(mFontButton);
     delete mFontButton;
-    mFontButton = 0;
+    mFontButton = nullptr;
 
     mButtons.removeOne(mColorButton);
     delete mColorButton;
-    mColorButton = 0;
+    mColorButton = nullptr;
 
     mButtons.removeOne(mDecreaseSizeButton);
     delete mDecreaseSizeButton;
-    mDecreaseSizeButton = 0;
+    mDecreaseSizeButton = nullptr;
 
     mButtons.removeOne(mIncreaseSizeButton);
     delete mIncreaseSizeButton;
-    mIncreaseSizeButton = 0;
+    mIncreaseSizeButton = nullptr;
 
     mButtons.removeOne(mAlignButton);
     delete mAlignButton;
-    mAlignButton = 0;
+    mAlignButton = nullptr;
 
     UBGraphicsItemDelegate::freeButtons();
 }
@@ -284,7 +284,7 @@ void UBGraphicsTextItemDelegate::customize(QFontDialog &fontDialog)
         fontDialog.setStyleSheet("background-color: white;");
     }
 
-    QListView *fontNameListView = NULL;
+    QListView *fontNameListView = nullptr;
     QList<QListView*> listViews = fontDialog.findChildren<QListView*>();
     if (listViews.count() > 0)
     {

@@ -39,7 +39,7 @@ class UBGraphicsGroupContainerItemDelegate : public UBGraphicsItemDelegate
 Q_OBJECT
 
 public:
-    UBGraphicsGroupContainerItemDelegate(QGraphicsItem* pDelegated, QObject * parent = 0);
+    UBGraphicsGroupContainerItemDelegate(QGraphicsItem* pDelegated, QObject * parent = nullptr);
     UBGraphicsGroupContainerItem *delegated();
 
 protected:

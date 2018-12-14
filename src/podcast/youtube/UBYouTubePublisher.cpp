@@ -49,8 +49,8 @@ const QString UBYouTubePublisher::sYouTubeDeveloperKey("AI39si62ga82stA4YBr5Jjkf
 
 UBYouTubePublisher::UBYouTubePublisher(QObject* pParent)
     : QObject(pParent)
-    , mAuthRequest(0)
-    , mUploadRequest(0)
+    , mAuthRequest(nullptr)
+    , mUploadRequest(nullptr)
 {
     // NOOP
 }
@@ -145,7 +145,7 @@ void UBYouTubePublisher::postClientLoginResponse(bool success, const QByteArray&
     }
 
     mAuthRequest->deleteLater();
-    mAuthRequest = 0;
+    mAuthRequest = nullptr;
 
     if(mAuthToken.length() == 0)
     {

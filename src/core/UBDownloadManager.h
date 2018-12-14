@@ -86,7 +86,7 @@ class UBDownloadHttpFile : public UBHttpGet
 {
     Q_OBJECT
 public:
-    UBDownloadHttpFile(int fileId, QObject* parent=0);
+    UBDownloadHttpFile(int fileId, QObject* parent=nullptr);
     ~UBDownloadHttpFile() override;
 
 signals:
@@ -106,7 +106,7 @@ class UBAsyncLocalFileDownloader : public QThread
 {
     Q_OBJECT
 public:
-    UBAsyncLocalFileDownloader(sDownloadFileDesc desc, QObject *parent = 0);
+    UBAsyncLocalFileDownloader(sDownloadFileDesc desc, QObject *parent = nullptr);
 
     UBAsyncLocalFileDownloader *download();    
     void run() override;
@@ -128,7 +128,7 @@ class UBDownloadManager : public QObject
 {
     Q_OBJECT
 public:
-    UBDownloadManager(QObject* parent=0, const char* name="UBDownloadManager");
+    UBDownloadManager(QObject* parent=nullptr, const char* name="UBDownloadManager");
     ~UBDownloadManager() override;
     static UBDownloadManager* downloadManager();
     int addFileToDownload(sDownloadFileDesc desc);

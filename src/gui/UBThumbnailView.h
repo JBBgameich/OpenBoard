@@ -43,7 +43,7 @@ class UBThumbnailView : public QGraphicsView
 
     public:
 
-        UBThumbnailView(UBGraphicsScene *scene, QWidget* parent =0);
+        UBThumbnailView(UBGraphicsScene *scene, QWidget* parent =nullptr);
         ~UBThumbnailView() override
         {
 

@@ -62,12 +62,12 @@
 
 UBDesktopAnnotationController::UBDesktopAnnotationController(QObject *parent, UBRightPalette* rightPalette)
         : QObject(parent)
-        , mTransparentDrawingView(0)
-        , mTransparentDrawingScene(0)
-        , mDesktopPalette(NULL)
-        , mDesktopPenPalette(NULL)
-        , mDesktopMarkerPalette(NULL)
-        , mDesktopEraserPalette(NULL)
+        , mTransparentDrawingView(nullptr)
+        , mTransparentDrawingScene(nullptr)
+        , mDesktopPalette(nullptr)
+        , mDesktopPenPalette(nullptr)
+        , mDesktopMarkerPalette(nullptr)
+        , mDesktopEraserPalette(nullptr)
         , mRightPalette(rightPalette)
         , mWindowPositionInitialized(false)
         , mIsFullyTransparent(false)
@@ -80,7 +80,7 @@ UBDesktopAnnotationController::UBDesktopAnnotationController(QObject *parent, UB
         , mDesktopStylusTool(UBDrawingController::drawingController()->stylusTool())
 {
 
-    mTransparentDrawingView = new UBBoardView(UBApplication::boardController, static_cast<QWidget*>(0), false, true); // deleted in UBDesktopAnnotationController::destructor
+    mTransparentDrawingView = new UBBoardView(UBApplication::boardController, static_cast<QWidget*>(nullptr), false, true); // deleted in UBDesktopAnnotationController::destructor
     mTransparentDrawingView->setAttribute(Qt::WA_TranslucentBackground, true);
 #ifdef Q_OS_OSX
     mTransparentDrawingView->setAttribute(Qt::WA_MacNoShadow, true);
@@ -96,7 +96,7 @@ UBDesktopAnnotationController::UBDesktopAnnotationController(QObject *parent, UB
     QString backgroundStyle = "QWidget {background-color: rgba(127, 127, 127, 0)}";
     mTransparentDrawingView->setStyleSheet(backgroundStyle);
 
-    mTransparentDrawingScene = new UBGraphicsScene(0, false);
+    mTransparentDrawingScene = new UBGraphicsScene(nullptr, false);
     updateColors();
 
     mTransparentDrawingView->setScene(mTransparentDrawingScene);
@@ -725,7 +725,7 @@ void UBDesktopAnnotationController::pointerActionReleased()
  */
 void UBDesktopAnnotationController::togglePropertyPalette(UBActionPalette *palette)
 {
-    if(NULL != palette)
+    if(nullptr != palette)
     {
         bool bShow = !palette->isVisible();
         if(mDesktopPenPalette == palette)
@@ -757,7 +757,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMaximized()
 {
     // Pen
     UBActionPaletteButton* pPenButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionPen);
-    if(NULL != pPenButton)
+    if(nullptr != pPenButton)
     {
         connect(pPenButton, SIGNAL(pressed()), this, SLOT(penActionPressed()));
         connect(pPenButton, SIGNAL(released()), this, SLOT(penActionReleased()));
@@ -765,7 +765,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMaximized()
 
     // Eraser
     UBActionPaletteButton* pEraserButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionEraser);
-    if(NULL != pEraserButton)
+    if(nullptr != pEraserButton)
     {
         connect(pEraserButton, SIGNAL(pressed()), this, SLOT(eraserActionPressed()));
         connect(pEraserButton, SIGNAL(released()), this, SLOT(eraserActionReleased()));
@@ -773,7 +773,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMaximized()
 
     // Marker
     UBActionPaletteButton* pMarkerButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionMarker);
-    if(NULL != pMarkerButton)
+    if(nullptr != pMarkerButton)
     {
         connect(pMarkerButton, SIGNAL(pressed()), this, SLOT(markerActionPressed()));
         connect(pMarkerButton, SIGNAL(released()), this, SLOT(markerActionReleased()));
@@ -781,7 +781,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMaximized()
 
     // Pointer
     UBActionPaletteButton* pSelectorButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionSelector);
-    if(NULL != pSelectorButton)
+    if(nullptr != pSelectorButton)
     {
         connect(pSelectorButton, SIGNAL(pressed()), this, SLOT(selectorActionPressed()));
         connect(pSelectorButton, SIGNAL(released()), this, SLOT(selectorActionReleased()));
@@ -789,7 +789,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMaximized()
 
     // Pointer
     UBActionPaletteButton* pPointerButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionPointer);
-    if(NULL != pPointerButton)
+    if(nullptr != pPointerButton)
     {
         connect(pPointerButton, SIGNAL(pressed()), this, SLOT(pointerActionPressed()));
         connect(pPointerButton, SIGNAL(released()), this, SLOT(pointerActionReleased()));
@@ -804,7 +804,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMinimize()
 {
     // Pen
     UBActionPaletteButton* pPenButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionPen);
-    if(NULL != pPenButton)
+    if(nullptr != pPenButton)
     {
         disconnect(pPenButton, SIGNAL(pressed()), this, SLOT(penActionPressed()));
         disconnect(pPenButton, SIGNAL(released()), this, SLOT(penActionReleased()));
@@ -812,7 +812,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMinimize()
 
     // Marker
     UBActionPaletteButton* pMarkerButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionMarker);
-    if(NULL != pMarkerButton)
+    if(nullptr != pMarkerButton)
     {
         disconnect(pMarkerButton, SIGNAL(pressed()), this, SLOT(markerActionPressed()));
         disconnect(pMarkerButton, SIGNAL(released()), this, SLOT(markerActionReleased()));
@@ -820,7 +820,7 @@ void UBDesktopAnnotationController::onDesktopPaletteMinimize()
 
     // Eraser
     UBActionPaletteButton* pEraserButton = mDesktopPalette->getButtonFromAction(UBApplication::mainWindow->actionEraser);
-    if(NULL != pEraserButton)
+    if(nullptr != pEraserButton)
     {
         disconnect(pEraserButton, SIGNAL(pressed()), this, SLOT(eraserActionPressed()));
         disconnect(pEraserButton, SIGNAL(released()), this, SLOT(eraserActionReleased()));

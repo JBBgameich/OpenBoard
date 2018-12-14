@@ -112,7 +112,7 @@ WBBrowserWindow *WBWebPage::mainWindow()
         w = w->parent();
     }
 
-        return 0;
+        return nullptr;
 }
 
 bool WBWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)

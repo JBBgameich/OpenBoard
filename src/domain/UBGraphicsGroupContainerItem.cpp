@@ -41,11 +41,11 @@
 
 UBGraphicsGroupContainerItem::UBGraphicsGroupContainerItem(QGraphicsItem *parent)
     : QGraphicsItem(parent)
-    , mCurrentItem(NULL)
+    , mCurrentItem(nullptr)
 {
     setData(UBGraphicsItemData::ItemLayerType, UBItemLayerType::Object);
 
-    setDelegate(new UBGraphicsGroupContainerItemDelegate(this, 0));
+    setDelegate(new UBGraphicsGroupContainerItemDelegate(this, nullptr));
 
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -172,7 +172,7 @@ void UBGraphicsGroupContainerItem::deselectCurrentItem()
         dynamic_cast<UBGraphicsMediaItem*>(mCurrentItem)->Delegate()->getToolBarItem()->hide();
 
         mCurrentItem->setSelected(false);
-        mCurrentItem = NULL;
+        mCurrentItem = nullptr;
     }
 }
 

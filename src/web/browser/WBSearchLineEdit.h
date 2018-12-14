@@ -88,7 +88,7 @@ class WBClearButton : public QAbstractButton
     Q_OBJECT;
 
     public:
-        WBClearButton(QWidget *parent = 0);
+        WBClearButton(QWidget *parent = nullptr);
         void paintEvent(QPaintEvent *event) override;
 
     public slots:
@@ -105,7 +105,7 @@ class WBSearchLineEdit : public WBExLineEdit
         void textChanged(const QString &text);
 
     public:
-        WBSearchLineEdit(QWidget *parent = 0);
+        WBSearchLineEdit(QWidget *parent = nullptr);
 
         QString inactiveText() const;
         void setInactiveText(const QString &text);

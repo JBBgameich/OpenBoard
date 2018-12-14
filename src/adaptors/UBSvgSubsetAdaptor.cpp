@@ -247,7 +247,7 @@ UBGraphicsScene* UBSvgSubsetAdaptor::loadScene(UBDocumentProxy* proxy, const int
         if (!file.open(QIODevice::ReadOnly))
         {
             qWarning() << "Cannot open file " << fileName << " for reading ...";
-            return 0;
+            return nullptr;
         }
 
         UBGraphicsScene* scene = loadScene(proxy, file.readAll());
@@ -257,7 +257,7 @@ UBGraphicsScene* UBSvgSubsetAdaptor::loadScene(UBDocumentProxy* proxy, const int
         return scene;
     }
 
-    return 0;
+    return nullptr;
 }
 
 
@@ -297,7 +297,7 @@ QUuid UBSvgSubsetAdaptor::sceneUuid(UBDocumentProxy* proxy, const int pageIndex)
         if (!file.open(QIODevice::ReadOnly))
         {
             qWarning() << "Cannot open file " << fileName << " for reading ...";
-            return 0;
+            return nullptr;
         }
 
         QXmlStreamReader xml(file.readAll());
@@ -352,15 +352,15 @@ UBGraphicsScene* UBSvgSubsetAdaptor::UBSvgSubsetReader::loadScene(UBDocumentProx
     qDebug() << "loadScene() : starting reading...";
     QTime time;
     time.start();
-    mScene = 0;
-    UBGraphicsWidgetItem *currentWidget = 0;
+    mScene = nullptr;
+    UBGraphicsWidgetItem *currentWidget = nullptr;
     bool pageDpiSpecified = true;
     saveSceneAfterLoading = false;
 
     mFileVersion = 40100; // default to 4.1.0
 
-    UBGraphicsStrokesGroup* strokesGroup = 0;
-    UBGraphicsStroke* currentStroke = 0;
+    UBGraphicsStrokesGroup* strokesGroup = nullptr;
+    UBGraphicsStroke* currentStroke = nullptr;
 
     while (!mXmlReader.atEnd())
     {
@@ -556,7 +556,7 @@ UBGraphicsScene* UBSvgSubsetAdaptor::UBSvgSubsetReader::loadScene(UBDocumentProx
             }
             else if (mXmlReader.name() == "polygon" || mXmlReader.name() == "line")
             {
-                UBGraphicsPolygonItem* polygonItem = 0;
+                UBGraphicsPolygonItem* polygonItem = nullptr;
 
                 QString parentId = mXmlReader.attributes().value(mNamespaceUri, "parent").toString();
 
@@ -836,7 +836,7 @@ UBGraphicsScene* UBSvgSubsetAdaptor::UBSvgSubsetReader::loadScene(UBDocumentProx
 
                         pdfItem->show();
 
-                        currentWidget = 0;
+                        currentWidget = nullptr;
                     }
                 }
                 else if (src.contains(".wdgt"))
@@ -874,7 +874,7 @@ UBGraphicsScene* UBSvgSubsetAdaptor::UBSvgSubsetReader::loadScene(UBDocumentProx
                 else if (type == "text")
                 {
                     UBGraphicsTextItem* textItem = textItemFromSvg();
-                    UBGraphicsTextItemDelegate *textDelegate = 0;
+                    UBGraphicsTextItemDelegate *textDelegate = nullptr;
 
                     if (textItem)
                         textDelegate = dynamic_cast<UBGraphicsTextItemDelegate*>(textItem->Delegate());
@@ -932,8 +932,8 @@ UBGraphicsScene* UBSvgSubsetAdaptor::UBSvgSubsetReader::loadScene(UBDocumentProx
                 mGroupHasInfo = false;
                 mGroupDarkBackgroundColor = QColor();
                 mGroupLightBackgroundColor = QColor();
-                strokesGroup = NULL;
-                currentStroke = NULL;
+                strokesGroup = nullptr;
+                currentStroke = nullptr;
             }
         }
     }
@@ -1066,7 +1066,7 @@ void UBSvgSubsetAdaptor::UBSvgSubsetReader::readGroupRoot()
 
 QGraphicsItem *UBSvgSubsetAdaptor::UBSvgSubsetReader::readElementFromGroup()
 {
-    QGraphicsItem *result = 0;
+    QGraphicsItem *result = nullptr;
     QString id = mXmlReader.attributes().value(aId).toString();
     QString uuid = id.right(QUuid().toString().size());
     result = mScene->itemForUuid(QUuid(uuid));
@@ -1178,7 +1178,7 @@ bool UBSvgSubsetAdaptor::UBSvgSubsetWriter::persistScene(UBDocumentProxy* proxy,
 
     qSort(items.begin(), items.end(), itemZIndexComp);
 
-    UBGraphicsStroke *openStroke = 0;
+    UBGraphicsStroke *openStroke = nullptr;
 
     bool groupHoldsInfo = false;
 
@@ -1194,7 +1194,7 @@ bool UBSvgSubsetAdaptor::UBSvgSubsetWriter::persistScene(UBDocumentProxy* proxy,
             if (openStroke && (currentStroke != openStroke))
             {
                 mXmlWriter.writeEndElement(); //g
-                openStroke = 0;
+                openStroke = nullptr;
                 groupHoldsInfo = false;
             }
 
@@ -1272,7 +1272,7 @@ bool UBSvgSubsetAdaptor::UBSvgSubsetWriter::persistScene(UBDocumentProxy* proxy,
         {
             mXmlWriter.writeEndElement(); //g
             groupHoldsInfo = false;
-            openStroke = 0;
+            openStroke = nullptr;
         }
 
         // Is the item a picture?
@@ -1398,7 +1398,7 @@ bool UBSvgSubsetAdaptor::UBSvgSubsetWriter::persistScene(UBDocumentProxy* proxy,
     {
         mXmlWriter.writeEndElement();
         groupHoldsInfo = false;
-        openStroke = 0;
+        openStroke = nullptr;
     }
 
     //writing group data
@@ -1785,7 +1785,7 @@ UBGraphicsPolygonItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::polygonItemFromLin
     else
     {
         qWarning() << "cannot make sense of 'line' value";
-        return 0;
+        return nullptr;
     }
 
     QStringRef strokeWidth = mXmlReader.attributes().value("stroke-width");
@@ -2015,7 +2015,7 @@ UBGraphicsPixmapItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::pixmapItemFromSvg()
     else
     {
         qWarning() << "cannot make sens of image href value";
-        return 0;
+        return nullptr;
     }
 
     graphicsItemFromSvg(pixmapItem);
@@ -2043,7 +2043,7 @@ void UBSvgSubsetAdaptor::UBSvgSubsetWriter::svgItemToLinkedSvg(UBGraphicsSvgItem
 
 UBGraphicsSvgItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::svgItemFromSvg()
 {
-    UBGraphicsSvgItem* svgItem = 0;
+    UBGraphicsSvgItem* svgItem = nullptr;
 
     QStringRef imageHref = mXmlReader.attributes().value(nsXLink, "href");
 
@@ -2056,7 +2056,7 @@ UBGraphicsSvgItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::svgItemFromSvg()
     else
     {
         qWarning() << "cannot make sens of image href value";
-        return 0;
+        return nullptr;
     }
 
     graphicsItemFromSvg(svgItem);
@@ -2101,14 +2101,14 @@ void UBSvgSubsetAdaptor::UBSvgSubsetWriter::pdfItemToLinkedPDF(UBGraphicsPDFItem
 
 UBGraphicsPDFItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::pdfItemFromPDF()
 {
-    UBGraphicsPDFItem* pdfItem = 0;
+    UBGraphicsPDFItem* pdfItem = nullptr;
 
     QString href = mXmlReader.attributes().value(nsXLink, "href").toString();
     QStringList parts = href.split("#page=");
     if (parts.count() != 2)
     {
         qWarning() << "invalid pdf href value" << href;
-        return 0;
+        return nullptr;
     }
 
     QString pdfPath = parts[0];
@@ -2176,7 +2176,7 @@ UBGraphicsMediaItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::audioItemFromSvg()
     if (audioHref.isNull())
     {
         qWarning() << "cannot make sens of video href value";
-        return 0;
+        return nullptr;
     }
 
     QString href = mDocumentPath + "/" + audioHref.toString();
@@ -2211,7 +2211,7 @@ UBGraphicsMediaItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::videoItemFromSvg()
     if (videoHref.isNull())
     {
         qWarning() << "cannot make sens of video href value";
-        return 0;
+        return nullptr;
     }
 
     QString href = mDocumentPath + "/" + videoHref.toString();
@@ -2505,7 +2505,7 @@ UBGraphicsAppleWidgetItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::graphicsAppleW
     if (widgetUrl.isNull())
     {
         qWarning() << "cannot make sens of widget src value";
-        return 0;
+        return nullptr;
     }
 
     QString href = widgetUrl.toString();
@@ -2531,7 +2531,7 @@ UBGraphicsW3CWidgetItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::graphicsW3CWidge
     if (widgetUrl.isNull())
     {
         qWarning() << "cannot make sens of widget src value";
-        return 0;
+        return nullptr;
     }
 
     QString href = widgetUrl.toString();
@@ -2643,8 +2643,8 @@ UBGraphicsTextItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::textItemFromSvg()
         if (mXmlReader.hasError())
         {
             delete textItem;
-            textItem = 0;
-            return 0;
+            textItem = nullptr;
+            return nullptr;
         }
 
         mXmlReader.readNext();
@@ -2683,7 +2683,7 @@ UBGraphicsTextItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::textItemFromSvg()
                     textItem->resize(width, height);
                     if (textItem->toPlainText().isEmpty()) {
                         delete textItem;
-                        textItem = 0;
+                        textItem = nullptr;
                     }
                     return textItem;
                 }
@@ -2754,7 +2754,7 @@ UBGraphicsTextItem* UBSvgSubsetAdaptor::UBSvgSubsetReader::textItemFromSvg()
 
     if (text.isEmpty()) {
         delete textItem;
-        textItem = 0;
+        textItem = nullptr;
     } else {
         textItem->setPlainText(text);
         textItem->resize(width, height);

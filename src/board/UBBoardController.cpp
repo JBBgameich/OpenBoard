@@ -92,15 +92,15 @@
 UBBoardController::UBBoardController(UBMainWindow* mainWindow)
     : UBDocumentContainer(mainWindow->centralWidget())
     , mMainWindow(mainWindow)
-    , mActiveScene(0)
+    , mActiveScene(nullptr)
     , mActiveSceneIndex(-1)
-    , mPaletteManager(0)
-    , mSoftwareUpdateDialog(0)
-    , mMessageWindow(0)
-    , mControlView(0)
-    , mDisplayView(0)
-    , mControlContainer(0)
-    , mControlLayout(0)
+    , mPaletteManager(nullptr)
+    , mSoftwareUpdateDialog(nullptr)
+    , mMessageWindow(nullptr)
+    , mControlView(nullptr)
+    , mDisplayView(nullptr)
+    , mControlContainer(nullptr)
+    , mControlLayout(nullptr)
     , mZoomFactor(1.0)
     , mIsClosing(false)
     , mSystemScaleFactor(1.0)
@@ -110,7 +110,7 @@ UBBoardController::UBBoardController(UBMainWindow* mainWindow)
     , mMovingSceneIndex(-1)
     , mActionGroupText(tr("Group"))
     , mActionUngroupText(tr("Ungroup"))
-    , mAutosaveTimer(0)
+    , mAutosaveTimer(nullptr)
 {
     mZoomFactor = UBSettings::settings()->boardZoomFactor->get().toDouble();
 
@@ -225,7 +225,7 @@ void UBBoardController::setupViews()
     // TODO UB 4.x Optimization do we have to create the display view even if their is
     // only 1 screen
     //
-    mDisplayView = new UBBoardView(this, UBItemLayerType::FixedBackground, UBItemLayerType::Tool, 0);
+    mDisplayView = new UBBoardView(this, UBItemLayerType::FixedBackground, UBItemLayerType::Tool, nullptr);
     mDisplayView->setInteractive(false);
     mDisplayView->setTransformationAnchor(QGraphicsView::NoAnchor);
 
@@ -599,11 +599,11 @@ void UBBoardController::duplicateScene()
 UBGraphicsItem *UBBoardController::duplicateItem(UBItem *item)
 {
     if (!item)
-        return NULL;
+        return nullptr;
 
-    UBGraphicsItem *retItem = NULL;
+    UBGraphicsItem *retItem = nullptr;
 
-    mLastCreatedItem = NULL;
+    mLastCreatedItem = nullptr;
 
     QUrl sourceUrl;
     QByteArray pData;
@@ -657,7 +657,7 @@ UBGraphicsItem *UBBoardController::duplicateItem(UBItem *item)
             {
                 sourceUrl = mitem->mediaFileUrl();
                 downloadURL(sourceUrl, srcFile, itemPos, QSize(itemSize.width(), itemSize.height()), false, false);
-                return NULL; // async operation
+                return nullptr; // async operation
             }
         }break;
 
@@ -686,7 +686,7 @@ UBGraphicsItem *UBBoardController::duplicateItem(UBItem *item)
     case UBMimeType::Group:
     {
         UBGraphicsGroupContainerItem* groupItem = dynamic_cast<UBGraphicsGroupContainerItem*>(item);
-        UBGraphicsGroupContainerItem* duplicatedGroup = NULL;
+        UBGraphicsGroupContainerItem* duplicatedGroup = nullptr;
 
         QList<QGraphicsItem*> duplicatedItems;
         QList<QGraphicsItem*> children = groupItem->childItems();
@@ -740,7 +740,7 @@ UBGraphicsItem *UBBoardController::duplicateItem(UBItem *item)
     {
         QGraphicsItem *graphicsRetItem = dynamic_cast<QGraphicsItem *>(retItem);
         if (mActiveScene->isURStackIsEnabled()) { //should be deleted after scene own undo stack implemented
-             UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(mActiveScene, 0, graphicsRetItem);
+             UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(mActiveScene, nullptr, graphicsRetItem);
              UBApplication::undoStack->push(uc);
         }
         return retItem;
@@ -1040,7 +1040,7 @@ void UBBoardController::downloadURL(const QUrl& url, QString contentSourceUrl, c
     qDebug() << "something has been dropped on the board! Url is: " << url.toString();
     QString sUrl = url.toString();
 
-    QGraphicsItem *oldBackgroundObject = NULL;
+    QGraphicsItem *oldBackgroundObject = nullptr;
     if (isBackground)
         oldBackgroundObject = mActiveScene->backgroundObject();
 
@@ -1138,7 +1138,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
     if (!pSuccess)
     {
         showMessage(tr("Downloading content %1 failed").arg(sourceUrl.toString()));
-        return NULL;
+        return nullptr;
     }
 
 
@@ -1163,7 +1163,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
             pix = QPixmap::fromImage(img);
         }
 
-        UBGraphicsPixmapItem* pixItem = mActiveScene->addPixmap(pix, NULL, pPos, 1.);
+        UBGraphicsPixmapItem* pixItem = mActiveScene->addPixmap(pix, nullptr, pPos, 1.);
         pixItem->setSourceUrl(sourceUrl);
 
         if (isBackground)
@@ -1250,7 +1250,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
     {
         qDebug() << "accepting mime type" << mimeType << "as video";
 
-        UBGraphicsMediaItem *mediaVideoItem = 0;
+        UBGraphicsMediaItem *mediaVideoItem = nullptr;
         QUuid uuid = QUuid::createUuid();
         if (pData.length() > 0)
         {
@@ -1264,7 +1264,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
             if (!b)
             {
                 showMessage(tr("Add file operation failed: file copying error"));
-                return NULL;
+                return nullptr;
             }
 
             QUrl url = QUrl::fromLocalFile(destFile);
@@ -1294,7 +1294,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
     {
         qDebug() << "accepting mime type" << mimeType << "as audio";
 
-        UBGraphicsMediaItem *audioMediaItem = 0;
+        UBGraphicsMediaItem *audioMediaItem = nullptr;
 
         QUuid uuid = QUuid::createUuid();
         if (pData.length() > 0)
@@ -1309,7 +1309,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
             if (!b)
             {
                 showMessage(tr("Add file operation failed: file copying error"));
-                return NULL;
+                return nullptr;
             }
 
             QUrl url = QUrl::fromLocalFile(destFile);
@@ -1347,7 +1347,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
             sUrl = sourceUrl.toLocalFile();
         }
 
-        QTemporaryFile* eduMediaFile = 0;
+        QTemporaryFile* eduMediaFile = nullptr;
 
         if (sUrl.toLower().contains("edumedia-sciences.com"))
         {
@@ -1524,7 +1524,7 @@ UBItem *UBBoardController::downloadFinished(bool pSuccess, QUrl sourceUrl, QUrl 
         qWarning() << "ignoring mime type" << pContentTypeHeader ;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void UBBoardController::setActiveDocumentScene(int pSceneIndex)
@@ -1688,7 +1688,7 @@ void UBBoardController::ClearUndoStack()
     while (itUniq.hasNext())
     {
         QGraphicsItem* item = itUniq.next();
-        UBGraphicsScene *scene = NULL;
+        UBGraphicsScene *scene = nullptr;
         if (item->scene()) {
             scene = dynamic_cast<UBGraphicsScene*>(item->scene());
         }
@@ -1702,7 +1702,7 @@ void UBBoardController::ClearUndoStack()
         {
             if (!mActiveScene->deleteItem(item)){
                 delete item;
-                item = 0;
+                item = nullptr;
             }
         }
     }
@@ -2203,7 +2203,7 @@ UBGraphicsMediaItem* UBBoardController::addVideo(const QUrl& pSourceUrl, bool st
         if (!b)
         {
             showMessage(tr("Add file operation failed: file copying error"));
-            return NULL;
+            return nullptr;
         }
         concreteUrl = QUrl::fromLocalFile(destFile);
     }// else we just use source Url.
@@ -2238,7 +2238,7 @@ UBGraphicsMediaItem* UBBoardController::addAudio(const QUrl& pSourceUrl, bool st
         if (!b)
         {
             showMessage(tr("Add file operation failed: file copying error"));
-            return NULL;
+            return nullptr;
         }
         concreteUrl = QUrl::fromLocalFile(destFile);
     }// else we just use source Url.
@@ -2257,13 +2257,13 @@ UBGraphicsMediaItem* UBBoardController::addAudio(const QUrl& pSourceUrl, bool st
 
 UBGraphicsWidgetItem *UBBoardController::addW3cWidget(const QUrl &pUrl, const QPointF &pos)
 {
-    UBGraphicsWidgetItem* w3cWidgetItem = 0;
+    UBGraphicsWidgetItem* w3cWidgetItem = nullptr;
 
     QUuid uuid = QUuid::createUuid();
 
     QString destPath;
     if (!UBPersistenceManager::persistenceManager()->addGraphicsWidgetToDocument(selectedDocument(), pUrl.toLocalFile(), uuid, destPath))
-        return NULL;
+        return nullptr;
     QUrl newUrl = QUrl::fromLocalFile(destPath);
 
     w3cWidgetItem = mActiveScene->addW3CWidget(newUrl, pos);
@@ -2406,7 +2406,7 @@ void UBBoardController::processMimeData(const QMimeData* pMimeData, const QPoint
             foreach(UBItem* item, items)
             {
                 QGraphicsItem* pItem = dynamic_cast<QGraphicsItem*>(item);
-                if(NULL != pItem){
+                if(nullptr != pItem){
                     duplicateItem(item);
                 }
             }
@@ -2457,7 +2457,7 @@ void UBBoardController::processMimeData(const QMimeData* pMimeData, const QPoint
         // validate that the image is really an image, webkit does not fill properly the image mime data
         if (pix.width() != 0 && pix.height() != 0)
         {
-            mActiveScene->addPixmap(pix, NULL, pPos, 1.);
+            mActiveScene->addPixmap(pix, nullptr, pPos, 1.);
             return;
         }
     }
@@ -2502,8 +2502,8 @@ void UBBoardController::togglePodcast(bool checked)
 void UBBoardController::moveGraphicsWidgetToControlView(UBGraphicsWidgetItem* graphicsWidget)
 {
     mActiveScene->setURStackEnable(false);
-     UBGraphicsItem *toolW3C = duplicateItem(dynamic_cast<UBItem *>(graphicsWidget));
-    UBGraphicsWidgetItem *copyedGraphicsWidget = NULL;
+    UBGraphicsItem *toolW3C = duplicateItem(dynamic_cast<UBItem *>(graphicsWidget));
+    UBGraphicsWidgetItem *copyedGraphicsWidget = nullptr;
 
     if (toolW3C)
     {
@@ -2581,7 +2581,7 @@ void UBBoardController::addItem()
 
     QString filename = QFileDialog::getOpenFileName(mControlContainer, tr("Add Item"),
                                                     defaultPath,
-                                                    tr("All Supported (%1)").arg(extensions), NULL, QFileDialog::DontUseNativeDialog);
+                                                    tr("All Supported (%1)").arg(extensions), nullptr, QFileDialog::DontUseNativeDialog);
 
     if (filename.length() > 0)
     {
@@ -2632,7 +2632,7 @@ void UBBoardController::freezeW3CWidget(QGraphicsItem *item, bool freeze)
     if(item->type() == UBGraphicsW3CWidgetItem::Type)
     {
         UBGraphicsW3CWidgetItem* item_casted = dynamic_cast<UBGraphicsW3CWidgetItem*>(item);
-        if (0 == item_casted)
+        if (nullptr == item_casted)
             return;
 
         if (freeze) {

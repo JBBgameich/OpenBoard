@@ -45,7 +45,7 @@ class UBGraphicsMediaItemDelegate :  public UBGraphicsItemDelegate
     Q_OBJECT
 
     public:
-        UBGraphicsMediaItemDelegate(UBGraphicsMediaItem* pDelegated, QObject * parent = 0);
+        UBGraphicsMediaItemDelegate(UBGraphicsMediaItem* pDelegated, QObject * parent = nullptr);
         ~UBGraphicsMediaItemDelegate() override;
 
         void positionHandles() override;

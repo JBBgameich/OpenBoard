@@ -87,7 +87,7 @@ class WBWebPage : public UBWebPage
         void loadingUrl(const QUrl &url);
 
     public:
-        WBWebPage(QObject *parent = 0);
+        WBWebPage(QObject *parent = nullptr);
         WBBrowserWindow *mainWindow();
 
     protected:
@@ -140,7 +140,7 @@ class WBWebView : public WBWebTrapWebView
     Q_OBJECT
 
     public:
-        WBWebView(QWidget *parent = 0);
+        WBWebView(QWidget *parent = nullptr);
         WBWebPage *webPage() const { return mPage; }
 
         void load(const QUrl &url);

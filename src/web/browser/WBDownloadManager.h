@@ -86,7 +86,7 @@ class WBDownloadItem : public QWidget, public Ui_DownloadItem
         void statusChanged();
 
     public:
-        WBDownloadItem(QNetworkReply *reply = 0, bool requestFileName = false, QWidget *parent = 0, QString customDownloadPath = QString());
+        WBDownloadItem(QNetworkReply *reply = nullptr, bool requestFileName = false, QWidget *parent = nullptr, QString customDownloadPath = QString());
         bool downloading() const;
         bool downloadedSuccessfully() const;
 
@@ -138,7 +138,7 @@ class WBDownloadManager : public QDialog, public Ui_DownloadDialog
             SuccessFullDownload
         };
 
-        WBDownloadManager(QWidget *parent = 0);
+        WBDownloadManager(QWidget *parent = nullptr);
         ~WBDownloadManager() override;
         int activeDownloads() const;
 
@@ -179,7 +179,7 @@ class WBDownloadModel : public QAbstractListModel
     Q_OBJECT
 
     public:
-        WBDownloadModel(WBDownloadManager *downloadManager, QObject *parent = 0);
+        WBDownloadModel(WBDownloadManager *downloadManager, QObject *parent = nullptr);
         QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;

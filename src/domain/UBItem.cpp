@@ -56,13 +56,13 @@ UBItem::~UBItem()
 
 UBGraphicsItem::~UBGraphicsItem()
 {
-    if (mDelegate!=NULL)
+    if (mDelegate!=nullptr)
         delete mDelegate;
 }
 
 void UBGraphicsItem::setDelegate(UBGraphicsItemDelegate* delegate)
 {
-    Q_ASSERT(mDelegate==NULL);
+    Q_ASSERT(mDelegate==nullptr);
     mDelegate = delegate;
 }
 
@@ -106,7 +106,7 @@ void UBGraphicsItem::remove(bool canUndo)
 
 UBGraphicsItemDelegate *UBGraphicsItem::Delegate(QGraphicsItem *pItem)
 {
-    UBGraphicsItemDelegate *result = 0;
+    UBGraphicsItemDelegate *result = nullptr;
 
     switch (static_cast<int>(pItem->type())) {
     case UBGraphicsPixmapItem::Type :

@@ -46,7 +46,7 @@ UBRubberBand::UBRubberBand(Shape s, QWidget * p)
     , mMouseIsPressed(false)
     , mLastPressedPoint(QPoint())
 {
-    customStyle = NULL;
+    customStyle = nullptr;
 
 #ifdef Q_OS_WIN
     customStyle = QStyleFactory::create("windows");

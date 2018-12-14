@@ -39,9 +39,9 @@
 QAtomicInt XPDFRenderer::sInstancesCount = 0;
 
 XPDFRenderer::XPDFRenderer(const QString &filename, bool importingFile)
-    : mDocument(0)
-    , mpSplashBitmap(0)
-    , mSplash(0)
+    : mDocument(nullptr)
+    , mpSplashBitmap(nullptr)
+    , mSplash(nullptr)
 {
     Q_UNUSED(importingFile);
     if (!globalParams)
@@ -51,12 +51,12 @@ XPDFRenderer::XPDFRenderer(const QString &filename, bool importingFile)
 #if POPPLER_VERSION_MAJOR > 0 || POPPLER_VERSION_MINOR >= 83
         globalParams = std::make_unique<GlobalParams>();
 #else
-        globalParams = new GlobalParams(0);
+        globalParams = new GlobalParams(nullptr);
 #endif
         globalParams->setupBaseFonts(QFile::encodeName(UBPlatformUtils::applicationResourcesDirectory() + "/" + "fonts").data());
     }
 
-    mDocument = new PDFDoc(new GooString(filename.toLocal8Bit()), 0, 0, 0); // the filename GString is deleted on PDFDoc desctruction
+    mDocument = new PDFDoc(new GooString(filename.toLocal8Bit()), nullptr, nullptr, nullptr); // the filename GString is deleted on PDFDoc desctruction
     sInstancesCount.ref();
 }
 
@@ -64,7 +64,7 @@ XPDFRenderer::~XPDFRenderer()
 {
     if(mSplash){
         delete mSplash;
-        mSplash = NULL;
+        mSplash = nullptr;
     }
 
     if (mDocument)
@@ -79,7 +79,7 @@ XPDFRenderer::~XPDFRenderer()
         globalParams.reset();
 #else
         delete globalParams;
-        globalParams = 0;
+        globalParams = nullptr;
 #endif
     }
 }

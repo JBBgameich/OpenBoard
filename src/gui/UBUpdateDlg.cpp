@@ -37,19 +37,19 @@
 
 UBUpdateDlg::UBUpdateDlg(QWidget *parent, int nbFiles, const QString& bkpPath)
     : QDialog(parent)
-    , mMainLayout(NULL)
-    , mNbFilesLabel(NULL)
-    , mBkpLabel(NULL)
-    , mBkpPath(NULL)
-    , mBrowseBttn(NULL)
-    , mpDlgBttn(NULL)
-    , mLayout(NULL)
-    , mHLayout(NULL)
-    , mStackedWidget(NULL)
-    , mDialogWidget(NULL)
-    , mProgressWidget(NULL)
-    , mProgressLayout(NULL)
-    , mProgressLabel(NULL)
+    , mMainLayout(nullptr)
+    , mNbFilesLabel(nullptr)
+    , mBkpLabel(nullptr)
+    , mBkpPath(nullptr)
+    , mBrowseBttn(nullptr)
+    , mpDlgBttn(nullptr)
+    , mLayout(nullptr)
+    , mHLayout(nullptr)
+    , mStackedWidget(nullptr)
+    , mDialogWidget(nullptr)
+    , mProgressWidget(nullptr)
+    , mProgressLayout(nullptr)
+    , mProgressLabel(nullptr)
 
 {
     mDialogWidget = new QWidget(this);
@@ -107,70 +107,70 @@ UBUpdateDlg::UBUpdateDlg(QWidget *parent, int nbFiles, const QString& bkpPath)
 
 UBUpdateDlg::~UBUpdateDlg()
 {
-    if (NULL != mpDlgBttn)
+    if (nullptr != mpDlgBttn)
     {
         delete mpDlgBttn;
-        mpDlgBttn = NULL;
+        mpDlgBttn = nullptr;
     }
 
     if (mNbFilesLabel) {
         delete mNbFilesLabel;
-        mNbFilesLabel = NULL;
+        mNbFilesLabel = nullptr;
     }
 
     if (mBkpLabel) {
         delete mBkpLabel;
-        mBkpLabel = NULL;
+        mBkpLabel = nullptr;
     }
 
     if (mBkpPath) {
         delete mBkpPath;
-        mBkpPath = NULL;
+        mBkpPath = nullptr;
     }
 
     if (mBrowseBttn) {
         delete mBrowseBttn;
-        mBrowseBttn = NULL;
+        mBrowseBttn = nullptr;
     }
 
     if (mProgressLabel) {
         delete mProgressLabel;
-        mProgressLabel = NULL;
+        mProgressLabel = nullptr;
     }
 
     if (mHLayout) {
         delete mHLayout;
-        mHLayout = NULL;
+        mHLayout = nullptr;
     }
 
     if (mLayout) {
         delete mLayout;
-        mLayout = NULL;
+        mLayout = nullptr;
     }
 
     if (mProgressLayout) {
         delete mProgressLayout;
-        mProgressLayout = NULL;
+        mProgressLayout = nullptr;
     }
 
     if (mDialogWidget) {
         delete mDialogWidget;
-        mDialogWidget = NULL;
+        mDialogWidget = nullptr;
     }
 
     if (mProgressWidget) {
         delete mProgressWidget;
-        mProgressWidget = NULL;
+        mProgressWidget = nullptr;
     }
 
     if (mStackedWidget) {
         delete mStackedWidget;
-        mStackedWidget = NULL;
+        mStackedWidget = nullptr;
     }
 
     if (mMainLayout) {
         delete mMainLayout;
-        mMainLayout = NULL;
+        mMainLayout = nullptr;
     }
 }
 

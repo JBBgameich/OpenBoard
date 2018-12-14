@@ -110,7 +110,7 @@ void UBImportImage::placeImportedItemToScene(UBGraphicsScene* scene, UBGraphicsI
 {
     UBGraphicsPixmapItem* pixmapItem = (UBGraphicsPixmapItem*)item;
 
-     UBGraphicsPixmapItem* sceneItem = scene->addPixmap(pixmapItem->pixmap(), NULL, QPointF(0, 0),1.0,false,true);
+     UBGraphicsPixmapItem* sceneItem = scene->addPixmap(pixmapItem->pixmap(), nullptr, QPointF(0, 0),1.0,false,true);
      scene->setAsBackgroundObject(sceneItem, true);
 
      // Only stored pixmap, should be deleted now

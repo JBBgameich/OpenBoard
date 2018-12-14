@@ -55,7 +55,7 @@ public:
     };
 
 public:
-    UBMagnifier(QWidget *parent = 0, bool isInteractive = false);
+    UBMagnifier(QWidget *parent = nullptr, bool isInteractive = false);
     ~UBMagnifier() override;
 
     void setSize(qreal percentFromScene);

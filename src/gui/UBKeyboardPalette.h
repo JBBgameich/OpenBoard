@@ -103,7 +103,7 @@ public:
 
     BTNImages *currBtnImages;
 
-    bool isEnabled(){return locales!= NULL;}
+    bool isEnabled(){return locales!= nullptr;}
     QSize  sizeHint () const override;
     void adjustSizeAndPosition(bool pUp = true) override;
     QString getKeyButtonSize() const {QString res; res.sprintf("%dx%d", btnWidth, btnHeight); return res;}

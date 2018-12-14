@@ -49,8 +49,8 @@ UBGraphicsMediaItemDelegate::UBGraphicsMediaItemDelegate(UBGraphicsMediaItem* pD
     : UBGraphicsItemDelegate(pDelegated, parent, GF_COMMON
                              | GF_RESPECT_RATIO
                              | GF_TOOLBAR_USED)
-    , mPlayPauseButton(NULL)
-    , mToolBarShowTimer(NULL)
+    , mPlayPauseButton(nullptr)
+    , mToolBarShowTimer(nullptr)
     , m_iToolBarShowingInterval(5000)
 {
     QPalette palette;
@@ -166,7 +166,7 @@ UBGraphicsMediaItemDelegate::~UBGraphicsMediaItemDelegate()
 {
     if (mToolBarShowTimer){
         delete mToolBarShowTimer;
-        mToolBarShowTimer = NULL;
+        mToolBarShowTimer = nullptr;
     }
 }
 

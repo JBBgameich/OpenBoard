@@ -41,7 +41,7 @@ class UBDrawingController : public QObject
     Q_OBJECT;
 
     private:
-        UBDrawingController(QObject * parent = 0);
+        UBDrawingController(QObject * parent = nullptr);
         ~UBDrawingController() override;
 
     public:

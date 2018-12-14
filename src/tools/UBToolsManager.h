@@ -94,7 +94,7 @@ class UBToolsManager : public QObject
         QString iconFromToolId(QString id) { return mToolsIcon.value(id);}
 
     private:
-        UBToolsManager(QObject *parent = 0);
+        UBToolsManager(QObject *parent = nullptr);
         ~UBToolsManager() override;
 
         static UBToolsManager* sManager;

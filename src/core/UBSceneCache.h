@@ -44,7 +44,7 @@ class UBSceneCacheID
     public:
 
         UBSceneCacheID()
-            : documentProxy(0)
+            : documentProxy(nullptr)
             , pageIndex(-1)
         {
             // NOOP

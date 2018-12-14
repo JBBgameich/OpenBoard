@@ -182,7 +182,7 @@ UBDocumentProxy* UBImportDocument::importFile(const QFile& pFile, const QString&
 
     if(!extractFileToDir(pFile, path, documentRootFolder)){
         UBApplication::showMessage(tr("Import of file %1 failed.").arg(fi.baseName()));
-        return NULL;
+        return nullptr;
     }
 
     UBDocumentProxy* newDocument = UBPersistenceManager::persistenceManager()->createDocumentFromDir(documentRootFolder, pGroup, "", false, false, true);

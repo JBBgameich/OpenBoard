@@ -38,7 +38,7 @@ class UBScreenMirror : public QWidget
     Q_OBJECT;
 
     public:
-        UBScreenMirror(QWidget* parent = 0);
+        UBScreenMirror(QWidget* parent = nullptr);
         ~UBScreenMirror() override;
 
         void paintEvent (QPaintEvent * event) override;
@@ -51,7 +51,7 @@ class UBScreenMirror : public QWidget
         void setSourceRect(const QRect& pRect)
         {
             mRect = pRect;
-            mSourceWidget = 0;
+            mSourceWidget = nullptr;
         }
 
         void start();

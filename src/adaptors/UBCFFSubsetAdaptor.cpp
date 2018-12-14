@@ -146,7 +146,7 @@ bool UBCFFSubsetAdaptor::ConvertCFFFileToUbz(QString &cffSourceFile, UBDocumentP
 }
 UBCFFSubsetAdaptor::UBCFFSubsetReader::UBCFFSubsetReader(UBDocumentProxy *proxy, QFile *content)
     : mProxy(proxy)
-    , mGSectionContainer(NULL)
+    , mGSectionContainer(nullptr)
 {
     int errorLine, errorColumn;
     QString errorStr;
@@ -201,7 +201,7 @@ bool UBCFFSubsetAdaptor::UBCFFSubsetReader::parseGSection(const QDomElement &ele
     {
         delete mGSectionContainer;
     }
-    mGSectionContainer = NULL;
+    mGSectionContainer = nullptr;
 
     return true;
 }
@@ -881,7 +881,7 @@ bool UBCFFSubsetAdaptor::UBCFFSubsetReader::parseSvgImage(const QDomElement &ele
         }
     }
 
-   UBGraphicsPixmapItem *pixItem = mCurrentScene->addPixmap(pix, NULL);
+   UBGraphicsPixmapItem *pixItem = mCurrentScene->addPixmap(pix, nullptr);
 
    QString uuid = QUuid::createUuid().toString();
    mRefToUuidMap.insert(element.attribute(aId), uuid);
@@ -1275,7 +1275,7 @@ bool UBCFFSubsetAdaptor::UBCFFSubsetReader::parseIwbElement(QDomElement &element
         if (isEditableItem)
             isEditable = strToBool(element.attribute(aEditable));
 
-        UBGraphicsItem *referedItem(0);
+        UBGraphicsItem *referedItem(nullptr);
         QHash<QString, UBGraphicsItem*>::iterator iReferedItem;
         iReferedItem = persistedItems.find(IDRef);
         if (iReferedItem != persistedItems.end()) {
@@ -1355,13 +1355,13 @@ bool UBCFFSubsetAdaptor::UBCFFSubsetReader::createNewScene()
 
 bool UBCFFSubsetAdaptor::UBCFFSubsetReader::persistCurrentScene()
 {
-    if (mCurrentScene != 0 && mCurrentScene->isModified())
+    if (mCurrentScene != nullptr && mCurrentScene->isModified())
     {
         UBThumbnailAdaptor::persistScene(mProxy, mCurrentScene, mProxy->pageCount() - 1);
         UBSvgSubsetAdaptor::persistScene(mProxy, mCurrentScene, mProxy->pageCount() - 1);
 
         mCurrentScene->setModified(false);
-        mCurrentScene = 0;
+        mCurrentScene = nullptr;
     }
     return true;
 }

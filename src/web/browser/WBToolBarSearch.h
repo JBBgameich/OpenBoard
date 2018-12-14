@@ -85,7 +85,7 @@ class WBToolbarSearch : public WBSearchLineEdit
         void search(const QUrl &url);
 
     public:
-        WBToolbarSearch(QWidget *parent = 0);
+        WBToolbarSearch(QWidget *parent = nullptr);
         ~WBToolbarSearch() override;
 
     public slots:

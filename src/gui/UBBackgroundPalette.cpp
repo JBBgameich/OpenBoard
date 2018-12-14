@@ -29,7 +29,7 @@ void UBBackgroundPalette::init()
     mButtonSize = QSize(32, 32);
     mIsClosable = false;
     mAutoClose = false;
-    mButtonGroup = 0;
+    mButtonGroup = nullptr;
     mToolButtonStyle = Qt::ToolButtonIconOnly;
     mButtons.clear();
 

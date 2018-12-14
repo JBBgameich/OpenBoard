@@ -42,7 +42,7 @@ class UBStartupHintsPalette : public UBFloatingPalette
 {
     Q_OBJECT;
 public:
-    UBStartupHintsPalette(QWidget *parent = 0);
+    UBStartupHintsPalette(QWidget *parent = nullptr);
     ~UBStartupHintsPalette() override;
 
 

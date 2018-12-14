@@ -47,7 +47,7 @@ class UBPageNavigationWidget : public UBDockPaletteWidget
 {
     Q_OBJECT
 public:
-    UBPageNavigationWidget(QWidget* parent=0, const char* name="UBPageNavigationWidget");
+    UBPageNavigationWidget(QWidget* parent=nullptr, const char* name="UBPageNavigationWidget");
     ~UBPageNavigationWidget() override;
 
     bool visibleInMode(eUBDockPaletteWidgetMode mode) override

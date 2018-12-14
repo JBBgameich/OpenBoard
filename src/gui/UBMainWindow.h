@@ -45,7 +45,7 @@ class UBMainWindow : public QMainWindow, public Ui::MainWindow
     Q_OBJECT
     public:
 
-        UBMainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+        UBMainWindow(QWidget *parent = nullptr, Qt::WindowFlags flags = nullptr);
         ~UBMainWindow() override;
 
         void addBoardWidget(QWidget *pWidget);
@@ -79,7 +79,7 @@ class UBMainWindow : public QMainWindow, public Ui::MainWindow
         QMenu* createPopupMenu () override
         {
             // no pop up on toolbar
-            return 0;
+            return nullptr;
         }
 
         QStackedLayout* mStackedLayout;

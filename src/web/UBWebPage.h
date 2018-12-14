@@ -42,7 +42,7 @@ class UBWebPage : public QWebPage
     Q_OBJECT;
 
     public:
-        UBWebPage(QObject *parent = 0);
+        UBWebPage(QObject *parent = nullptr);
         ~UBWebPage() override;
 
         void javaScriptConsoleMessage(const QString &message, int lineNumber, const QString &sourceID) override;

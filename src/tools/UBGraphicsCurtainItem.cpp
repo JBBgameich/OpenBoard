@@ -51,7 +51,7 @@ const QColor UBGraphicsCurtainItem::sDarkBackgroundOpaqueControlColor = QColor(6
 UBGraphicsCurtainItem::UBGraphicsCurtainItem(QGraphicsItem* parent)
     : QGraphicsRectItem(parent)
 {
-    UBGraphicsCurtainItemDelegate* delegate = new UBGraphicsCurtainItemDelegate(this, 0);
+    UBGraphicsCurtainItemDelegate* delegate = new UBGraphicsCurtainItemDelegate(this, nullptr);
     delegate->init();
     setDelegate(delegate);
 

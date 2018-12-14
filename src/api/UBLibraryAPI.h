@@ -39,7 +39,7 @@ class UBLibraryAPI : public QObject
     Q_OBJECT;
 
     public:
-        UBLibraryAPI(QWebView *pWebView = 0);
+        UBLibraryAPI(QWebView *pWebView = nullptr);
         ~UBLibraryAPI() override;
 
     public slots:

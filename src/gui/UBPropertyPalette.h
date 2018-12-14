@@ -39,8 +39,8 @@ class UBPropertyPalette : public UBActionPalette
 {
     Q_OBJECT
 public:
-    UBPropertyPalette(QWidget* parent=0, const char* name="propertyPalette");
-    UBPropertyPalette(Qt::Orientation orientation, QWidget* parent = 0);
+    UBPropertyPalette(QWidget* parent=nullptr, const char* name="propertyPalette");
+    UBPropertyPalette(Qt::Orientation orientation, QWidget* parent = nullptr);
     ~UBPropertyPalette() override;
 
 private slots:

@@ -77,7 +77,7 @@ class UBItem
 
         virtual UBGraphicsScene* scene() // TODO UB 4.x should be pure virtual ...
         {
-            return 0;
+            return nullptr;
         }
 
         virtual QUrl sourceUrl() const
@@ -103,7 +103,7 @@ class UBItem
 class UBGraphicsItem
 {
 protected:
-    UBGraphicsItem() : mDelegate(NULL)
+    UBGraphicsItem() : mDelegate(nullptr)
     {
         // NOOP
     }

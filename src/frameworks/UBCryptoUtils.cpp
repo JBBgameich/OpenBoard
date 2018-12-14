@@ -33,7 +33,7 @@
 
 #include "core/memcheck.h"
 
-UBCryptoUtils* UBCryptoUtils::sInstance(0);
+UBCryptoUtils* UBCryptoUtils::sInstance(nullptr);
 QString UBCryptoUtils::sAESKey("9ecHaspud9uD9ste5erAchehefrup3echej-caje6&thestawacuk=h#F3jet3aF");
 QString UBCryptoUtils::sAESSalt("6f0083e0-a90c-11de-ac21-0002a5d5c51b");
 
@@ -49,7 +49,7 @@ void UBCryptoUtils::destroy()
 {
     if (sInstance)
         delete sInstance;
-    sInstance = NULL;
+    sInstance = nullptr;
 }
 
 
@@ -79,7 +79,7 @@ QString UBCryptoUtils::symetricEncrypt(const QString& clear)
     unsigned char *ciphertext = (unsigned char *)malloc(cipheredLength);
 
 #if OPENSSL_VERSION_NUMBER >= 10100000L
-    if(!EVP_EncryptInit_ex(mAesEncryptContext, NULL, NULL, NULL, NULL)){
+    if(!EVP_EncryptInit_ex(mAesEncryptContext, nullptr, nullptr, nullptr, nullptr)){
 #else
     if(!EVP_EncryptInit_ex(&mAesEncryptContext, NULL, NULL, NULL, NULL)){
 #endif
@@ -123,7 +123,7 @@ QString UBCryptoUtils::symetricDecrypt(const QString& encrypted)
     unsigned char *plaintext = (unsigned char *)malloc(encryptedLength);
 
 #if OPENSSL_VERSION_NUMBER >= 10100000L
-    if(!EVP_DecryptInit_ex(mAesDecryptContext, NULL, NULL, NULL, NULL)){
+    if(!EVP_DecryptInit_ex(mAesDecryptContext, nullptr, nullptr, nullptr, nullptr)){
 #else
     if(!EVP_DecryptInit_ex(&mAesDecryptContext, NULL, NULL, NULL, NULL)){
 #endif
@@ -176,9 +176,9 @@ void UBCryptoUtils::aesInit()
 
 #if OPENSSL_VERSION_NUMBER >= 10100000L
     mAesEncryptContext = EVP_CIPHER_CTX_new();
-    EVP_EncryptInit_ex(mAesEncryptContext, EVP_aes_256_cbc(), NULL, key, iv);
+    EVP_EncryptInit_ex(mAesEncryptContext, EVP_aes_256_cbc(), nullptr, key, iv);
     mAesDecryptContext = EVP_CIPHER_CTX_new();
-    EVP_DecryptInit_ex(mAesDecryptContext, EVP_aes_256_cbc(), NULL, key, iv);
+    EVP_DecryptInit_ex(mAesDecryptContext, EVP_aes_256_cbc(), nullptr, key, iv);
 #else
     EVP_CIPHER_CTX_init(&mAesEncryptContext);
     EVP_EncryptInit_ex(&mAesEncryptContext, EVP_aes_256_cbc(), NULL, key, iv);

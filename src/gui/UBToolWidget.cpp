@@ -45,14 +45,14 @@
 #include "core/memcheck.h"
 
 
-QPixmap* UBToolWidget::sClosePixmap = 0;
-QPixmap* UBToolWidget::sUnpinPixmap = 0;
+QPixmap* UBToolWidget::sClosePixmap = nullptr;
+QPixmap* UBToolWidget::sUnpinPixmap = nullptr;
 
 
 UBToolWidget::UBToolWidget(const QUrl& pUrl, QWidget *pParent)
     : QWidget(pParent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint)
-    , mWebView(0)
-    , mToolWidget(0)
+    , mWebView(nullptr)
+    , mToolWidget(nullptr)
     , mShouldMoveWidget(false)
     , mContentMargin(0)
     , mFrameWidth(0)
@@ -71,7 +71,7 @@ UBToolWidget::UBToolWidget(const QUrl& pUrl, QWidget *pParent)
 
 UBToolWidget::UBToolWidget(UBGraphicsWidgetItem *pWidget, QWidget *pParent)
     : QWidget(pParent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint)
-    , mWebView(0)
+    , mWebView(nullptr)
     , mToolWidget(pWidget)
     , mShouldMoveWidget(false)
     , mContentMargin(0)
@@ -244,7 +244,7 @@ QPoint UBToolWidget::naturalCenter() const
 
 void UBToolWidget::remove()
 {
-    mToolWidget = NULL;
+    mToolWidget = nullptr;
     hide();
     deleteLater();
 }

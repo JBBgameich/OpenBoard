@@ -41,7 +41,7 @@ class UBWebPluginWidget : public QWidget
     Q_OBJECT
 
     public:
-        UBWebPluginWidget(const QUrl &url, QWidget *parent = 0);
+        UBWebPluginWidget(const QUrl &url, QWidget *parent = nullptr);
         ~UBWebPluginWidget() override;
 
         virtual QString title() const;

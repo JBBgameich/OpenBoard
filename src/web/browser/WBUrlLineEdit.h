@@ -86,7 +86,7 @@ class WBExLineEdit : public QWidget
     Q_OBJECT;
 
     public:
-        WBExLineEdit(QWidget *parent = 0);
+        WBExLineEdit(QWidget *parent = nullptr);
 
         inline QLineEdit *lineEdit() const { return mLineEdit; }
 
@@ -125,7 +125,7 @@ class WBUrlLineEdit : public WBExLineEdit
     Q_OBJECT;
 
     public:
-        WBUrlLineEdit(QWidget *parent = 0);
+        WBUrlLineEdit(QWidget *parent = nullptr);
         void setWebView(WBWebView *webView);
 
     protected:

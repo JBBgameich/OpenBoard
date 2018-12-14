@@ -39,7 +39,7 @@ class UBSetting : public QObject
     Q_OBJECT
 
     public:
-        UBSetting(UBSettings* parent = 0);
+        UBSetting(UBSettings* parent = nullptr);
         UBSetting(UBSettings* owner, const QString& pDomain, const QString& pKey,
                         const QVariant& pDefaultValue);
 
@@ -94,7 +94,7 @@ class UBColorListSetting : public UBSetting
     Q_OBJECT
 
     public:
-        UBColorListSetting(UBSettings* parent = 0);
+        UBColorListSetting(UBSettings* parent = nullptr);
 
         UBColorListSetting(UBSettings* owner, const QString& pDomain,
                 const QString& pKey, const QVariant& pDefaultValue, qreal pAlpha = 1.0);

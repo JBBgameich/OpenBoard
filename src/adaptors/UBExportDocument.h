@@ -44,7 +44,7 @@ class UBExportDocument : public UBExportAdaptor, public UBProcessingProgressList
     Q_OBJECT
 
     public:
-        UBExportDocument(QObject *parent = 0);
+        UBExportDocument(QObject *parent = nullptr);
         ~UBExportDocument() override;
 
         QString exportName() override;

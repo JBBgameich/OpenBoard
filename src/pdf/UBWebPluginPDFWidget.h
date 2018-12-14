@@ -40,7 +40,7 @@ class UBWebPluginPDFWidget : public UBWebPluginWidget
     Q_OBJECT
 
     public:
-        UBWebPluginPDFWidget(const QUrl &url, QWidget *parent = 0);
+        UBWebPluginPDFWidget(const QUrl &url, QWidget *parent = nullptr);
         ~UBWebPluginPDFWidget() override;
 
         QString title() const override;

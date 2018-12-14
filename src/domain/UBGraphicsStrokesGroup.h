@@ -46,7 +46,7 @@ public:
         , colorOnDarkBackground
     };
 
-    UBGraphicsStrokesGroup(QGraphicsItem* parent = 0);
+    UBGraphicsStrokesGroup(QGraphicsItem* parent = nullptr);
     ~UBGraphicsStrokesGroup() override;
     UBItem* deepCopy() const override;
     void copyItemParameters(UBItem *copy) const override;

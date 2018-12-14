@@ -146,7 +146,7 @@ struct KEYBT
             QIcon* _icon,
             KEYBT** _symbols)
             :fullName(_fullName),name(_name), id(_id), icon(_icon),
-                        constSymbols(NULL), varSymbols(_symbols)
+                        constSymbols(nullptr), varSymbols(_symbols)
         {}
         UBKeyboardLocale(const QString& _fullName,
             const QString& _name,
@@ -154,7 +154,7 @@ struct KEYBT
             QIcon* _icon,
             KEYBT _symbols[])
             :fullName(_fullName),name(_name),  id(_id), icon(_icon),
-                        constSymbols(_symbols), varSymbols(NULL)
+                        constSymbols(_symbols), varSymbols(nullptr)
         {}
 
         ~UBKeyboardLocale();
@@ -165,7 +165,7 @@ struct KEYBT
         QIcon* icon;
         KEYBT* operator[] (int index) const
         {
-            return (varSymbols==NULL)? constSymbols + index : varSymbols[index];
+            return (varSymbols==nullptr)? constSymbols + index : varSymbols[index];
         }
     private:
         KEYBT* constSymbols;

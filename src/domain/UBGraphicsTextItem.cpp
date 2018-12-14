@@ -51,7 +51,7 @@ UBGraphicsTextItem::UBGraphicsTextItem(QGraphicsItem * parent)
     , mLastMousePressTime(QTime::currentTime())
     , isActivatedTextEditor(true)
 {
-    setDelegate(new UBGraphicsTextItemDelegate(this, 0));
+    setDelegate(new UBGraphicsTextItemDelegate(this, nullptr));
 
     // TODO claudio remove this because in contrast with the fact the frame should be created on demand.
     Delegate()->createControls();

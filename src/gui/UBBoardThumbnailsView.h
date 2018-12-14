@@ -42,7 +42,7 @@ class UBBoardThumbnailsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    UBBoardThumbnailsView(QWidget* parent=0, const char* name="UBBoardThumbnailsView");
+    UBBoardThumbnailsView(QWidget* parent=nullptr, const char* name="UBBoardThumbnailsView");
 
 public slots:
     void ensureVisibleThumbnail(int index);

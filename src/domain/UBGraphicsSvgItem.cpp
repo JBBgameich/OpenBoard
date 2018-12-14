@@ -74,7 +74,7 @@ void UBGraphicsSvgItem::init()
 {
     setData(UBGraphicsItemData::ItemLayerType, UBItemLayerType::Object);
 
-    setDelegate(new UBGraphicsItemDelegate(this, 0, GF_COMMON
+    setDelegate(new UBGraphicsItemDelegate(this, nullptr, GF_COMMON
                                            | GF_RESPECT_RATIO
                                            | GF_REVOLVABLE));
     UBGraphicsFlags dfl = Delegate()->ubflags();

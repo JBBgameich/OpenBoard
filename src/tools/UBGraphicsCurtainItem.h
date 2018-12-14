@@ -45,7 +45,7 @@ class UBGraphicsCurtainItem : public QObject, public QGraphicsRectItem, public U
     Q_OBJECT
 
     public:
-        UBGraphicsCurtainItem(QGraphicsItem* parent = 0);
+        UBGraphicsCurtainItem(QGraphicsItem* parent = nullptr);
         ~UBGraphicsCurtainItem() override;
 
         enum { Type = UBGraphicsItemType::CurtainItemType };

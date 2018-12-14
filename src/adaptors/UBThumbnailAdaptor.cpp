@@ -98,7 +98,7 @@ const QPixmap* UBThumbnailAdaptor::get(UBDocumentProxy* proxy, int pageIndex)
     {
         //Warning. Works only with modified Qt
 #ifdef Q_OS_LINUX
-        pix->load(fileName, 0, Qt::AutoColor);
+        pix->load(fileName, nullptr, Qt::AutoColor);
 #else
         pix->load(fileName, 0, Qt::AutoColor);
 #endif
@@ -112,7 +112,7 @@ void UBThumbnailAdaptor::load(UBDocumentProxy* proxy, QList<const QPixmap*>& lis
 
     foreach(const QPixmap* pm, list){
         delete pm;
-        pm = NULL;
+        pm = nullptr;
     }
     list.clear();
     for(int i=0; i<proxy->pageCount(); i++)

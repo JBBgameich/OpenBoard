@@ -53,7 +53,7 @@ class UBGraphicsProxyWidget: public QGraphicsProxyWidget, public UBItem, public 
         void setUuid(const QUuid &pUuid) override;
 
     protected:
-        UBGraphicsProxyWidget(QGraphicsItem* parent = 0);
+        UBGraphicsProxyWidget(QGraphicsItem* parent = nullptr);
 
         void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

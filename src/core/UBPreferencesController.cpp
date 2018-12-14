@@ -74,12 +74,12 @@ void UBPreferencesDialog::closeEvent(QCloseEvent* e)
 
 UBPreferencesController::UBPreferencesController(QWidget *parent)
     : QObject(parent)
-    , mPreferencesWindow(0)
-    , mPreferencesUI(0)
-    , mPenProperties(0)
-    , mMarkerProperties(0)
-    , mDarkBackgroundGridColorPicker(0)
-    , mLightBackgroundGridColorPicker(0)
+    , mPreferencesWindow(nullptr)
+    , mPreferencesUI(nullptr)
+    , mPenProperties(nullptr)
+    , mMarkerProperties(nullptr)
+    , mDarkBackgroundGridColorPicker(nullptr)
+    , mLightBackgroundGridColorPicker(nullptr)
 {
     mDesktop = qApp->desktop();
     mPreferencesWindow = new UBPreferencesDialog(this,parent, Qt::Dialog);
@@ -507,7 +507,7 @@ void UBPreferencesController::widthSliderChanged(int value)
     qreal width = value / sSliderRatio;
 
     QObject *slider = sender();
-    UBCircleFrame* display = 0;
+    UBCircleFrame* display = nullptr;
 
     if (slider == mPenProperties->fineSlider)
     {

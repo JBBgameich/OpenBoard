@@ -46,7 +46,7 @@ class UBPodcastController : public QObject
     Q_OBJECT;
 
     private:
-        UBPodcastController(QObject* pParent = 0);
+        UBPodcastController(QObject* pParent = nullptr);
         ~UBPodcastController() override;
 
     public:

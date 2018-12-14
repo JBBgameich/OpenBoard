@@ -462,7 +462,7 @@ void UBGraphicsRuler::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     mCloseSvgItem->setVisible(mShowButtons);
     mResizeSvgItem->setVisible(mShowButtons);
     mRotateSvgItem->setVisible(mShowButtons);
-    UBDrawingController::drawingController()->mActiveRuler = NULL;
+    UBDrawingController::drawingController()->mActiveRuler = nullptr;
     event->accept();
     update();
 }

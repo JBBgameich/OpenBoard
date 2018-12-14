@@ -43,7 +43,7 @@ class UBCustomCaptureWindow : public QDialog
     Q_OBJECT;
 
     public:
-        UBCustomCaptureWindow(QWidget *parent = 0);
+        UBCustomCaptureWindow(QWidget *parent = nullptr);
         ~UBCustomCaptureWindow() override;
 
         // launch the custom capture window based on pSreenPixmap.

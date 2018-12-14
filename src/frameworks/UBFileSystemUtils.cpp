@@ -399,7 +399,7 @@ QString UBFileSystemUtils::lastPathComponent(const QString& path)
         lastPathComponent = lastPathComponent.right(lastPathComponent.length() - lastSeparatorIndex - 1);
     }
     else {
-        return 0;
+        return nullptr;
     }
 
     return lastPathComponent;

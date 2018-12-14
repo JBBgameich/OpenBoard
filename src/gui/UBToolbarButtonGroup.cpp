@@ -45,7 +45,7 @@ UBToolbarButtonGroup::UBToolbarButtonGroup(QToolBar *toolBar, const QList<QActio
     , mActions(actions)
     , mCurrentIndex(-1)
     , mDisplayLabel(true)
-    , mActionGroup(0)
+    , mActionGroup(nullptr)
 {
     Q_ASSERT(actions.size() > 0);
 

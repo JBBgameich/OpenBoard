@@ -60,7 +60,7 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
     Q_OBJECT
 
     public:
-        UBGraphicsWidgetItem(const QUrl &pWidgetUrl = QUrl(), QGraphicsItem *parent = 0);
+        UBGraphicsWidgetItem(const QUrl &pWidgetUrl = QUrl(), QGraphicsItem *parent = nullptr);
         ~UBGraphicsWidgetItem() override;
 
         enum { Type = UBGraphicsItemType::GraphicsWidgetItemType };
@@ -168,7 +168,7 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         virtual void injectInlineJavaScript();
         void wheelEvent(QGraphicsSceneWheelEvent *event) override;
         QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     protected slots:
         void geometryChangeRequested(const QRect& geom);
@@ -198,7 +198,7 @@ class UBGraphicsAppleWidgetItem : public UBGraphicsWidgetItem
     Q_OBJECT
 
     public:
-        UBGraphicsAppleWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = 0);
+        UBGraphicsAppleWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = nullptr);
         ~UBGraphicsAppleWidgetItem() override;
 
         void copyItemParameters(UBItem *copy) const override;
@@ -243,7 +243,7 @@ class UBGraphicsW3CWidgetItem : public UBGraphicsWidgetItem
                 QString version;
         };
 
-        UBGraphicsW3CWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = 0);
+        UBGraphicsW3CWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent = nullptr);
         ~UBGraphicsW3CWidgetItem() override;
 
         void setUuid(const QUuid &pUuid) override;

@@ -38,7 +38,7 @@ class UBDocumentContainer : public QObject
     Q_OBJECT
 
     public:
-        UBDocumentContainer(QObject * parent = 0);
+        UBDocumentContainer(QObject * parent = nullptr);
         ~UBDocumentContainer() override;
 
         void setDocument(UBDocumentProxy* document, bool forceReload = false);
@@ -52,7 +52,7 @@ class UBDocumentContainer : public QObject
                 return mDocumentThumbs[index];
             else
             {
-                return NULL;
+                return nullptr;
             }
         }
 

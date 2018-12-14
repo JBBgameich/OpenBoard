@@ -40,12 +40,12 @@ class UBNetworkAccessManager : public QNetworkAccessManager
 
         static UBNetworkAccessManager *defaultAccessManager();
 
-        UBNetworkAccessManager(QObject *parent = 0);
+        UBNetworkAccessManager(QObject *parent = nullptr);
 
         virtual QNetworkReply *get(const QNetworkRequest &request);
 
     protected:
-        QNetworkReply * createRequest ( Operation op, const QNetworkRequest & req, QIODevice * outgoingData = 0 ) override;
+        QNetworkReply * createRequest ( Operation op, const QNetworkRequest & req, QIODevice * outgoingData = nullptr ) override;
 
     private:
 

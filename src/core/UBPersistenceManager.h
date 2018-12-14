@@ -46,7 +46,7 @@ class UBPersistenceManager : public QObject
     Q_OBJECT
 
     private:
-        UBPersistenceManager(QObject *pParent = 0);
+        UBPersistenceManager(QObject *pParent = nullptr);
         static UBPersistenceManager* sSingleton;
 
     public:
@@ -144,7 +144,7 @@ class UBPersistenceManager : public QObject
         virtual void purgeEmptyDocuments();
 
         bool addGraphicsWidgetToDocument(UBDocumentProxy *mDocumentProxy, QString path, QUuid objectUuid, QString& destinationPath);
-        bool addFileToDocument(UBDocumentProxy* pDocumentProxy, QString path, const QString& subdir,  QUuid objectUuid, QString& destinationPath, QByteArray* data = NULL);
+        bool addFileToDocument(UBDocumentProxy* pDocumentProxy, QString path, const QString& subdir,  QUuid objectUuid, QString& destinationPath, QByteArray* data = nullptr);
 
         bool mayHaveVideo(UBDocumentProxy* pDocumentProxy);
         bool mayHaveAudio(UBDocumentProxy* pDocumentProxy);

@@ -50,7 +50,7 @@ static const QString mimeSankoreFeatureTypes = "Sankore/featureTypes";
 
 UBFeaturesWidget::UBFeaturesWidget(QWidget *parent, const char *name)
     : UBDockPaletteWidget(parent)
-    , imageGatherer(NULL)
+    , imageGatherer(nullptr)
 {
     setObjectName(name);
     mName = "FeaturesWidget";
@@ -114,7 +114,7 @@ UBFeaturesWidget::UBFeaturesWidget(QWidget *parent, const char *name)
 
 UBFeaturesWidget::~UBFeaturesWidget()
 {
-    if (NULL != imageGatherer)
+    if (nullptr != imageGatherer)
         delete imageGatherer;
 }
 
@@ -463,7 +463,7 @@ void UBFeaturesListView::thumbnailSizeChanged( int value )
 }
 
 UBFeaturesNavigatorWidget::UBFeaturesNavigatorWidget(QWidget *parent, const char *name) :
-    QWidget(parent), mListView(0), mListSlider(0)
+    QWidget(parent), mListView(nullptr), mListSlider(nullptr)
 
 {
     name = "UBFeaturesNavigatorWidget";
@@ -706,9 +706,9 @@ void UBFeaturesNewFolderDialog::reactOnTextChanged(const QString &pStr)
 
 UBFeaturesProgressInfo::UBFeaturesProgressInfo(QWidget *parent) :
     QWidget(parent),
-    mProgressBar(0),
-    mCommonInfoLabel(0),
-    mDetailedInfoLabel(0)
+    mProgressBar(nullptr),
+    mCommonInfoLabel(nullptr),
+    mDetailedInfoLabel(nullptr)
 {
     QVBoxLayout *mainLayer = new QVBoxLayout(this);
 
@@ -763,10 +763,10 @@ void UBFeaturesProgressInfo::sendFeature(UBFeature pFeature)
 
 
 UBFeaturesWebView::UBFeaturesWebView(QWidget* parent, const char* name):QWidget(parent)
-    , mpView(NULL)
-    , mpWebSettings(NULL)
-    , mpLayout(NULL)
-    , mpSankoreAPI(NULL)
+    , mpView(nullptr)
+    , mpWebSettings(nullptr)
+    , mpLayout(nullptr)
+    , mpSankoreAPI(nullptr)
 {
     setObjectName(name);
 
@@ -798,20 +798,20 @@ UBFeaturesWebView::UBFeaturesWebView(QWidget* parent, const char* name):QWidget(
 
 UBFeaturesWebView::~UBFeaturesWebView()
 {
-    if( NULL != mpSankoreAPI )
+    if( nullptr != mpSankoreAPI )
     {
         delete mpSankoreAPI;
-        mpSankoreAPI = NULL;
+        mpSankoreAPI = nullptr;
     }
-    if( NULL != mpView )
+    if( nullptr != mpView )
     {
         delete mpView;
-        mpView = NULL;
+        mpView = nullptr;
     }
-    if( NULL != mpLayout )
+    if( nullptr != mpLayout )
     {
         delete mpLayout;
-        mpLayout = NULL;
+        mpLayout = nullptr;
     }
 }
 
@@ -856,22 +856,22 @@ void UBFeaturesWebView::showElement(const UBFeature &elem)
 
 void UBFeaturesWebView::onLoadFinished(bool ok)
 {
-    if(ok && NULL != mpSankoreAPI){
+    if(ok && nullptr != mpSankoreAPI){
         mpView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
     }
 }
 
 
 UBFeatureProperties::UBFeatureProperties( QWidget *parent, const char *name ) : QWidget(parent)
-    , mpLayout(NULL)
-    , mpButtonLayout(NULL)
-    , mpAddPageButton(NULL)
-    , mpAddToLibButton(NULL)
-    , mpObjInfoLabel(NULL)
-    , mpObjInfos(NULL)
-    , mpThumbnail(NULL)
-    , mpOrigPixmap(NULL)
-    , mpElement(NULL)
+    , mpLayout(nullptr)
+    , mpButtonLayout(nullptr)
+    , mpAddPageButton(nullptr)
+    , mpAddToLibButton(nullptr)
+    , mpObjInfoLabel(nullptr)
+    , mpObjInfos(nullptr)
+    , mpThumbnail(nullptr)
+    , mpOrigPixmap(nullptr)
+    , mpElement(nullptr)
 {
     setObjectName(name);
 
@@ -927,42 +927,42 @@ UBFeatureProperties::~UBFeatureProperties()
     if ( mpOrigPixmap )
     {
         delete mpOrigPixmap;
-        mpOrigPixmap = NULL;
+        mpOrigPixmap = nullptr;
     }
     if ( mpElement )
     {
         delete mpElement;
-        mpElement = NULL;
+        mpElement = nullptr;
     }
     if ( mpThumbnail )
     {
         delete mpThumbnail;
-        mpThumbnail = NULL;
+        mpThumbnail = nullptr;
     }
     if ( mpButtonLayout )
     {
         delete mpButtonLayout;
-        mpButtonLayout = NULL;
+        mpButtonLayout = nullptr;
     }
     if ( mpAddPageButton )
     {
         delete mpAddPageButton;
-        mpAddPageButton = NULL;
+        mpAddPageButton = nullptr;
     }
     if ( mpAddToLibButton )
     {
         delete mpAddToLibButton;
-        mpAddToLibButton = NULL;
+        mpAddToLibButton = nullptr;
     }
     if ( mpObjInfoLabel )
     {
         delete mpObjInfoLabel;
-        mpObjInfoLabel = NULL;
+        mpObjInfoLabel = nullptr;
     }
     if ( mpObjInfos )
     {
         delete mpObjInfos;
-        mpObjInfos = NULL;
+        mpObjInfos = nullptr;
     }
 }
 
@@ -1003,7 +1003,7 @@ void UBFeatureProperties::setThumbnail(const QPixmap &pix)
 
 void UBFeatureProperties::adaptSize()
 {
-    if( NULL != mpOrigPixmap )
+    if( nullptr != mpOrigPixmap )
     {
         if( width() < THUMBNAIL_WIDTH + 40 )
         {
@@ -1021,12 +1021,12 @@ void UBFeatureProperties::showElement(const UBFeature &elem)
     if ( mpOrigPixmap )
     {
         delete mpOrigPixmap;
-        mpOrigPixmap = NULL;
+        mpOrigPixmap = nullptr;
     }
     if ( mpElement )
     {
         delete mpElement;
-        mpElement = NULL;
+        mpElement = nullptr;
     }
     mpElement = new UBFeature(elem);
     mpOrigPixmap = new QPixmap(QPixmap::fromImage(elem.getThumbnail()));
@@ -1045,7 +1045,7 @@ void UBFeatureProperties::showElement(const UBFeature &elem)
 
 void UBFeatureProperties::populateMetadata()
 {
-    if(NULL != mpObjInfos){
+    if(nullptr != mpObjInfos){
         mpObjInfos->clear();
         QMap<QString, QString> metas = mpElement->getMetadata();
         QList<QString> lKeys = metas.keys();
@@ -1493,6 +1493,6 @@ UBFeaturesPathItemDelegate::~UBFeaturesPathItemDelegate()
     if ( arrowPixmap )
     {
         delete arrowPixmap;
-        arrowPixmap = NULL;
+        arrowPixmap = nullptr;
     }
 }

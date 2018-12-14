@@ -71,34 +71,34 @@
 
 #include "core/memcheck.h"
 
-UBPodcastController* UBPodcastController::sInstance = 0;
+UBPodcastController* UBPodcastController::sInstance = nullptr;
 
 unsigned int UBPodcastController::sBackgroundColor = 0x00000000;  // BBGGRRAA
 
 
 UBPodcastController::UBPodcastController(QObject* pParent)
     : QObject(pParent)
-    , mVideoEncoder(0)
+    , mVideoEncoder(nullptr)
     , mIsGrabbing(false)
     , mInitialized(false)
     , mVideoFramesPerSecondAtStart(10)
     , mVideoFrameSizeAtStart(1024, 768)
     , mVideoBitsPerSecondAtStart(1700000)
-    , mSourceWidget(0)
-    , mSourceScene(0)
+    , mSourceWidget(nullptr)
+    , mSourceScene(nullptr)
     , mScreenGrabingTimerEventID(0)
     , mRecordingProgressTimerEventID(0)
-    , mRecordingPalette(0)
+    , mRecordingPalette(nullptr)
     , mRecordingState(Stopped)
     , mApplicationIsClosing(false)
     , mRecordingTimestampOffset(0)
-    , mDefaultAudioInputDeviceAction(0)
-    , mNoAudioInputDeviceAction(0)
-    , mSmallVideoSizeAction(0)
-    , mMediumVideoSizeAction(0)
-    , mFullVideoSizeAction(0)
-    , mYoutubePublicationAction(0)
-    , mIntranetPublicationAction(0)
+    , mDefaultAudioInputDeviceAction(nullptr)
+    , mNoAudioInputDeviceAction(nullptr)
+    , mSmallVideoSizeAction(nullptr)
+    , mMediumVideoSizeAction(nullptr)
+    , mFullVideoSizeAction(nullptr)
+    , mYoutubePublicationAction(nullptr)
+    , mIntranetPublicationAction(nullptr)
 {
     connect(UBApplication::applicationController, SIGNAL(mainModeChanged(UBApplicationController::MainMode)),
             this, SLOT(applicationMainModeChanged(UBApplicationController::MainMode)));
@@ -237,7 +237,7 @@ void UBPodcastController::setSourceWidget(QWidget* pWidget)
                 disconnect(UBApplication::boardController, SIGNAL(backgroundChanged()), this, SLOT(sceneBackgroundChanged()));
                 disconnect(UBApplication::boardController, SIGNAL(controlViewportChanged()), this, SLOT(activeSceneChanged()));
 
-                mSourceScene = 0;
+                mSourceScene = nullptr;
 
                 startNextChapter();
 

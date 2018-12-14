@@ -53,10 +53,10 @@
 
 UBTrapFlashController::UBTrapFlashController(QWidget* parent)
     : QObject(parent)
-    , mTrapFlashUi(0)
-    , mTrapFlashDialog(0)
+    , mTrapFlashUi(nullptr)
+    , mTrapFlashDialog(nullptr)
     , mParentWidget(parent)
-    , mCurrentWebFrame(0)
+    , mCurrentWebFrame(nullptr)
 {
     // NOOP
 }

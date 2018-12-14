@@ -70,12 +70,12 @@
 
 QPointer<QUndoStack> UBApplication::undoStack;
 
-UBApplicationController* UBApplication::applicationController = 0;
-UBBoardController* UBApplication::boardController = 0;
-UBWebController* UBApplication::webController = 0;
-UBDocumentController* UBApplication::documentController = 0;
+UBApplicationController* UBApplication::applicationController = nullptr;
+UBBoardController* UBApplication::boardController = nullptr;
+UBWebController* UBApplication::webController = nullptr;
+UBDocumentController* UBApplication::documentController = nullptr;
 
-UBMainWindow* UBApplication::mainWindow = 0;
+UBMainWindow* UBApplication::mainWindow = nullptr;
 
 const QString UBApplication::mimeTypeUniboardDocument = QString("application/vnd.mnemis-uniboard-document");
 const QString UBApplication::mimeTypeUniboardPage = QString("application/vnd.mnemis-uniboard-page");
@@ -86,16 +86,16 @@ const QString UBApplication::mimeTypeUniboardPageThumbnail = QString("applicatio
 bool bIsMinimized = false;
 #endif
 
-QObject* UBApplication::staticMemoryCleaner = 0;
+QObject* UBApplication::staticMemoryCleaner = nullptr;
 
 
 UBApplication::UBApplication(const QString &id, int &argc, char **argv) : QtSingleApplication(id, argc, argv)
-  , mPreferencesController(NULL)
-  , mApplicationTranslator(NULL)
-  , mQtGuiTranslator(NULL)
+  , mPreferencesController(nullptr)
+  , mApplicationTranslator(nullptr)
+  , mQtGuiTranslator(nullptr)
 {
 
-    staticMemoryCleaner = new QObject(0); // deleted in UBApplication destructor
+    staticMemoryCleaner = new QObject(nullptr); // deleted in UBApplication destructor
 
     setOrganizationName("Open Education Foundation");
     setOrganizationDomain("oe-f.org");
@@ -154,7 +154,7 @@ UBApplication::~UBApplication()
     UBFileSystemUtils::deleteAllTempDirCreatedDuringSession();
 
     delete mainWindow;
-    mainWindow = 0;
+    mainWindow = nullptr;
 
     UBPersistenceManager::destroy();
 
@@ -168,17 +168,17 @@ UBApplication::~UBApplication()
 
     UBToolsManager::destroy();
 
-    if(mApplicationTranslator != NULL){
+    if(mApplicationTranslator != nullptr){
         delete mApplicationTranslator;
-        mApplicationTranslator = NULL;
+        mApplicationTranslator = nullptr;
     }
-    if(mQtGuiTranslator!=NULL){
+    if(mQtGuiTranslator!=nullptr){
         delete mQtGuiTranslator;
-        mQtGuiTranslator = NULL;
+        mQtGuiTranslator = nullptr;
     }
 
     delete staticMemoryCleaner;
-    staticMemoryCleaner = 0;
+    staticMemoryCleaner = nullptr;
 }
 
 QString UBApplication::checkLanguageAvailabilityForSankore(QString &language)
@@ -278,7 +278,7 @@ int UBApplication::exec(const QString& pFileToImport)
     gs->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
 
 
-    mainWindow = new UBMainWindow(0, Qt::FramelessWindowHint); // deleted by application destructor
+    mainWindow = new UBMainWindow(nullptr, Qt::FramelessWindowHint); // deleted by application destructor
     mainWindow->setAttribute(Qt::WA_NativeWindow, true);
 
     mainWindow->actionCopy->setShortcuts(QKeySequence::Copy);
@@ -632,10 +632,10 @@ void UBApplication::cleanup()
     if (webController) delete webController;
     if (documentController) delete documentController;
 
-    applicationController = NULL;
-    boardController = NULL;
-    webController = NULL;
-    documentController = NULL;
+    applicationController = nullptr;
+    boardController = nullptr;
+    webController = nullptr;
+    documentController = nullptr;
 }
 
 QString UBApplication::urlFromHtml(QString html)

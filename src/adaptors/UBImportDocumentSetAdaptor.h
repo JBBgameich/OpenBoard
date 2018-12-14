@@ -38,7 +38,7 @@ class UBImportDocumentSetAdaptor : public UBImportAdaptor
     Q_OBJECT
 
     public:
-        UBImportDocumentSetAdaptor(QObject *parent = 0);
+        UBImportDocumentSetAdaptor(QObject *parent = nullptr);
         ~UBImportDocumentSetAdaptor() override;
 
         QStringList supportedExtentions() override;

@@ -70,10 +70,10 @@
 UBWebController::UBWebController(UBMainWindow* mainWindow)
     : QObject(mainWindow->centralWidget())
     , mMainWindow(mainWindow)
-    , mCurrentWebBrowser(0)
-    , mBrowserWidget(0)
-    , mTrapFlashController(0)
-    , mToolsCurrentPalette(0)
+    , mCurrentWebBrowser(nullptr)
+    , mBrowserWidget(nullptr)
+    , mTrapFlashController(nullptr)
+    , mToolsCurrentPalette(nullptr)
     , mToolsPalettePositionned(false)
     , mDownloadViewIsVisible(false)
 {
@@ -446,7 +446,7 @@ void UBWebController::captureoEmbed()
 
 void UBWebController::lookForEmbedContent(QString* pHtml, QString tag, QString attribute, QList<QUrl> *pList)
 {
-    if(NULL != pHtml && NULL != pList){
+    if(nullptr != pHtml && nullptr != pList){
         QVector<QString> urlsFound;
         // Check for <embed> content
         QRegExp exp(QString("<%0(.*)").arg(tag));
@@ -479,7 +479,7 @@ void UBWebController::getEmbeddableContent()
     // Get the source code of the page
     if(mCurrentWebBrowser){
         QNetworkAccessManager* pNam = mCurrentWebBrowser->currentTabWebView()->webPage()->networkAccessManager();
-        if(NULL != pNam){
+        if(nullptr != pNam){
             QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->mainFrame()->toHtml();
             mOEmbedParser.setNetworkAccessManager(pNam);
 

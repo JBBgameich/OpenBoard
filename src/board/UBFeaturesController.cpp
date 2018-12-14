@@ -310,7 +310,7 @@ bool UBFeature::inTrash() const
 
 UBFeaturesController::UBFeaturesController(QWidget *pParentWidget) :
     QObject(pParentWidget)
-    ,featuresList(0)
+    ,featuresList(nullptr)
     ,mLastItemOffsetIndex(0)
 {
     //Initializing physical directories from UBSettings
@@ -960,7 +960,7 @@ void UBFeaturesController::siftElements(const QString &pSiftValue)
 UBFeature UBFeaturesController::getFeature(const QModelIndex &index, const QString &listName)
 {
 //    QSortFilterProxyModel *model = qobject_cast<QSortFilterProxyModel *>(pOnView->model());
-    QAbstractItemModel *model = 0;
+    QAbstractItemModel *model = nullptr;
     if (listName == UBFeaturesWidget::objNamePathList) {
         model = featuresPathModel;
     } else if (listName == UBFeaturesWidget::objNameFeatureList) {

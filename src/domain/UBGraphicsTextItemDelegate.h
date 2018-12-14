@@ -52,7 +52,7 @@ public:
         , k_mixed
     };
 
-    AlignTextButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = 0, Qt::WindowFrameSection section = Qt::TopLeftSection);
+    AlignTextButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = nullptr, Qt::WindowFrameSection section = Qt::TopLeftSection);
     ~AlignTextButton() override;
 
     void setKind(int pKind);
@@ -83,7 +83,7 @@ private:
             break;
         }
 
-        return 0;
+        return nullptr;
     }
 
     QSvgRenderer *curRnd() {return rndFromKind(mKind);}
@@ -108,7 +108,7 @@ class UBGraphicsTextItemDelegate : public UBGraphicsItemDelegate
     };
 
     public:
-        UBGraphicsTextItemDelegate(UBGraphicsTextItem* pDelegated, QObject * parent = 0);
+        UBGraphicsTextItemDelegate(UBGraphicsTextItem* pDelegated, QObject * parent = nullptr);
         ~UBGraphicsTextItemDelegate() override;
         bool isEditable();
         void scaleTextSize(qreal multiplyer);

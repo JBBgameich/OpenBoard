@@ -49,7 +49,7 @@
 UBGraphicsPixmapItem::UBGraphicsPixmapItem(QGraphicsItem* parent)
     : QGraphicsPixmapItem(parent)
 {
-    setDelegate(new UBGraphicsItemDelegate(this, 0, GF_COMMON
+    setDelegate(new UBGraphicsItemDelegate(this, nullptr, GF_COMMON
                                            | GF_FLIPPABLE_ALL_AXIS
                                            | GF_REVOLVABLE
                                            | GF_RESPECT_RATIO

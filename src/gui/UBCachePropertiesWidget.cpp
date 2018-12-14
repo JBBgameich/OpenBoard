@@ -45,23 +45,23 @@
 static QVector<UBGraphicsCache*> mCaches;
 
 UBCachePropertiesWidget::UBCachePropertiesWidget(QWidget *parent, const char *name):UBDockPaletteWidget(parent)
-  , mpLayout(NULL)
-  , mpCachePropertiesLabel(NULL)
-  , mpColorLabel(NULL)
-  , mpShapeLabel(NULL)
-  , mpSizeLabel(NULL)
-  , mpColor(NULL)
-  , mpSquareButton(NULL)
-  , mpCircleButton(NULL)
-  , mpCloseButton(NULL)
-  , mpSizeSlider(NULL)
-  , mpColorLayout(NULL)
-  , mpShapeLayout(NULL)
-  , mpSizeLayout(NULL)
-  , mpCloseLayout(NULL)
-  , mpProperties(NULL)
-  , mpPropertiesLayout(NULL)
-  , mpCurrentCache(NULL)
+  , mpLayout(nullptr)
+  , mpCachePropertiesLabel(nullptr)
+  , mpColorLabel(nullptr)
+  , mpShapeLabel(nullptr)
+  , mpSizeLabel(nullptr)
+  , mpColor(nullptr)
+  , mpSquareButton(nullptr)
+  , mpCircleButton(nullptr)
+  , mpCloseButton(nullptr)
+  , mpSizeSlider(nullptr)
+  , mpColorLayout(nullptr)
+  , mpShapeLayout(nullptr)
+  , mpSizeLayout(nullptr)
+  , mpCloseLayout(nullptr)
+  , mpProperties(nullptr)
+  , mpPropertiesLayout(nullptr)
+  , mpCurrentCache(nullptr)
 {
     setObjectName(name);
 
@@ -154,85 +154,85 @@ UBCachePropertiesWidget::UBCachePropertiesWidget(QWidget *parent, const char *na
 
 UBCachePropertiesWidget::~UBCachePropertiesWidget()
 {
-    if(NULL != mpCachePropertiesLabel)
+    if(nullptr != mpCachePropertiesLabel)
     {
         delete mpCachePropertiesLabel;
-        mpCachePropertiesLabel = NULL;
+        mpCachePropertiesLabel = nullptr;
     }
-    if(NULL != mpColorLabel)
+    if(nullptr != mpColorLabel)
     {
         delete mpColorLabel;
-        mpColorLabel = NULL;
+        mpColorLabel = nullptr;
     }
-    if(NULL != mpShapeLabel)
+    if(nullptr != mpShapeLabel)
     {
         delete mpShapeLabel;
-        mpShapeLabel = NULL;
+        mpShapeLabel = nullptr;
     }
-    if(NULL != mpSizeLabel)
+    if(nullptr != mpSizeLabel)
     {
         delete mpSizeLabel;
-        mpSizeLabel = NULL;
+        mpSizeLabel = nullptr;
     }
-    if(NULL != mpColor)
+    if(nullptr != mpColor)
     {
         delete mpColor;
-        mpColor = NULL;
+        mpColor = nullptr;
     }
-    if(NULL != mpSquareButton)
+    if(nullptr != mpSquareButton)
     {
         delete mpSquareButton;
-        mpSquareButton = NULL;
+        mpSquareButton = nullptr;
     }
-    if(NULL != mpCircleButton)
+    if(nullptr != mpCircleButton)
     {
         delete mpCircleButton;
-        mpCircleButton = NULL;
+        mpCircleButton = nullptr;
     }
-    if(NULL != mpCloseButton)
+    if(nullptr != mpCloseButton)
     {
         delete mpCloseButton;
-        mpCloseButton = NULL;
+        mpCloseButton = nullptr;
     }
-    if(NULL != mpSizeSlider)
+    if(nullptr != mpSizeSlider)
     {
         delete mpSizeSlider;
-        mpSizeSlider = NULL;
+        mpSizeSlider = nullptr;
     }
-    if(NULL != mpColorLayout)
+    if(nullptr != mpColorLayout)
     {
         delete mpColorLayout;
-        mpColorLayout = NULL;
+        mpColorLayout = nullptr;
     }
-    if(NULL != mpShapeLayout)
+    if(nullptr != mpShapeLayout)
     {
         delete mpShapeLayout;
-        mpShapeLayout = NULL;
+        mpShapeLayout = nullptr;
     }
-    if(NULL != mpSizeLayout)
+    if(nullptr != mpSizeLayout)
     {
         delete mpSizeLayout;
-        mpSizeLayout = NULL;
+        mpSizeLayout = nullptr;
     }
-    if(NULL != mpCloseLayout)
+    if(nullptr != mpCloseLayout)
     {
         delete mpCloseLayout;
-        mpCloseLayout = NULL;
+        mpCloseLayout = nullptr;
     }
-    if(NULL != mpPropertiesLayout)
+    if(nullptr != mpPropertiesLayout)
     {
         delete mpPropertiesLayout;
-        mpPropertiesLayout = NULL;
+        mpPropertiesLayout = nullptr;
     }
-    if(NULL != mpProperties)
+    if(nullptr != mpProperties)
     {
         delete mpProperties;
-        mpProperties = NULL;
+        mpProperties = nullptr;
     }
-    if(NULL != mpLayout)
+    if(nullptr != mpLayout)
     {
         delete mpLayout;
-        mpLayout = NULL;
+        mpLayout = nullptr;
     }
 }
 
@@ -245,7 +245,7 @@ void UBCachePropertiesWidget::onCloseClicked()
 
         // Remove the cache from the board
         UBApplication::boardController->activeScene()->removeItem(mpCurrentCache);
-        mpCurrentCache = NULL;
+        mpCurrentCache = nullptr;
 
         emit hideTab(this);
     }
@@ -269,7 +269,7 @@ void UBCachePropertiesWidget::updateCacheColor(QColor color)
 
     mpColor->setIcon(QIcon(pix));
 
-    if(NULL != mpCurrentCache)
+    if(nullptr != mpCurrentCache)
     {
         mpCurrentCache->setMaskColor(mActualColor);
     }
@@ -295,7 +295,7 @@ void UBCachePropertiesWidget::updateShapeButtons()
         mpCircleButton->setChecked(false);
     }
 
-    if(NULL != mpCurrentCache)
+    if(nullptr != mpCurrentCache)
     {
         mpCurrentCache->setMaskShape(mActualShape);
     }
@@ -305,7 +305,7 @@ void UBCachePropertiesWidget::updateCurrentCache()
 {
     bool isBoardMode = false;
     // this widget can work only on Board mode
-    if( UBApplication::applicationController != NULL )
+    if( UBApplication::applicationController != nullptr )
     {
         // if app controller is available, and current mode is Board, and no show desktop, than all ok, just process
         if( UBApplication::applicationController->displayMode() == UBApplicationController::Board &&
@@ -327,7 +327,7 @@ void UBCachePropertiesWidget::updateCurrentCache()
                 setEnabled(true);
                 emit showTab(this);
                 mpCurrentCache = dynamic_cast<UBGraphicsCache*>(it);
-                if((NULL != mpCurrentCache) && (!mCaches.contains(mpCurrentCache)))
+                if((nullptr != mpCurrentCache) && (!mCaches.contains(mpCurrentCache)))
                 {
                     mCaches.append(mpCurrentCache);
                 }
@@ -357,13 +357,13 @@ void UBCachePropertiesWidget::updateCurrentCache()
     // 2 - we are not in Board mode
     // 3 - we are in Board mode, but show desktop (as really - Desktop mode)
     emit hideTab(this);
-    mpCurrentCache = NULL;
+    mpCurrentCache = nullptr;
     setDisabled(true);
 }
 
 void UBCachePropertiesWidget::onSizeChanged(int newSize)
 {
-    if(NULL != mpCurrentCache)
+    if(nullptr != mpCurrentCache)
     {
         mpCurrentCache->setShapeWidth(newSize);
     }

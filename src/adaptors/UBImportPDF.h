@@ -40,7 +40,7 @@ class UBImportPDF : public UBPageBasedImportAdaptor
     Q_OBJECT;
 
     public:
-        UBImportPDF(QObject *parent = 0);
+        UBImportPDF(QObject *parent = nullptr);
         ~UBImportPDF() override;
 
         QStringList supportedExtentions() override;

@@ -47,7 +47,7 @@ class UBCachePropertiesWidget : public UBDockPaletteWidget
 {
     Q_OBJECT
 public:
-    UBCachePropertiesWidget(QWidget* parent=0, const char* name="UBCachePropertiesWidget");
+    UBCachePropertiesWidget(QWidget* parent=nullptr, const char* name="UBCachePropertiesWidget");
     ~UBCachePropertiesWidget() override;
 
     bool visibleInMode(eUBDockPaletteWidgetMode mode) override

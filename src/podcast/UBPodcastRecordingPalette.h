@@ -43,7 +43,7 @@ class UBPodcastRecordingPalette : public UBActionPalette
     Q_OBJECT;
 
     public:
-        UBPodcastRecordingPalette(QWidget *parent = 0);
+        UBPodcastRecordingPalette(QWidget *parent = nullptr);
         ~UBPodcastRecordingPalette() override;
 
     public slots:

@@ -86,7 +86,7 @@ QVariant UBGraphicsProxyWidget::itemChange(GraphicsItemChange change, const QVar
         {
             if(scene()->activeWindow() == this)
             {
-                scene()->setActiveWindow(0);
+                scene()->setActiveWindow(nullptr);
             }
         }
     }

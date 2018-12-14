@@ -45,7 +45,7 @@
 UBScreenMirror::UBScreenMirror(QWidget* parent)
     : QWidget(parent)
     , mScreenIndex(0)
-    , mSourceWidget(0)
+    , mSourceWidget(nullptr)
     , mTimerID(0)
 {
     // NOOP

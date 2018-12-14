@@ -47,7 +47,7 @@ class UBGraphicsCurtainItemDelegate : public UBGraphicsItemDelegate
     Q_OBJECT;
 
     public:
-        UBGraphicsCurtainItemDelegate(UBGraphicsCurtainItem* pDelegated, QObject * parent = 0);
+        UBGraphicsCurtainItemDelegate(UBGraphicsCurtainItem* pDelegated, QObject * parent = nullptr);
         ~UBGraphicsCurtainItemDelegate() override;
 
         bool mousePressEvent(QGraphicsSceneMouseEvent *event) override;

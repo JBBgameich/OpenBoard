@@ -47,7 +47,7 @@
 
 UBIntranetPodcastPublisher::UBIntranetPodcastPublisher(QObject* pParent)
     : QObject(pParent)
-    , mPublishingRequest(0)
+    , mPublishingRequest(nullptr)
 {
     // NOOP
 }

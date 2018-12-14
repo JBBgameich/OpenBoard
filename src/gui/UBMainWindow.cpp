@@ -46,10 +46,10 @@
 
 UBMainWindow::UBMainWindow(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags)
-    , mBoardWidget(0)
-    , mWebWidget(0)
-    , mDocumentsWidget(0)
-    , mpDownloadWidget(NULL)
+    , mBoardWidget(nullptr)
+    , mWebWidget(nullptr)
+    , mDocumentsWidget(nullptr)
+    , mpDownloadWidget(nullptr)
 {
     Ui::MainWindow::setupUi(this);
 
@@ -80,10 +80,10 @@ UBMainWindow::UBMainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 UBMainWindow::~UBMainWindow()
 {
-    if(NULL != mpDownloadWidget)
+    if(nullptr != mpDownloadWidget)
     {
         delete mpDownloadWidget;
-        mpDownloadWidget = NULL;
+        mpDownloadWidget = nullptr;
     }
 }
 
@@ -238,7 +238,7 @@ void UBMainWindow::information(QString windowTitle, QString text)
 
 void UBMainWindow::showDownloadWidget()
 {
-    if(NULL != mpDownloadWidget)
+    if(nullptr != mpDownloadWidget)
     {
         mpDownloadWidget->show();
     }
@@ -246,7 +246,7 @@ void UBMainWindow::showDownloadWidget()
 
 void UBMainWindow::hideDownloadWidget()
 {
-    if(NULL != mpDownloadWidget)
+    if(nullptr != mpDownloadWidget)
     {
         mpDownloadWidget->hide();
     }

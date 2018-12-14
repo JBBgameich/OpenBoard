@@ -51,9 +51,9 @@ UBGraphicsProtractor::UBGraphicsProtractor()
         , mSpan(180)
         , mStartAngle(0)
         , mScaleFactor(1)
-        , mResetSvgItem(0)
-        , mResizeSvgItem(0)
-        , mMarkerSvgItem(0)
+        , mResetSvgItem(nullptr)
+        , mResizeSvgItem(nullptr)
+        , mMarkerSvgItem(nullptr)
 {
     sFillTransparency = 127;
     sDrawTransparency = 192;

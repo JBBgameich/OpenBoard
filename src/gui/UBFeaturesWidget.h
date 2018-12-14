@@ -86,7 +86,7 @@ class UBFeaturesWidget : public UBDockPaletteWidget
 {
     Q_OBJECT
 public:
-    UBFeaturesWidget(QWidget* parent=0, const char* name="UBFeaturesWidget");
+    UBFeaturesWidget(QWidget* parent=nullptr, const char* name="UBFeaturesWidget");
     ~UBFeaturesWidget() override;
 
     bool visibleInMode(eUBDockPaletteWidgetMode mode) override
@@ -161,7 +161,7 @@ class UBFeaturesListView : public QListView
     Q_OBJECT
 
 public:
-    UBFeaturesListView( QWidget* parent=0, const char* name="UBFeaturesListView" );
+    UBFeaturesListView( QWidget* parent=nullptr, const char* name="UBFeaturesListView" );
     ~UBFeaturesListView() override {;}
 
 protected:
@@ -212,7 +212,7 @@ public:
         Modal
     };
 
-    UBFeaturesCentralWidget(QWidget *parent = 0);
+    UBFeaturesCentralWidget(QWidget *parent = nullptr);
     void setSliderPosition(int pValue) {mNavigator->setSliderPosition(pValue);}
 
     UBFeaturesListView *listView() {return mNavigator->listView();}
@@ -259,7 +259,7 @@ class UBFeaturesNewFolderDialog : public QWidget
     Q_OBJECT
 
 public:
-    UBFeaturesNewFolderDialog(QWidget *parent = 0);
+    UBFeaturesNewFolderDialog(QWidget *parent = nullptr);
     void setRegexp(const QRegExp pRegExp);
     bool validString(const QString &pStr);
 
@@ -287,7 +287,7 @@ class UBFeaturesProgressInfo: public QWidget {
     Q_OBJECT
 
 public:
-    UBFeaturesProgressInfo(QWidget *parent = 0);
+    UBFeaturesProgressInfo(QWidget *parent = nullptr);
 
 private slots:
     void setCommmonInfoText(const QString &str);
@@ -308,7 +308,7 @@ class UBFeaturesWebView : public QWidget
 {
     Q_OBJECT
 public:
-    UBFeaturesWebView(QWidget* parent = 0, const char* name = "UBFeaturesWebView");
+    UBFeaturesWebView(QWidget* parent = nullptr, const char* name = "UBFeaturesWebView");
     ~UBFeaturesWebView() override;
 
     void showElement(const UBFeature &elem);
@@ -328,7 +328,7 @@ class UBFeatureProperties : public QWidget
 {
     Q_OBJECT
 public:
-    UBFeatureProperties(QWidget* parent=0, const char* name="UBFeatureProperties");
+    UBFeatureProperties(QWidget* parent=nullptr, const char* name="UBFeatureProperties");
     ~UBFeatureProperties() override;
 
     void showElement(const UBFeature &elem);
@@ -367,7 +367,7 @@ private:
 class UBFeatureItemButton : public QPushButton
 {
 public:
-    UBFeatureItemButton(QWidget* parent=0, const char* name="UBFeatureItemButton");
+    UBFeatureItemButton(QWidget* parent=nullptr, const char* name="UBFeatureItemButton");
     ~UBFeatureItemButton() override;
 };
 
@@ -379,7 +379,7 @@ signals:
     void dataRestructured();
 
 public:
-    UBFeaturesModel(QList<UBFeature> *pFeaturesList, QObject *parent = 0) : QAbstractListModel(parent), featuresList(pFeaturesList) {;}
+    UBFeaturesModel(QList<UBFeature> *pFeaturesList, QObject *parent = nullptr) : QAbstractListModel(parent), featuresList(pFeaturesList) {;}
     ~UBFeaturesModel() override{;}
 
     void deleteFavoriteItem( const QString &path );
@@ -414,7 +414,7 @@ class UBFeaturesProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    UBFeaturesProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent) {;}
+    UBFeaturesProxyModel(QObject *parent = nullptr) : QSortFilterProxyModel(parent) {;}
     ~UBFeaturesProxyModel() override {}
 protected:
     bool filterAcceptsRow ( int sourceRow, const QModelIndex & sourceParent ) const override;
@@ -424,7 +424,7 @@ class UBFeaturesSearchProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    UBFeaturesSearchProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent), mFilterPrefix() {;}
+    UBFeaturesSearchProxyModel(QObject *parent = nullptr) : QSortFilterProxyModel(parent), mFilterPrefix() {;}
     ~UBFeaturesSearchProxyModel() override {}
     void setFilterPrefix(const QString &newPrefix) {mFilterPrefix = newPrefix;}
 protected:
@@ -437,7 +437,7 @@ class UBFeaturesPathProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    UBFeaturesPathProxyModel(QObject *parent = 0) : QSortFilterProxyModel(parent) {;}
+    UBFeaturesPathProxyModel(QObject *parent = nullptr) : QSortFilterProxyModel(parent) {;}
     ~UBFeaturesPathProxyModel() override {}
     void setPath( const QString &p ) { path = p; }
 protected:
@@ -450,7 +450,7 @@ class UBFeaturesItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    UBFeaturesItemDelegate(QObject *parent = 0, const QListView *lw = 0) : QStyledItemDelegate(parent) { listView = lw; }
+    UBFeaturesItemDelegate(QObject *parent = nullptr, const QListView *lw = nullptr) : QStyledItemDelegate(parent) { listView = lw; }
     ~UBFeaturesItemDelegate() override {}
     //UBFeaturesItemDelegate(const QListView *lw = 0) { listView = lw; };
     //void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -464,7 +464,7 @@ class UBFeaturesPathItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    UBFeaturesPathItemDelegate(QObject *parent = 0);
+    UBFeaturesPathItemDelegate(QObject *parent = nullptr);
     ~UBFeaturesPathItemDelegate() override;
     QString    displayText ( const QVariant & value, const QLocale & locale ) const override;
     void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;

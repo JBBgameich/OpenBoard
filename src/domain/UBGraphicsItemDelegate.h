@@ -60,7 +60,7 @@ class DelegateButton: public QGraphicsSvgItem
     Q_OBJECT
 
     public:
-        DelegateButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = 0, Qt::WindowFrameSection section = Qt::TopLeftSection);
+        DelegateButton(const QString & fileName, QGraphicsItem* pDelegated, QGraphicsItem * parent = nullptr, Qt::WindowFrameSection section = Qt::TopLeftSection);
 
         ~DelegateButton() override;
 
@@ -117,7 +117,7 @@ private slots:
 class MediaTimer: public QGraphicsRectItem
 {
 public:
-    MediaTimer(QGraphicsItem * parent = 0);
+    MediaTimer(QGraphicsItem * parent = nullptr);
     ~MediaTimer() override;
 
     void positionHandles();
@@ -130,7 +130,7 @@ public:
 private:
 
     static const char* getSegments(char);
-    void drawString(const QString& s, QPainter &, QBitArray * = 0, bool = true);
+    void drawString(const QString& s, QPainter &, QBitArray * = nullptr, bool = true);
     void drawDigit(const QPoint &, QPainter &, int, char, char = ' ');
     void drawSegment(const QPoint &, char, QPainter &, int, bool = false);
     void addPoint(QPolygon&, const QPoint&);
@@ -161,7 +161,7 @@ class DelegateMediaControl: public QObject, public QGraphicsRectItem
 
     public:
 
-        DelegateMediaControl(UBGraphicsMediaItem* pDelegated, QGraphicsItem * parent = 0);
+        DelegateMediaControl(UBGraphicsMediaItem* pDelegated, QGraphicsItem * parent = nullptr);
 
         ~DelegateMediaControl() override
         {
@@ -209,7 +209,7 @@ class DelegateMediaControl: public QObject, public QGraphicsRectItem
 class UBGraphicsToolBarItem : public QGraphicsRectItem, public QObject
 {
     public:
-        UBGraphicsToolBarItem(QGraphicsItem * parent = 0);
+        UBGraphicsToolBarItem(QGraphicsItem * parent = nullptr);
         ~UBGraphicsToolBarItem() override {;}
 
         bool isVisibleOnBoard() const { return mVisible; }
@@ -241,7 +241,7 @@ class UBGraphicsItemDelegate : public QObject
     Q_OBJECT
 
     public:
-    UBGraphicsItemDelegate(QGraphicsItem* pDelegated, QObject * parent = 0, UBGraphicsFlags fls = 0);
+    UBGraphicsItemDelegate(QGraphicsItem* pDelegated, QObject * parent = nullptr, UBGraphicsFlags fls = nullptr);
 
         ~UBGraphicsItemDelegate() override;
 

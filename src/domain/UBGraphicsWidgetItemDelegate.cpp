@@ -44,10 +44,10 @@
 #include "core/memcheck.h"
 
 UBGraphicsWidgetItemDelegate::UBGraphicsWidgetItemDelegate(UBGraphicsWidgetItem* pDelegated, int widgetType)
-    : UBGraphicsItemDelegate(pDelegated, 0, GF_COMMON
+    : UBGraphicsItemDelegate(pDelegated, nullptr, GF_COMMON
                              | GF_RESPECT_RATIO)
-    , freezeAction(0)
-    , setAsToolAction(0)
+    , freezeAction(nullptr)
+    , setAsToolAction(nullptr)
 {
     mWidgetType = widgetType;
 }

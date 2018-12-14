@@ -65,7 +65,7 @@ class UBDocumentManager : public QObject
         void documentUpdated(UBDocumentProxy *pDocument);
 
     private:
-        UBDocumentManager(QObject *parent = 0);
+        UBDocumentManager(QObject *parent = nullptr);
         QList<UBExportAdaptor*> mExportAdaptors;
         QList<UBImportAdaptor*> mImportAdaptors;
 

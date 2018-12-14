@@ -39,7 +39,7 @@ class UBGraphicsGroupContainerItem : public QGraphicsItem, public UBItem, public
 {
 
 public:
-    UBGraphicsGroupContainerItem (QGraphicsItem *parent = 0);
+    UBGraphicsGroupContainerItem (QGraphicsItem *parent = nullptr);
     ~UBGraphicsGroupContainerItem() override;
 
     void addToGroup(QGraphicsItem *item);

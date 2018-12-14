@@ -44,10 +44,10 @@ class UBActionPalette : public UBFloatingPalette
     Q_OBJECT;
 
     public:
-        UBActionPalette(QList<QAction*> actions, Qt::Orientation orientation = Qt::Vertical, QWidget* parent = 0);
-        UBActionPalette(Qt::Orientation orientation, QWidget* parent = 0);
-        UBActionPalette(Qt::Corner corner, QWidget* parent = 0, Qt::Orientation orient = Qt::Vertical);
-        UBActionPalette(QWidget* parent = 0);
+        UBActionPalette(QList<QAction*> actions, Qt::Orientation orientation = Qt::Vertical, QWidget* parent = nullptr);
+        UBActionPalette(Qt::Orientation orientation, QWidget* parent = nullptr);
+        UBActionPalette(Qt::Corner corner, QWidget* parent = nullptr, Qt::Orientation orient = Qt::Vertical);
+        UBActionPalette(QWidget* parent = nullptr);
 
         ~UBActionPalette() override;
 
@@ -116,7 +116,7 @@ class UBActionPaletteButton : public QToolButton
     Q_OBJECT
 
     public:
-        UBActionPaletteButton(QAction* action, QWidget * parent = 0);
+        UBActionPaletteButton(QAction* action, QWidget * parent = nullptr);
         ~UBActionPaletteButton() override;
 
     signals:

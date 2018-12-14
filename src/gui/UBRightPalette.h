@@ -36,7 +36,7 @@ class UBRightPalette : public UBDockPalette
 {
     Q_OBJECT
 public:
-    UBRightPalette(QWidget* parent=0, const char* name="UBRightPalette");
+    UBRightPalette(QWidget* parent=nullptr, const char* name="UBRightPalette");
     ~UBRightPalette() override;
     bool switchMode(eUBDockPaletteWidgetMode mode);
 

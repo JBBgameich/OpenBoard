@@ -84,9 +84,9 @@ UBApplicationController::UBApplicationController(UBBoardView *pControlView,
     , mMainWindow(pMainWindow)
     , mControlView(pControlView)
     , mDisplayView(pDisplayView)
-    , mMirror(0)
+    , mMirror(nullptr)
     , mMainMode(Board)
-    , mDisplayManager(0)
+    , mDisplayManager(nullptr)
     , mAutomaticCheckForUpdates(false)
     , mCheckingForUpdates(false)
     , mIsShowingDesktop(false)
@@ -104,12 +104,12 @@ UBApplicationController::UBApplicationController(UBBoardView *pControlView,
 
     for(int i = 0; i < mDisplayManager->numPreviousViews(); i++)
     {
-        UBBoardView *previousView = new UBBoardView(UBApplication::boardController, UBItemLayerType::FixedBackground, UBItemLayerType::Tool, 0);
+        UBBoardView *previousView = new UBBoardView(UBApplication::boardController, UBItemLayerType::FixedBackground, UBItemLayerType::Tool, nullptr);
         previousView->setInteractive(false);
         mPreviousViews.append(previousView);
     }
 
-    mBlackScene = new UBGraphicsScene(0); // deleted by UBApplicationController::destructor
+    mBlackScene = new UBGraphicsScene(nullptr); // deleted by UBApplicationController::destructor
     mBlackScene->setBackground(true, UBPageBackground::plain);
 
     if (mDisplayManager->numScreens() >= 2 && mDisplayManager->useMultiScreen())
@@ -136,7 +136,7 @@ UBApplicationController::~UBApplicationController()
     delete mMirror;
 
     delete(mOpenSankoreImporter);
-    mOpenSankoreImporter = NULL;
+    mOpenSankoreImporter = nullptr;
 }
 
 
@@ -178,7 +178,7 @@ void UBApplicationController::screenLayoutChanged()
        UBApplication::boardController->setBoxing(QRect());
     }
 
-    adjustPreviousViews(0, 0);
+    adjustPreviousViews(0, nullptr);
 }
 
 
@@ -686,13 +686,13 @@ void UBApplicationController::importFile(const QString& pFilePath)
     if (!fileToOpen.exists())
         return;
 
-    UBDocumentProxy* document = 0;
+    UBDocumentProxy* document = nullptr;
 
     bool success = false;
 
     document = UBDocumentManager::documentManager()->importFile(fileToOpen, "");
 
-    success = (document != 0);
+    success = (document != nullptr);
 
     if (success && document)
     {
@@ -718,7 +718,7 @@ void UBApplicationController::useMultiScreen(bool use)
         mMirror = new UBScreenMirror();
     if (!use && mMirror) {
         delete mMirror;
-        mMirror = NULL;
+        mMirror = nullptr;
     }
 
     mDisplayManager->setUseMultiScreen(use);

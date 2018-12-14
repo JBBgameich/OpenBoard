@@ -904,7 +904,7 @@ void UBGraphicsTriangle::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     mVFlipSvgItem->setVisible(false);
     mHFlipSvgItem->setVisible(false);
     mRotateSvgItem->setVisible(false);
-    UBDrawingController::drawingController()->mActiveRuler = NULL;
+    UBDrawingController::drawingController()->mActiveRuler = nullptr;
     event->accept();
     update();
 }

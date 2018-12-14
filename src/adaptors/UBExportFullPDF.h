@@ -41,7 +41,7 @@ class UBExportFullPDF : public UBExportAdaptor
     Q_OBJECT;
 
     public:
-        UBExportFullPDF(QObject *parent = 0);
+        UBExportFullPDF(QObject *parent = nullptr);
         ~UBExportFullPDF() override;
 
         QString exportName() override;

@@ -46,7 +46,7 @@ class UBDocumentNavigator : public QGraphicsView
 {
     Q_OBJECT
 public:
-    UBDocumentNavigator(QWidget* parent=0, const char* name="documentNavigator");
+    UBDocumentNavigator(QWidget* parent=nullptr, const char* name="documentNavigator");
     ~UBDocumentNavigator() override;
 
     void setNbColumns(int nbColumns);

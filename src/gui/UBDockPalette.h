@@ -77,7 +77,7 @@ class UBTabDockPalette : public QWidget
 
 public:
 
-    UBTabDockPalette(UBDockPalette *dockPalette, QWidget *parent = 0);
+    UBTabDockPalette(UBDockPalette *dockPalette, QWidget *parent = nullptr);
     ~UBTabDockPalette() override;
 
 protected:
@@ -106,7 +106,7 @@ class UBDockPalette : public QWidget
     friend class UBTabDockPalette;
 
 public:
-    UBDockPalette(eUBDockPaletteType paletteType, QWidget* parent=0, const char* name="UBDockPalette");
+    UBDockPalette(eUBDockPaletteType paletteType, QWidget* parent=nullptr, const char* name="UBDockPalette");
     ~UBDockPalette() override;
 
     eUBDockOrientation orientation();

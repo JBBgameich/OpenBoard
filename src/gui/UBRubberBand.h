@@ -37,7 +37,7 @@ class UBRubberBand : public QRubberBand
     Q_OBJECT;
 
     public:
-        UBRubberBand(Shape s, QWidget * p = 0);
+        UBRubberBand(Shape s, QWidget * p = nullptr);
         ~UBRubberBand() override;
 
     private:

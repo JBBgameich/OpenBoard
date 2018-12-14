@@ -41,7 +41,7 @@ class UBImportAdaptor : public QObject
     Q_OBJECT;
 
     protected:
-        UBImportAdaptor(bool _documentBased, QObject *parent = 0);
+        UBImportAdaptor(bool _documentBased, QObject *parent = nullptr);
         ~UBImportAdaptor() override;
 
     public:
@@ -58,7 +58,7 @@ class UBImportAdaptor : public QObject
 class UBPageBasedImportAdaptor : public UBImportAdaptor
 {
 protected:
-        UBPageBasedImportAdaptor(QObject *parent = 0);
+        UBPageBasedImportAdaptor(QObject *parent = nullptr);
 
 public:
         virtual QList<UBGraphicsItem*> import(const QUuid& uuid, const QString& filePath) = 0;
@@ -69,7 +69,7 @@ public:
 class UBDocumentBasedImportAdaptor : public UBImportAdaptor
 {
 protected:
-        UBDocumentBasedImportAdaptor(QObject *parent = 0);
+        UBDocumentBasedImportAdaptor(QObject *parent = nullptr);
 public:
     virtual UBDocumentProxy* importFile(const QFile& pFile, const QString& pGroup) = 0;
     virtual bool addFileToDocument(UBDocumentProxy* pDocument, const QFile& pFile) = 0;

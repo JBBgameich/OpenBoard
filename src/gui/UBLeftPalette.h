@@ -35,7 +35,7 @@
 class UBLeftPalette : public UBDockPalette
 {
 public:
-    UBLeftPalette(QWidget* parent=0, const char* name="UBLeftPalette");
+    UBLeftPalette(QWidget* parent=nullptr, const char* name="UBLeftPalette");
     ~UBLeftPalette() override;
 
     bool switchMode(eUBDockPaletteWidgetMode mode);

@@ -42,8 +42,8 @@ UBMagnifier::UBMagnifier(QWidget *parent, bool isInteractive)
     , mShouldMoveWidget(false)
     , mShouldResizeWidget(false)
     , borderPen(Qt::darkGray)
-    , gView(0)
-    , mView(0)
+    , gView(nullptr)
+    , mView(nullptr)
 {
     isCusrsorAlreadyStored = false;
     setMouseTracking(true);
@@ -99,31 +99,31 @@ UBMagnifier::~UBMagnifier()
     if(sClosePixmap)
     {
         delete sClosePixmap;
-        sClosePixmap = NULL;
+        sClosePixmap = nullptr;
     }
 
     if(sIncreasePixmap)
     {
         delete sIncreasePixmap;
-        sIncreasePixmap = NULL;
+        sIncreasePixmap = nullptr;
     }
 
     if(sDecreasePixmap)
     {
         delete sDecreasePixmap;
-        sDecreasePixmap = NULL;
+        sDecreasePixmap = nullptr;
     }
 
     if (sChangeModePixmap)
     {
         delete sChangeModePixmap;
-        sChangeModePixmap = NULL;
+        sChangeModePixmap = nullptr;
     }
 }
 
 void UBMagnifier::setSize(qreal percentFromScene)
 {
-    if(gView == NULL || mView == NULL) return;
+    if(gView == nullptr || mView == nullptr) return;
 
     // calculate object size
     params.sizePercentFromScene = percentFromScene;
@@ -154,7 +154,7 @@ void UBMagnifier::setSize(qreal percentFromScene)
 
 void UBMagnifier::createMask()
 {
-    if(gView == NULL || mView == NULL) return;
+    if(gView == nullptr || mView == nullptr) return;
 
     // calculate object size
     QSize sceneSize = mView->size();

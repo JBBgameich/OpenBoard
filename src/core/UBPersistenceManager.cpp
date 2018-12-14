@@ -76,7 +76,7 @@ const QString UBPersistenceManager::fFolders = "folders.xml";
 const QString UBPersistenceManager::tFolder = "folder";
 const QString UBPersistenceManager::aName = "name";
 
-UBPersistenceManager * UBPersistenceManager::sSingleton = 0;
+UBPersistenceManager * UBPersistenceManager::sSingleton = nullptr;
 
 UBPersistenceManager::UBPersistenceManager(QObject *pParent)
     : QObject(pParent)
@@ -116,7 +116,7 @@ void UBPersistenceManager::destroy()
 {
     if (sSingleton)
         delete sSingleton;
-    sSingleton = NULL;
+    sSingleton = nullptr;
 }
 
 UBPersistenceManager::~UBPersistenceManager()
@@ -229,7 +229,7 @@ QDialog::DialogCode UBPersistenceManager::processInteractiveReplacementDialog(UB
         if (docList.contains(docName)) {
             UBDocumentReplaceDialog *replaceDialog = new UBDocumentReplaceDialog(docName
                                                                                  , docList
-                                                                                 , /*UBApplication::documentController->mainWidget()*/0
+                                                                                 , /*UBApplication::documentController->mainWidget()*/nullptr
                                                                                  , Qt::Widget);
             if (replaceDialog->exec() == QDialog::Accepted)
             {
@@ -255,7 +255,7 @@ QDialog::DialogCode UBPersistenceManager::processInteractiveReplacementDialog(UB
                 pProxy->setMetaData(UBSettings::documentName, resultName);
                 mDocumentTreeStructureModel->addDocument(pProxy, parentIndex);
             }
-            replaceDialog->setParent(0);
+            replaceDialog->setParent(nullptr);
             delete replaceDialog;
         } else {
             mDocumentTreeStructureModel->addDocument(pProxy, parentIndex);
@@ -449,7 +449,7 @@ UBDocumentProxy* UBPersistenceManager::createDocument(const QString& pGroupName
         QDir dir(doc->persistencePath());
         if (!dir.mkpath(doc->persistencePath()))
         {
-            return 0; // if we can't create the path, abort function.
+            return nullptr; // if we can't create the path, abort function.
         }
     }
 
@@ -464,7 +464,7 @@ UBDocumentProxy* UBPersistenceManager::createDocument(const QString& pGroupName
         emit proxyListChanged();
     } else {
         deleteDocument(doc);
-        doc = 0;
+        doc = nullptr;
     }
 
     return doc;
@@ -538,7 +538,7 @@ UBDocumentProxy* UBPersistenceManager::createDocumentFromDir(const QString& pDoc
         emit documentCreated(doc);
     } else {
         deleteDocument(doc);
-        doc = 0;
+        doc = nullptr;
     }
 
     return doc;
@@ -1152,7 +1152,7 @@ bool UBPersistenceManager::addFileToDocument(UBDocumentProxy* pDocumentProxy,
 
     if (!pDocumentProxy || objectUuid.isNull())
         return false;
-    if (data == NULL && !fi.exists())
+    if (data == nullptr && !fi.exists())
         return false;
 
     qDebug() << fi.suffix();
@@ -1168,7 +1168,7 @@ bool UBPersistenceManager::addFileToDocument(UBDocumentProxy* pDocumentProxy,
         if (!QFile::exists(pDocumentProxy->persistencePath() + "/" + subdir))
             return false;
 
-        if (data == NULL)
+        if (data == nullptr)
         {
             QFile source(path);
             return source.copy(destinationPath);

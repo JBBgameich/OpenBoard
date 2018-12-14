@@ -43,7 +43,7 @@ class UBMessageWindow  : public UBFloatingPalette
     Q_OBJECT;
 
     public:
-        UBMessageWindow(QWidget *parent = 0);
+        UBMessageWindow(QWidget *parent = nullptr);
         ~UBMessageWindow() override;
 
         void showMessage(const QString& message, bool showSpinningWheel = false);

@@ -94,7 +94,7 @@ class WBBrowserWindow : public QWidget
     Q_OBJECT;
 
     public:
-        WBBrowserWindow(QWidget *parent = 0, Ui::MainWindow* uniboardMainWindow = 0);
+        WBBrowserWindow(QWidget *parent = nullptr, Ui::MainWindow* uniboardMainWindow = nullptr);
         ~WBBrowserWindow() override;
         QSize sizeHint() const override;
 

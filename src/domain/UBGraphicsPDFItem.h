@@ -43,7 +43,7 @@ class UBGraphicsPixmapItem;
 class UBGraphicsPDFItem: public GraphicsPDFItem, public UBItem, public UBGraphicsItem
 {
     public:
-        UBGraphicsPDFItem(PDFRenderer *renderer, int pageNumber, QGraphicsItem* parent = 0);
+        UBGraphicsPDFItem(PDFRenderer *renderer, int pageNumber, QGraphicsItem* parent = nullptr);
         ~UBGraphicsPDFItem() override;
 
         enum { Type = UBGraphicsItemType::PDFItemType };

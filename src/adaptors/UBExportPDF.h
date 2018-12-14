@@ -40,7 +40,7 @@ class UBExportPDF : public UBExportAdaptor
     Q_OBJECT;
 
     public:
-        UBExportPDF(QObject *parent = 0);
+        UBExportPDF(QObject *parent = nullptr);
         ~UBExportPDF() override;
 
         QString exportName() override;

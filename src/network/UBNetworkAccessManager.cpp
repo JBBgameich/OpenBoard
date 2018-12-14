@@ -46,7 +46,7 @@
 
 #include "core/memcheck.h"
 
-UBNetworkAccessManager *UBNetworkAccessManager::sNetworkAccessManager = 0;
+UBNetworkAccessManager *UBNetworkAccessManager::sNetworkAccessManager = nullptr;
 
 UBNetworkAccessManager *UBNetworkAccessManager::defaultAccessManager()
 {
@@ -116,7 +116,7 @@ void UBNetworkAccessManager::authenticationRequired(QNetworkReply *reply, QAuthe
     passwordDialog.setupUi(&dialog);
 
     passwordDialog.iconLabel->setText(QString());
-    passwordDialog.iconLabel->setPixmap(mainWindow->style()->standardIcon(QStyle::SP_MessageBoxQuestion, 0, mainWindow).pixmap(32, 32));
+    passwordDialog.iconLabel->setPixmap(mainWindow->style()->standardIcon(QStyle::SP_MessageBoxQuestion, nullptr, mainWindow).pixmap(32, 32));
 
     QString introMessage = tr("<qt>Enter username and password for \"%1\" at %2</qt>");
     introMessage = introMessage.arg((reply->url().toString()).toHtmlEscaped()).arg((reply->url().toString()).toHtmlEscaped());

@@ -162,20 +162,20 @@ void DelegateButton::startShowProgress()
 UBGraphicsItemDelegate::UBGraphicsItemDelegate(QGraphicsItem* pDelegated, QObject * parent, UBGraphicsFlags fls)
     : QObject(parent)
     , mDelegated(pDelegated)
-    , mDeleteButton(NULL)
-    , mDuplicateButton(NULL)
-    , mMenuButton(NULL)
-    , mZOrderUpButton(0)
-    , mZOrderDownButton(0)
-    , mMenu(0)
-    , mLockAction(0)
-    , mShowOnDisplayAction(0)
-    , mGotoContentSourceAction(0)
-    , mFrame(0)
+    , mDeleteButton(nullptr)
+    , mDuplicateButton(nullptr)
+    , mMenuButton(nullptr)
+    , mZOrderUpButton(nullptr)
+    , mZOrderDownButton(nullptr)
+    , mMenu(nullptr)
+    , mLockAction(nullptr)
+    , mShowOnDisplayAction(nullptr)
+    , mGotoContentSourceAction(nullptr)
+    , mFrame(nullptr)
     , mFrameWidth(UBSettings::settings()->objectFrameWidth)
     , mAntiScaleRatio(1.0)
-    , mToolBarItem(NULL)
-    , mMimeData(NULL)
+    , mToolBarItem(nullptr)
+    , mMimeData(nullptr)
 {
     setUBFlags(fls);
     connect(UBApplication::boardController, SIGNAL(zoomChanged(qreal)), this, SLOT(onZoomChanged()));
@@ -424,7 +424,7 @@ bool UBGraphicsItemDelegate::keyReleaseEvent(QKeyEvent *event)
 
 QGraphicsItem *UBGraphicsItemDelegate::delegated()
 {
-    QGraphicsItem *curDelegate = 0;
+    QGraphicsItem *curDelegate = nullptr;
     if (mDelegated->parentItem() && mDelegated->parentItem()->type() == UBGraphicsGroupContainerItem::Type) {
         curDelegate = mDelegated->parentItem(); // considering delegated item as an item's group which contains everything
     } else {
@@ -521,7 +521,7 @@ void UBGraphicsItemDelegate::remove(bool canUndo)
 
         if (canUndo)
         {
-            UBGraphicsItemUndoCommand *uc = new UBGraphicsItemUndoCommand(scene, mDelegated, 0);
+            UBGraphicsItemUndoCommand *uc = new UBGraphicsItemUndoCommand(scene, mDelegated, nullptr);
             UBApplication::undoStack->push(uc);
         }
     }
@@ -692,10 +692,10 @@ void UBGraphicsItemDelegate::freeButtons()
    //Previously deleted with the frame
    // Rimplement for some specific behavior
    mButtons.clear();
-   mDeleteButton = 0;
-   mMenuButton = 0;
-   mZOrderUpButton = 0;
-   mZOrderDownButton = 0;
+   mDeleteButton = nullptr;
+   mMenuButton = nullptr;
+   mZOrderUpButton = nullptr;
+   mZOrderDownButton = nullptr;
 }
 
 void UBGraphicsItemDelegate::decorateMenu(QMenu* menu)
@@ -1053,7 +1053,7 @@ const char* MediaTimer::getSegments(char ch)               // gets list of segme
      if (ch == ' ')
         return segments[11];
 
-     return NULL;
+     return nullptr;
 }
 
 void MediaTimer::drawSegment(const QPoint &pos, char segmentNo, QPainter &p,
@@ -1210,7 +1210,7 @@ void MediaTimer::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWid
     if (smallPoint)
         drawString(digitStr, *p, &points, false);
     else
-        drawString(digitStr, *p, 0, false);
+        drawString(digitStr, *p, nullptr, false);
 }
 
 void MediaTimer::internalSetString(const QString& s)

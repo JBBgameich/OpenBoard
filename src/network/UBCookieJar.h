@@ -105,7 +105,7 @@ class UBCookieJar : public QNetworkCookieJar
             KeepUntilTimeLimit
         };
 
-        UBCookieJar(QObject *parent = 0);
+        UBCookieJar(QObject *parent = nullptr);
         ~UBCookieJar() override;
 
         QList<QNetworkCookie> cookiesForUrl(const QUrl &url) const override;

@@ -45,11 +45,11 @@
  * @param name as the widget object name
  */
 UBDownloadWidget::UBDownloadWidget(QWidget *parent, const char *name):QWidget(parent)
-  , mpLayout(NULL)
-  , mpBttnLayout(NULL)
-  , mpTree(NULL)
-  , mpCancelBttn(NULL)
-  , mpItem(NULL)
+  , mpLayout(nullptr)
+  , mpBttnLayout(nullptr)
+  , mpTree(nullptr)
+  , mpCancelBttn(nullptr)
+  , mpItem(nullptr)
 {
     setObjectName(name);
     setWindowTitle(tr("Downloading files"));
@@ -88,25 +88,25 @@ UBDownloadWidget::UBDownloadWidget(QWidget *parent, const char *name):QWidget(pa
  */
 UBDownloadWidget::~UBDownloadWidget()
 {
-    if(NULL != mpCancelBttn)
+    if(nullptr != mpCancelBttn)
     {
         delete mpCancelBttn;
-        mpCancelBttn = NULL;
+        mpCancelBttn = nullptr;
     }
-    if(NULL != mpTree)
+    if(nullptr != mpTree)
     {
         delete mpTree;
-        mpTree = NULL;
+        mpTree = nullptr;
     }
-    if(NULL != mpBttnLayout)
+    if(nullptr != mpBttnLayout)
     {
         delete mpBttnLayout;
-        mpBttnLayout = NULL;
+        mpBttnLayout = nullptr;
     }
-    if(NULL != mpLayout)
+    if(nullptr != mpLayout)
     {
         delete mpLayout;
-        mpLayout = NULL;
+        mpLayout = nullptr;
     }
 }
 
@@ -115,7 +115,7 @@ UBDownloadWidget::~UBDownloadWidget()
  */
 void UBDownloadWidget::onFileAddedToDownload()
 {
-    if(NULL != mpTree)
+    if(nullptr != mpTree)
     {
         mpTree->clear();
         addCurrentDownloads();
@@ -169,10 +169,10 @@ void UBDownloadWidget::addPendingDownloads()
  */
 void UBDownloadWidget::onDownloadUpdated(int id, qint64 crnt, qint64 total)
 {
-    if(NULL != mpTree)
+    if(nullptr != mpTree)
     {
         QAbstractItemModel* model = mpTree->model();
-        if(NULL != model)
+        if(nullptr != model)
         {
             for(int i=0; i< model->rowCount(); i++)
             {
@@ -238,6 +238,6 @@ void UBDownloadProgressDelegate::paint(QPainter *painter, const QStyleOptionView
     opt.progress = index.data(Qt::UserRole).toInt();
 
     if(0 == index.column()){
-        QApplication::style()->drawControl(QStyle::CE_ProgressBar, &opt, painter, 0);
+        QApplication::style()->drawControl(QStyle::CE_ProgressBar, &opt, painter, nullptr);
     }
 }

@@ -235,9 +235,9 @@ void WBTabBar::reloadTab()
 
 WBTabWidget::WBTabWidget(QWidget *parent)
     : QTabWidget(parent)
-    , mRecentlyClosedTabsMenu(0)
-    , mLineEditCompleter(0)
-    , mLineEdits(0)
+    , mRecentlyClosedTabsMenu(nullptr)
+    , mLineEditCompleter(nullptr)
+    , mLineEdits(nullptr)
     , mTabBar(new WBTabBar(this))
 {
     setObjectName("ubWebBrowserTabWidget");
@@ -358,7 +358,7 @@ QLineEdit *WBTabWidget::lineEdit(int index) const
     WBUrlLineEdit *urlLineEdit = qobject_cast<WBUrlLineEdit*>(mLineEdits->widget(index));
     if (urlLineEdit)
         return urlLineEdit->lineEdit();
-    return 0;
+    return nullptr;
 }
 
 WBWebView *WBTabWidget::webView(int index) const
@@ -377,7 +377,7 @@ WBWebView *WBTabWidget::webView(int index) const
             return currentWebView();
         }
     }
-    return 0;
+    return nullptr;
 }
 
 int WBTabWidget::webViewIndex(WBWebView *webView) const
@@ -426,7 +426,7 @@ WBWebView *WBTabWidget::newTab(bool makeCurrent)
         disconnect(this, SIGNAL(currentChanged(int)), this, SLOT(currentChanged(int)));
         addTab(emptyWidget, tr("(Untitled)"));
         connect(this, SIGNAL(currentChanged(int)), this, SLOT(currentChanged(int)));
-        return 0;
+        return nullptr;
     }
 
     // webview
@@ -765,7 +765,7 @@ bool WBTabWidget::restoreState(const QByteArray &state)
 
 WBWebActionMapper::WBWebActionMapper(QAction *root, QWebPage::WebAction webAction, QObject *parent)
     : QObject(parent)
-    , mCurrentParent(0)
+    , mCurrentParent(nullptr)
     , mRootAction(root)
     , mWebAction(webAction)
 {
@@ -778,12 +778,12 @@ WBWebActionMapper::WBWebActionMapper(QAction *root, QWebPage::WebAction webActio
 
 void WBWebActionMapper::rootDestroyed()
 {
-    mRootAction = 0;
+    mRootAction = nullptr;
 }
 
 void WBWebActionMapper::currentDestroyed()
 {
-    updateCurrent(0);
+    updateCurrent(nullptr);
 }
 
 void WBWebActionMapper::addChild(QAction *action)

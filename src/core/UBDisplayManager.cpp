@@ -47,9 +47,9 @@ UBDisplayManager::UBDisplayManager(QObject *parent)
     : QObject(parent)
     , mControlScreenIndex(-1)
     , mDisplayScreenIndex(-1)
-    , mControlWidget(0)
-    , mDisplayWidget(0)
-    , mDesktopWidget(0)
+    , mControlWidget(nullptr)
+    , mDisplayWidget(nullptr)
+    , mDesktopWidget(nullptr)
 {
     mDesktop = qApp->desktop();
 

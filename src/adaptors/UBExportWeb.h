@@ -41,7 +41,7 @@ class UBExportWeb : public UBExportAdaptor
     Q_OBJECT;
 
     public:
-        UBExportWeb(QObject *parent = 0);
+        UBExportWeb(QObject *parent = nullptr);
         ~UBExportWeb() override;
 
         QString exportName() override;

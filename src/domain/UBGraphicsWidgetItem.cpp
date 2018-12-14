@@ -71,7 +71,7 @@ UBGraphicsWidgetItem::UBGraphicsWidgetItem(const QUrl &pWidgetUrl, QGraphicsItem
     , mIsFrozen(false)
     , mIsTakingSnapshot(false)
     , mShouldMoveWidget(false)
-    , mUniboardAPI(0)
+    , mUniboardAPI(nullptr)
 {
     setData(UBGraphicsItemData::ItemLayerType, QVariant(itemLayerType::ObjectItem)); //Necessary to set if we want z value to be assigned correctly
 
@@ -639,7 +639,7 @@ QVariant UBGraphicsWidgetItem::itemChange(GraphicsItemChange change, const QVari
             scene()->setActiveWindow(this);
         else
             if(scene()->activeWindow() == this)
-                scene()->setActiveWindow(0);
+                scene()->setActiveWindow(nullptr);
     }
 
     QVariant newValue = Delegate()->itemChange(change, value);
@@ -761,7 +761,7 @@ QMap<QString, QString> UBGraphicsW3CWidgetItem::sNPAPIWrapperTemplates;
 
 UBGraphicsW3CWidgetItem::UBGraphicsW3CWidgetItem(const QUrl& pWidgetUrl, QGraphicsItem *parent)
     : UBGraphicsWidgetItem(pWidgetUrl, parent)
-    , mW3CWidgetAPI(0)
+    , mW3CWidgetAPI(nullptr)
 {
     QString path = pWidgetUrl.toLocalFile();
     QDir potentialDir(path);

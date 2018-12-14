@@ -38,7 +38,7 @@
 #include "gui/UBMainWindow.h"
 #include "core/memcheck.h"
 
-UBDrawingController* UBDrawingController::sDrawingController = 0;
+UBDrawingController* UBDrawingController::sDrawingController = nullptr;
 
 
 UBDrawingController* UBDrawingController::drawingController()
@@ -53,12 +53,12 @@ void UBDrawingController::destroy()
 {
     if(sDrawingController)
         delete sDrawingController;
-    sDrawingController = NULL;
+    sDrawingController = nullptr;
 }
 
 UBDrawingController::UBDrawingController(QObject * parent)
     : QObject(parent)
-    , mActiveRuler(NULL)
+    , mActiveRuler(nullptr)
     , mStylusTool((UBStylusTool::Enum)-1)
     , mLatestDrawingTool((UBStylusTool::Enum)-1)
     , mIsDesktopMode(false)

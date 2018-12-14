@@ -43,7 +43,7 @@ class UBGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem, public 
     Q_OBJECT
 
     public:
-        UBGraphicsPixmapItem(QGraphicsItem* parent = 0);
+        UBGraphicsPixmapItem(QGraphicsItem* parent = nullptr);
         ~UBGraphicsPixmapItem() override;
 
         enum { Type = UBGraphicsItemType::PixmapItemType };

@@ -41,7 +41,7 @@ class UBYouTubePublisher : public QObject
     Q_OBJECT;
 
     public:
-        UBYouTubePublisher(QObject* pParent = 0);
+        UBYouTubePublisher(QObject* pParent = nullptr);
         ~UBYouTubePublisher() override;
 
     public slots:
@@ -87,7 +87,7 @@ class UBYouTubePublishingDialog : public QDialog, public Ui::YouTubePublishingDi
     Q_OBJECT;
 
     public:
-        UBYouTubePublishingDialog(const QString& videoFilePath, QWidget *parent = 0);
+        UBYouTubePublishingDialog(const QString& videoFilePath, QWidget *parent = nullptr);
         ~UBYouTubePublishingDialog() override{};
 
     private:

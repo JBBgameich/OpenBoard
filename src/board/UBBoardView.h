@@ -49,8 +49,8 @@ class UBBoardView : public QGraphicsView
 
 public:
 
-    UBBoardView(UBBoardController* pController, QWidget* pParent = 0, bool isControl = false, bool isDesktop = false);
-    UBBoardView(UBBoardController* pController, int pStartLayer, int pEndLayer, QWidget* pParent = 0, bool isControl = false, bool isDesktop = false);
+    UBBoardView(UBBoardController* pController, QWidget* pParent = nullptr, bool isControl = false, bool isDesktop = false);
+    UBBoardView(UBBoardController* pController, int pStartLayer, int pEndLayer, QWidget* pParent = nullptr, bool isControl = false, bool isDesktop = false);
     ~UBBoardView() override;
 
     UBGraphicsScene* scene();

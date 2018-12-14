@@ -49,7 +49,7 @@ class UBSettings : public QObject
 
     private:
 
-        UBSettings(QObject *parent = 0);
+        UBSettings(QObject *parent = nullptr);
         ~UBSettings() override;
         void cleanNonPersistentSettings();
         bool checkSystemOnScreenKeyboardAvailable();

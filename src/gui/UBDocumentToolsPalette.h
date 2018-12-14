@@ -43,7 +43,7 @@ class UBDocumentToolsPalette : public UBActionPalette
     Q_OBJECT;
 
     public:
-        UBDocumentToolsPalette(QWidget *parent = 0);
+        UBDocumentToolsPalette(QWidget *parent = nullptr);
         ~UBDocumentToolsPalette() override;
         bool isEmpty() { return actions().count() == 0; }
 

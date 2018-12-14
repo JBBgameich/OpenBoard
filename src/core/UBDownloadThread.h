@@ -39,7 +39,7 @@ class UBDownloadThread : public QThread
 {
     Q_OBJECT
 public:
-    UBDownloadThread(QObject* parent=0, const char* name="UBDownloadThread");
+    UBDownloadThread(QObject* parent=nullptr, const char* name="UBDownloadThread");
     ~UBDownloadThread() override;
     void stopDownload();
     void startDownload(int id, QString url);

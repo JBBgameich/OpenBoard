@@ -79,7 +79,7 @@ class WBEditTableView : public QTableView
     Q_OBJECT;
 
     public:
-        WBEditTableView(QWidget *parent = 0);
+        WBEditTableView(QWidget *parent = nullptr);
         void keyPressEvent(QKeyEvent *event) override;
 
     public slots:

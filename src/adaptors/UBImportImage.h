@@ -40,7 +40,7 @@ class UBImportImage : public UBPageBasedImportAdaptor
     Q_OBJECT;
 
     public:
-        UBImportImage(QObject *parent = 0);
+        UBImportImage(QObject *parent = nullptr);
         ~UBImportImage() override;
 
         QStringList supportedExtentions() override;

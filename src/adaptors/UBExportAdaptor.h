@@ -39,7 +39,7 @@ class UBExportAdaptor : public QObject
     Q_OBJECT
 
     public:
-        UBExportAdaptor(QObject *parent = 0);
+        UBExportAdaptor(QObject *parent = nullptr);
         ~UBExportAdaptor() override;
 
         virtual QString exportName() = 0;

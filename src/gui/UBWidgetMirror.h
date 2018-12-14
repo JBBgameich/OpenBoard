@@ -39,7 +39,7 @@ class UBWidgetMirror : public QWidget
     Q_OBJECT;
 
     public:
-        UBWidgetMirror(QWidget* sourceWidget, QWidget* parent = 0);
+        UBWidgetMirror(QWidget* sourceWidget, QWidget* parent = nullptr);
         ~UBWidgetMirror() override;
 
     public slots:

@@ -38,7 +38,7 @@ class UBMessagesDialog : public QWidget
     Q_OBJECT
 
 public:
-    UBMessagesDialog(QString windowTitle, QWidget *parent = NULL);
+    UBMessagesDialog(QString windowTitle, QWidget *parent = nullptr);
     void setMessages(const QList<QString> messages);
 
     private slots:

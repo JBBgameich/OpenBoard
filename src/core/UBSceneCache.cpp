@@ -116,7 +116,7 @@ UBGraphicsScene* UBSceneCache::value(UBDocumentProxy* proxy, int pageIndex)
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -152,7 +152,7 @@ void UBSceneCache::moveScene(UBDocumentProxy* proxy, int sourceIndex, int target
 {
     UBSceneCacheID keySource(proxy, sourceIndex);
 
-    UBGraphicsScene *scene = 0;
+    UBGraphicsScene *scene = nullptr;
 
     if (QHash<UBSceneCacheID, UBGraphicsScene*>::contains(keySource))
     {
@@ -257,7 +257,7 @@ void UBSceneCache::dumpCacheContent()
 {
     foreach(UBSceneCacheID key, keys())
     {
-        UBGraphicsScene *scene = 0;
+        UBGraphicsScene *scene = nullptr;
 
         if (QHash<UBSceneCacheID, UBGraphicsScene*>::contains(key))
             scene = QHash<UBSceneCacheID, UBGraphicsScene*>::value(key);

@@ -43,8 +43,8 @@ class UBGraphicsPixmapItem;
 class UBGraphicsSvgItem: public QGraphicsSvgItem, public UBItem, public UBGraphicsItem
 {
     public:
-        UBGraphicsSvgItem(const QString& pFile, QGraphicsItem* parent = 0);
-        UBGraphicsSvgItem(const QByteArray& pFileData, QGraphicsItem* parent = 0);
+        UBGraphicsSvgItem(const QString& pFile, QGraphicsItem* parent = nullptr);
+        UBGraphicsSvgItem(const QByteArray& pFileData, QGraphicsItem* parent = nullptr);
 
         void init();
 

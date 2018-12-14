@@ -31,7 +31,7 @@
 
 #include "core/memcheck.h"
 
-UBToolsManager* UBToolsManager::sManager = 0;
+UBToolsManager* UBToolsManager::sManager = nullptr;
 
 UBToolsManager* UBToolsManager::manager()
 {
@@ -44,7 +44,7 @@ void UBToolsManager::destroy()
 {
     if (sManager)
         delete sManager;
-    sManager = NULL;
+    sManager = nullptr;
 }
 
 

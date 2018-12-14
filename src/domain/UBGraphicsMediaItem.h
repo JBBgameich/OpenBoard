@@ -64,9 +64,9 @@ public:
         return Type;
     }
 
-    static UBGraphicsMediaItem* createMediaItem(const QUrl& pMediaFileUrl, QGraphicsItem* parent = 0);
+    static UBGraphicsMediaItem* createMediaItem(const QUrl& pMediaFileUrl, QGraphicsItem* parent = nullptr);
 
-    UBGraphicsMediaItem(const QUrl& pMediaFileUrl, QGraphicsItem* parent = 0);
+    UBGraphicsMediaItem(const QUrl& pMediaFileUrl, QGraphicsItem* parent = nullptr);
     ~UBGraphicsMediaItem() override;
 
 
@@ -167,7 +167,7 @@ public:
         return Type;
     }
 
-    UBGraphicsAudioItem(const QUrl& pMediaFileUrl, QGraphicsItem *parent = 0);
+    UBGraphicsAudioItem(const QUrl& pMediaFileUrl, QGraphicsItem *parent = nullptr);
     mediaType getMediaType() const override { return mediaType_Audio; }
 
     UBItem* deepCopy() const override;
@@ -184,7 +184,7 @@ public:
         return Type;
     }
 
-    UBGraphicsVideoItem(const QUrl& pMediaFileUrl, QGraphicsItem *parent = 0);
+    UBGraphicsVideoItem(const QUrl& pMediaFileUrl, QGraphicsItem *parent = nullptr);
 
     mediaType getMediaType() const override { return mediaType_Video; }
 

@@ -39,7 +39,7 @@ class UBImportCFF : public UBDocumentBasedImportAdaptor
     Q_OBJECT;
 
     public:
-        UBImportCFF(QObject *parent = 0);
+        UBImportCFF(QObject *parent = nullptr);
         ~UBImportCFF() override;
 
         QStringList supportedExtentions() override;

@@ -115,7 +115,7 @@ class WBHistoryManager : public QWebHistoryInterface
         void entryUpdated(int offset);
 
     public:
-        WBHistoryManager(QObject *parent = 0);
+        WBHistoryManager(QObject *parent = nullptr);
         ~WBHistoryManager() override;
 
         bool historyContains(const QString &url) const override;
@@ -176,7 +176,7 @@ class WBHistoryModel : public QAbstractTableModel
             UrlStringRole = Qt::UserRole + 4
         };
 
-        WBHistoryModel(WBHistoryManager *history, QObject *parent = 0);
+        WBHistoryModel(WBHistoryManager *history, QObject *parent = nullptr);
         QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
         QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
         int columnCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -197,7 +197,7 @@ class WBHistoryFilterModel : public QAbstractProxyModel
     Q_OBJECT;
 
 public:
-    WBHistoryFilterModel(QAbstractItemModel *sourceModel, QObject *parent = 0);
+    WBHistoryFilterModel(QAbstractItemModel *sourceModel, QObject *parent = nullptr);
 
     inline bool historyContains(const QString &url) const
         { load(); return m_historyHash.contains(url); }
@@ -241,7 +241,7 @@ class WBHistoryMenuModel : public QAbstractProxyModel
     Q_OBJECT;
 
     public:
-        WBHistoryMenuModel(WBHistoryTreeModel *sourceModel, QObject *parent = 0);
+        WBHistoryMenuModel(WBHistoryTreeModel *sourceModel, QObject *parent = nullptr);
         int columnCount(const QModelIndex &parent) const override;
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         QModelIndex mapFromSource(const QModelIndex & sourceIndex) const override;
@@ -264,7 +264,7 @@ class WBHistoryMenu : public WBModelMenu
         void openUrl(const QUrl &url);
 
     public:
-         WBHistoryMenu(QWidget *parent = 0);
+         WBHistoryMenu(QWidget *parent = nullptr);
          void setInitialActions(QList<QAction*> actions);
 
     protected:
@@ -288,7 +288,7 @@ class WBHistoryCompletionModel : public QAbstractProxyModel
     Q_OBJECT;
 
     public:
-        WBHistoryCompletionModel(QObject *parent = 0);
+        WBHistoryCompletionModel(QObject *parent = nullptr);
         QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         int columnCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -311,7 +311,7 @@ class WBHistoryTreeModel : public QAbstractProxyModel
     Q_OBJECT;
 
     public:
-        WBHistoryTreeModel(QAbstractItemModel *sourceModel, QObject *parent = 0);
+        WBHistoryTreeModel(QAbstractItemModel *sourceModel, QObject *parent = nullptr);
         QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
         int columnCount(const QModelIndex &parent) const override;
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -345,7 +345,7 @@ class WBTreeProxyModel : public QSortFilterProxyModel
     Q_OBJECT;
 
     public:
-        WBTreeProxyModel(QObject *parent = 0);
+        WBTreeProxyModel(QObject *parent = nullptr);
 
     protected:
         bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;

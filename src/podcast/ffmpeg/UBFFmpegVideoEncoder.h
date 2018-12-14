@@ -77,7 +77,7 @@ class UBFFmpegVideoEncoder : public UBAbstractVideoEncoder
 
 public:
 
-    UBFFmpegVideoEncoder(QObject* parent = NULL);
+    UBFFmpegVideoEncoder(QObject* parent = nullptr);
     ~UBFFmpegVideoEncoder() override;
 
     bool start() override;

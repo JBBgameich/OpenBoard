@@ -51,7 +51,7 @@ UBGraphicsStroke::UBGraphicsStroke(UBGraphicsScene *scene)
 UBGraphicsStroke::~UBGraphicsStroke()
 {
     foreach(UBGraphicsPolygonItem* poly, mPolygons)
-        poly->setStroke(NULL);
+        poly->setStroke(nullptr);
 
     mPolygons.clear();
 }
@@ -204,7 +204,7 @@ void UBGraphicsStroke::clear()
 UBGraphicsStroke* UBGraphicsStroke::simplify()
 {
     if (mDrawnPoints.size() < 3)
-        return NULL;
+        return nullptr;
 
     UBGraphicsStroke* newStroke = new UBGraphicsStroke();
     newStroke->mDrawnPoints = QList<strokePoint>(mDrawnPoints);

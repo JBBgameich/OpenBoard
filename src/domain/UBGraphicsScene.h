@@ -232,7 +232,7 @@ class UBGraphicsScene: public UBCoreGraphicsScene, public UBItem
 
         bool hasBackground()
         {
-            return (mBackgroundObject != 0);
+            return (mBackgroundObject != nullptr);
         }
 
         void addRuler(QPointF center);
@@ -409,7 +409,7 @@ public slots:
         void recolorAllItems();
 
         void drawItems (QPainter * painter, int numItems,
-                               QGraphicsItem * items[], const QStyleOptionGraphicsItem options[], QWidget * widget = 0) override;
+                               QGraphicsItem * items[], const QStyleOptionGraphicsItem options[], QWidget * widget = nullptr) override;
 
         QGraphicsItem* rootItem(QGraphicsItem* item) const;
 

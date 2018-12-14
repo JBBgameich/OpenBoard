@@ -47,7 +47,7 @@ class UBExportDocumentSetAdaptor : public UBExportAdaptor
     Q_OBJECT
 
     public:
-        UBExportDocumentSetAdaptor(QObject *parent = 0);
+        UBExportDocumentSetAdaptor(QObject *parent = nullptr);
         ~UBExportDocumentSetAdaptor() override;
 
         QString exportName() override;

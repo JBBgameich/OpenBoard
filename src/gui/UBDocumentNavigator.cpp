@@ -54,14 +54,14 @@
  * @param name as the object name
  */
 UBDocumentNavigator::UBDocumentNavigator(QWidget *parent, const char *name):QGraphicsView(parent)
-  , mScene(NULL)
+  , mScene(nullptr)
   , mNbColumns(1)
   , mThumbnailWidth(0)
   , mThumbnailMinWidth(100)
-  , mSelectedThumbnail(NULL)
-  , mLastClickedThumbnail(NULL)
-  , mDropSource(NULL)
-  , mDropTarget(NULL)
+  , mSelectedThumbnail(nullptr)
+  , mLastClickedThumbnail(nullptr)
+  , mDropSource(nullptr)
+  , mDropTarget(nullptr)
   , mDropBar(new QGraphicsRectItem())
   , mLongPressInterval(350)
 {
@@ -95,10 +95,10 @@ UBDocumentNavigator::UBDocumentNavigator(QWidget *parent, const char *name):QGra
  */
 UBDocumentNavigator::~UBDocumentNavigator()
 {
-    if(NULL != mScene)
+    if(nullptr != mScene)
     {
         delete mScene;
-        mScene = NULL;
+        mScene = nullptr;
     }
 }
 
@@ -126,7 +126,7 @@ void UBDocumentNavigator::generateThumbnails(UBDocumentContainer* source)
         {
             mScene->removeItem(item);
             delete item;
-            item = NULL;
+            item = nullptr;
         }
     }
 
@@ -160,7 +160,7 @@ void UBDocumentNavigator::generateThumbnails(UBDocumentContainer* source)
     if (selectedIndex >= 0 && selectedIndex < mThumbsWithLabels.count())
         mSelectedThumbnail = mThumbsWithLabels.at(selectedIndex).getThumbnail();
     else
-        mSelectedThumbnail = NULL;
+        mSelectedThumbnail = nullptr;
 
     // Draw the items
     refreshScene();
@@ -182,7 +182,7 @@ void UBDocumentNavigator::onScrollToSelectedPage(int index)
         }
         c++;
     }
-    if(NULL != mSelectedThumbnail)
+    if(nullptr != mSelectedThumbnail)
         ensureVisible(mSelectedThumbnail);
 }
 
@@ -197,7 +197,7 @@ void UBDocumentNavigator::updateSpecificThumbnail(int iPage)
 
     // Get the old thumbnail
     UBSceneThumbnailNavigPixmap* oldItem = mThumbsWithLabels.at(iPage).getThumbnail();
-    if(NULL != oldItem)
+    if(nullptr != oldItem)
     {
         mScene->removeItem(oldItem);
         mScene->addItem(newItem);
@@ -205,7 +205,7 @@ void UBDocumentNavigator::updateSpecificThumbnail(int iPage)
         if (mLastClickedThumbnail == oldItem)
             mLastClickedThumbnail = newItem;
         delete oldItem;
-        oldItem = NULL;
+        oldItem = nullptr;
     }
 
 }
@@ -451,9 +451,9 @@ void UBDocumentNavigator::dropEvent(QDropEvent *event)
     if (mDropSource->sceneIndex() != mDropTarget->sceneIndex())
         UBApplication::boardController->moveSceneToIndex(mDropSource->sceneIndex(), mDropTarget->sceneIndex());
 
-    mDropSource = NULL;
-    mDropTarget = NULL;
-    mLastClickedThumbnail = NULL;
+    mDropSource = nullptr;
+    mDropTarget = nullptr;
+    mLastClickedThumbnail = nullptr;
 
     mDropBar->setRect(QRectF());
     mDropBar->hide();

@@ -87,7 +87,7 @@ class UBWidgetUniboardAPI : public QObject
 
     public:
 
-        UBWidgetUniboardAPI(UBGraphicsScene *pScene, UBGraphicsWidgetItem *widget = 0);
+        UBWidgetUniboardAPI(UBGraphicsScene *pScene, UBGraphicsWidgetItem *widget = nullptr);
         ~UBWidgetUniboardAPI() override;
 
         QObject* messages();

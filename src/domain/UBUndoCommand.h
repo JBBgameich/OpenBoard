@@ -38,7 +38,7 @@ class UBUndoCommand : public QUndoCommand
 {
     public:
 
-        UBUndoCommand(QUndoCommand *parent = 0);
+        UBUndoCommand(QUndoCommand *parent = nullptr);
         ~UBUndoCommand() override;
 
         virtual int getType() const { return UBUndoType::undotype_UNKNOWN; }

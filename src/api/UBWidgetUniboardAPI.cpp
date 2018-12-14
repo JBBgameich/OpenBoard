@@ -86,8 +86,8 @@ UBWidgetUniboardAPI::UBWidgetUniboardAPI(UBGraphicsScene *pScene, UBGraphicsWidg
     , mScene(pScene)
     , mGraphicsWidget(widget)
     , mIsVisible(false)
-    , mMessagesAPI(0)
-    , mDatastoreAPI(0)
+    , mMessagesAPI(nullptr)
+    , mDatastoreAPI(nullptr)
  {
     UBGraphicsW3CWidgetItem* w3CGraphicsWidget = dynamic_cast<UBGraphicsW3CWidgetItem*>(widget);
 

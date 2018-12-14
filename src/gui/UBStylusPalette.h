@@ -40,7 +40,7 @@ class UBStylusPalette : public UBActionPalette
     Q_OBJECT
 
     public:
-        UBStylusPalette(QWidget *parent = 0, Qt::Orientation orient = Qt::Vertical);
+        UBStylusPalette(QWidget *parent = nullptr, Qt::Orientation orient = Qt::Vertical);
         ~UBStylusPalette() override;
 
         void initPosition();

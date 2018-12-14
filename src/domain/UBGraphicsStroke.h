@@ -44,7 +44,7 @@ class UBGraphicsStroke
     friend class UBGraphicsPolygonItem;
 
     public:
-        UBGraphicsStroke(UBGraphicsScene* scene = NULL);
+        UBGraphicsStroke(UBGraphicsScene* scene = nullptr);
         virtual ~UBGraphicsStroke();
 
         bool hasPressure();

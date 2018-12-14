@@ -40,7 +40,7 @@ class UBImportDocument : public UBDocumentBasedImportAdaptor
     Q_OBJECT;
 
     public:
-        UBImportDocument(QObject *parent = 0);
+        UBImportDocument(QObject *parent = nullptr);
         ~UBImportDocument() override;
 
 

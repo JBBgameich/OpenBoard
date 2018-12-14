@@ -60,7 +60,7 @@ class UBDocumentReplaceDialog : public QDialog
     Q_OBJECT
 
 public:
-    UBDocumentReplaceDialog(const QString &pIncommingName, const QStringList &pFileList, QWidget *parent = 0, Qt::WindowFlags pFlags = 0);
+    UBDocumentReplaceDialog(const QString &pIncommingName, const QStringList &pFileList, QWidget *parent = nullptr, Qt::WindowFlags pFlags = nullptr);
     void setRegexp(const QRegExp pRegExp);
     bool validString(const QString &pStr);
     void setFileNameAndList(const QString &fileName, const QStringList &pLst);
@@ -100,8 +100,8 @@ public:
         , Document
     };
 
-    UBDocumentTreeNode(Type pType, const QString &pName, const QString &pDisplayName = QString(), UBDocumentProxy *pProxy = 0);
-    UBDocumentTreeNode() : mType(Catalog), mParent(0), mProxy(0) {;}
+    UBDocumentTreeNode(Type pType, const QString &pName, const QString &pDisplayName = QString(), UBDocumentProxy *pProxy = nullptr);
+    UBDocumentTreeNode() : mType(Catalog), mParent(nullptr), mProxy(nullptr) {;}
     ~UBDocumentTreeNode();
 
     QList<UBDocumentTreeNode*> children() const {return mChildren;}
@@ -170,7 +170,7 @@ public:
         UpdateDate
     };
 
-    UBDocumentTreeModel(QObject *parent = 0);
+    UBDocumentTreeModel(QObject *parent = nullptr);
     ~UBDocumentTreeModel() override;
 
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
@@ -293,7 +293,7 @@ class UBDocumentTreeView : public QTreeView
     Q_OBJECT
 
 public:
-    UBDocumentTreeView (QWidget *parent = 0);
+    UBDocumentTreeView (QWidget *parent = nullptr);
 
     //N/C - NNE - 20140404
     QModelIndex mapIndexToSource(const QModelIndex &index);
@@ -326,7 +326,7 @@ class UBDocumentTreeItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    UBDocumentTreeItemDelegate(QObject *parent = 0);
+    UBDocumentTreeItemDelegate(QObject *parent = nullptr);
 
 private slots:
     void commitAndCloseEditor();

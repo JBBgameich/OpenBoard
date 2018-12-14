@@ -224,7 +224,7 @@ namespace merge_lib
             if( _annotsTransforms[i] )
             {
                delete _annotsTransforms[i];
-               _annotsTransforms[i] = 0;
+               _annotsTransforms[i] = nullptr;
             }
             _annotsTransforms.clear();
          }
@@ -233,7 +233,7 @@ namespace merge_lib
             if( _transforms[i] )
             {
                delete _transforms[i];
-               _transforms[i] = 0;
+               _transforms[i] = nullptr;
             }
          }
          _transforms.clear();

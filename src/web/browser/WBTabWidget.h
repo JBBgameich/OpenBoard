@@ -97,7 +97,7 @@ class WBTabBar : public QTabBar
         void tabMoveRequested(int fromIndex, int toIndex);
 
     public:
-        WBTabBar(QWidget *parent = 0);
+        WBTabBar(QWidget *parent = nullptr);
 
     protected:
         void mousePressEvent(QMouseEvent* event) override;
@@ -180,7 +180,7 @@ class WBTabWidget : public QTabWidget
         void printRequested(QWebFrame *frame);
 
     public:
-        WBTabWidget(QWidget *parent = 0);
+        WBTabWidget(QWidget *parent = nullptr);
         void clear();
         void addWebAction(QAction *action, QWebPage::WebAction webAction);
 

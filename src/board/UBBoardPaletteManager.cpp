@@ -79,27 +79,27 @@
 
 UBBoardPaletteManager::UBBoardPaletteManager(QWidget* container, UBBoardController* pBoardController)
     : QObject(container)
-    , mKeyboardPalette(0)
-    , mWebToolsCurrentPalette(0)
+    , mKeyboardPalette(nullptr)
+    , mWebToolsCurrentPalette(nullptr)
     , mContainer(container)
     , mBoardControler(pBoardController)
-    , mStylusPalette(0)
-    , mZoomPalette(0)
-    , mTipPalette(0)
-    , mLeftPalette(NULL)
-    , mRightPalette(NULL)
-    , mBackgroundsPalette(0)
-    , mToolsPalette(0)
-    , mAddItemPalette(0)
-    , mErasePalette(NULL)
-    , mPagePalette(NULL)
+    , mStylusPalette(nullptr)
+    , mZoomPalette(nullptr)
+    , mTipPalette(nullptr)
+    , mLeftPalette(nullptr)
+    , mRightPalette(nullptr)
+    , mBackgroundsPalette(nullptr)
+    , mToolsPalette(nullptr)
+    , mAddItemPalette(nullptr)
+    , mErasePalette(nullptr)
+    , mPagePalette(nullptr)
     , mPendingPageButtonPressed(false)
     , mPendingZoomButtonPressed(false)
     , mPendingPanButtonPressed(false)
     , mPendingEraseButtonPressed(false)
-    , mpPageNavigWidget(NULL)
-    , mpCachePropWidget(NULL)
-    , mpDownloadWidget(NULL)
+    , mpPageNavigWidget(nullptr)
+    , mpCachePropWidget(nullptr)
+    , mpDownloadWidget(nullptr)
     , mDownloadInProgress(false)
 {
     setupPalettes();
@@ -195,7 +195,7 @@ void UBBoardPaletteManager::slot_changeMainMode(UBApplicationController::MainMod
 
         default:
             {
-                if (UBPlatformUtils::hasVirtualKeyboard() && mKeyboardPalette != NULL)
+                if (UBPlatformUtils::hasVirtualKeyboard() && mKeyboardPalette != nullptr)
                     mKeyboardPalette->hide();
             }
             break;
@@ -226,7 +226,7 @@ void UBBoardPaletteManager::setupPalettes()
 
     if (UBPlatformUtils::hasVirtualKeyboard())
     {
-        mKeyboardPalette = new UBKeyboardPalette(0);
+        mKeyboardPalette = new UBKeyboardPalette(nullptr);
 #ifndef Q_OS_WIN
         connect(mKeyboardPalette, SIGNAL(closed()), mKeyboardPalette, SLOT(onDeactivated()));
 #endif
@@ -326,7 +326,7 @@ void UBBoardPaletteManager::pagePaletteButtonReleased()
         {
             // The palette is reinstanciated because the duplication depends on the current scene
             delete(mPagePalette);
-            mPagePalette = 0;
+            mPagePalette = nullptr;
             QList<QAction*>pageActions;
             pageActions << UBApplication::mainWindow->actionNewPage;
             pageActions << UBApplication::mainWindow->actionDuplicatePage;
@@ -681,7 +681,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mRightPalette->stackUnder(mStylusPalette);
                 mLeftPalette->stackUnder(mStylusPalette);
                 if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
+                    && mKeyboardPalette != nullptr
                     && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
                 {
                     if(mKeyboardPalette->m_isVisible) {
@@ -715,7 +715,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mStylusPalette->raise();
 
                 if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
+                    && mKeyboardPalette != nullptr
                     && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
                 {
 
@@ -725,7 +725,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
 #ifndef Q_OS_LINUX
                         mKeyboardPalette->setParent((QWidget*)UBApplication::applicationController->uninotesController()->drawingView());
 #else
-                        mKeyboardPalette->setParent(0);
+                        mKeyboardPalette->setParent(nullptr);
 #endif
 #ifdef Q_OS_OSX
                         mKeyboardPalette->setWindowFlags(Qt::Dialog | Qt::Popup | Qt::FramelessWindowHint);
@@ -735,7 +735,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                     else
 // In linux keyboard in desktop mode have to allways be with null parent
 #ifdef Q_OS_LINUX
-                        mKeyboardPalette->setParent(0);
+                        mKeyboardPalette->setParent(nullptr);
 #else
                         mKeyboardPalette->setParent((QWidget*)UBApplication::applicationController->uninotesController()->drawingView());
 #endif //Q_OS_LINUX
@@ -764,7 +764,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
             {
                 mAddItemPalette->setParent(UBApplication::mainWindow);
                 if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
+                    && mKeyboardPalette != nullptr
                     && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
                 {
 //                    tmp variable?
@@ -790,7 +790,7 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
                 mLeftPalette->assignParent(UBApplication::documentController->controlView());
                 mRightPalette->assignParent(UBApplication::documentController->controlView());
                 if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
+                    && mKeyboardPalette != nullptr
                     && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
                 {
 
@@ -812,21 +812,21 @@ void UBBoardPaletteManager::changeMode(eUBDockPaletteWidgetMode newMode, bool is
             {
                 mLeftPalette->setVisible(leftPaletteVisible);
                 mRightPalette->setVisible(rightPaletteVisible);
-                mLeftPalette->assignParent(0);
-                mRightPalette->assignParent(0);
+                mLeftPalette->assignParent(nullptr);
+                mRightPalette->assignParent(nullptr);
                 if (UBPlatformUtils::hasVirtualKeyboard()
-                    && mKeyboardPalette != NULL
+                    && mKeyboardPalette != nullptr
                     && UBSettings::settings()->useSystemOnScreenKeyboard->get().toBool() == false)
                 {
 
                     if(mKeyboardPalette->m_isVisible)
                     {
                         mKeyboardPalette->hide();
-                        mKeyboardPalette->setParent(0);
+                        mKeyboardPalette->setParent(nullptr);
                         mKeyboardPalette->show();
                     }
                     else
-                        mKeyboardPalette->setParent(0);
+                        mKeyboardPalette->setParent(nullptr);
                 }
             }
             break;
@@ -859,7 +859,7 @@ void UBBoardPaletteManager::addItemToCurrentPage()
         UBApplication::boardController->downloadURL(mItemUrl);
     else
     {
-        UBGraphicsPixmapItem* item = UBApplication::boardController->activeScene()->addPixmap(mPixmap, NULL, mPos, mScaleFactor);
+        UBGraphicsPixmapItem* item = UBApplication::boardController->activeScene()->addPixmap(mPixmap, nullptr, mPos, mScaleFactor);
 
         QString documentPath = UBApplication::boardController->selectedDocument()->persistencePath();
         QString fileName = UBPersistenceManager::imageDirectory + "/" + item->uuid().toString() + ".png";
@@ -964,10 +964,10 @@ void UBBoardPaletteManager::changeStylusPaletteOrientation(QVariant var)
     bool bVisible = mStylusPalette->isVisible();
 
     // Clean the old palette
-    if(NULL != mStylusPalette)
+    if(nullptr != mStylusPalette)
     {
         delete mStylusPalette;
-        mStylusPalette = NULL;
+        mStylusPalette = nullptr;
     }
 
     // Create the new palette

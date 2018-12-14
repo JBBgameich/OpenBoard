@@ -37,7 +37,7 @@
 #include "core/memcheck.h"
 
 
-UBResources* UBResources::sSingleton = 0;
+UBResources* UBResources::sSingleton = nullptr;
 
 UBResources::UBResources(QObject* pParent)
  : QObject(pParent)

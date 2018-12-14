@@ -50,7 +50,7 @@
 void ub_message_output(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
     // We must temporarily remove the handler to avoid the infinite recursion of
     // ub_message_output -> qt_message_output -> ub_message_output -> qt_message_output ...
-    QtMessageHandler previousHandler = qInstallMessageHandler(0);
+    QtMessageHandler previousHandler = qInstallMessageHandler(nullptr);
 
 #if defined(QT_NO_DEBUG)
     // Suppress qDebug output in release builds
