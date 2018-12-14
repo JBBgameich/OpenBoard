@@ -1,0 +1,45 @@
+neon-bionic:
+  image: kaidan/neon-bionic
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+ubuntu-xenial:
+  image: ubuntu:xenial
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+ubuntu-bionic:
+  image: ubuntu:bionic
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+debian-sid:
+  image: kaidan/debian-unstable
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+debian-buster:
+  image: debian:buster
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+debian-stretch:
+  image: debian:stretch
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+
+cache:
+  paths:
+    - ccache/
