@@ -163,7 +163,7 @@ static QDomDocument createDomFromSvg(const QString &svgUrl)
     Q_ASSERT(QFile::exists(svgUrl));
     QString mFoldersXmlStorageName = svgUrl;
 
-    if (QFileInfo(mFoldersXmlStorageName).exists()) {
+    if (QFileInfo::exists(mFoldersXmlStorageName)) {
         QDomDocument xmlDom;
         QFile inFile(mFoldersXmlStorageName);
         if (inFile.open(QIODevice::ReadOnly)) {
