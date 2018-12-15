@@ -79,7 +79,7 @@ QFileInfoList UBImportDocumentSetAdaptor::importData(const QString &zipFile, con
     QFileInfoList result;
     do {
       tmpDir = QDir::tempPath() + "/Sankore_tmpImportUBX_" + QString::number(i++);
-    } while (QFileInfo(tmpDir).exists());
+    } while (QFileInfo::exists(tmpDir));
 
     QDir(QDir::tempPath()).mkdir(tmpDir);
 
@@ -94,7 +94,7 @@ QFileInfoList UBImportDocumentSetAdaptor::importData(const QString &zipFile, con
 
     foreach(QFileInfo readDir, tDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden , QDir::Name)) {
         QString newFileName = readDir.fileName();
-        if (QFileInfo(destination + "/" + readDir.fileName()).exists()) {
+        if (QFileInfo::exists(destination + "/" + readDir.fileName())) {
             newFileName = QFileInfo(UBPersistenceManager::persistenceManager()->generateUniqueDocumentPath(tmpDir)).fileName();
         }
         QString newFilePath = destination + "/" + newFileName;

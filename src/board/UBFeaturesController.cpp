@@ -64,8 +64,8 @@ const QString UBFeaturesController::webSearchPath = rootPath + "/Web search";
 
 void UBFeaturesComputingThread::scanFS(const QUrl & currentPath, const QString & currVirtualPath, const QSet<QUrl> &pFavoriteSet)
 {
-//    Q_ASSERT(QFileInfo(currentPath.toLocalFile()).exists());
-//    if(QFileInfo(currentPath.toLocalFile()).exists())
+//    Q_ASSERT(QFileInfo::exists(currentPath.toLocalFile()));
+//    if(QFileInfo::exists(currentPath.toLocalFile()))
 //        return;
 
     QFileInfoList fileInfoList = UBFileSystemUtils::allElementsInDirectory(currentPath.toLocalFile());
@@ -402,7 +402,7 @@ void UBFeaturesController::startThread()
 
 void UBFeaturesController::createNpApiFeature(const QString &str)
 {
-    Q_ASSERT(QFileInfo(str).exists() && QFileInfo(str).isDir());
+    Q_ASSERT(QFileInfo::exists(str) && QFileInfo(str).isDir());
 
     QString widgetName = QFileInfo(str).fileName();
 
@@ -809,7 +809,7 @@ void UBFeaturesController::addNewFolder(QString name)
         return;
     }
 
-    if(!QFileInfo(path).exists()) {
+    if(!QFileInfo::exists(path)) {
         QDir().mkpath(path);
     }
     UBFeature newFeatureFolder = UBFeature( currentElement.getFullVirtualPath() + "/" + name, QImage(":images/libpalette/folder.svg"),
@@ -908,7 +908,7 @@ UBFeature UBFeaturesController::moveItemToFolder( const QUrl &url, const UBFeatu
     return newElement;*/
     QString sourcePath = url.toLocalFile();
 
-    Q_ASSERT( QFileInfo( sourcePath ).exists() );
+    Q_ASSERT( QFileInfo::exists( sourcePath ) );
 
     UBFeature possibleDest = getDestinationFeatureForUrl(url);
 
@@ -1005,7 +1005,7 @@ UBFeature UBFeaturesController::copyItemToFolder( const QUrl &url, const UBFeatu
 {
     QString sourcePath = url.toLocalFile();
 
-    Q_ASSERT( QFileInfo( sourcePath ).exists() );
+    Q_ASSERT( QFileInfo::exists( sourcePath ) );
 
     UBFeature possibleDest = getDestinationFeatureForUrl( url );
 
@@ -1037,7 +1037,7 @@ void UBFeaturesController::moveExternalData(const QUrl &url, const UBFeature &de
 {
     QString sourcePath = url.toLocalFile();
 
-    Q_ASSERT( QFileInfo( sourcePath ).exists() );
+    Q_ASSERT( QFileInfo::exists( sourcePath ) );
 
     UBFeature possibleDest = getDestinationFeatureForUrl(url);
 
@@ -1064,7 +1064,7 @@ void UBFeaturesController::moveExternalData(const QUrl &url, const UBFeature &de
         return;
     }
 
-    Q_ASSERT(QFileInfo(newFullPath).exists());
+    Q_ASSERT(QFileInfo::exists(newFullPath));
 
     QImage thumb = getIcon(newFullPath, type);
     UBFeature newElement(destVirtualPath + "/" + name, thumb, name, QUrl::fromLocalFile(newFullPath), type);
@@ -1075,10 +1075,10 @@ void UBFeaturesController::moveExternalData(const QUrl &url, const UBFeature &de
 void UBFeaturesController::deleteItem(const QUrl &url)
 {
     QString path = url.toLocalFile();
-    Q_ASSERT( QFileInfo( path ).exists() );
+    Q_ASSERT( QFileInfo::exists( path ) );
 
     QString thumbnailPath = UBFileSystemUtils::thumbnailPath( path );
-    if ( thumbnailPath.length() && QFileInfo( thumbnailPath ).exists()) {
+    if ( thumbnailPath.length() && QFileInfo::exists( thumbnailPath )) {
         if (QFileInfo(thumbnailPath).isFile()) {
             QFile::remove(thumbnailPath);
         } else if (QFileInfo(thumbnailPath).isDir()){
