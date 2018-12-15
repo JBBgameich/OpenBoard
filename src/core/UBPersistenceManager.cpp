@@ -128,7 +128,7 @@ void UBPersistenceManager::createDocumentProxiesStructure(bool interactive)
     QFileInfoList contentList = rootDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Time | QDir::Reversed);
     createDocumentProxiesStructure(contentList, interactive);
 
-    if (QFileInfo(mFoldersXmlStorageName).exists()) {
+    if (QFileInfo::exists(mFoldersXmlStorageName)) {
         QDomDocument xmlDom;
         QFile inFile(mFoldersXmlStorageName);
         if (inFile.open(QIODevice::ReadOnly)) {
@@ -536,7 +536,7 @@ void UBPersistenceManager::deleteDocument(UBDocumentProxy* pDocumentProxy)
 
     emit documentWillBeDeleted(pDocumentProxy);
 
-    if (QFileInfo(pDocumentProxy->persistencePath()).exists())
+    if (QFileInfo::exists(pDocumentProxy->persistencePath()))
         UBFileSystemUtils::deleteDir(pDocumentProxy->persistencePath());
 
     mSceneCache.removeAllScenes(pDocumentProxy);
@@ -725,8 +725,8 @@ void UBPersistenceManager::copyDocumentScene(UBDocumentProxy *from, int fromInde
     QFile::remove(thumbTo);
     QFile::copy(thumbTmp, thumbTo);
 
-    Q_ASSERT(QFileInfo(thumbTmp).exists());
-    Q_ASSERT(QFileInfo(thumbTo).exists());
+    Q_ASSERT(QFileInfo::exists(thumbTmp));
+    Q_ASSERT(QFileInfo::exists(thumbTo));
     const QPixmap *pix = new QPixmap(thumbTmp);
     UBDocumentController *ctrl = UBApplication::documentController;
     ctrl->addPixmapAt(pix, toIndex);

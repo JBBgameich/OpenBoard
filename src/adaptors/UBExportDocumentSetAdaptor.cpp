@@ -163,7 +163,7 @@ bool UBExportDocumentSetAdaptor::addDocumentToZip(const QModelIndex &pIndex, UBD
     UBDocumentProxy *pDocumentProxy = model->proxyForIndex(parentIndex);
     if (pDocumentProxy) {
 
-//        Q_ASSERT(QFileInfo(pDocumentProxy->persistencePath()).exists());
+//        Q_ASSERT(QFileInfo::exists(pDocumentProxy->persistencePath()));
 //        UBForeighnObjectsHandler cleaner;
 //        cleaner.cure(pDocumentProxy->persistencePath());
 
