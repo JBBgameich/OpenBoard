@@ -188,14 +188,14 @@ void UBDocumentTreeWidget::dragMoveEvent(QDragMoveEvent *event)
                 mBackground = underlyingItem->background(0);
                 mDropTargetProxyTi->setBackground(0, mBackground);
                 mDropTargetProxyTi = underlyingItem;
-                mDropTargetProxyTi->setBackground(0, QBrush(QColor("#6682b5")));
+                mDropTargetProxyTi->setBackground(0, QBrush(QColor(0x66, 0x82, 0xb5)));
             }
         }
         else
         {
             mBackground = underlyingItem->background(0);
             mDropTargetProxyTi = underlyingItem;
-            mDropTargetProxyTi->setBackground(0, QBrush(QColor("#6682b5")));
+            mDropTargetProxyTi->setBackground(0, QBrush(QColor(0x66, 0x82, 0xb5)));
         }
     }
     else if (mDropTargetProxyTi)
