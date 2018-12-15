@@ -198,7 +198,7 @@ void UBSceneCache::reassignDocProxy(UBDocumentProxy *newDocument, UBDocumentProx
     if (newDocument->pageCount() != oldDocument->pageCount()) {
         return;
     }
-    if (!QFileInfo(oldDocument->persistencePath()).exists()) {
+    if (!QFileInfo::exists(oldDocument->persistencePath())) {
         return;
     }
     for (int i = 0; i < oldDocument->pageCount(); i++) {
