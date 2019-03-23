@@ -1597,7 +1597,7 @@ bool UBCFFAdaptor::UBToCFFConverter::parseSVGGGroup(const QDomElement &element, 
     while (nextSVGElement.hasNext()) 
         layers << nextSVGElement.next().key();
 
-    qSort(layers);
+    std::sort(layers.begin(), layers.end());
     int layer = layers.at(0);
 
     nextSVGElement.toFront();

@@ -723,7 +723,7 @@ QByteArray WBTabWidget::saveState() const
         {
             tabs.append(tab->url().toString());
         } else {
-            tabs.append(QString::null);
+            tabs.append(QString());
         }
     }
     stream << tabs;
@@ -870,26 +870,26 @@ void WBTabWidget::paintEvent ( QPaintEvent * event )
 
     // all this is in synch with CSS QTabBar ...
     QLinearGradient linearGrad(QPointF(0, 0), QPointF(0, 1));
-    linearGrad.setColorAt(0, QColor("#d3d3d3"));
-    linearGrad.setColorAt(1, QColor("#dddddd"));
+    linearGrad.setColorAt(0, QColor(0xd3, 0xd3, 0xd3));
+    linearGrad.setColorAt(1, QColor(0xdd, 0xdd, 0xdd));
     painter.setBrush(linearGrad);
 
     QRect r = addTabButtonRect();
 
-    painter.setPen(QColor("#888888"));
+    painter.setPen(QColor(0x88, 0x88, 0x88));
     painter.drawRoundedRect(r, 3, 3);
 
     painter.setPen(Qt::NoPen);
     painter.drawRect(QRect(r.x(), r.y() + r.height() / 2, r.width() + 1, r.height() / 2 + 1));
 
-    painter.setPen(QColor("#888888"));
+    painter.setPen(QColor(0x88, 0x88, 0x88));
     painter.drawLine(r.x(), r.y() + r.height() / 2, r.x(), r.bottom());
     painter.drawLine(r.right() + 1, r.y() + r.height() / 2, r.right() + 1, r.bottom());
 
     if (tabPosition() == QTabWidget::South)
     {
         QPen pen = painter.pen();
-        pen.setColor(QColor("#b3b3b3"));
+        pen.setColor(QColor(0xb3, 0xb3, 0xb3));
         pen.setWidth(2);
         painter.setPen(pen);
         painter.drawLine(0, r.bottom() + 2, width(), r.bottom() + 2);
