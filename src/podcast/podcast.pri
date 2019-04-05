@@ -60,21 +60,12 @@ linux-g++* {
                 src/podcast/ffmpeg/UBMicrophoneInput.cpp
 
 
-    DEPENDPATH += /usr/lib/x86_64-linux-gnu
+    PKGCONFIG += libavformat libavcodec libavutil libswresample libswscale
 
-    LIBS += -lavformat -lavcodec -lswscale -lavutil \
-            -lva-x11 \
-            -lva \
-            -lxcb-shm \
-            -lxcb-xfixes \
-            -lxcb-render -lxcb-shape -lxcb -lX11 -lasound -lpthread -llzma -lbz2 -lz -ldl -lswresample -lswscale -lavutil -lm
-
-    UBUNTU_VERSION = $$system(lsb_release -irs)
-    equals(UBUNTU_VERSION, Ubuntu 14.04) {
-        LIBS -= -lswresample
-        LIBS += -lavresample
+    packagesExist(libavresample) {
+        PKGCONFIG -= libswresample
+        PKGCONFIG += libavresample
     }
-
 
     QMAKE_CXXFLAGS += -std=c++11 # move this to OpenBoard.pro when we can use C++11 on all platforms
 }
