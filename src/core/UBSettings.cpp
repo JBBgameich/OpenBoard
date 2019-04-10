@@ -226,6 +226,20 @@ void UBSettings::ValidateKeyboardPaletteKeyBtnSize()
     boardKeyboardPaletteKeyBtnSize->set(supportedKeyboardSizes->at(0));
 }
 
+bool UBSettings::checkSystemOnScreenKeyboardAvailable()
+{
+#ifdef Q_OS_UNIX
+    QProcess oskTestProcess;
+    oskTestProcess.start("which", QStringList() << "onboard");
+
+    return oskTestProcess.waitForFinished() &&
+                    oskTestProcess.exitStatus() == QProcess::NormalExit &&
+                    oskTestProcess.readAll() != "";
+#else
+    return true;
+#endif
+}
+
 void UBSettings::init()
 {
     productWebUrl =  new UBSetting(this, "App", "ProductWebAddress", "http://www.openboard.ch");
@@ -457,7 +471,7 @@ void UBSettings::init()
 
     libIconSize = new UBSetting(this, "Library", "LibIconSize", defaultLibraryIconSize);
 
-    useSystemOnScreenKeyboard = new UBSetting(this, "App", "UseSystemOnScreenKeyboard", true);
+    useSystemOnScreenKeyboard = new UBSetting(this, "App", "UseSystemOnScreenKeyboard", checkSystemOnScreenKeyboardAvailable());
 
     showDateColumnOnAlphabeticalSort = new UBSetting(this, "Document", "ShowDateColumnOnAlphabeticalSort", false);
     emptyTrashForOlderDocuments = new UBSetting(this, "Document", "emptyTrashForOlderDocuments", false);
