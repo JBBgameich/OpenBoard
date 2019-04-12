@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-if command -v sudo; then
-        export SUDO=$(command -v sudo)
-fi
+. ./ci_scripts/common.sh
 
 # Set up ccache
 export PATH=/usr/lib/ccache/:$PATH
@@ -16,4 +14,4 @@ fi
 
 mkdir -p QtWebKit && touch QtWebKit/QWebView
 QT_SELECT=5 qmake CONFIG+=ccache
-make
+$BEAR make -j$(nproc)

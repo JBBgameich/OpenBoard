@@ -1,4 +1,5 @@
 neon-bionic:
+  stage: build
   image: kaidan/neon-bionic
   before_script:
    - ./ci_scripts/debian-install-deps.sh
@@ -6,6 +7,7 @@ neon-bionic:
    - ./ci_scripts/build.sh
 
 ubuntu-xenial:
+  stage: build
   image: ubuntu:xenial
   before_script:
    - ./ci_scripts/debian-install-deps.sh
@@ -13,6 +15,7 @@ ubuntu-xenial:
    - ./ci_scripts/build.sh
 
 ubuntu-bionic:
+  stage: build
   image: ubuntu:bionic
   before_script:
    - ./ci_scripts/debian-install-deps.sh
@@ -20,6 +23,7 @@ ubuntu-bionic:
    - ./ci_scripts/build.sh
 
 debian-sid:
+  stage: build
   image: kaidan/debian-unstable
   before_script:
    - ./ci_scripts/debian-install-deps.sh
@@ -27,11 +31,22 @@ debian-sid:
    - ./ci_scripts/build.sh
 
 debian-stretch:
+  stage: build
   image: debian:stretch
   before_script:
    - ./ci_scripts/debian-install-deps.sh
   script:
    - ./ci_scripts/build.sh
+
+clang-tidy:
+  stage: deploy
+  image: kaidan/debian-unstable
+  before_script:
+   - ./ci_scripts/debian-install-deps.sh
+  script:
+   - ./ci_scripts/build.sh
+   - ./ci_scripts/clang-tidy.sh
+
 
 cache:
   paths:

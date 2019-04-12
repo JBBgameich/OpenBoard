@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-if command -v sudo; then
-	export SUDO=$(command -v sudo)
-fi
+. ./ci_scripts/common.sh
 
 $SUDO apt-get update
 $SUDO apt-get install -y \
@@ -42,4 +40,5 @@ $SUDO apt-get install -y \
         qtmultimedia5-dev \
         qtscript5-dev \
         qttools5-dev \
-        qtbase5-private-dev
+        qtbase5-private-dev \
+        bear
