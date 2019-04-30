@@ -95,7 +95,7 @@ BUILD_DIR = build
 
 macx:BUILD_DIR = $$BUILD_DIR/macx
 win32:BUILD_DIR = $$BUILD_DIR/win32
-linux-g++*:BUILD_DIR = $$BUILD_DIR/linux
+unix:BUILD_DIR = $$BUILD_DIR/linux
 
 CONFIG(debug, debug|release):BUILD_DIR = $$BUILD_DIR/debug
 CONFIG(release, debug|release) {
@@ -414,7 +414,7 @@ macx {
   # system(printf "%02x%02x%02x%02x" `printf $$VERSION_RC | cut -d ',' -f 1` `printf $$VERSION_RC | cut -d ',' -f 2` `printf $$VERSION_RC | cut -d ',' -f 3` `printf $$VERSION_RC | cut -d ',' -f 4` | xxd -r -p > "$$VERSION_RC_PATH")
 }
 
-linux-g++* {
+unix {
     isEmpty(PREFIX) {
         PREFIX = "/usr/"
     }

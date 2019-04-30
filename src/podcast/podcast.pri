@@ -52,7 +52,7 @@ macx {
     LIBS += -L/usr/local/opt/libass/lib
 }
 
-linux-g++* {
+unix {
     HEADERS  += src/podcast/ffmpeg/UBFFmpegVideoEncoder.h \
                 src/podcast/ffmpeg/UBMicrophoneInput.h
 

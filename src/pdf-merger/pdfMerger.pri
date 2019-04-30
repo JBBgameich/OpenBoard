@@ -69,21 +69,8 @@ win32 {
    
 }
 
-linux-g++ {
+unix {
 
    LIBS += -lz
 
 }
-linux-g++-32 {
-
-   LIBS += -lz
-
-}
-linux-g++-64 {
-
-   LIBS += -lz
-
-}
-
-
-

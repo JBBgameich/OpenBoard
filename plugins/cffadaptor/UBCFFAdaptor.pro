@@ -9,9 +9,7 @@ TEMPLATE = lib
 
 win32: SUB_DIR = win32
 macx: SUB_DIR = macx
-linux-g++: SUB_DIR = linux
-linux-g++-32: SUB_DIR = linux
-linux-g++-64: SUB_DIR = linux
+unix: SUB_DIR = linux
 
 THIRD_PARTY_PATH = ../../../Sankore-ThirdParty
 QUAZIP_DIR   = "$$PWD/../../../Sankore-ThirdParty/quazip/quazip-0.3"
