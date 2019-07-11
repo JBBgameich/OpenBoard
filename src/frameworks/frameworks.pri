@@ -31,7 +31,7 @@ macx {
 }       
 
 
-unix {
+unix:!macx {
 
     SOURCES  += src/frameworks/UBPlatformUtils_linux.cpp
 }         

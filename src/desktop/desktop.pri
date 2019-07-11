@@ -7,7 +7,7 @@ HEADERS += src/desktop/UBDesktopPalette.h \
 SOURCES += src/desktop/UBDesktopPalette.cpp \
            src/desktop/UBDesktopAnnotationController.cpp \
            src/desktop/UBCustomCaptureWindow.cpp \
-    	   src/desktop/UBDesktopPropertyPalette.cpp
+           src/desktop/UBDesktopPropertyPalette.cpp
 
 win32 { 
     HEADERS += src/desktop/UBWindowCaptureDelegate_win.h
@@ -17,4 +17,4 @@ win32 {
 
 macx:OBJECTIVE_SOURCES += src/desktop/UBWindowCapture_mac.mm
 
-unix:SOURCES += src/desktop/UBWindowCapture_linux.cpp
+unix:!macx:SOURCES += src/desktop/UBWindowCapture_linux.cpp

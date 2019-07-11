@@ -69,7 +69,7 @@ win32 {
    
 }
 
-unix {
+unix:!macx {
 
    LIBS += -lz
 

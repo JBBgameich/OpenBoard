@@ -90,4 +90,4 @@ SOURCES += src/gui/UBThumbnailView.cpp \
     src/gui/UBDocumentNavigator.cpp
 win32:SOURCES += src/gui/UBKeyboardPalette_win.cpp
 macx:OBJECTIVE_SOURCES += src/gui/UBKeyboardPalette_mac.mm
-unix:SOURCES += src/gui/UBKeyboardPalette_linux.cpp
+unix:!macx:SOURCES += src/gui/UBKeyboardPalette_linux.cpp

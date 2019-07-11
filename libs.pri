@@ -1,6 +1,6 @@
 THIRD_PARTY_PATH="../OpenBoard-ThirdParty"
 
-unix {
+unix:!macx {
     CONFIG += link_pkgconfig
     PKGCONFIG += poppler
     PKGCONFIG += freetype2
@@ -23,6 +23,6 @@ unix {
     }
 }
 
-!unix {
+!linux {
     include($$THIRD_PARTY_PATH/libs.pri)
 }
