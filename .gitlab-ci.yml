@@ -7,10 +7,29 @@ neon-bionic:
 
 ubuntu-xenial:
   image: ubuntu:xenial
+  variables:
+    QT_SELECT: qt5
+    VERSION: continuous
   before_script:
    - ./ci_scripts/debian-install-deps.sh
   script:
    - ./ci_scripts/build.sh
+   - mkdir AppDir
+   - export QT_SELECT=qt5
+   - qmake PREFIX=$PWD/AppDir/usr
+   - make install
+   - wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-x86_64.AppImage
+   - chmod +x linuxdeploy-x86_64.AppImage
+   - ./linuxdeploy-x86_64.AppImage --appimage-extract
+   - ./squashfs-root/usr/bin/linuxdeploy --appdir AppDir
+   - wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+   - chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
+   - ./linuxdeploy-plugin-qt-x86_64.AppImage --appimage-extract
+   - ./squashfs-root/usr/bin/linuxdeploy-plugin-qt --appdir AppDir
+   - ./squashfs-root/usr/bin/linuxdeploy --appdir AppDir --output appimage
+  artifacts:
+    paths:
+     - OpenBoard-continuous-x86_64.AppImage
 
 ubuntu-bionic:
   image: ubuntu:bionic
