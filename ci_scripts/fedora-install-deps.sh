@@ -21,5 +21,7 @@ dnf install \
     qt5-qttools-static \
     poppler-cpp-devel \
     ccache \
+    cmake \
+    extra-cmake-modules \
     -y
 

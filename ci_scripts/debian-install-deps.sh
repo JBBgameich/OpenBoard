@@ -39,7 +39,8 @@ $SUDO apt-get install -y \
         libx264-dev \
         libxcb-shm0-dev \
         lzma-dev \
-        qt5-qmake \
+        cmake \
+        extra-cmake-modules \
         qtbase5-dev \
         qtmultimedia5-dev \
         qtscript5-dev \
