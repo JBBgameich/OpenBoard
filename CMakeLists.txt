@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.3)
 project(openboard)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
