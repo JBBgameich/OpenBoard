@@ -45,4 +45,5 @@ $SUDO apt-get install -y \
         qtmultimedia5-dev \
         qtscript5-dev \
         qttools5-dev \
+        qttools5-dev-tools \
         qtbase5-private-dev
