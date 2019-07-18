@@ -47,8 +47,9 @@ find_package(Qt5 REQUIRED COMPONENTS
     LinguistTools
 )
 
-find_package(ECM REQUIRED) # Required for finding poppler
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+find_package(ECM REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake) # Fall back to included modules if ECM is to old
+
 find_package(QuaZip 0.6 REQUIRED)
 find_package(Poppler REQUIRED COMPONENTS Core Cpp)
 find_package(X11 REQUIRED)
