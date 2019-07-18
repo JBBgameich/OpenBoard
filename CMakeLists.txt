@@ -6,6 +6,29 @@ set(CMAKE_AUTOMOC ON)
 
 include(FeatureSummary)
 
+
+#
+# Version
+#
+
+set(VERSION_MAJ 1)
+set(VERSION_MIN 5)
+set(VERSION_PATCH 3)
+set(VERSION_TYPE r) # a = alpha, b = beta, rc = release candidate, r = release, other => error
+set(VERSION_BUILD 0)
+
+set(VERSION "${VERSION_MAJ}.${VERSION_MIN}.${VERSION_PATCH}-${VERSION_TYPE}.${VERSION_BUILD}")
+
+if(VERSION_TYPE STREQUAL "r")
+    set(VERSION "${VERSION_MAJ}.${VERSION_MIN}.${VERSION_PATCH}")
+endif()
+
+set(VERSION_RC "${VERSION_MAJ},${VERSION_MIN},${VERSION_PATCH},${VERSION_TYPE},${VERSION_BUILD}")
+string(REPLACE "a" "160" VERSION_RC ${VERSION_RC}) # 0xA0
+string(REPLACE "b" "176" VERSION_RC ${VERSION_RC}) # 0xB0
+string(REPLACE "rc" "192" VERSION_RC ${VERSION_RC}) # 0xC0
+string(REPLACE "r" "240" VERSION_RC ${VERSION_RC}) # 0xF0
+
 #
 # Dependencies
 #
@@ -26,11 +49,11 @@ find_package(Qt5 REQUIRED COMPONENTS
 
 find_package(ECM REQUIRED) # Required for finding poppler
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-find_package(QuaZip 0.6)
+find_package(QuaZip 0.6 REQUIRED)
 find_package(Poppler REQUIRED COMPONENTS Core Cpp)
 find_package(X11 REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(ZLIB)
+find_package(ZLIB REQUIRED)
 
 #
 # Main sources
@@ -368,8 +391,8 @@ add_executable(openboard
 
 add_definitions(
     -DNO_THIRD_PARTY_WARNINGS
-    -DUBVERSION="1.5.3-r.0"
-    -DUBVERSION_RC="r240"
+    -DUBVERSION="${VERSION}"
+    -DUBVERSION_RC="${VERSION_RC}"
 )
 
 target_include_directories(openboard PUBLIC
