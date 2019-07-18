@@ -357,6 +357,8 @@ qt5_add_translation(QM_FILES
     ${TS_FILES}
 )
 
+add_custom_target(translations ALL DEPENDS ${QM_FILES})
+
 #
 # Executable
 #
