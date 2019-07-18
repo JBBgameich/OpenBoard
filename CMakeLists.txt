@@ -1,10 +1,14 @@
-# Generated from OpenBoard.pro.
 cmake_minimum_required(VERSION 3.13)
 project(openboard)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+include(FeatureSummary)
+
+#
+# Dependencies
+#
 find_package(Qt5 REQUIRED COMPONENTS
     Multimedia
     MultimediaWidgets
@@ -26,6 +30,11 @@ find_package(QuaZip 0.6) # NOTE: This will likely fail with older QuaZip version
 find_package(Poppler REQUIRED COMPONENTS Core Cpp)
 find_package(X11 REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(ZLIB)
+
+#
+# Main sources
+#
 
 set(OPENBOARD_SOURCES
     plugins/cffadaptor/src/UBCFFAdaptor.cpp
@@ -229,7 +238,7 @@ set(OPENBOARD_SOURCES
     src/web/browser/WBWebView.cpp
 )
 
-# SingleApplication
+# QtSingleApplication
 set(OPENBOARD_SOURCES
     ${OPENBOARD_SOURCES}
     src/qtsingleapplication/src/qtlocalpeer.cpp
@@ -238,6 +247,9 @@ set(OPENBOARD_SOURCES
     src/qtsingleapplication/src/qtsingleapplication.h
 )
 
+#
+# Platform specific sources
+#
 if(UNIX AND NOT APPLE)
     set(OPENBOARD_SOURCES
         ${OPENBOARD_SOURCES}
@@ -273,6 +285,9 @@ if(APPLE)
     )
 endif()
 
+#
+# UI files
+#
 qt5_wrap_ui(OPENBOARD_SOURCES
     resources/forms/blackoutWidget.ui
     resources/forms/brushProperties.ui
@@ -289,10 +304,16 @@ qt5_wrap_ui(OPENBOARD_SOURCES
     src/web/browser/proxy.ui
 )
 
+#
+# Resources
+#
 qt5_add_resources(OPENBOARD_SOURCES
     resources/OpenBoard.qrc
 )
 
+#
+# Translations
+#
 set(TS_FILES
    resources/i18n/OpenBoard_en_UK.ts
    resources/i18n/OpenBoard_fr.ts
@@ -336,6 +357,9 @@ qt5_add_translation(QM_FILES
     ${TS_FILES}
 )
 
+#
+# Executable
+#
 add_executable(openboard
     ${OPENBOARD_SOURCES}
 )
@@ -372,20 +396,24 @@ target_link_libraries(openboard
     Poppler::Core
     Poppler::Cpp
     OpenSSL::Crypto
-    ${FFMPEG_LIBRARIES}
     X11
-    -lquazip5
-    -lz
+    quazip5 #TODO: Use cmake
+    ZLIB::ZLIB
 )
 
 if(UNIX)
     target_link_libraries(openboard
-        -lswresample -lswscale
+        swresample swscale avutil avcodec avformat
     )
 endif()
 
+#
+# Installing
+#
 if(UNIX)
     install(TARGETS openboard DESTINATION bin/)
     install(DIRECTORY resources/ DESTINATION share/OpenBoard)
     install(FILES ${QM_FILES} DESTINATION share/OpenBoard/i18n)
 endif()
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
