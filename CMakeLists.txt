@@ -54,6 +54,9 @@ find_package(Poppler REQUIRED COMPONENTS Core Cpp)
 find_package(X11 REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(FFMPEG REQUIRED libavformat libavcodec libavutil libswresample libswscale)
 
 #
 # Main sources
@@ -403,6 +406,7 @@ target_include_directories(openboard PUBLIC
     src/web/browser
 
     ${QUAZIP_INCLUDE_DIRS}
+    ${FFMPEG_INCLUDE_DIRS}
 )
 
 target_link_libraries(openboard
@@ -422,6 +426,7 @@ target_link_libraries(openboard
     OpenSSL::Crypto
     X11
     ${QUAZIP_LIBRARIES}
+    ${FFMPEG_LIBRARIES}
     ZLIB::ZLIB
 )
 
