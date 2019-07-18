@@ -25,8 +25,8 @@ find_package(Qt5 REQUIRED COMPONENTS
 )
 
 find_package(ECM REQUIRED) # Required for finding poppler
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-find_package(QuaZip 0.6) # NOTE: This will likely fail with older QuaZip versions
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+find_package(QuaZip 0.6)
 find_package(Poppler REQUIRED COMPONENTS Core Cpp)
 find_package(X11 REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -357,7 +357,7 @@ qt5_add_translation(QM_FILES
     ${TS_FILES}
 )
 
-add_custom_target(translations ALL DEPENDS ${QM_FILES})
+add_custom_target(translations DEPENDS ${QM_FILES})
 
 #
 # Executable
@@ -379,8 +379,7 @@ target_include_directories(openboard PUBLIC
     src/qtsingleapplication/src
     src/web/browser
 
-    # TODO: Use cmake when available in distributions
-    /usr/include/quazip5/
+    ${QUAZIP_INCLUDE_DIRS}
 )
 
 target_link_libraries(openboard
@@ -399,7 +398,7 @@ target_link_libraries(openboard
     Poppler::Cpp
     OpenSSL::Crypto
     X11
-    quazip5 #TODO: Use cmake
+    ${QUAZIP_LIBRARIES}
     ZLIB::ZLIB
 )
 
