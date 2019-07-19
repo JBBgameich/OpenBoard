@@ -53,12 +53,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SO
 
 find_package(QuaZip 0.6 REQUIRED)
 find_package(Poppler REQUIRED COMPONENTS Core Cpp)
-find_package(X11 REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(PkgConfig REQUIRED)
-
-pkg_check_modules(FFMPEG REQUIRED libavformat libavcodec libavutil libswresample libswscale)
 
 #
 # Main sources
@@ -278,38 +275,46 @@ set(OPENBOARD_SOURCES
 #
 # Platform specific sources
 #
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE) ## Linux and *BSD
     set(OPENBOARD_SOURCES
         ${OPENBOARD_SOURCES}
         src/desktop/UBWindowCapture_linux.cpp
         src/frameworks/UBPlatformUtils_linux.cpp
         src/gui/UBKeyboardPalette_linux.cpp
+    )
+
+    find_package(X11 REQUIRED)
+endif()
+
+if(UNIX) # Linux, *BSD and macOS
+    set(OPENBOARD_SOURCES
+        ${OPENBOARD_SOURCES}
         src/podcast/ffmpeg/UBFFmpegVideoEncoder.cpp
         src/podcast/ffmpeg/UBMicrophoneInput.cpp
     )
+
+    pkg_check_modules(FFMPEG REQUIRED libavformat libavcodec libavutil libswresample libswscale)
 endif()
 
-if(WIN32)
+if(WIN32) # Windows
     set(OPENBOARD_SOURCES
         ${OPENBOARD_SOURCES}
-        src/desktop/UBWindowCaptureDelegate_win.cpp src/desktop/UBWindowCaptureDelegate_win.h
+        src/desktop/UBWindowCaptureDelegate_win.cpp
         src/desktop/UBWindowCapture_win.cpp
         src/frameworks/UBPlatformUtils_win.cpp
         src/gui/UBKeyboardPalette_win.cpp
-        src/podcast/windowsmedia/UBWaveRecorder.cpp src/podcast/windowsmedia/UBWaveRecorder.h
-        src/podcast/windowsmedia/UBWindowsMediaFile.cpp src/podcast/windowsmedia/UBWindowsMediaFile.h
-        src/podcast/windowsmedia/UBWindowsMediaVideoEncoder.cpp src/podcast/windowsmedia/UBWindowsMediaVideoEncoder.h
+        src/podcast/windowsmedia/UBWaveRecorder.cpp
+        src/podcast/windowsmedia/UBWindowsMediaFile.cpp
+        src/podcast/windowsmedia/UBWindowsMediaVideoEncoder.cpp
     )
 endif()
 
-if(APPLE)
+if(APPLE) # macOS
     set(OPENBOARD_SOURCES
         ${OPENBOARD_SOURCES}
         src/desktop/UBWindowCapture_mac.mm
         src/frameworks/UBPlatformUtils_mac.mm
         src/gui/UBKeyboardPalette_mac.mm
-        src/podcast/ffmpeg/UBFFmpegVideoEncoder.cpp src/podcast/ffmpeg/UBFFmpegVideoEncoder.h
-        src/podcast/ffmpeg/UBMicrophoneInput.cpp src/podcast/ffmpeg/UBMicrophoneInput.h
     )
 endif()
 
@@ -391,6 +396,8 @@ add_custom_target(translations DEPENDS ${QM_FILES})
 # Executable
 #
 add_executable(openboard
+    MACOSX_BUNDLE
+    WIN32
     ${OPENBOARD_SOURCES}
 )
 
@@ -426,25 +433,36 @@ target_link_libraries(openboard
     Poppler::Core
     Poppler::Cpp
     OpenSSL::Crypto
-    X11
     ${QUAZIP_LIBRARIES}
     ${FFMPEG_LIBRARIES}
     ZLIB::ZLIB
 )
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(openboard
-        swresample swscale avutil avcodec avformat
+        X11
     )
 endif()
 
 #
 # Installing
 #
-if(UNIX)
+if(UNIX AND NOT APPLE)
     install(TARGETS openboard DESTINATION bin/)
     install(DIRECTORY resources/ DESTINATION share/OpenBoard)
     install(FILES ${QM_FILES} DESTINATION share/OpenBoard/i18n)
+    install(FILES resources/ch.openboard.OpenBoard.desktop DESTINATION share/applications)
+endif()
+
+if(WIN32)
+    install(TARGETS openboard DESTINATION)
+    install(DIRECTORY resources/ DESTINATION)
+    install(FILES ${QM_FILES} DESTINATION i18n)
+endif()
+
+if(APPLE)
+    install(DIRECTORY resources/ DESTINATION . COMPONENT Resources)
+    install(FILES ${QM_FILES} DESTINATION i18n COMPONENT Resources)
 endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
