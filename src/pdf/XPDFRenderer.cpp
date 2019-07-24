@@ -29,7 +29,7 @@
 
 #include "XPDFRenderer.h"
 
-#include <QtGui>
+#include <QPainter>
 
 #include <frameworks/UBPlatformUtils.h>
 #ifndef USE_XPDF
@@ -176,7 +176,7 @@ QString XPDFRenderer::title() const
             if (title.isString())
             {
 #if POPPLER_VERSION_MAJOR > 0 || POPPLER_VERSION_MINOR >= 72
-                return QString(title.getString()->c_str());
+                return QString::fromStdString(title.getString()->toStr());
 #else
                 return QString(title.getString()->getCString());
 #endif
