@@ -14,7 +14,7 @@ include(FeatureSummary)
 
 set(VERSION_MAJ 1)
 set(VERSION_MIN 5)
-set(VERSION_PATCH 3)
+set(VERSION_PATCH 4)
 set(VERSION_TYPE r) # a = alpha, b = beta, rc = release candidate, r = release, other => error
 set(VERSION_BUILD 0)
 
