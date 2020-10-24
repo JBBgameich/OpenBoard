@@ -91,7 +91,7 @@ class UBWebController : public QObject
         void captureEduMedia();
 
         bool isOEmbedable(const QUrl& pUrl);
-        bool hasEmbeddedContent();
+        void searchEmbeddedContent();
         void getEmbeddableContent();
 
         bool isEduMedia(const QUrl& pUrl);
@@ -103,8 +103,8 @@ class UBWebController : public QObject
     private:
         void initialiazemOEmbedProviders();
         void webBrowserInstance();
-        void lookForEmbedContent(QString* pHtml, QString tag, QString attribute, QList<QUrl>* pList);
-        void checkForOEmbed(QString* pHtml);
+        void lookForEmbedContent(const QString &pHtml, QString tag, QString attribute, QList<QUrl>* pList);
+        void checkForOEmbed(const QString &pHtml);
 
         UBMainWindow *mMainWindow;
 
@@ -141,6 +141,8 @@ class UBWebController : public QObject
         void imageCaptured(const QPixmap& pCapturedPixmap, bool pageMode, const QUrl& source);
 
         void activeWebPageChanged(WBWebView* pWebView);
+
+        void embeddedContentFound();
 
 };
 

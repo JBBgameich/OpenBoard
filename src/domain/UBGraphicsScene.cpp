@@ -1696,11 +1696,11 @@ void UBGraphicsScene::addGraphicsWidget(UBGraphicsWidgetItem* graphicsWidget, co
 
 UBGraphicsW3CWidgetItem* UBGraphicsScene::addOEmbed(const QUrl& pContentUrl, const QPointF& pPos)
 {
-    QStringList widgetPaths = UBPersistenceManager::persistenceManager()->allWidgets(UBSettings::settings()->applicationApplicationsLibraryDirectory());
+    const QStringList widgetPaths = UBPersistenceManager::persistenceManager()->allWidgets(UBSettings::settings()->applicationApplicationsLibraryDirectory());
 
     UBGraphicsW3CWidgetItem *widget = 0;
 
-    foreach(QString widgetPath, widgetPaths)
+    for (const QString &widgetPath : widgetPaths)
     {
         if (widgetPath.contains("VideoPicker"))
         {

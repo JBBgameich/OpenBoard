@@ -41,22 +41,18 @@
 #include "core/memcheck.h"
 
 UBOEmbedParser::UBOEmbedParser(QObject *parent, const char* name)
+    : QObject(parent)
+    , mpNam(new QNetworkAccessManager(this))
 {
-    Q_UNUSED(parent);
     setObjectName(name);
     mParsedTitles.clear();
+    connect(mpNam, &QNetworkAccessManager::finished, this, &UBOEmbedParser::onFinished);
     connect(this, SIGNAL(parseContent(QString)), this, SLOT(onParseContent(QString)));
 }
 
 UBOEmbedParser::~UBOEmbedParser()
 {
 
-}
-
-void UBOEmbedParser::setNetworkAccessManager(QNetworkAccessManager *nam)
-{
-    mpNam = nam;
-    connect(mpNam, SIGNAL(finished(QNetworkReply*)), this, SLOT(onFinished(QNetworkReply*)));
 }
 
 void UBOEmbedParser::parse(const QString& html)
@@ -226,7 +222,7 @@ sOEmbedContent UBOEmbedParser::getXMLInfos(const QString &xml)
     return content;
 }
 
-void UBOEmbedParser::onParseContent(QString url)
+void UBOEmbedParser::onParseContent(const QString &url)
 {
     QUrl qurl = QUrl::fromEncoded(url.toLatin1());
 

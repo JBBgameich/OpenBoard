@@ -188,7 +188,10 @@ void UBWebController::activePageChanged()
         QUrl latestUrl = mCurrentWebBrowser->currentTabWebView()->url();
 
         // TODO : Uncomment the next line to continue the youtube button bugfix
-        //UBApplication::mainWindow->actionWebOEmbed->setEnabled(hasEmbeddedContent());
+        searchEmbeddedContent();
+        connect(this, &UBWebController::embeddedContentFound, this, [] {
+            UBApplication::mainWindow->actionWebOEmbed->setEnabled(true);
+        });
         // And remove this line once the previous one is uncommented
         UBApplication::mainWindow->actionWebOEmbed->setEnabled(isOEmbedable(latestUrl));
         UBApplication::mainWindow->actionEduMedia->setEnabled(isEduMedia(latestUrl));
@@ -197,35 +200,32 @@ void UBWebController::activePageChanged()
     }
 }
 
-bool UBWebController::hasEmbeddedContent()
+void UBWebController::searchEmbeddedContent()
 {
-//    bool bHasContent = false;
-//    if(mCurrentWebBrowser){
-//        QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->toHtml();
+    if(mCurrentWebBrowser) {
+        mCurrentWebBrowser->currentTabWebView()->webPage()->toHtml([this](const QString &html) {
+            // search the presence of "+oembed"
+            QString query = "\\+oembed([^>]*)>";
+            QRegExp exp(query);
+            exp.indexIn(html);
+            QStringList results = exp.capturedTexts();
+            if(2 <= results.size() && "" != results.at(1)){
+                // An embedded content has been found, no need to check the other ones
+                emit embeddedContentFound();
+            }else{
+                QList<QUrl> contentUrls;
+                lookForEmbedContent(html, "embed", "src", &contentUrls);
+                lookForEmbedContent(html, "video", "src", &contentUrls);
+                lookForEmbedContent(html, "object", "data", &contentUrls);
 
-//        // search the presence of "+oembed"
-//        QString query = "\\+oembed([^>]*)>";
-//        QRegExp exp(query);
-//        exp.indexIn(html);
-//        QStringList results = exp.capturedTexts();
-//        if(2 <= results.size() && "" != results.at(1)){
-//            // An embedded content has been found, no need to check the other ones
-//            bHasContent = true;
-//        }else{
-//            QList<QUrl> contentUrls;
-//            lookForEmbedContent(&html, "embed", "src", &contentUrls);
-//            lookForEmbedContent(&html, "video", "src", &contentUrls);
-//            lookForEmbedContent(&html, "object", "data", &contentUrls);
+                // TODO: check the hidden iFrame
 
-//            // TODO: check the hidden iFrame
-
-//            if(!contentUrls.empty()){
-//                bHasContent = true;
-//            }
-//        }
-//    }
-
-//    return bHasContent;
+                if(!contentUrls.empty()){
+                    emit embeddedContentFound();
+                }
+            }
+        });
+    }
 }
 
 QPixmap UBWebController::captureCurrentPage()
@@ -258,7 +258,7 @@ void UBWebController::setupPalettes()
 
         connect(mMainWindow->actionWebCustomCapture, SIGNAL(triggered()), this, SLOT(customCapture()));
         connect(mMainWindow->actionWebWindowCapture, SIGNAL(triggered()), this, SLOT(captureWindow()));
-        connect(mMainWindow->actionWebOEmbed, SIGNAL(triggered()), this, SLOT(captureoEmbed()));
+        connect(mMainWindow->actionWebOEmbed, &QAction::triggered, this, &UBWebController::captureoEmbed);
         connect(mMainWindow->actionEduMedia, SIGNAL(triggered()), this, SLOT(captureEduMedia()));
 
         connect(mMainWindow->actionWebShowHideOnDisplay, SIGNAL(toggled(bool)), this, SLOT(toogleMirroring(bool)));
@@ -380,7 +380,7 @@ void UBWebController::captureoEmbed()
 
         if (isOEmbedable(currentUrl))
         {
-            UBGraphicsW3CWidgetItem * widget = UBApplication::boardController->activeScene()->addOEmbed(currentUrl);
+            UBGraphicsW3CWidgetItem *widget = UBApplication::boardController->activeScene()->addOEmbed(currentUrl);
 
             if(widget)
             {
@@ -392,13 +392,13 @@ void UBWebController::captureoEmbed()
     }
 }
 
-void UBWebController::lookForEmbedContent(QString* pHtml, QString tag, QString attribute, QList<QUrl> *pList)
+void UBWebController::lookForEmbedContent(const QString &pHtml, QString tag, QString attribute, QList<QUrl> *pList)
 {
     if(NULL != pHtml && NULL != pList){
         QVector<QString> urlsFound;
         // Check for <embed> content
         QRegExp exp(QString("<%0(.*)").arg(tag));
-        exp.indexIn(*pHtml);
+        exp.indexIn(pHtml);
         QStringList strl = exp.capturedTexts();
         if(2 <= strl.size() && strl.at(1) != ""){
             // Here we call this regular expression:
@@ -417,26 +417,22 @@ void UBWebController::lookForEmbedContent(QString* pHtml, QString tag, QString a
     }
 }
 
-void UBWebController::checkForOEmbed(QString *pHtml)
+void UBWebController::checkForOEmbed(const QString &pHtml)
 {
-    mOEmbedParser.parse(*pHtml);
+    mOEmbedParser.parse(pHtml);
 }
 
 void UBWebController::getEmbeddableContent()
 {
-//    // Get the source code of the page
-//    if(mCurrentWebBrowser){
-//        QNetworkAccessManager* pNam = mCurrentWebBrowser->currentTabWebView()->webPage()->networkAccessManager();
-//        if(nullptr != pNam){
-//            QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->mainFrame()->toHtml();
-//            mOEmbedParser.setNetworkAccessManager(pNam);
+    // Get the source code of the page
+    if(mCurrentWebBrowser){
+        mCurrentWebBrowser->currentTabWebView()->webPage()->toHtml([&](const QString &html) {
+            // First, we have to check if there is some oembed content
+            checkForOEmbed(html);
 
-//            // First, we have to check if there is some oembed content
-//            checkForOEmbed(&html);
-
-//            // Note: The other contents will be verified once the oembed ones have been checked
-//        }
-//    }
+            // Note: The other contents will be verified once the oembed ones have been checked
+        });
+    }
 }
 
 void UBWebController::captureEduMedia()
