@@ -32,9 +32,11 @@
 #include "core/UBApplication.h"
 #include "board/UBBoardController.h"
 
+#include <QWebEngineView>
+
 #include "core/memcheck.h"
 
-UBLibraryAPI::UBLibraryAPI(QWebView *pWebView)
+UBLibraryAPI::UBLibraryAPI(QWebEngineView *pWebView)
     : QObject(pWebView)
     , mWebView(pWebView)
 {

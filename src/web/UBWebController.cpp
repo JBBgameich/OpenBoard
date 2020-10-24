@@ -30,7 +30,6 @@
 #include <QtGui>
 #include <QDomDocument>
 #include <QXmlQuery>
-#include <QWebFrame>
 
 #include "frameworks/UBPlatformUtils.h"
 
@@ -196,9 +195,6 @@ void UBWebController::activePageChanged()
 {
     if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
     {
-        if (mTrapFlashController && mCurrentWebBrowser->currentTabWebView()->page())
-            mTrapFlashController->updateTrapFlashFromPage(mCurrentWebBrowser->currentTabWebView()->page()->currentFrame());
-
         mMainWindow->actionWebTrap->setChecked(false);
 
         QUrl latestUrl = mCurrentWebBrowser->currentTabWebView()->url();
@@ -215,83 +211,82 @@ void UBWebController::activePageChanged()
 
 bool UBWebController::hasEmbeddedContent()
 {
-    bool bHasContent = false;
-    if(mCurrentWebBrowser){
-        QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->mainFrame()->toHtml();
+//    bool bHasContent = false;
+//    if(mCurrentWebBrowser){
+//        QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->toHtml();
 
-        // search the presence of "+oembed"
-        QString query = "\\+oembed([^>]*)>";
-        QRegExp exp(query);
-        exp.indexIn(html);
-        QStringList results = exp.capturedTexts();
-        if(2 <= results.size() && "" != results.at(1)){
-            // An embedded content has been found, no need to check the other ones
-            bHasContent = true;
-        }else{
-            QList<QUrl> contentUrls;
-            lookForEmbedContent(&html, "embed", "src", &contentUrls);
-            lookForEmbedContent(&html, "video", "src", &contentUrls);
-            lookForEmbedContent(&html, "object", "data", &contentUrls);
+//        // search the presence of "+oembed"
+//        QString query = "\\+oembed([^>]*)>";
+//        QRegExp exp(query);
+//        exp.indexIn(html);
+//        QStringList results = exp.capturedTexts();
+//        if(2 <= results.size() && "" != results.at(1)){
+//            // An embedded content has been found, no need to check the other ones
+//            bHasContent = true;
+//        }else{
+//            QList<QUrl> contentUrls;
+//            lookForEmbedContent(&html, "embed", "src", &contentUrls);
+//            lookForEmbedContent(&html, "video", "src", &contentUrls);
+//            lookForEmbedContent(&html, "object", "data", &contentUrls);
 
-            // TODO: check the hidden iFrame
+//            // TODO: check the hidden iFrame
 
-            if(!contentUrls.empty()){
-                bHasContent = true;
-            }
-        }
-    }
+//            if(!contentUrls.empty()){
+//                bHasContent = true;
+//            }
+//        }
+//    }
 
-    return bHasContent;
+//    return bHasContent;
 }
 
 QPixmap UBWebController::captureCurrentPage()
 {
-    QPixmap pix;
+//    QPixmap pix;
 
-    if (mCurrentWebBrowser
-            && mCurrentWebBrowser->currentTabWebView()
-            && mCurrentWebBrowser->currentTabWebView()->page()
-            && mCurrentWebBrowser->currentTabWebView()->page()->mainFrame())
-    {
-        QWebFrame* frame = mCurrentWebBrowser->currentTabWebView()->page()->mainFrame();
-        QSize size = frame->contentsSize();
+//    if (mCurrentWebBrowser
+//            && mCurrentWebBrowser->currentTabWebView()
+//            && mCurrentWebBrowser->currentTabWebView()->page())
+//    {
+//        QWebFrame* frame = mCurrentWebBrowser->currentTabWebView()->page()->mainFrame();
+//        QSize size = frame->contentsSize();
 
-        qDebug() << size;
+//        qDebug() << size;
 
-        QVariant top = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientTop");
-        QVariant left = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientLeft");
-        QVariant width = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientWidth");
-        QVariant height = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientHeight");
+//        QVariant top = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientTop");
+//        QVariant left = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientLeft");
+//        QVariant width = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientWidth");
+//        QVariant height = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientHeight");
 
-        QSize vieportSize = mCurrentWebBrowser->currentTabWebView()->page()->viewportSize();
-        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(frame->contentsSize());
-        pix = QPixmap(frame->geometry().width(), frame->geometry().height());
+//        QSize vieportSize = mCurrentWebBrowser->currentTabWebView()->page()->viewportSize();
+//        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(frame->contentsSize());
+//        pix = QPixmap(frame->geometry().width(), frame->geometry().height());
 
-        {
-            QPainter p(&pix);
-            frame->render(&p);
-        }
+//        {
+//            QPainter p(&pix);
+//            frame->render(&p);
+//        }
 
-        if (left.isValid() && top.isValid() && width.isValid() && height.isValid())
-        {
-            bool okLeft, okTop, okWidth, okHeight;
+//        if (left.isValid() && top.isValid() && width.isValid() && height.isValid())
+//        {
+//            bool okLeft, okTop, okWidth, okHeight;
 
-            int iLeft = left.toInt(&okLeft) * frame->zoomFactor();
-            int iTop = top.toInt(&okTop) * frame->zoomFactor();
-            int iWidth = width.toInt(&okWidth) * frame->zoomFactor();
-            int iHeight = height.toInt(&okHeight) * frame->zoomFactor();
+//            int iLeft = left.toInt(&okLeft) * frame->zoomFactor();
+//            int iTop = top.toInt(&okTop) * frame->zoomFactor();
+//            int iWidth = width.toInt(&okWidth) * frame->zoomFactor();
+//            int iHeight = height.toInt(&okHeight) * frame->zoomFactor();
 
-            if(okLeft && okTop && okWidth && okHeight)
-            {
-                pix = pix.copy(iLeft, iTop, iWidth, iHeight);
-            }
-        }
+//            if(okLeft && okTop && okWidth && okHeight)
+//            {
+//                pix = pix.copy(iLeft, iTop, iWidth, iHeight);
+//            }
+//        }
 
 
-        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(vieportSize);
-    }
+//        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(vieportSize);
+//    }
 
-    return pix;
+//    return pix;
 }
 
 
@@ -427,7 +422,7 @@ void UBWebController::captureoEmbed()
 
         // And comment from here
 
-        QWebView* webView = mCurrentWebBrowser->currentTabWebView();
+        QWebEngineView* webView = mCurrentWebBrowser->currentTabWebView();
         QUrl currentUrl = webView->url();
 
         if (isOEmbedable(currentUrl))
@@ -476,81 +471,81 @@ void UBWebController::checkForOEmbed(QString *pHtml)
 
 void UBWebController::getEmbeddableContent()
 {
-    // Get the source code of the page
-    if(mCurrentWebBrowser){
-        QNetworkAccessManager* pNam = mCurrentWebBrowser->currentTabWebView()->webPage()->networkAccessManager();
-        if(NULL != pNam){
-            QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->mainFrame()->toHtml();
-            mOEmbedParser.setNetworkAccessManager(pNam);
+//    // Get the source code of the page
+//    if(mCurrentWebBrowser){
+//        QNetworkAccessManager* pNam = mCurrentWebBrowser->currentTabWebView()->webPage()->networkAccessManager();
+//        if(nullptr != pNam){
+//            QString html = mCurrentWebBrowser->currentTabWebView()->webPage()->mainFrame()->toHtml();
+//            mOEmbedParser.setNetworkAccessManager(pNam);
 
-            // First, we have to check if there is some oembed content
-            checkForOEmbed(&html);
+//            // First, we have to check if there is some oembed content
+//            checkForOEmbed(&html);
 
-            // Note: The other contents will be verified once the oembed ones have been checked
-        }
-    }
+//            // Note: The other contents will be verified once the oembed ones have been checked
+//        }
+//    }
 }
 
 void UBWebController::captureEduMedia()
 {
-    if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
-    {
-        QWebView* webView = mCurrentWebBrowser->currentTabWebView();
-        QUrl currentUrl = webView->url();
+//    if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
+//    {
+//        QWebEngineView* webView = mCurrentWebBrowser->currentTabWebView();
+//        QUrl currentUrl = webView->url();
 
-        if (isEduMedia(currentUrl))
-        {
-            QWebElementCollection objects = webView->page()->currentFrame()->findAllElements("object");
+//        if (isEduMedia(currentUrl))
+//        {
+//            QWebElementCollection objects = webView->page()->findAllElements("object");
 
-            foreach(QWebElement object, objects)
-            {
-                foreach(QWebElement param, object.findAll("param"))
-                {
-                    if(param.attribute("name") == "flashvars")
-                    {
-                        QString value = param.attribute("value");
-                        QString midValue;
-                        QString langValue;
-                        QString hostValue;
+//            foreach(QWebElement object, objects)
+//            {
+//                foreach(QWebElement param, object.findAll("param"))
+//                {
+//                    if(param.attribute("name") == "flashvars")
+//                    {
+//                        QString value = param.attribute("value");
+//                        QString midValue;
+//                        QString langValue;
+//                        QString hostValue;
 
-                        QStringList flashVars = value.split("&");
+//                        QStringList flashVars = value.split("&");
 
-                        foreach(QString flashVar, flashVars)
-                        {
-                            QStringList var = flashVar.split("=");
+//                        foreach(QString flashVar, flashVars)
+//                        {
+//                            QStringList var = flashVar.split("=");
 
-                            if (var.length() < 2)
-                                break;
+//                            if (var.length() < 2)
+//                                break;
 
-                            if (var.at(0) == "mid")
-                                midValue = var.at(1);
-                            else if (var.at(0) == "lang")
-                                langValue = var.at(1);
-                            else if (var.at(0) == "host")
-                                hostValue = var.at(1);
+//                            if (var.at(0) == "mid")
+//                                midValue = var.at(1);
+//                            else if (var.at(0) == "lang")
+//                                langValue = var.at(1);
+//                            else if (var.at(0) == "host")
+//                                hostValue = var.at(1);
 
-                        }
+//                        }
 
-                        if (midValue.length() > 0 && langValue.length() > 0 && hostValue.length() > 0)
-                        {
-                            QString swfUrl = "http://" + hostValue + "/" + langValue + "/fl/" + midValue;
+//                        if (midValue.length() > 0 && langValue.length() > 0 && hostValue.length() > 0)
+//                        {
+//                            QString swfUrl = "http://" + hostValue + "/" + langValue + "/fl/" + midValue;
 
-                            UBApplication::boardController->downloadURL(QUrl(swfUrl));
+//                            UBApplication::boardController->downloadURL(QUrl(swfUrl));
 
-                            UBApplication::applicationController->showBoard();
-                            UBDrawingController::drawingController()->setStylusTool(UBStylusTool::Selector);
+//                            UBApplication::applicationController->showBoard();
+//                            UBDrawingController::drawingController()->setStylusTool(UBStylusTool::Selector);
 
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        UBApplication::showMessage("Cannot find any reference to eduMedia content");
-    }
+//                            return;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    else
+//    {
+//        UBApplication::showMessage("Cannot find any reference to eduMedia content");
+//    }
 }
 
 bool UBWebController::isOEmbedable(const QUrl& pUrl)
@@ -593,7 +588,7 @@ void UBWebController::loadUrl(const QUrl& url)
 }
 
 
-QWebView* UBWebController::createNewTab()
+QWebEngineView* UBWebController::createNewTab()
 {
     if (mCurrentWebBrowser)
         UBApplication::applicationController->showInternet();
@@ -606,8 +601,8 @@ void UBWebController::copy()
 {
     if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
     {
-        QWebView* webView = mCurrentWebBrowser->currentTabWebView();
-        QAction *act = webView->pageAction(QWebPage::Copy);
+        QWebEngineView* webView = mCurrentWebBrowser->currentTabWebView();
+        QAction *act = webView->pageAction(QWebEnginePage::Copy);
         if(act)
             act->trigger();
     }
@@ -618,8 +613,8 @@ void UBWebController::paste()
 {
     if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
     {
-        QWebView* webView = mCurrentWebBrowser->currentTabWebView();
-        QAction *act = webView->pageAction(QWebPage::Paste);
+        QWebEngineView* webView = mCurrentWebBrowser->currentTabWebView();
+        QAction *act = webView->pageAction(QWebEnginePage::Paste);
         if(act)
             act->trigger();
     }
@@ -630,8 +625,8 @@ void UBWebController::cut()
 {
     if (mCurrentWebBrowser && mCurrentWebBrowser->currentTabWebView())
     {
-        QWebView* webView = mCurrentWebBrowser->currentTabWebView();
-        QAction *act = webView->pageAction(QWebPage::Cut);
+        QWebEngineView* webView = mCurrentWebBrowser->currentTabWebView();
+        QAction *act = webView->pageAction(QWebEnginePage::Cut);
         if(act)
             act->trigger();
     }

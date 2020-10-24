@@ -30,8 +30,6 @@
 #include "UBTrapFlashController.h"
 
 #include <QtXml>
-#include <QWebFrame>
-
 
 #include "frameworks/UBFileSystemUtils.h"
 
@@ -80,7 +78,6 @@ void UBTrapFlashController::showTrapFlash()
         mTrapFlashUi = new Ui::trapFlashDialog();
         mTrapFlashUi->setupUi(mTrapFlashDialog);
 
-        mTrapFlashUi->webView->page()->setNetworkAccessManager(UBNetworkAccessManager::defaultAccessManager());
         int viewWidth = mParentWidget->width() / 2;
         int viewHeight = mParentWidget->height() * 2. / 3.;
         mTrapFlashDialog->setGeometry(
@@ -154,27 +151,8 @@ void UBTrapFlashController::updateListOfFlashes(const QList<UBWebKitUtils::HtmlO
         }
 
         connect(mTrapFlashUi->flashCombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectFlash(int)));
-        selectFlash(mTrapFlashUi->flashCombobox->currentIndex());
     }
 }
-
-
-void UBTrapFlashController::selectFlash(int pFlashIndex)
-{
-    if (pFlashIndex == 0)
-    {
-        mTrapFlashUi->webView->setHtml(generateFullPageHtml("", false));
-        QVariant res = mCurrentWebFrame->evaluateJavaScript("window.document.title");
-        mTrapFlashUi->widgetNameLineEdit->setText(res.toString().trimmed());
-    }
-    else if (pFlashIndex > 0 && pFlashIndex <= mAvailableFlashes.size())
-    {
-        UBWebKitUtils::HtmlObject currentObject = mAvailableFlashes.at(pFlashIndex - 1);
-        mTrapFlashUi->webView->setHtml(generateHtml(currentObject, "", false));
-        mTrapFlashUi->widgetNameLineEdit->setText(widgetNameForObject(currentObject));
-    }
-}
-
 
 void UBTrapFlashController::createWidget()
 {
@@ -211,9 +189,6 @@ void UBTrapFlashController::createWidget()
         UBApplication::applicationController->showBoard();
         UBApplication::boardController->downloadURL(QUrl(selectedObject.source), QString(), QPoint(0, 0), QSize(selectedObject.width, selectedObject.height));
     }
-
-    QString freezedWidgetPath = UBPlatformUtils::applicationResourcesDirectory() + "/etc/freezedWidgetWrapper.html";
-    mTrapFlashUi->webView->load(QUrl::fromLocalFile(freezedWidgetPath));
 
     mTrapFlashDialog->hide();
 }
@@ -254,25 +229,9 @@ void UBTrapFlashController::importWidgetInLibrary(QDir pSourceDir)
     }
 }
 
-
-void UBTrapFlashController::updateTrapFlashFromPage(QWebFrame* pCurrentWebFrame)
-{
-    if (pCurrentWebFrame && mTrapFlashDialog && mTrapFlashDialog->isVisible())
-    {
-        QList<UBWebKitUtils::HtmlObject> list = UBWebKitUtils::objectsInFrame(pCurrentWebFrame);
-        mCurrentWebFrame = pCurrentWebFrame;
-        updateListOfFlashes(list);
-    }
-}
-
-
 QString UBTrapFlashController::generateIcon(const QString& pDirPath)
 {
     QDesktopWidget* desktop = QApplication::desktop();
-    QPoint webViewPosition = mTrapFlashUi->webView->mapToGlobal(mTrapFlashUi->webView->pos());
-    QSize webViewSize = mTrapFlashUi->webView->size();
-    QPixmap capture = QPixmap::grabWindow(desktop->winId(), webViewPosition.x(), webViewPosition.y()
-            , webViewSize.width() - 10, webViewSize.height() -10);
 
     QPixmap widgetIcon(75,75);
     widgetIcon.fill(Qt::transparent);
@@ -282,8 +241,6 @@ QString UBTrapFlashController::generateIcon(const QString& pDirPath)
     painter.setBrush(QBrush(QColor(180,180,180)));
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(0, 0, 75, 75, 10, 10);
-    QPixmap icon = capture.scaled(65, 65);
-    painter.drawPixmap(5,5,icon);
 
     QString iconFile = pDirPath + "/icon.png";
     widgetIcon.save(iconFile, "PNG");
@@ -416,11 +373,11 @@ QString UBTrapFlashController::generateHtml(const UBWebKitUtils::HtmlObject& pOb
 
     if (mCurrentWebFrame->url().toString().contains("youtube"))
     {
-        QVariant res = mCurrentWebFrame->evaluateJavaScript("window.document.getElementById('embed_code').value");
+        //QVariant res = mCurrentWebFrame->evaluateJavaScript("window.document.getElementById('embed_code').value");
 
         //force windowsless mode
 
-        htmlContentString += res.toString().replace("></embed>", " wmode='opaque'></embed>");
+        //htmlContentString += res.toString().replace("></embed>", " wmode='opaque'></embed>");
     }
     else
     {

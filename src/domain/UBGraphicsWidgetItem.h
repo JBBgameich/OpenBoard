@@ -31,9 +31,8 @@
 #define UBGRAPHICSWIDGETITEM_H
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QDomElement>
-#include <QGraphicsWebView>
+#include <QGraphicsView>
 
 #include "core/UB.h"
 
@@ -55,7 +54,7 @@ struct UBWidgetType
     };
 };
 
-class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBResizableGraphicsItem, public UBGraphicsItem
+class UBGraphicsWidgetItem : public QGraphicsWidget, public UBItem, public UBResizableGraphicsItem, public UBGraphicsItem
 {
     Q_OBJECT
 
@@ -74,7 +73,6 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         virtual QSizeF size() const;
 
         QUrl mainHtml();
-        void loadMainHtml();
         QUrl widgetUrl();
         void widgetUrl(QUrl url) { mWidgetUrl = url; }
         QString mainHtmlFileName();
@@ -157,26 +155,21 @@ class UBGraphicsWidgetItem : public QGraphicsWebView, public UBItem, public UBRe
         QMap<QString, QString> mPreferences;
 
 
-        virtual bool event(QEvent *event);
-        virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
-        virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-        virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-        virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-        virtual void sendJSEnterEvent();
-        virtual void sendJSLeaveEvent();
-        virtual void injectInlineJavaScript();
-        virtual void wheelEvent(QGraphicsSceneWheelEvent *event);
-        virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
-        virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+        bool event(QEvent *event) override;
+        void dropEvent(QGraphicsSceneDragDropEvent *event) override;
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+        void wheelEvent(QGraphicsSceneWheelEvent *event) override;
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     protected slots:
         void geometryChangeRequested(const QRect& geom);
-        virtual void javaScriptWindowObjectCleared();
         void mainFrameLoadFinished(bool ok);
 
     private slots:
-        void onLinkClicked(const QUrl& url);
         void initialLayoutCompleted();
 
     private:
@@ -260,9 +253,6 @@ class UBGraphicsW3CWidgetItem : public UBGraphicsWidgetItem
         static bool hasNPAPIWrapper(const QString& pMimeType);
 
         Metadata mMetadatas;
-
-    private slots:
-        virtual void javaScriptWindowObjectCleared();
 
     private:
         static void loadNPAPIWrappersTemplates();

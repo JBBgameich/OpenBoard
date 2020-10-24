@@ -71,9 +71,9 @@
 #include "WBToolBarSearch.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QMenu>
 #include <QCompleter>
+#include <QWebEngineSettings>
 
 #include "network/UBAutoSaver.h"
 
@@ -138,12 +138,9 @@ void WBToolbarSearch::searchNow()
     if (newList.size() >= mMaxSavedSearches)
         newList.removeLast();
 
-    QWebSettings *globalSettings = QWebSettings::globalSettings();
-    if (!globalSettings->testAttribute(QWebSettings::PrivateBrowsingEnabled))
-    {
-        mStringListModel->setStringList(newList);
-        mAutosaver->changeOccurred();
-    }
+    QWebEngineSettings *globalSettings = QWebEngineSettings::defaultSettings();
+    mStringListModel->setStringList(newList);
+    mAutosaver->changeOccurred();
 
     QUrl url(QLatin1String("http://www.google.com/search"));
     QUrlQuery urlQuery;

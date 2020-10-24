@@ -31,16 +31,15 @@
 #define UBLIBRARYAPI_H_
 
 #include <QtGui>
-#include <QtWebKit>
-#include <QWebView>
+#include <QWebEngineView>
 
 class UBLibraryAPI : public QObject
 {
     Q_OBJECT;
 
     public:
-        UBLibraryAPI(QWebView *pWebView = 0);
-        virtual ~UBLibraryAPI();
+        UBLibraryAPI(QWebEngineView *pWebView = nullptr);
+        ~UBLibraryAPI() override;
 
     public slots:
 
@@ -68,9 +67,7 @@ class UBLibraryAPI : public QObject
 
 
     private:
-        QWebView* mWebView;
-
-
+        QWebEngineView* mWebView;
 };
 
 #endif /* UBLIBRARYAPI_H_ */

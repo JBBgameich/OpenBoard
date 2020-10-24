@@ -54,9 +54,8 @@
 #include "api/UBWidgetUniboardAPI.h"
 #include "UBFeaturesActionBar.h"
 #include "UBRubberBand.h"
-#include <QtWebKit>
-#include <QWebView>
-#include <QWebSettings>
+#include <QWebEngineView>
+#include <QWebEngineSettings>
 
 #define THUMBNAIL_WIDTH 400
 #define ID_LISTVIEW 0
@@ -315,11 +314,10 @@ public:
 
 private slots:
     void onLoadFinished(bool ok);
-    void javaScriptWindowObjectCleared();
 
 private:
-    QWebView* mpView;
-    QWebSettings* mpWebSettings;
+    QWebEngineView* mpView;
+    QWebEngineSettings* mpWebSettings;
     QVBoxLayout* mpLayout;
     UBWidgetUniboardAPI* mpSankoreAPI;
 };

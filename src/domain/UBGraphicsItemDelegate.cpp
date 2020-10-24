@@ -515,7 +515,6 @@ void UBGraphicsItemDelegate::remove(bool canUndo)
         /* this is performed because when removing delegated from scene while it contains flash content, segfault happens because of QGraphicsScene::removeItem() */
         UBGraphicsWidgetItem *mDelegated_casted = dynamic_cast<UBGraphicsWidgetItem*>(mDelegated);
         if (mDelegated_casted)
-            mDelegated_casted->setHtml(QString());
 
         scene->removeItem(mDelegated);
 
@@ -1298,7 +1297,7 @@ void MediaTimer::setNumDigits(int numDigits)
     } else {
         if (numDigits == ndigits)             // no change
             return;
-        register int i;
+        int i;
         int dif;
         if (numDigits > ndigits) {            // expand
             dif = numDigits - ndigits;

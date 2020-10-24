@@ -56,10 +56,6 @@ class UBWidgetMessageAPI : public QObject
             mSubscribedTopics.remove(pTopicName);
         }
 
-    private slots:
-
-         void onNewMessage(const QString& pTopicName, const QString& pMessage);
-
     private:
 
         QSet<QString> mSubscribedTopics;

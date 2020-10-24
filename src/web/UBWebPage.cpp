@@ -77,7 +77,7 @@ class UBWebPluginFactory : public QWebPluginFactory
 
 
 UBWebPage::UBWebPage(QObject *parent)
-    : QWebPage(parent)
+    : QWebEnginePage(parent)
     , mPluginFactory(0)
 {
     mCachedUserAgentString = QWebPage::userAgentForUrl(QUrl());

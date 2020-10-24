@@ -35,9 +35,9 @@
  */
 
 #include <QtCore>
-#include <QWebPage>
+#include <QWebEnginePage>
 
-class UBWebPage : public QWebPage
+class UBWebPage : public QWebEnginePage
 {
     Q_OBJECT;
 

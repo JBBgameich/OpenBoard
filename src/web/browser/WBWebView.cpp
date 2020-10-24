@@ -72,7 +72,6 @@
 #include "WBDownloadManager.h"
 #include "WBTabWidget.h"
 #include "WBWebView.h"
-#include "web/UBWebPage.h"
 #include "core/UBApplication.h"
 #include "core/UBApplicationController.h"
 #include "board/UBBoardController.h"
@@ -82,21 +81,19 @@
 #include "network/UBCookieJar.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QtUiTools/QUiLoader>
 #include <QMessageBox>
-#include <QWebFrame>
+#include <QWebEnginePage>
+#include <QWebEngineSettings>
 
 #include "core/memcheck.h"
 
 WBWebPage::WBWebPage(QObject *parent)
-    : UBWebPage(parent)
+    : QWebEnginePage(parent)
     , mKeyboardModifiers(Qt::NoModifier)
     , mPressedButtons(Qt::NoButton)
     , mOpenInNewTab(false)
 {
-    setNetworkAccessManager(UBNetworkAccessManager::defaultAccessManager());
-
     connect(this, SIGNAL(unsupportedContent(QNetworkReply *)),
             this, SLOT(handleUnsupportedContent(QNetworkReply *)));
 }
@@ -115,12 +112,12 @@ WBBrowserWindow *WBWebPage::mainWindow()
         return 0;
 }
 
-bool WBWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)
+bool WBWebPage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame)
 {
     // ctrl open in new tab
     // ctrl-shift open in new tab and select
     // ctrl-alt open in new window
-    if (type == QWebPage::NavigationTypeLinkClicked
+    if (type == QWebEnginePage::NavigationTypeLinkClicked
         && (mKeyboardModifiers & Qt::ControlModifier
             || mPressedButtons == Qt::MidButton))
     {
@@ -129,43 +126,29 @@ bool WBWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest 
         bool selectNewTab = (mKeyboardModifiers & Qt::ShiftModifier);
         webView = mainWindow()->tabWidget()->newTab(selectNewTab);
 
-        webView->load(request);
+        webView->load(url);
         mKeyboardModifiers = Qt::NoModifier;
         mPressedButtons = Qt::NoButton;
 
         return false;
     }
 
-    if (frame == mainFrame())
+    /*if (url == mainFrame())*/
     {
-        mLoadingUrl = request.url();
+        mLoadingUrl = url;
         emit loadingUrl(mLoadingUrl);
     }
 
-    return QWebPage::acceptNavigationRequest(frame, request, type);
+    return QWebEnginePage::acceptNavigationRequest(url, type, isMainFrame);
 }
 
 
-QWebPage *WBWebPage::createWindow(QWebPage::WebWindowType type)
+QWebEnginePage *WBWebPage::createWindow(QWebEnginePage::WebWindowType type)
 {
     Q_UNUSED(type);
 
     return mainWindow()->tabWidget()->newTab()->page();
 }
-
-
-QObject *WBWebPage::createPlugin(const QString &classId, const QUrl &url, const QStringList &paramNames
-        , const QStringList &paramValues)
-{
-    Q_UNUSED(url);
-    Q_UNUSED(paramNames);
-    Q_UNUSED(paramValues);
-
-    QUiLoader loader;
-
-    return loader.createWidget(classId, view());
-}
-
 
 void WBWebPage::handleUnsupportedContent(QNetworkReply *reply)
 {
@@ -232,24 +215,21 @@ void WBWebPage::handleUnsupportedContent(QNetworkReply *reply)
                         .arg(reply->url().toString());
     }
 
-    QList<QWebFrame*> frames;
-    frames.append(mainFrame());
+    QList<QWebEnginePage*> frames;
+    frames.append(this);
     while (!frames.isEmpty())
     {
-        QWebFrame *frame = frames.takeFirst();
+        QWebEnginePage *frame = frames.takeFirst();
         if (frame->url() == reply->url())
         {
             frame->setHtml(html, reply->url());
             return;
         }
-        QList<QWebFrame *> children = frame->childFrames();
-        foreach(QWebFrame *frame, children)
-            frames.append(frame);
     }
 
     if (mLoadingUrl == reply->url())
     {
-        mainFrame()->setHtml(html, reply->url());
+        setHtml(html, reply->url());
     }
 }
 
@@ -262,8 +242,6 @@ WBWebView::WBWebView(QWidget* parent)
     setObjectName("ubBrowserWebView");
 
     setPage(mPage);
-
-    QWebView::setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 
     connect(page(), SIGNAL(statusBarMessage(const QString&)),
             this, SLOT(setStatusBarText(const QString&)));
@@ -282,53 +260,28 @@ WBWebView::WBWebView(QWidget* parent)
 
     connect(page(), SIGNAL(downloadRequested(const QNetworkRequest &)),
             this, SLOT(downloadRequested(const QNetworkRequest &)));
-
-    page()->setForwardUnsupportedContent(true);
-
 }
 
 
 void WBWebView::contextMenuEvent(QContextMenuEvent *event)
 {
-    QWebHitTestResult r = page()->mainFrame()->hitTestContent(event->pos());
-
-    if (!r.linkUrl().isEmpty())
-    {
-        QMenu menu(this);
-        menu.addAction(pageAction(QWebPage::OpenLinkInNewWindow));
-        menu.addAction(tr("Open in New Tab"), this, SLOT(openLinkInNewTab()));
-        menu.addSeparator();
-        menu.addAction(pageAction(QWebPage::DownloadLinkToDisk));
-        // Add link to bookmarks...
-        menu.addSeparator();
-        menu.addAction(pageAction(QWebPage::CopyLinkToClipboard));
-        if (page()->settings()->testAttribute(QWebSettings::DeveloperExtrasEnabled))
-            menu.addAction(pageAction(QWebPage::InspectElement));
-        menu.exec(mapToGlobal(event->pos()));
-        return;
-    }
-    WBWebTrapWebView::contextMenuEvent(event);
+    QMenu menu(this);
+    menu.addAction(pageAction(QWebEnginePage::OpenLinkInNewWindow));
+    menu.addAction(tr("Open in New Tab"), this, SLOT(openLinkInNewTab()));
+    menu.addSeparator();
+    menu.addAction(pageAction(QWebEnginePage::DownloadLinkToDisk));
+    // Add link to bookmarks...
+    menu.addSeparator();
+    menu.addAction(pageAction(QWebEnginePage::CopyLinkToClipboard));
+    menu.addAction(pageAction(QWebEnginePage::InspectElement));
+    menu.exec(mapToGlobal(event->pos()));
+    return;
 }
-
-
-void WBWebView::wheelEvent(QWheelEvent *event)
-{
-    if (QApplication::keyboardModifiers() & Qt::ControlModifier)
-    {
-        int numDegrees = event->delta() / 8;
-        int numSteps = numDegrees / 15;
-        setTextSizeMultiplier(textSizeMultiplier() + numSteps * 0.1);
-        event->accept();
-        return;
-    }
-    WBWebTrapWebView::wheelEvent(event);
-}
-
 
 void WBWebView::openLinkInNewTab()
 {
     mPage->mOpenInNewTab = true;
-    pageAction(QWebPage::OpenLinkInNewWindow)->trigger();
+    pageAction(QWebEnginePage::OpenLinkInNewWindow)->trigger();
 }
 
 
@@ -385,7 +338,7 @@ QUrl WBWebView::url() const
 {
     QUrl url;
     try{
-        url = QWebView::url();
+        url = QWebEngineView::url();
     } catch(...)
     {}
 
@@ -429,10 +382,5 @@ void WBWebView::setStatusBarText(const QString &string)
 void WBWebView::downloadRequested(const QNetworkRequest &request)
 {
     WBBrowserWindow::downloadManager()->download(request);
-}
-
-void WBWebView::load(const QNetworkRequest & request, QNetworkAccessManager::Operation operation, const QByteArray & body)
-{
-    WBWebTrapWebView::load(request, operation, body);
 }
 

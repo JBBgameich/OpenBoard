@@ -85,6 +85,8 @@
 
 #include "core/memcheck.h"
 
+#include <QWebEngineView>
+
 UBBoardView::UBBoardView (UBBoardController* pController, QWidget* pParent, bool isControl, bool isDesktop)
     : QGraphicsView (pParent)
     , mController (pController)
@@ -583,8 +585,6 @@ Here we determines cases when items should to get mouse press event at pressing 
         }
         return false;
         break;
-    case QGraphicsWebView::Type:
-        return true;
     case QGraphicsProxyWidget::Type:
         return false;
 
@@ -614,8 +614,6 @@ bool UBBoardView::itemShouldReceiveSuspendedMousePressEvent(QGraphicsItem *item)
 
     switch(item->type())
     {
-    case QGraphicsWebView::Type:
-        return false;
     case UBGraphicsPixmapItem::Type:
     case UBGraphicsSvgItem::Type:
     case UBGraphicsTextItem::Type:
@@ -1273,7 +1271,6 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
                             DelegateButton::Type != movingItem->type() &&
                             UBGraphicsDelegateFrame::Type !=  movingItem->type() &&
                             UBGraphicsCache::Type != movingItem->type() &&
-                            QGraphicsWebView::Type != movingItem->type() && // for W3C widgets as Tools.
                             !(!isMultipleSelectionEnabled() && movingItem->parentItem() && UBGraphicsWidgetItem::Type == movingItem->type() && UBGraphicsGroupContainerItem::Type == movingItem->parentItem()->type()))
                     {
                         bReleaseIsNeed = false;
@@ -1355,7 +1352,6 @@ void UBBoardView::mouseReleaseEvent (QMouseEvent *event)
                         QGraphicsSvgItem::Type !=  movingItem->type() &&
                         UBGraphicsDelegateFrame::Type !=  movingItem->type() &&
                         UBGraphicsCache::Type != movingItem->type() &&
-                        QGraphicsWebView::Type != movingItem->type() && // for W3C widgets as Tools.
                         !(!isMultipleSelectionEnabled() && movingItem->parentItem() && UBGraphicsWidgetItem::Type == movingItem->type() && UBGraphicsGroupContainerItem::Type == movingItem->parentItem()->type()))
                 {
                     bReleaseIsNeed = false;
@@ -1557,7 +1553,7 @@ void UBBoardView::dropEvent (QDropEvent *event)
     else {
         if (!event->source()
                 || qobject_cast<UBThumbnailWidget *>(event->source())
-                || qobject_cast<QWebView*>(event->source())
+                || qobject_cast<QWebEngineView*>(event->source())
                 || qobject_cast<QListView *>(event->source())) {
             mController->processMimeData (event->mimeData (), mapToScene (event->pos ()));
             event->acceptProposedAction();

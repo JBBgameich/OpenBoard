@@ -31,8 +31,7 @@
 #define UBWEBCONTROLLER_H_
 
 #include <QtGui>
-#include <QtWebKit>
-#include <QWebView>
+#include <QWebEngineView>
 
 #include "UBOEmbedParser.h"
 
@@ -61,7 +60,7 @@ class UBWebController : public QObject
 
         void loadUrl(const QUrl& url);
 
-        QWebView* createNewTab();
+        QWebEngineView *createNewTab();
 
         QUrl currentPageUrl() const;
 

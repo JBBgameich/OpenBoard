@@ -46,9 +46,8 @@ class UBGraphicsWidgetItemDelegate : public UBGraphicsItemDelegate
 
     protected:
 
-        virtual void decorateMenu(QMenu* menu);
-        virtual void updateMenuActionState();
-        virtual void remove(bool canundo);
+        void decorateMenu(QMenu* menu) override;
+        void updateMenuActionState() override;
 
     private slots:
 

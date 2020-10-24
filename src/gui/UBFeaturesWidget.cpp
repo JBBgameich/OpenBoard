@@ -28,9 +28,8 @@
 
 
 #include <QDomDocument>
-#include <QWebView>
-#include <QWebFrame>
 #include <QWidget>
+#include <QWebEngineView>
 
 #include "UBFeaturesWidget.h"
 #include "gui/UBThumbnailWidget.h"
@@ -775,20 +774,18 @@ UBFeaturesWebView::UBFeaturesWebView(QWidget* parent, const char* name):QWidget(
     mpLayout = new QVBoxLayout();
     setLayout(mpLayout);
 
-    mpView = new QWebView(this);
+    mpView = new QWebEngineView(this);
     mpView->setObjectName("SearchEngineView");
     mpSankoreAPI = new UBWidgetUniboardAPI(UBApplication::boardController->activeScene());
-    mpView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
-    connect(mpView->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(javaScriptWindowObjectCleared()));
-    mpWebSettings = QWebSettings::globalSettings();
-    mpWebSettings->setAttribute(QWebSettings::JavaEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::PluginsEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::LocalStorageDatabaseEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::JavascriptCanAccessClipboard, true);
-    mpWebSettings->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
-    mpWebSettings->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    //mpView->page()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
+    //connect(mpView->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(javaScriptWindowObjectCleared()));
+    mpWebSettings = QWebEngineSettings::defaultSettings();
+    mpWebSettings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    mpWebSettings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
+    mpWebSettings->setAttribute(QWebEngineSettings::LocalStorageEnabled, true);
+    mpWebSettings->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
+    mpWebSettings->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
+    mpWebSettings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
 
     mpLayout->addWidget(mpView);
     mpLayout->setMargin(0);
@@ -813,11 +810,6 @@ UBFeaturesWebView::~UBFeaturesWebView()
         delete mpLayout;
         mpLayout = NULL;
     }
-}
-
-void UBFeaturesWebView::javaScriptWindowObjectCleared()
-{
-    mpView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
 }
 
 void UBFeaturesWebView::showElement(const UBFeature &elem)
@@ -856,8 +848,8 @@ void UBFeaturesWebView::showElement(const UBFeature &elem)
 
 void UBFeaturesWebView::onLoadFinished(bool ok)
 {
-    if(ok && NULL != mpSankoreAPI){
-        mpView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
+    if(ok && nullptr != mpSankoreAPI){
+        //mpView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", mpSankoreAPI);
     }
 }
 

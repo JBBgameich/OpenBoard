@@ -28,8 +28,8 @@
 
 
 #include <QtGui>
-#include <QWebView>
-#include <QWebFrame>
+#include <QWebEngineView>
+#include <QWebEngineSettings>
 
 #include "UBToolWidget.h"
 #include "api/UBWidgetUniboardAPI.h"
@@ -79,7 +79,6 @@ UBToolWidget::UBToolWidget(UBGraphicsWidgetItem *pWidget, QWidget *pParent)
 
 {
     initialize();
-    javaScriptWindowObjectCleared();
 }
 
 UBToolWidget::~UBToolWidget()
@@ -103,12 +102,7 @@ void UBToolWidget::initialize()
     }
 
 
-    mWebView = new QWebView(this);
-
-    QPalette palette = mWebView->page()->palette();
-    palette.setBrush(QPalette::Base, QBrush(Qt::transparent));
-    mWebView->page()->setPalette(palette);
-
+    mWebView = new QWebEngineView(this);
 
     mWebView->installEventFilter(this);
 
@@ -119,18 +113,12 @@ void UBToolWidget::initialize()
     layout()->addWidget(mWebView);
 
     setFixedSize(mToolWidget->boundingRect().width() + mContentMargin * 2, mToolWidget->boundingRect().height() + mContentMargin * 2);
-
-    connect(mWebView->page()->mainFrame(), &QWebFrame::javaScriptWindowObjectCleared,
-            this, &UBToolWidget::javaScriptWindowObjectCleared);
     mWebView->load(mToolWidget->mainHtml());
 
 
     mWebView->setAcceptDrops(false);
-    mWebView->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    mWebView->settings()->setAttribute(QWebEngineSettings::PluginsEnabled, true);
     mWebView->setAttribute(Qt::WA_OpaquePaintEvent, false);
-
-
-    connect(UBApplication::boardController, SIGNAL(activeSceneChanged()), this, SLOT(javaScriptWindowObjectCleared()));
 }
 
 
@@ -212,20 +200,6 @@ void UBToolWidget::paintEvent(QPaintEvent *event)
 
         if (mToolWidget->canBeContent())
             painter.drawPixmap(mContentMargin, 0, *sUnpinPixmap);
-    }
-}
-
-void UBToolWidget::javaScriptWindowObjectCleared()
-{
-    UBWidgetUniboardAPI *uniboardAPI = new UBWidgetUniboardAPI(UBApplication::boardController->activeScene(), mToolWidget);
-
-    mWebView->page()->mainFrame()->addToJavaScriptWindowObject("sankore", uniboardAPI);
-
-    UBGraphicsW3CWidgetItem *graphicsW3cWidgetItem = dynamic_cast<UBGraphicsW3CWidgetItem*>(mToolWidget);
-    if (graphicsW3cWidgetItem)
-    {
-        UBW3CWidgetAPI* widgetAPI = new UBW3CWidgetAPI(graphicsW3cWidgetItem);
-        mWebView->page()->mainFrame()->addToJavaScriptWindowObject("widget", widgetAPI);
     }
 }
 

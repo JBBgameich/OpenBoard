@@ -30,9 +30,6 @@
 #include "WBWebTrapWebView.h"
 
 #include <QtGui>
-#include <QtWebKit>
-#include <QWebHitTestResult>
-#include <QWebFrame>
 
 #include "web/UBWebKitUtils.h"
 
@@ -43,7 +40,7 @@
 #include "core/memcheck.h"
 
 WBWebTrapWebView::WBWebTrapWebView(QWidget* parent)
-    : QWebView(parent)
+    : QWebEngineView(parent)
     , mCurrentContentType(Unknown)
     , mIsTrapping(false)
     , mTrapingWidget(0)
@@ -97,7 +94,7 @@ void WBWebTrapWebView::setIsTrapping(bool pIsTrapping)
 void WBWebTrapWebView::hideEvent ( QHideEvent * event )
 {
     setIsTrapping(false);
-    QWebView::hideEvent(event);
+    QWebEngineView::hideEvent(event);
 }
 
 
@@ -105,215 +102,213 @@ void WBWebTrapWebView::highliteElementAtPos ( const QPoint& pos)
 {
     mCurrentContentType = Unknown;
 
-    if(page() && page()->currentFrame())
-    {
-        QWebHitTestResult htr = page()->currentFrame()->hitTestContent (pos);
-        QRect pageHtr = htr.boundingRect().translated(htr.frame()->pos());
+//    if(page())
+//    {
+//        QWebHitTestResult htr = page()->hitTestContent (pos);
+//        QRect pageHtr = htr.boundingRect().translated(htr.frame()->pos());
 
-        QRect updateRect = mWebViewElementRect.united(pageHtr);
-        updateRect = updateRect.adjusted(-8, -8, 8, 8);
+//        QRect updateRect = mWebViewElementRect.united(pageHtr);
+//        updateRect = updateRect.adjusted(-8, -8, 8, 8);
 
-        mDomElementRect = htr.boundingRect();
+//        mDomElementRect = htr.boundingRect();
 
-        if (!htr.pixmap().isNull())
-        {
-            mCurrentContentType = Image;
-            qDebug() << "found pixmap at " << htr.boundingRect();
-        }
-        else
-        {
-            QWebElement element = htr.element();
-            QString tagName = element.tagName().toLower();
+//        if (!htr.pixmap().isNull())
+//        {
+//            mCurrentContentType = Image;
+//            qDebug() << "found pixmap at " << htr.boundingRect();
+//        }
+//        else
+//        {
+//            QWebElement element = htr.element();
+//            QString tagName = element.tagName().toLower();
 
-            if (tagName == "object"
-                || tagName == "embed")
-            {
-                mCurrentContentType = ObjectOrEmbed;
-            }
-            else if ((tagName == "input") || (tagName == "textarea"))
-            {
-                QString ec = potentialEmbedCodeAtPos(pos);
+//            if (tagName == "object"
+//                || tagName == "embed")
+//            {
+//                mCurrentContentType = ObjectOrEmbed;
+//            }
+//            else if ((tagName == "input") || (tagName == "textarea"))
+//            {
+//                QString ec = potentialEmbedCodeAtPos(pos);
 
-                if (ec.length() > 0)
-                {
-                    qDebug() << "found input data \n\n" << ec;
-                    mCurrentContentType = Input;
-                }
-            }
-            else
-            {
-                QString tagName = htr.element().tagName();
-                QString id =  htr.element().attribute("id", "");
-                QWebElement el = htr.element();
+//                if (ec.length() > 0)
+//                {
+//                    qDebug() << "found input data \n\n" << ec;
+//                    mCurrentContentType = Input;
+//                }
+//            }
+//            else
+//            {
+//                QString tagName = htr.element().tagName();
+//                QString id =  htr.element().attribute("id", "");
+//                QWebElement el = htr.element();
 
-                QString idSelector = tagName + "#" + id;
-                bool idSuccess = (el == el.document().findFirst(idSelector));
+//                QString idSelector = tagName + "#" + id;
+//                bool idSuccess = (el == el.document().findFirst(idSelector));
 
-                if (idSuccess)
-                {
-                    mElementQuery = idSelector;
-                    mCurrentContentType = ElementByQuery;
-                }
-                else
-                {
-                    //bool isValid = true;
+//                if (idSuccess)
+//                {
+//                    mElementQuery = idSelector;
+//                    mCurrentContentType = ElementByQuery;
+//                }
+//                else
+//                {
+//                    //bool isValid = true;
 
-                    QWebElement elParent = el.parent();
-                    QWebElement currentEl = el;
-                    QString path = tagName;
-                    QStringList pathElements;
+//                    QWebElement elParent = el.parent();
+//                    QWebElement currentEl = el;
+//                    QString path = tagName;
+//                    QStringList pathElements;
 
-                    do
-                    {
-                        QWebElement someSibling = elParent.firstChild();
+//                    do
+//                    {
+//                        QWebElement someSibling = elParent.firstChild();
 
-                        int index = 0;
-                        bool foundIndex = false;
+//                        int index = 0;
+//                        bool foundIndex = false;
 
-                        do
-                        {
-                            if (someSibling.tagName() == currentEl.tagName())
-                            {
-                                if (someSibling == currentEl)
-                                {
-                                    foundIndex = true;
-                                }
-                                else
-                                    index++;
-                            }
+//                        do
+//                        {
+//                            if (someSibling.tagName() == currentEl.tagName())
+//                            {
+//                                if (someSibling == currentEl)
+//                                {
+//                                    foundIndex = true;
+//                                }
+//                                else
+//                                    index++;
+//                            }
 
-                            someSibling = someSibling.nextSibling();
-                        }
-                        while(!someSibling.isNull() && !foundIndex);
+//                            someSibling = someSibling.nextSibling();
+//                        }
+//                        while(!someSibling.isNull() && !foundIndex);
 
-                        QString part;
+//                        QString part;
 
-                        if (index > 0)
-                            part = QString("%1:nth-child(%2)").arg(currentEl.tagName()).arg(index);
-                        else
-                            part = currentEl.tagName();
+//                        if (index > 0)
+//                            part = QString("%1:nth-child(%2)").arg(currentEl.tagName()).arg(index);
+//                        else
+//                            part = currentEl.tagName();
 
-                        pathElements.insert(0, part);
+//                        pathElements.insert(0, part);
 
-                        currentEl = elParent;
-                        elParent = elParent.parent();
+//                        currentEl = elParent;
+//                        elParent = elParent.parent();
 
-                    } while(!elParent.isNull());
+//                    } while(!elParent.isNull());
 
-                    //QString idSelector = tagName + "#" + id;
-                    QString treeSelector =  pathElements.join(" > ");
+//                    //QString idSelector = tagName + "#" + id;
+//                    QString treeSelector =  pathElements.join(" > ");
 
-                    mElementQuery = treeSelector;
-                    mCurrentContentType = ElementByQuery;
+//                    mElementQuery = treeSelector;
+//                    mCurrentContentType = ElementByQuery;
 
-                    //bool treeSuccess = (el == el.document().findFirst(treeSelector));
+//                    //bool treeSuccess = (el == el.document().findFirst(treeSelector));
 
-                    //qDebug() << "----------------------------";
-                    //qDebug() << idSuccess << idSelector;
-                    //qDebug() << treeSuccess << treeSelector;
-                }
-            }
-        }
+//                    //qDebug() << "----------------------------";
+//                    //qDebug() << idSuccess << idSelector;
+//                    //qDebug() << treeSuccess << treeSelector;
+//                }
+//            }
+//        }
 
-        update(updateRect);
-    }
+//        update(updateRect);
+//    }
 }
 
 
-QString WBWebTrapWebView::potentialEmbedCodeAtPos(const QPoint& pos)
+void WBWebTrapWebView::potentialEmbedCodeAtPos(const QPoint& pos)
 {
 
     QString scr = QString("document.elementFromPoint(%1, %2).tagName")
         .arg(pos.x())
         .arg(pos.y());
 
-    QVariant tagNameVar = page()->currentFrame()->evaluateJavaScript(scr);
-    QString tagName = tagNameVar.toString().toLower();
+    page()->runJavaScript(scr, [pos, this](const QVariant &tagNameVar) {
+        QString tagName = tagNameVar.toString().toLower();
 
-    if ((tagName == "input") || (tagName == "textarea"))
-    {
-        QString valueScript;
-
-        if (tagName == "input")
+        if ((tagName == "input") || (tagName == "textarea"))
         {
-            valueScript = QString("document.elementFromPoint(%1, %2).value")
-                .arg(pos.x())
-                .arg(pos.y());
-        }
-        else if (tagName == "textarea")
-        {
-            valueScript = QString("document.elementFromPoint(%1, %2).innerHTML")
-                .arg(pos.x())
-                .arg(pos.y());
-        }
+            QString valueScript;
 
-        QVariant valueVar = page()->currentFrame()->evaluateJavaScript(valueScript);
-        QString value = valueVar.toString();
+            if (tagName == "input")
+            {
+                valueScript = QString("document.elementFromPoint(%1, %2).value")
+                    .arg(pos.x())
+                    .arg(pos.y());
+            }
+            else if (tagName == "textarea")
+            {
+                valueScript = QString("document.elementFromPoint(%1, %2).innerHTML")
+                    .arg(pos.x())
+                    .arg(pos.y());
+            }
 
-        if (value.length() > 0 && value.contains("width") && value.contains("height"))
-        {
-            return value;
+            page()->runJavaScript(valueScript, [this](const QVariant &valueVar) {
+                QString value = valueVar.toString();
+
+                if (value.length() > 0 && value.contains("width") && value.contains("height"))
+                {
+                    emit embedCodeCaptured(value);
+                }
+            });
         }
-    }
-
-    return "";
+    });
 }
 
 
 void WBWebTrapWebView::trapElementAtPos(const QPoint& pos)
 {
-    QWebHitTestResult htr = page()->currentFrame()->hitTestContent(pos);
+//    QWebHitTestResult htr = page()->hitTestContent(pos);
 
-    if (!htr.pixmap().isNull())
-    {
-        emit pixmapCaptured(htr.pixmap(), false);
-    }
-    else if (mCurrentContentType == ObjectOrEmbed)
-    {
-        QString embedSelector = QString("document.elementFromPoint(%1, %2)").arg(pos.x()).arg(pos.y());
-        QVariant tagName = page()->currentFrame()->evaluateJavaScript(embedSelector + ".tagName");
+//    if (!htr.pixmap().isNull())
+//    {
+//        emit pixmapCaptured(htr.pixmap(), false);
+//    }
+//    else if (mCurrentContentType == ObjectOrEmbed)
+//    {
+//        QString embedSelector = QString("document.elementFromPoint(%1, %2)").arg(pos.x()).arg(pos.y());
+//        page()->runJavaScript(embedSelector + ".tagName", [&](const QVariant &tagName) {
+//            page()->runJavaScript(embedSelector + ".innerHTML", [&](const QVariant &innerHTML) {
+//                qDebug() << "innerHTML" << innerHTML;
 
-        QVariant innerHTML = page()->currentFrame()->evaluateJavaScript(embedSelector + ".innerHTML");
-        qDebug() << "innerHTML" << innerHTML;
+//                if (tagName.toString().toLower() == "object")
+//                {
+//                    embedSelector = QString("document.elementFromPoint(%1, %2).getElementsByTagName('object')[0]")
+//                        .arg(pos.x()).arg(pos.y());
+//                }
 
-        if (tagName.toString().toLower() == "object")
-        {
-            embedSelector = QString("document.elementFromPoint(%1, %2).getElementsByTagName('object')[0]")
-                .arg(pos.x()).arg(pos.y());
-        }
+//                QString querySource = embedSelector + ".src";
+//                page()->runJavaScript(querySource, [&](const QVariant &resSource) {
+//                    qDebug() << "resSource" << resSource;
+//                    QString source = resSource.toString();
 
-        QString querySource = embedSelector + ".src";
-        QVariant resSource = page()->currentFrame()->evaluateJavaScript(querySource);
-        qDebug() << "resSource" << resSource;
-        QString source = resSource.toString();
+//                    QString queryType = embedSelector + ".type";
+//                    page()->runJavaScript(queryType, [&](const QVariant &resType) {
+//                        QString type = resType.toString();
+//                        qDebug() << "resType" << resType;
 
-        QString queryType = embedSelector + ".type";
-        QVariant resType = page()->currentFrame()->evaluateJavaScript(queryType);
-        QString type = resType.toString();
-        qDebug() << "resType" << resType;
+//                        if (source.trimmed().length() > 0)
+//                        {
+//                            emit objectCaptured(QUrl(page()->url().toString() + "/" + source), type,
+//                                    htr.boundingRect().width(), htr.boundingRect().height());
 
-        if (source.trimmed().length() > 0)
-        {
-            emit objectCaptured(QUrl(page()->currentFrame()->url().toString() + "/" + source), type,
-                    htr.boundingRect().width(), htr.boundingRect().height());
-
-            UBApplication::boardController->downloadURL(QUrl(source));
-            UBApplication::applicationController->showBoard();
-        }
-    }
-    else if (mCurrentContentType == Input)
-    {
-        QString embedCode = potentialEmbedCodeAtPos(pos);
-
-        if (embedCode.length() > 0)
-        {
-            emit embedCodeCaptured(embedCode);
-        }
-    }
-    else if (mCurrentContentType == ElementByQuery)
-    {
-        webElementCaptured(page()->currentFrame()->url(), mElementQuery);
-    }
+//                            UBApplication::boardController->downloadURL(QUrl(source));
+//                            UBApplication::applicationController->showBoard();
+//                        }
+//                    });
+//                });
+//            });
+//        });
+//    }
+//    else if (mCurrentContentType == Input)
+//    {
+//        potentialEmbedCodeAtPos(pos);
+//    }
+//    else if (mCurrentContentType == ElementByQuery)
+//    {
+//        webElementCaptured(page()->url(), mElementQuery);
+//    }
 }
 
 
@@ -325,7 +320,7 @@ void WBWebTrapWebView::mouseMoveEvent ( QMouseEvent * event )
     }
     else
     {
-        QWebView::mouseMoveEvent(event);
+        QWebEngineView::mouseMoveEvent(event);
     }
 }
 
@@ -337,7 +332,7 @@ void WBWebTrapWebView::mousePressEvent(QMouseEvent* event)
     }
     else
     {
-        QWebView::mousePressEvent(event);
+        QWebEngineView::mousePressEvent(event);
     }
 }
 
@@ -354,7 +349,7 @@ void WBWebTrapWebView::mouseReleaseEvent ( QMouseEvent * event )
     }
     else
     {
-        QWebView::mouseReleaseEvent(event);
+        QWebEngineView::mouseReleaseEvent(event);
     }
 
     //if (!eventConsumed)
@@ -410,10 +405,10 @@ void WBWebTrapWebView::mouseReleaseEvent ( QMouseEvent * event )
 
 void WBWebTrapWebView::paintEvent ( QPaintEvent * event )
 {
-    QWebView::paintEvent(event);
+    QWebEngineView::paintEvent(event);
 
     if (mIsTrapping && mDomElementRect.isValid()
-            && page() && page()->currentFrame())
+            && page())
     {
         QPainter p(this);
 
@@ -432,8 +427,8 @@ void WBWebTrapWebView::paintEvent ( QPaintEvent * event )
         pen.setWidth(8);
         p.setPen(pen);
 
-        QPoint scrollPosition = page()->currentFrame()->scrollPosition();
-        QRect webViewPosition = mDomElementRect;
+        QPointF scrollPosition = page()->scrollPosition();
+        QRectF webViewPosition = mDomElementRect;
         webViewPosition.translate(-scrollPosition);
 
         mWebViewElementRect = webViewPosition.adjusted(-4, -4, 4, 4);

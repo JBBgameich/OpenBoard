@@ -288,7 +288,7 @@ void WBTabWidget::moveTab(int fromIndex, int toIndex)
     mLineEdits->insertWidget(toIndex, lineEdit);
 }
 
-void WBTabWidget::addWebAction(QAction *action, QWebPage::WebAction webAction)
+void WBTabWidget::addWebAction(QAction *action, QWebEnginePage::WebAction webAction)
 {
     if (!action)
         return;
@@ -763,7 +763,7 @@ bool WBTabWidget::restoreState(const QByteArray &state)
     return true;
 }
 
-WBWebActionMapper::WBWebActionMapper(QAction *root, QWebPage::WebAction webAction, QObject *parent)
+WBWebActionMapper::WBWebActionMapper(QAction *root, QWebEnginePage::WebAction webAction, QObject *parent)
     : QObject(parent)
     , mCurrentParent(0)
     , mRootAction(root)
@@ -793,7 +793,7 @@ void WBWebActionMapper::addChild(QAction *action)
     connect(action, SIGNAL(changed()), this, SLOT(childChanged()));
 }
 
-QWebPage::WebAction WBWebActionMapper::webAction() const
+QWebEnginePage::WebAction WBWebActionMapper::webAction() const
 {
     return mWebAction;
 }
@@ -821,7 +821,7 @@ void WBWebActionMapper::childChanged()
     }
 }
 
-void WBWebActionMapper::updateCurrent(QWebPage *currentParent)
+void WBWebActionMapper::updateCurrent(QWebEnginePage *currentParent)
 {
     if (mCurrentParent)
         disconnect(mCurrentParent, SIGNAL(destroyed(QObject *)),

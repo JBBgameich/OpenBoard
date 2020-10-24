@@ -71,7 +71,6 @@
 #include "WBDownloadManager.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QFileDialog>
 
 #include "network/UBAutoSaver.h"
@@ -538,10 +537,6 @@ void WBDownloadManager::updateRow()
     downloadsView->setRowHeight(row, item->minimumSizeHint().height());
 
     bool remove = false;
-    QWebSettings *globalSettings = QWebSettings::globalSettings();
-
-    if (!item->downloading() && globalSettings->testAttribute(QWebSettings::PrivateBrowsingEnabled))
-        remove = true;
 
     if (item->downloadedSuccessfully() && removePolicy() == WBDownloadManager::SuccessFullDownload)
         remove = true;
