@@ -93,33 +93,6 @@ class WBWebPage : public QWebEnginePage
         bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override;
         QWebEnginePage *createWindow(QWebEnginePage::WebWindowType type) override;
 
-        bool supportsExtension(Extension extension) const {
-            if (extension == QWebPage::ErrorPageExtension)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        bool extension(Extension extension, const ExtensionOption *option = 0, ExtensionReturn *output = 0)
-        {
-            if (extension != QWebPage::ErrorPageExtension)
-                return false;
-
-            ErrorPageExtensionOption *errorOption = (ErrorPageExtensionOption*) option;
-            qDebug() << "Error loading " << qPrintable(errorOption->url.toString());
-            if(errorOption->domain == QWebPage::QtNetwork)
-                qDebug() << "Network error (" << errorOption->error << "): ";
-            else if(errorOption->domain == QWebPage::Http)
-                qDebug() << "HTTP error (" << errorOption->error << "): ";
-            else if(errorOption->domain == QWebPage::WebKit)
-                qDebug() << "WebKit error (" << errorOption->error << "): ";
-
-            qDebug() << qPrintable(errorOption->errorString);
-
-            return false;
-        }
-
     private slots:
         void handleUnsupportedContent(QNetworkReply *reply);
 
