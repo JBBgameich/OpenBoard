@@ -111,7 +111,6 @@ class UBWebController : public QObject
         WBBrowserWindow* mCurrentWebBrowser;
 
         QWidget* mBrowserWidget;
-        UBTrapFlashController* mTrapFlashController;
         UBWebToolsPalette* mToolsCurrentPalette;
 
         bool mToolsPalettePositionned;
@@ -126,7 +125,6 @@ class UBWebController : public QObject
     private slots:
 
         void activePageChanged();
-        void trapFlash();
 
         void toggleWebTrap(bool checked);
 

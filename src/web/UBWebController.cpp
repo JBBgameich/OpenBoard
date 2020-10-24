@@ -35,7 +35,6 @@
 
 #include "UBWebController.h"
 #include "UBOEmbedParser.h"
-#include "UBTrapFlashController.h"
 
 #include "web/browser/WBBrowserWindow.h"
 #include "web/browser/WBWebView.h"
@@ -69,10 +68,9 @@
 UBWebController::UBWebController(UBMainWindow* mainWindow)
     : QObject(mainWindow->centralWidget())
     , mMainWindow(mainWindow)
-    , mCurrentWebBrowser(0)
-    , mBrowserWidget(0)
-    , mTrapFlashController(0)
-    , mToolsCurrentPalette(0)
+    , mCurrentWebBrowser(nullptr)
+    , mBrowserWidget(nullptr)
+    , mToolsCurrentPalette(nullptr)
     , mToolsPalettePositionned(false)
     , mDownloadViewIsVisible(false)
 {
@@ -147,8 +145,6 @@ void UBWebController::webBrowserInstance()
 
             adaptToolBar();
 
-            mTrapFlashController = new UBTrapFlashController(mCurrentWebBrowser);
-
             connect(mCurrentWebBrowser, SIGNAL(activeViewPageChanged()), this, SLOT(activePageChanged()));
 
             mCurrentWebBrowser->loadUrl(currentUrl);
@@ -182,14 +178,6 @@ void UBWebController::setSourceWidget(QWidget* pWidget)
     mBrowserWidget = pWidget;
     UBApplication::applicationController->setMirrorSourceWidget(pWidget);
 }
-
-
-void UBWebController::trapFlash()
-{
-    mTrapFlashController->showTrapFlash();
-    activePageChanged();
-}
-
 
 void UBWebController::activePageChanged()
 {
@@ -302,7 +290,6 @@ void UBWebController::setupPalettes()
                     UBApplication::boardController->paletteManager()->mKeyboardPalette, SLOT(onDeactivated()));
 #endif
 
-        connect(mMainWindow->actionWebTrapFlash, SIGNAL(triggered()), this, SLOT(trapFlash()));
         connect(mMainWindow->actionWebCustomCapture, SIGNAL(triggered()), this, SLOT(customCapture()));
         connect(mMainWindow->actionWebWindowCapture, SIGNAL(triggered()), this, SLOT(captureWindow()));
         connect(mMainWindow->actionWebOEmbed, SIGNAL(triggered()), this, SLOT(captureoEmbed()));
