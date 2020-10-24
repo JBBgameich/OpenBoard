@@ -85,7 +85,6 @@ public:
     UBOEmbedParser(QObject* parent=nullptr, const char* name="UBOEmbedParser");
     ~UBOEmbedParser() override;
     void parse(const QString& html);
-    void setNetworkAccessManager(QNetworkAccessManager* nam);
 
 signals:
     void parseContent(QString url);
@@ -93,7 +92,7 @@ signals:
 
 private slots:
     void onFinished(QNetworkReply* reply);
-    void onParseContent(QString url);
+    void onParseContent(const QString &url);
 
 private:
     sOEmbedContent getJSONInfos(const QString& json);
