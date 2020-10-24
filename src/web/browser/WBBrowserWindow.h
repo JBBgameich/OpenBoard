@@ -72,7 +72,6 @@
 #define WBBROWSERMAINWINDOW_H
 
 #include <QtGui>
-#include <QtWebKit>
 
 class WBChaseWidget;
 class WBTabWidget;
@@ -150,7 +149,6 @@ class WBBrowserWindow : public QWidget
         void slotViewZoomIn();
         void slotViewZoomOut();
         void slotViewResetZoom();
-        void slotViewZoomTextOnly(bool enable);
 
         void slotWebSearch();
         void slotToggleInspector(bool enable);

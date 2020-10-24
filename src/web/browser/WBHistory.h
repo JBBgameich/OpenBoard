@@ -74,7 +74,7 @@
 #include "WBModelMenu.h"
 
 #include <QtGui>
-#include <QtWebKit>
+#include <QWebEngineHistory>
 
 class WBHistoryItem
 {
@@ -103,7 +103,7 @@ class WBHistoryModel;
 class WBHistoryFilterModel;
 class WBHistoryTreeModel;
 
-class WBHistoryManager : public QWebHistoryInterface
+class WBHistoryManager : public QObject
 {
     Q_OBJECT;
     Q_PROPERTY(int historyLimit READ historyLimit WRITE setHistoryLimit);
@@ -118,8 +118,8 @@ class WBHistoryManager : public QWebHistoryInterface
         WBHistoryManager(QObject *parent = nullptr);
         ~WBHistoryManager() override;
 
-        bool historyContains(const QString &url) const override;
-        void addHistoryEntry(const QString &url) override;
+        bool historyContains(const QString &url) const;
+        void addHistoryEntry(const QString &url);
 
         void updateHistoryItem(const QUrl &url, const QString &title);
 

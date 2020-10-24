@@ -114,10 +114,3 @@ UBGraphicsWidgetItem* UBGraphicsWidgetItemDelegate::delegated()
 {
     return static_cast<UBGraphicsWidgetItem*>(mDelegated);
 }
-
-
-void UBGraphicsWidgetItemDelegate::remove(bool canundo)
-{
-    delegated()->removeScript();
-    UBGraphicsItemDelegate::remove(canundo);
-}

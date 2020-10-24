@@ -30,7 +30,6 @@
 #include "UBApplication.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QtXml>
 #include <QFontDatabase>
 #include <QStyleFactory>
@@ -67,6 +66,8 @@
 
 #include "UBDisplayManager.h"
 #include "core/memcheck.h"
+
+#include <QWebEngineSettings>
 
 QPointer<QUndoStack> UBApplication::undoStack;
 
@@ -265,17 +266,12 @@ int UBApplication::exec(const QString& pFileToImport)
     if (!webDbDir.exists(webDbPath))
         webDbDir.mkpath(webDbPath);
 
-    QWebSettings::setIconDatabasePath(webDbPath);
-    QWebSettings::setOfflineStoragePath (webDbPath);
-
-    QWebSettings *gs = QWebSettings::globalSettings();
-    gs->setAttribute(QWebSettings::JavaEnabled, true);
-    gs->setAttribute(QWebSettings::PluginsEnabled, true);
-    gs->setAttribute(QWebSettings::LocalStorageDatabaseEnabled, true);
-    gs->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
-    gs->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
-    gs->setAttribute(QWebSettings::JavascriptCanAccessClipboard, true);
-    gs->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
+    QWebEngineSettings *gs = QWebEngineSettings::defaultSettings();
+    gs->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    gs->setAttribute(QWebEngineSettings::PluginsEnabled, true);
+    gs->setAttribute(QWebEngineSettings::LocalStorageEnabled, true);
+    gs->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
+    gs->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
 
 
     mainWindow = new UBMainWindow(nullptr, Qt::FramelessWindowHint); // deleted by application destructor

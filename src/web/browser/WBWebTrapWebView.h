@@ -31,11 +31,10 @@
 #define WBWEBTRAPWEBVIEW_H_
 
 #include <QtGui>
-#include <QtWebKit>
-#include <QWebView>
+#include <QWebEngineView>
 
 
-class WBWebTrapWebView : public QWebView
+class WBWebTrapWebView : public QWebEngineView
 {
     Q_OBJECT;
 
@@ -61,6 +60,8 @@ class WBWebTrapWebView : public QWebView
 
         void webElementCaptured(const QUrl& pUrl, const QString& query);
 
+        void foundEmbedCode(const QString &code);
+
     protected:
 
         void mousePressEvent(QMouseEvent* event) override;
@@ -70,7 +71,7 @@ class WBWebTrapWebView : public QWebView
 
         void paintEvent ( QPaintEvent * event ) override;
 
-        QString potentialEmbedCodeAtPos(const QPoint& pos);
+        void potentialEmbedCodeAtPos(const QPoint& pos);
 
         enum WebContentType
         {
@@ -79,7 +80,7 @@ class WBWebTrapWebView : public QWebView
 
     private:
         QRect mDomElementRect;
-        QRect mWebViewElementRect;
+        QRectF mWebViewElementRect;
         QString mElementQuery;
         WebContentType mCurrentContentType;
 

@@ -39,28 +39,22 @@
         <x>0</x>
         <y>0</y>
         <width>488</width>
-        <height>310</height>
+        <height>304</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="QWebView" name="webView">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="url">
-          <url>
-           <string>about:blank</string>
-          </url>
-         </property>
-        </widget>
-       </item>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
       </layout>
      </widget>
     </widget>
@@ -109,13 +103,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QWebView</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

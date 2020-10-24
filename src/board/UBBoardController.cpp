@@ -30,7 +30,7 @@
 #include "UBBoardController.h"
 
 #include <QtWidgets>
-#include <QtWebKitWidgets>
+#include <QtWebEngineWidgets>
 
 #include "frameworks/UBFileSystemUtils.h"
 #include "frameworks/UBPlatformUtils.h"
@@ -2634,10 +2634,5 @@ void UBBoardController::freezeW3CWidget(QGraphicsItem *item, bool freeze)
         UBGraphicsW3CWidgetItem* item_casted = dynamic_cast<UBGraphicsW3CWidgetItem*>(item);
         if (nullptr == item_casted)
             return;
-
-        if (freeze) {
-            item_casted->load(QUrl(UBGraphicsW3CWidgetItem::freezedWidgetFilePath()));
-        } else
-            item_casted->loadMainHtml();
     }
 }

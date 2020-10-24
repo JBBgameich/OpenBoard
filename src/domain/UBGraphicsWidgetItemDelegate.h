@@ -48,7 +48,6 @@ class UBGraphicsWidgetItemDelegate : public UBGraphicsItemDelegate
 
         void decorateMenu(QMenu* menu) override;
         void updateMenuActionState() override;
-        void remove(bool canundo) override;
 
     private slots:
 

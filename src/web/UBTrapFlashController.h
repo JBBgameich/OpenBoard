@@ -33,6 +33,9 @@
 #include <QtGui>
 #include "UBWebKitUtils.h"
 
+#include <QWebEnginePage>
+#include <QWebEngineView>
+
 namespace Ui
 {
     class trapFlashDialog;
@@ -50,13 +53,11 @@ class UBTrapFlashController : public QObject
         void hideTrapFlash();
 
     public slots:
-        void updateTrapFlashFromPage(QWebFrame* pCurrentWebFrame);
         void text_Changed(const QString &);
         void text_Edited(const QString &);
 
 
     private slots:
-        void selectFlash(int pFlashIndex);
         void createWidget();
 
     private:
@@ -77,7 +78,7 @@ class UBTrapFlashController : public QObject
         Ui::trapFlashDialog* mTrapFlashUi;
         QDialog* mTrapFlashDialog;
         QWidget* mParentWidget;
-        QWebFrame* mCurrentWebFrame;
+        QWebEngineView* mCurrentWebFrame;
         QList<UBWebKitUtils::HtmlObject> mAvailableFlashes;
 };
 

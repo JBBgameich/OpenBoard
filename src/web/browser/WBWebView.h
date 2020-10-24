@@ -72,14 +72,13 @@
 #define WBWEBVIEW_H
 
 #include <QtGui>
-#include <QtWebKit>
+#include <QWebEnginePage>
 
 #include "WBWebTrapWebView.h"
-#include "web/UBWebPage.h"
 
 class WBBrowserWindow;
 
-class WBWebPage : public UBWebPage
+class WBWebPage : public QWebEnginePage
 {
     Q_OBJECT;
 
@@ -91,9 +90,8 @@ class WBWebPage : public UBWebPage
         WBBrowserWindow *mainWindow();
 
     protected:
-        bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type) override;
-        QWebPage *createWindow(QWebPage::WebWindowType type) override;
-        QObject *createPlugin(const QString &classId, const QUrl &url, const QStringList &paramNames, const QStringList &paramValues) override;
+        bool acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame) override;
+        QWebEnginePage *createWindow(QWebEnginePage::WebWindowType type) override;
 
         bool supportsExtension(Extension extension) const {
             if (extension == QWebPage::ErrorPageExtension)
@@ -144,8 +142,7 @@ class WBWebView : public WBWebTrapWebView
         WBWebPage *webPage() const { return mPage; }
 
         void load(const QUrl &url);
-        void load ( const QNetworkRequest & request, QNetworkAccessManager::Operation operation = QNetworkAccessManager::GetOperation
-                , const QByteArray & body = QByteArray());
+        void load (const QWebEngineHttpRequest &request);
         QUrl url() const;
 
         QString lastStatusBarText() const;
@@ -155,7 +152,6 @@ class WBWebView : public WBWebTrapWebView
         void mousePressEvent(QMouseEvent *event) override;
         void mouseReleaseEvent(QMouseEvent *event) override;
         void contextMenuEvent(QContextMenuEvent *event) override;
-        void wheelEvent(QWheelEvent *event) override;
 
     private slots:
         void setProgress(int progress);

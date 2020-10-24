@@ -30,7 +30,8 @@
 #ifndef UBWEBKITUTILS_H_
 #define UBWEBKITUTILS_H_
 
-#include <QtWebKit>
+#include <QString>
+#include <QWebEnginePage>
 
 class UBWebKitUtils
 {
@@ -56,7 +57,7 @@ class UBWebKitUtils
 
         };
 
-        static QList<UBWebKitUtils::HtmlObject> objectsInFrame(QWebFrame* frame);
+        static QList<UBWebKitUtils::HtmlObject> objectsInFrame(QWebEnginePage* frame);
 
 };
 

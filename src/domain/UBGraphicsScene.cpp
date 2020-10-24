@@ -30,7 +30,6 @@
 #include "UBGraphicsScene.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QtSvg>
 #include <QGraphicsView>
 #include <QGraphicsVideoItem>
@@ -1677,8 +1676,6 @@ void UBGraphicsScene::addGraphicsWidget(UBGraphicsWidgetItem* graphicsWidget, co
 
     if (graphicsWidget->canBeContent())
     {
-        graphicsWidget->loadMainHtml();
-
         graphicsWidget->setSelected(true);
         if (mUndoRedoStackEnabled) { //should be deleted after scene own undo stack implemented
             UBGraphicsItemUndoCommand* uc = new UBGraphicsItemUndoCommand(this, nullptr, graphicsWidget);

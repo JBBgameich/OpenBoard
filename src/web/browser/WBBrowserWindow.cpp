@@ -71,7 +71,6 @@
 #include "WBBrowserWindow.h"
 
 #include <QtGui>
-#include <QtWebKit>
 #include <QDesktopWidget>
 
 #include "core/UBSettings.h"
@@ -96,6 +95,9 @@
 
 #include "core/memcheck.h"
 
+#include <QWebEngineHistory>
+#include <QWebEngineSettings>
+
 WBDownloadManager *WBBrowserWindow::sDownloadManager = nullptr;
 WBHistoryManager *WBBrowserWindow::sHistoryManager = nullptr;
 
@@ -108,9 +110,9 @@ WBBrowserWindow::WBBrowserWindow(QWidget *parent, Ui::MainWindow* uniboardMainWi
         , mSearchAction(nullptr)
         , mUniboardMainWindow(uniboardMainWindow)
 {
-    QWebSettings *defaultSettings = QWebSettings::globalSettings();
-    defaultSettings->setAttribute(QWebSettings::JavascriptEnabled, true);
-    defaultSettings->setAttribute(QWebSettings::PluginsEnabled, true);
+    QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
+    defaultSettings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
 
     setupMenu();
     setupToolBar();
@@ -176,7 +178,6 @@ WBHistoryManager *WBBrowserWindow::historyManager()
 {
     if (!sHistoryManager) {
         sHistoryManager = new WBHistoryManager();
-        QWebHistoryInterface::setDefaultInterface(sHistoryManager);
     }
     return sHistoryManager;
 }
@@ -200,10 +201,10 @@ void WBBrowserWindow::setupToolBar()
 {
     mWebToolBar = mUniboardMainWindow->webToolBar;
 
-    mTabWidget->addWebAction(mUniboardMainWindow->actionWebBack, QWebPage::Back);
-    mTabWidget->addWebAction(mUniboardMainWindow->actionWebForward, QWebPage::Forward);
-    mTabWidget->addWebAction(mUniboardMainWindow->actionWebReload, QWebPage::Reload);
-    mTabWidget->addWebAction(mUniboardMainWindow->actionStopLoading, QWebPage::Stop);
+    mTabWidget->addWebAction(mUniboardMainWindow->actionWebBack, QWebEnginePage::Back);
+    mTabWidget->addWebAction(mUniboardMainWindow->actionWebForward, QWebEnginePage::Forward);
+    mTabWidget->addWebAction(mUniboardMainWindow->actionWebReload, QWebEnginePage::Reload);
+    mTabWidget->addWebAction(mUniboardMainWindow->actionStopLoading, QWebEnginePage::Stop);
 
     mHistoryBackMenu = new QMenu(this);
     connect(mHistoryBackMenu, SIGNAL(aboutToShow()),this, SLOT(aboutToShowBackMenu()));
@@ -436,15 +437,6 @@ void WBBrowserWindow::slotViewResetZoom()
     currentTabWebView()->setZoomFactor(1.0);
 }
 
-
-void WBBrowserWindow::slotViewZoomTextOnly(bool enable)
-{
-    if (!currentTabWebView())
-        return;
-    currentTabWebView()->page()->settings()->setAttribute(QWebSettings::ZoomTextOnly, enable);
-}
-
-
 void WBBrowserWindow::slotHome()
 {
     loadPage(UBSettings::settings()->webHomePage->get().toString());
@@ -545,7 +537,7 @@ void WBBrowserWindow::aboutToShowBackMenu()
     mHistoryBackMenu->clear();
     if (!currentTabWebView())
         return;
-    QWebHistory *history = currentTabWebView()->history();
+    QWebEngineHistory *history = currentTabWebView()->history();
 
     int historyCount = history->count();
     int historyLimit = history->backItems(historyCount).count() - UBSettings::settings()->historyLimit->get().toReal();
@@ -554,13 +546,12 @@ void WBBrowserWindow::aboutToShowBackMenu()
 
     for (int i = history->backItems(historyCount).count() - 1; i >= historyLimit; --i)
     {
-        QWebHistoryItem item = history->backItems(historyCount).at(i);
+        QWebEngineHistoryItem item = history->backItems(historyCount).at(i);
 
         QAction *action = new QAction(this);
         action->setData(-1*(historyCount-i-1));
 
-        if (!QWebSettings::iconForUrl(item.originalUrl()).isNull())
-        action->setIcon(item.icon());
+        action->setIcon(QIcon(QPixmap(item.iconUrl().toString())));
         action->setText(item.title().isEmpty() ? item.url().toString() : item.title());
         mHistoryBackMenu->addAction(action);
     }
@@ -579,7 +570,7 @@ void WBBrowserWindow::aboutToShowForwardMenu()
     mHistoryForwardMenu->clear();
     if (!currentTabWebView())
         return;
-    QWebHistory *history = currentTabWebView()->history();
+    QWebEngineHistory *history = currentTabWebView()->history();
     int historyCount = history->count();
 
     int historyLimit = history->forwardItems(historyCount).count();
@@ -588,13 +579,12 @@ void WBBrowserWindow::aboutToShowForwardMenu()
 
     for (int i = 0; i < historyLimit; ++i)
     {
-        QWebHistoryItem item = history->forwardItems(historyCount).at(i);
+        QWebEngineHistoryItem item = history->forwardItems(historyCount).at(i);
 
         QAction *action = new QAction(this);
         action->setData(historyCount-i);
 
-        if (!QWebSettings::iconForUrl(item.originalUrl()).isNull())
-        action->setIcon(item.icon());
+        action->setIcon(QIcon(QPixmap(item.iconUrl().toString())));
         action->setText(item.title().isEmpty() ? item.url().toString() : item.title());
         mHistoryForwardMenu->addAction(action);
     }
@@ -609,7 +599,7 @@ void WBBrowserWindow::aboutToShowForwardMenu()
 
 void WBBrowserWindow::openActionUrl(QAction *action)
 {
-    QWebHistory *history = currentTabWebView()->history();
+    QWebEngineHistory *history = currentTabWebView()->history();
 
     if (action->data() == "clear")
     {

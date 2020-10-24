@@ -29,7 +29,6 @@
 
 #include "UBWidgetUniboardAPI.h"
 
-#include <QWebView>
 #include <QDomDocument>
 #include <QtGui>
 

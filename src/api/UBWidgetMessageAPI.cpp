@@ -25,8 +25,6 @@
  */
 
 
-#include <QWebFrame>
-
 #include "UBWidgetMessageAPI.h"
 
 #include "core/UBApplication.h"
@@ -50,28 +48,6 @@ void UBWidgetMessageAPI::sendMessage(const QString& pTopicName, const QString& p
 {
     UBWidgetAPIMessageBroker::instance()->sendMessage(pTopicName, pMessage);
 }
-
-
-void UBWidgetMessageAPI::onNewMessage(const QString& pTopicName, const QString& pMessage)
-{
-    if (mSubscribedTopics.contains(pTopicName))
-    {
-        if (mGraphicsWidgetItem && mGraphicsWidgetItem->page() && mGraphicsWidgetItem->page()->mainFrame())
-        {
-
-            QString js;
-            js += "if(widget && widget.messages && widget.messages.onmessage)";
-            js += "{widget.messages.onmessage('";
-            js += pMessage + "', '" + pTopicName + "')}";
-
-            mGraphicsWidgetItem->page()->
-                mainFrame()->evaluateJavaScript(js);
-
-        }
-    }
-}
-
-
 
 UBWidgetAPIMessageBroker* UBWidgetAPIMessageBroker::sInstance = nullptr;
 
