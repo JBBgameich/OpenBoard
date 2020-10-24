@@ -9,7 +9,6 @@ FORMS        += src/web/browser/downloaditem.ui \
 INCLUDEPATH  += src/web/browser
 
 HEADERS      += src/web/UBWebController.h \
-                src/web/UBTrapFlashController.h \
                 src/web/UBWebKitUtils.h \
                 #src/web/UBWebPage.h \
                 src/web/UBWebPluginWidget.h \
@@ -30,7 +29,6 @@ HEADERS      += src/web/UBWebController.h \
 
 
 SOURCES      += src/web/UBWebController.cpp \
-                src/web/UBTrapFlashController.cpp \
                 src/web/UBWebKitUtils.cpp \
                 #src/web/UBWebPage.cpp \
                 src/web/UBWebPluginWidget.cpp \
