@@ -230,51 +230,17 @@ bool UBWebController::hasEmbeddedContent()
 
 QPixmap UBWebController::captureCurrentPage()
 {
-//    QPixmap pix;
+    QPixmap pix;
 
-//    if (mCurrentWebBrowser
-//            && mCurrentWebBrowser->currentTabWebView()
-//            && mCurrentWebBrowser->currentTabWebView()->page())
-//    {
-//        QWebFrame* frame = mCurrentWebBrowser->currentTabWebView()->page()->mainFrame();
-//        QSize size = frame->contentsSize();
+    if (mCurrentWebBrowser
+            && mCurrentWebBrowser->currentTabWebView()
+            && mCurrentWebBrowser->currentTabWebView()->page())
+    {
+        auto* frame = mCurrentWebBrowser->currentTabWebView()->page();
+        return frame->view()->grab();
+    }
 
-//        qDebug() << size;
-
-//        QVariant top = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientTop");
-//        QVariant left = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientLeft");
-//        QVariant width = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientWidth");
-//        QVariant height = frame->evaluateJavaScript("document.getElementsByTagName('body')[0].clientHeight");
-
-//        QSize vieportSize = mCurrentWebBrowser->currentTabWebView()->page()->viewportSize();
-//        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(frame->contentsSize());
-//        pix = QPixmap(frame->geometry().width(), frame->geometry().height());
-
-//        {
-//            QPainter p(&pix);
-//            frame->render(&p);
-//        }
-
-//        if (left.isValid() && top.isValid() && width.isValid() && height.isValid())
-//        {
-//            bool okLeft, okTop, okWidth, okHeight;
-
-//            int iLeft = left.toInt(&okLeft) * frame->zoomFactor();
-//            int iTop = top.toInt(&okTop) * frame->zoomFactor();
-//            int iWidth = width.toInt(&okWidth) * frame->zoomFactor();
-//            int iHeight = height.toInt(&okHeight) * frame->zoomFactor();
-
-//            if(okLeft && okTop && okWidth && okHeight)
-//            {
-//                pix = pix.copy(iLeft, iTop, iWidth, iHeight);
-//            }
-//        }
-
-
-//        mCurrentWebBrowser->currentTabWebView()->page()->setViewportSize(vieportSize);
-//    }
-
-//    return pix;
+    return QPixmap();
 }
 
 
