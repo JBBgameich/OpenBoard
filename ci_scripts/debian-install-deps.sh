@@ -25,8 +25,8 @@ $SUDO apt-get install -y \
         libpoppler-dev \
         libpoppler-private-dev \
         libqt5svg5-dev \
-        libqt5webkit5-dev \
         libqt5xmlpatterns5-dev \
+        qtwebengine5-dev \
         libquazip5-dev \
         $(if ! lsb_release -d | grep bullseye>/dev/null; then echo libquazip5-headers; fi) \
         libsdl-dev \

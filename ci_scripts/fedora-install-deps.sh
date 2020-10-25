@@ -9,6 +9,7 @@ dnf install \
     qt5-qtwebkit-devel \
     qt5-qtxmlpatterns-devel \
     qt5-qtscript-devel \
+    qt5-webengine-devel \
     openssl-devel \
     libpaper-devel \
     motif-devel \
