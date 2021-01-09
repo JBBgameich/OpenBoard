@@ -99,7 +99,7 @@ QNetworkReply* UBNetworkAccessManager::createRequest(Operation op, const QNetwor
 
 QNetworkReply *UBNetworkAccessManager::get(const QNetworkRequest &request)
 {
-    QTime loadStartTime;
+    QElapsedTimer loadStartTime;
     loadStartTime.start();
     QNetworkReply *networkReply = QNetworkAccessManager::get(request);
     return networkReply;

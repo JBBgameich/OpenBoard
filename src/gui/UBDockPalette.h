@@ -39,6 +39,7 @@ class UBDocumentProxy;
 #include <QResizeEvent>
 #include <QEvent>
 #include <QTime>
+#include <QElapsedTimer>
 #include <QPoint>
 #include <QPixmap>
 #include <QMap>
@@ -179,7 +180,7 @@ protected:
     /** The last width of the palette */
     int mLastWidth;
     /** The click time*/
-    QTime mClickTime;
+    QElapsedTimer mClickTime;
     /** The mouse pressed position */
     QPoint mMousePressPos;
     /** The tab orientation */

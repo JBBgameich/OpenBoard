@@ -116,7 +116,7 @@ class WBDownloadItem : public QWidget, public Ui_DownloadItem
 
         bool mRequestFileName;
         qint64 mBytesReceived;
-        QTime mDownloadTime;
+        QElapsedTimer mDownloadTime;
         QString mCustomDownloadPath;
 
 };
