@@ -1499,7 +1499,7 @@ void UBBoardView::wheelEvent (QWheelEvent *wheelEvent)
         QGraphicsItem * selItem = selItemsList[0];
 
         // get items list under mouse cursor
-        QPointF scenePos = mapToScene(wheelEvent->pos());
+        QPointF scenePos = mapToScene(wheelEvent->position().toPoint());
         QList<QGraphicsItem *> itemsList = scene()->items(scenePos);
 
         bool isSelectedAndMouseHower = itemsList.contains(selItem);
