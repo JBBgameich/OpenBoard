@@ -322,7 +322,7 @@ void UBDesktopAnnotationController::showWindow()
 
     if (!mWindowPositionInitialized)
     {
-        QRect desktopRect = QApplication::desktop()->screenGeometry(mDesktopPalette->pos());
+        QRect desktopRect = QGuiApplication::screenAt(mDesktopPalette->pos())->availableGeometry();
 
         mDesktopPalette->move(5, desktopRect.top() + 150);
 
@@ -513,7 +513,7 @@ QPixmap UBDesktopAnnotationController::getScreenPixmap()
     QDesktopWidget *desktop = QApplication::desktop();
     QScreen * screen = UBApplication::controlScreen();
 
-    QRect rect = desktop->screenGeometry(QCursor::pos());
+    QRect rect = QGuiApplication::screenAt(QCursor::pos())->availableGeometry();
 
     return screen->grabWindow(desktop->effectiveWinId(),
                               rect.x(), rect.y(), rect.width(), rect.height());

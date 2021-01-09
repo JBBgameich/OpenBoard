@@ -57,8 +57,8 @@ UBDisplayManager::UBDisplayManager(QObject *parent)
 
     initScreenIndexes();
 
-    connect(mDesktop, &QDesktopWidget::resized, this, &UBDisplayManager::adjustScreens);
-    connect(mDesktop, &QDesktopWidget::workAreaResized, this, &UBDisplayManager::adjustScreens);
+    connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged, this, &UBDisplayManager::adjustScreens);
+    connect(QGuiApplication::primaryScreen(), &QScreen::availableGeometryChanged, this, &UBDisplayManager::adjustScreens);
 }
 
 
@@ -70,7 +70,9 @@ void UBDisplayManager::initScreenIndexes()
 
     if (screenCount > 0)
     {
-        mControlScreenIndex = mDesktop->primaryScreen();
+        const auto primaryScreen = QGuiApplication::primaryScreen();
+        const auto screens = QGuiApplication::screens();
+        mControlScreenIndex = screens.indexOf(primaryScreen);
         if (screenCount > 1 && UBSettings::settings()->swapControlAndDisplayScreens->get().toBool())
         {
             mControlScreenIndex = mControlScreenIndex^1;
@@ -136,14 +138,14 @@ UBDisplayManager::~UBDisplayManager()
 
 int UBDisplayManager::numScreens()
 {
-    int screenCount = mDesktop->screenCount();
+    int screenCount = QGuiApplication::screens().count();
     // Some window managers report two screens when the two monitors are in "cloned" mode; this hack ensures
     // that we consider this as just one screen. On most desktops, at least one of the following conditions is
     // a good indicator of the displays being in cloned or extended mode.
 #ifdef Q_OS_LINUX
     if (screenCount > 1
-        && (mDesktop->screenNumber(mDesktop->screen(0)) == mDesktop->screenNumber(mDesktop->screen(1))
-            || mDesktop->screenGeometry(0) == mDesktop->screenGeometry(1)))
+        && ((QGuiApplication::screens().at(0)->model() == QGuiApplication::screens().at(1)->model())
+            || QGuiApplication::screens().at(0)->availableGeometry() == QGuiApplication::screens().at(1)->availableGeometry()))
         return 1;
 #endif
     return screenCount;
@@ -179,7 +181,10 @@ void UBDisplayManager::setDisplayWidget(QWidget* pDisplayWidget)
             pDisplayWidget->setWindowFlags(mDisplayWidget->windowFlags());
         }
         mDisplayWidget = pDisplayWidget;
-        mDisplayWidget->setGeometry(mDesktop->screenGeometry(mDisplayScreenIndex));
+        if (mDisplayScreenIndex != -1) {
+            const QScreen *screen = QGuiApplication::screens().at(mDisplayScreenIndex);
+            mDisplayWidget->setGeometry(screen->availableGeometry());
+        }
         if (UBSettings::settings()->appUseMultiscreen->get().toBool())
             UBPlatformUtils::showFullScreen(mDisplayWidget);
     }
@@ -194,24 +199,22 @@ void UBDisplayManager::setPreviousDisplaysWidgets(QList<UBBoardView*> pPreviousV
 
 QRect UBDisplayManager::controlGeometry()
 {
-    return mDesktop->screenGeometry(mControlScreenIndex);
+    return QGuiApplication::screens().at(mControlScreenIndex)->availableGeometry();
 }
 
 QRect UBDisplayManager::displayGeometry()
 {
-    return mDesktop->screenGeometry(mDisplayScreenIndex);
+    return QGuiApplication::screens().at(mDisplayScreenIndex)->availableGeometry();
 }
 
 void UBDisplayManager::reinitScreens(bool swap)
 {
     Q_UNUSED(swap);
-    adjustScreens(-1);
+    adjustScreens();
 }
 
-void UBDisplayManager::adjustScreens(int screen)
+void UBDisplayManager::adjustScreens()
 {
-    Q_UNUSED(screen);
-
     initScreenIndexes();
 
     positionScreens();
@@ -225,19 +228,19 @@ void UBDisplayManager::positionScreens()
     if(mDesktopWidget && mControlScreenIndex > -1)
     {
         mDesktopWidget->hide();
-        mDesktopWidget->setGeometry(mDesktop->screenGeometry(mControlScreenIndex));
+        mDesktopWidget->setGeometry(QGuiApplication::screens().at(mControlScreenIndex)->availableGeometry());
     }
     if (mControlWidget && mControlScreenIndex > -1)
     {
         mControlWidget->hide();
-        mControlWidget->setGeometry(mDesktop->screenGeometry(mControlScreenIndex));
+        mControlWidget->setGeometry(QGuiApplication::screens().at(mControlScreenIndex)->availableGeometry());
         UBPlatformUtils::showFullScreen(mControlWidget);
     }
 
     if (mDisplayWidget && mDisplayScreenIndex > -1)
     {
         mDisplayWidget->hide();
-        mDisplayWidget->setGeometry(mDesktop->screenGeometry(mDisplayScreenIndex));
+        mDisplayWidget->setGeometry(QGuiApplication::screens().at(mDisplayScreenIndex)->availableGeometry());
         UBPlatformUtils::showFullScreen(mDisplayWidget);
     }
     else if(mDisplayWidget)
@@ -255,7 +258,7 @@ void UBDisplayManager::positionScreens()
         if (mPreviousDisplayWidgets.size() > psi)
         {
             QWidget* previous = mPreviousDisplayWidgets.at(psi);
-            previous->setGeometry(mDesktop->screenGeometry(mPreviousScreenIndexes.at(psi)));
+            previous->setGeometry(QGuiApplication::screens().at(mPreviousScreenIndexes.at(psi))->availableGeometry());
             UBPlatformUtils::showFullScreen(previous);
         }
     }
@@ -293,7 +296,7 @@ void UBDisplayManager::blackout()
         blackoutUi->iconButton->setVisible(screenIndex == mControlScreenIndex);
         blackoutUi->labelClickToReturn->setVisible(screenIndex == mControlScreenIndex);
 
-        blackoutWidget->setGeometry(mDesktop->screenGeometry(screenIndex));
+        blackoutWidget->setGeometry(QGuiApplication::screens().at(screenIndex)->availableGeometry());
 
         mBlackoutWidgets << blackoutWidget;
     }

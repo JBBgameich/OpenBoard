@@ -97,7 +97,7 @@ class UBDisplayManager : public QObject
 
         void reinitScreens(bool bswap);
 
-        void adjustScreens(int screen);
+        void adjustScreens();
 
         void blackout();
 

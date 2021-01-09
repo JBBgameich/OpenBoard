@@ -73,9 +73,8 @@ int UBCustomCaptureWindow::execute(const QPixmap &pScreenPixmap)
 {
     mWholeScreenPixmap = pScreenPixmap;
 
-    QDesktopWidget *desktop = QApplication::desktop();
-    int currentScreen = desktop->screenNumber(QCursor::pos());
-    setGeometry(desktop->screenGeometry(currentScreen));
+    const QScreen *currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    setGeometry(currentScreen->availableGeometry());
     this->show();
     setWindowOpacity(1.0);
 
