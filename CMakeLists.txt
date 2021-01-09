@@ -33,7 +33,7 @@ string(REPLACE "r" "240" VERSION_RC ${VERSION_RC}) # 0xF0
 #
 # Dependencies
 #
-find_package(Qt5 REQUIRED COMPONENTS
+find_package(Qt5 5.14 REQUIRED COMPONENTS
     Multimedia
     MultimediaWidgets
     Network
