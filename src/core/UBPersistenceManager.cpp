@@ -145,14 +145,14 @@ void UBPersistenceManager::createDocumentProxiesStructure(bool interactive)
             if (xmlDom.setContent(domString, &errorStr, &errorLine, &errorColumn)) {
                 loadFolderTreeFromXml("", xmlDom.firstChildElement());
             } else {
-                qDebug() << "Error reading content of " << mFoldersXmlStorageName << endl
+                qDebug() << "Error reading content of " << mFoldersXmlStorageName << Qt::endl
                          << "Error:" << inFile.errorString()
                          << "Line:" << errorLine
                          << "Column:" << errorColumn;
             }
             inFile.close();
         } else {
-            qDebug() << "Error reading" << mFoldersXmlStorageName << endl
+            qDebug() << "Error reading" << mFoldersXmlStorageName << Qt::endl
                      << "Error:" << inFile.errorString();
         }
     }
@@ -309,7 +309,7 @@ void UBPersistenceManager::closing()
 
         outFile.close();
     } else {
-        qDebug() << "failed to open document" <<  mFoldersXmlStorageName << "for writing" << endl
+        qDebug() << "failed to open document" <<  mFoldersXmlStorageName << "for writing" << Qt::endl
                  << "Error string:" << outFile.errorString();
     }
 }

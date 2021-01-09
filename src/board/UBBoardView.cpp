@@ -1198,9 +1198,9 @@ void UBBoardView::mouseMoveEvent (QMouseEvent *event)
                 }
             }
 
-            //          qDebug() << "| ==selected items count" << counter << endl
-            //                   << "| ==selection time" << testTime.msecsTo(QTime::currentTime()) << endl
-            //                   << "| =elapsed time " << startTime.msecsTo(QTime::currentTime()) << endl
+            //          qDebug() << "| ==selected items count" << counter << Qt::endl
+            //                   << "| ==selection time" << testTime.msecsTo(QTime::currentTime()) << Qt::endl
+            //                   << "| =elapsed time " << startTime.msecsTo(QTime::currentTime()) << Qt::endl
             //                   << "==================";
             //          QCoreApplication::removePostedEvents(scene(), 0);
         }

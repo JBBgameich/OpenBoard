@@ -1085,11 +1085,11 @@ void UBFeatureProperties::onAddToLib()
         QString str2 = mpElement->getFullPath().toString().normalized(QString::NormalizationForm_D);
         QString str3 = mpElement->getFullPath().toString().normalized(QString::NormalizationForm_KC);
         QString str4 = mpElement->getFullPath().toString().normalized(QString::NormalizationForm_KD);
-        qDebug() << desc.srcUrl << endl
-                    << "str1" << str1 << endl
-                    << "str2" << str2 << endl
-                    << "str3" << str3 << endl
-                    << "str4" << str4 << endl;
+        qDebug() << desc.srcUrl << Qt::endl
+                    << "str1" << str1 << Qt::endl
+                    << "str2" << str2 << Qt::endl
+                    << "str3" << str3 << Qt::endl
+                    << "str4" << str4 << Qt::endl;
         UBDownloadManager::downloadManager()->addFileToDownload(desc);
     }
 }

@@ -309,20 +309,20 @@ void UBTrapFlashController::generateConfig(int pWidth, int pHeight, const QStrin
 
     QTextStream out(&configFile);
     out.setCodec("UTF-8");
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-    out << "<widget xmlns=\"http://www.w3.org/ns/widgets\"" << endl;
-    out << "        xmlns:ub=\"http://uniboard.mnemis.com/widgets\"" << endl;
-    out << "        identifier=\"http://uniboard.mnemis.com/" << mTrapFlashUi->widgetNameLineEdit->text() << "\"" <<endl;
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << Qt::endl;
+    out << "<widget xmlns=\"http://www.w3.org/ns/widgets\"" << Qt::endl;
+    out << "        xmlns:ub=\"http://uniboard.mnemis.com/widgets\"" << Qt::endl;
+    out << "        identifier=\"http://uniboard.mnemis.com/" << mTrapFlashUi->widgetNameLineEdit->text() << "\"" << Qt::endl;
 
-    out << "        version=\"1.0\"" << endl;
-    out << "        width=\"" << pWidth << "\"" << endl;
-    out << "        height=\"" << pHeight << "\"" << endl;
-    out << "        ub:resizable=\"true\">" << endl;
+    out << "        version=\"1.0\"" << Qt::endl;
+    out << "        width=\"" << pWidth << "\"" << Qt::endl;
+    out << "        height=\"" << pHeight << "\"" << Qt::endl;
+    out << "        ub:resizable=\"true\">" << Qt::endl;
 
-    out << "    <name>" << mTrapFlashUi->widgetNameLineEdit->text() << "</name>" << endl;
-    out << "    <content src=\"" << mTrapFlashUi->widgetNameLineEdit->text() << ".html\"/>" << endl;
+    out << "    <name>" << mTrapFlashUi->widgetNameLineEdit->text() << "</name>" << Qt::endl;
+    out << "    <content src=\"" << mTrapFlashUi->widgetNameLineEdit->text() << ".html\"/>" << Qt::endl;
 
-    out << "</widget>" << endl;
+    out << "</widget>" << Qt::endl;
 
 
     configFile.close();
