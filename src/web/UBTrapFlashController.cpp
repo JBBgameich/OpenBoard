@@ -268,12 +268,11 @@ void UBTrapFlashController::updateTrapFlashFromPage(QWebFrame* pCurrentWebFrame)
 
 QString UBTrapFlashController::generateIcon(const QString& pDirPath)
 {
-    QDesktopWidget* desktop = QApplication::desktop();
     QPoint webViewPosition = mTrapFlashUi->webView->mapToGlobal(mTrapFlashUi->webView->pos());
     QSize webViewSize = mTrapFlashUi->webView->size();
-    QPixmap capture = QPixmap::grabWindow(desktop->winId(), webViewPosition.x(), webViewPosition.y()
-            , webViewSize.width() - 10, webViewSize.height() -10);
-
+    QScreen *captureScreen = QGuiApplication::screenAt(webViewPosition);
+    QPixmap capture = captureScreen->grabWindow(webViewPosition.x(), webViewPosition.y(),
+                        webViewSize.width() - 10, webViewSize.height() -10);
     QPixmap widgetIcon(75,75);
     widgetIcon.fill(Qt::transparent);
 
