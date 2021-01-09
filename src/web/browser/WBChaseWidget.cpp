@@ -137,7 +137,7 @@ void WBChaseWidget::paintEvent(QPaintEvent *event)
         if(mAnimated)
             p.setBrush(colorForSegment(segment));
         else
-            p.setBrush(palette().background());
+            p.setBrush(palette().window());
         p.drawEllipse(QRect(displ, -ext / 2, ext, ext));
     }
 }
