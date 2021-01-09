@@ -1050,7 +1050,7 @@ bool UBDocumentTreeModel::newNodeAllowed(const QModelIndex &pSelectedIndex)  con
 
 QModelIndex UBDocumentTreeModel::goTo(const QString &dir)
 {
-    QStringList pathList = dir.split("/", QString::SkipEmptyParts);
+    QStringList pathList = dir.split("/", Qt::SkipEmptyParts);
 
     if (pathList.isEmpty()) {
         return untitledDocumentsIndex();

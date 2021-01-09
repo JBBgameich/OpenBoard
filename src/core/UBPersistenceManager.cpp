@@ -276,7 +276,7 @@ QDialog::DialogCode UBPersistenceManager::processInteractiveReplacementDialog(UB
 
 QString UBPersistenceManager::adjustDocumentVirtualPath(const QString &str)
 {
-    QStringList pathList = str.split("/", QString::SkipEmptyParts);
+    QStringList pathList = str.split("/", Qt::SkipEmptyParts);
 
     if (pathList.isEmpty()) {
         pathList.append(myDocumentsName);

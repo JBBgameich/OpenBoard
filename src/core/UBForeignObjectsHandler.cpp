@@ -262,7 +262,7 @@ private:
     void fitIdsFromFileSystem()
     {
         QString absPrefix = mCurrentDir + "/";
-        QStringList dirsList = scanDirs.split(",", QString::SkipEmptyParts);
+        QStringList dirsList = scanDirs.split(",", Qt::SkipEmptyParts);
         foreach (QString dirName, dirsList) {
             QString absPath = absPrefix + dirName;
             if (!QFile::exists(absPath)) {
