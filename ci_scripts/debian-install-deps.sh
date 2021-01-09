@@ -28,7 +28,6 @@ $SUDO apt-get install -y \
         libqt5webkit5-dev \
         libqt5xmlpatterns5-dev \
         libquazip5-dev \
-        $(if ! lsb_release -d | grep bullseye>/dev/null; then echo libquazip5-headers; fi) \
         libsdl-dev \
         libssl-dev \
         libswscale-dev \

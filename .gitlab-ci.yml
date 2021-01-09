@@ -1,47 +1,19 @@
-neon-bionic:
-  image: kaidan/neon-bionic
-  before_script:
-   - ./ci_scripts/debian-install-deps.sh
-  script:
-   - ./ci_scripts/build.sh
-
-ubuntu-xenial:
-  image: ubuntu:xenial
-  before_script:
-   - ./ci_scripts/debian-install-deps.sh
-  script:
-   - ./ci_scripts/build.sh
-
-ubuntu-bionic:
-  image: ubuntu:bionic
+neon-focal:
+  image: kdeneon/plasma:unstable
   before_script:
    - ./ci_scripts/debian-install-deps.sh
   script:
    - ./ci_scripts/build.sh
 
 debian-sid:
-  image: kaidan/debian-unstable
+  image: debian:unstable
   before_script:
    - ./ci_scripts/debian-install-deps.sh
   script:
    - ./ci_scripts/build.sh
 
-debian-buster:
-  image: debian:buster
-  before_script:
-   - ./ci_scripts/debian-install-deps.sh
-  script:
-   - ./ci_scripts/build.sh
-
-debian-stretch:
-  image: debian:stretch
-  before_script:
-   - ./ci_scripts/debian-install-deps.sh
-  script:
-   - ./ci_scripts/build.sh
-
-fedora-30:
-  image: fedora:30
+fedora-33:
+  image: fedora:33
   before_script:
    - ./ci_scripts/fedora-install-deps.sh
   script:

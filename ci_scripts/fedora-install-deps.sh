@@ -4,7 +4,7 @@ dnf install \
 
 dnf install \
     git \
-    qt5 \
+    qt5-qtbase-devel \
     qt5-qtsvg-devel \
     qt5-qtwebkit-devel \
     qt5-qtxmlpatterns-devel \
