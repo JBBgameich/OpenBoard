@@ -231,7 +231,7 @@ UBDownloadProgressDelegate::UBDownloadProgressDelegate(QObject *parent):QItemDel
 
 void UBDownloadProgressDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QStyleOptionProgressBarV2 opt;
+    QStyleOptionProgressBar opt;
     opt.rect = option.rect;
     opt.minimum = 0;
     opt.maximum = index.data(Qt::UserRole + 1).toInt();
