@@ -38,7 +38,6 @@ find_package(Qt5 REQUIRED COMPONENTS
     MultimediaWidgets
     Network
     PrintSupport
-    Script
     Svg
     UiTools
     Xml
@@ -423,7 +422,6 @@ target_link_libraries(openboard
     Qt5::MultimediaWidgets
     Qt5::Network
     Qt5::PrintSupport
-    Qt5::Script
     Qt5::Svg
     Qt5::UiTools
     Qt5::Xml
