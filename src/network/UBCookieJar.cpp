@@ -207,7 +207,7 @@ void UBCookieJar::save()
         if (cookies.at(i).isSessionCookie())
             cookies.removeAt(i);
     }
-    cookieSettings.setValue(QLatin1String("cookies"), qVariantFromValue<QList<QNetworkCookie> >(cookies));
+    cookieSettings.setValue(QLatin1String("cookies"), QVariant::fromValue<QList<QNetworkCookie> >(cookies));
     cookieSettings.beginGroup(QLatin1String("Exceptions"));
     cookieSettings.setValue(QLatin1String("block"), mExceptionsBlock);
     cookieSettings.setValue(QLatin1String("allow"), mExceptionsAllow);
