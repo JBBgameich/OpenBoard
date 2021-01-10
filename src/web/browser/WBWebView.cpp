@@ -316,7 +316,7 @@ void WBWebView::wheelEvent(QWheelEvent *event)
     {
         QPoint numDegrees = event->angleDelta() / 8;
         QPoint numSteps = numDegrees / 15;
-        setTextSizeMultiplier(textSizeMultiplier() + numSteps.manhattanLength() * 0.1);
+        setTextSizeMultiplier(textSizeMultiplier() + (numSteps.x() + numSteps.y()) * 0.1);
         event->accept();
         return;
     }
