@@ -143,7 +143,6 @@ set(OPENBOARD_SOURCES
     src/domain/UBResizableGraphicsItem.cpp
     src/domain/UBSelectionFrame.cpp
     src/domain/UBUndoCommand.cpp
-    src/frameworks/UBBase32.cpp
     src/frameworks/UBCoreGraphicsScene.cpp
     src/frameworks/UBCryptoUtils.cpp
     src/frameworks/UBFileSystemUtils.cpp
