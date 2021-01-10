@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 include(FeatureSummary)
-
+include(GNUInstallDirs)
 
 #
 # Version
@@ -445,10 +445,10 @@ endif()
 # Installing
 #
 if(UNIX AND NOT APPLE)
-    install(TARGETS openboard DESTINATION bin/)
-    install(DIRECTORY resources/ DESTINATION share/OpenBoard)
-    install(FILES ${QM_FILES} DESTINATION share/OpenBoard/i18n)
-    install(FILES resources/ch.openboard.OpenBoard.desktop DESTINATION share/applications)
+    install(TARGETS openboard DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(DIRECTORY resources/ DESTINATION ${CMAKE_INSTALL_DATADIR}/OpenBoard)
+    install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATADIR}/OpenBoard/i18n)
+    install(FILES resources/ch.openboard.OpenBoard.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 endif()
 
 if(WIN32)
