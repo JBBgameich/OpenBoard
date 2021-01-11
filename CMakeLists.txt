@@ -414,9 +414,13 @@ target_include_directories(openboard PUBLIC
     src/pdf-merger
     src/qtsingleapplication/src
     src/web/browser
-
     ${QUAZIP_INCLUDE_DIRS}
     ${FFMPEG_INCLUDE_DIRS}
+)
+
+target_link_directories(openboard
+    PRIVATE
+    ${FFMPEG_LIBRARY_DIRS}
 )
 
 target_link_libraries(openboard
