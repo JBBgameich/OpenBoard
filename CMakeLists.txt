@@ -50,7 +50,7 @@ find_package(Qt5 5.14 REQUIRED COMPONENTS
 find_package(ECM REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake) # Fall back to included modules if ECM is to old
 
-find_package(QuaZip-Qt5 1.0)
+find_package(QuaZip-Qt5 1.0 QUIET)
 if (NOT QuaZip-Qt5_FOUND)
 	find_package(QuaZip 0.6 REQUIRED)
 endif()
