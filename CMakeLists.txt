@@ -383,6 +383,7 @@ set(TS_FILES
 )
 
 qt5_create_translation(QM_FILES
+    OPTIONS -silent
     ${CMAKE_SOURCE_DIR}
     ${TS_FILES}
 )
