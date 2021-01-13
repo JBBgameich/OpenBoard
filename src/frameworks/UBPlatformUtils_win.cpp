@@ -104,7 +104,7 @@ QString UBPlatformUtils::osUserLoginName()
 {
     WCHAR winUserName[256 + 1];
     DWORD winUserNameSize = sizeof(winUserName);
-    GetUserName( winUserName, &winUserNameSize );
+    GetUserNameW( winUserName, &winUserNameSize );
     QString userName = QString::fromWCharArray(winUserName, winUserNameSize - 1);
 
     return userName;
@@ -115,7 +115,7 @@ QString UBPlatformUtils::computerName()
 {
     WCHAR winComputerName[256 + 1];
     DWORD winComputerNameSize = sizeof(winComputerName);
-    GetComputerName(winComputerName, &winComputerNameSize );
+    GetComputerNameW(winComputerName, &winComputerNameSize );
     QString computerName = QString::fromWCharArray(winComputerName, winComputerNameSize - 1);
 
     return computerName;

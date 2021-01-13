@@ -458,17 +458,11 @@ endif()
 #
 # Installing
 #
-if(UNIX AND NOT APPLE)
+if(NOT APPLE)
     install(TARGETS openboard DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(DIRECTORY resources/ DESTINATION ${CMAKE_INSTALL_DATADIR}/OpenBoard)
     install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATADIR}/OpenBoard/i18n)
     install(FILES resources/ch.openboard.OpenBoard.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
-endif()
-
-if(WIN32)
-    install(TARGETS openboard DESTINATION)
-    install(DIRECTORY resources/ DESTINATION)
-    install(FILES ${QM_FILES} DESTINATION i18n)
 endif()
 
 if(APPLE)

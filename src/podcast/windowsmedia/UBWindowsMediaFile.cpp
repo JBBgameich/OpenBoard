@@ -85,7 +85,7 @@ bool UBWindowsMediaFile::init(const QString& videoFileName, const QString& profi
         return false;
     }
 
-    if (FAILED(mWMProfileManager->LoadProfileByData((LPCTSTR) profileData.utf16(), &mWMProfile)))
+    if (FAILED(mWMProfileManager->LoadProfileByData((LPCWSTR) profileData.utf16(), &mWMProfile)))
     {
         setLastErrorMessage("Unable to load WMProfileManager custom profile");
         close();
@@ -175,7 +175,7 @@ bool UBWindowsMediaFile::init(const QString& videoFileName, const QString& profi
         return false;
     }
 
-    if (FAILED(mWMWriter->SetOutputFilename((LPCTSTR) videoFileName.utf16())))
+    if (FAILED(mWMWriter->SetOutputFilename((LPCWSTR)videoFileName.utf16())))
     {
         setLastErrorMessage("Unable to set the output filename");
         close();
@@ -223,7 +223,7 @@ bool UBWindowsMediaFile::close()
         IWMHeaderInfo     *headerInfo = 0;
 
         WMCreateEditor(&editor);
-        editor->Open((LPCTSTR) mVideoFileName.utf16());
+        editor->Open((LPCWSTR) mVideoFileName.utf16());
         editor->QueryInterface(IID_IWMHeaderInfo, (void**)&headerInfo);
 
         foreach(MarkerInfo mi, mChapters)

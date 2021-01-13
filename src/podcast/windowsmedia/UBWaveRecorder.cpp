@@ -65,7 +65,7 @@ bool UBWaveRecorder::init(const QString& waveInDeviceName)
         {
             if (waveInGetDevCaps(i, &caps, sizeof(caps)) == MMSYSERR_NOERROR)
             {
-                QString deviceName  = QString::fromWCharArray(caps.szPname);
+                QString deviceName  = QString::fromUtf8(caps.szPname);
 
                 if (deviceName == waveInDeviceName)
                 {
@@ -238,7 +238,7 @@ QStringList UBWaveRecorder::waveInDevices()
     {
         if (waveInGetDevCaps(i, &caps, sizeof(caps)) == MMSYSERR_NOERROR)
         {
-            devices  << QString::fromWCharArray(caps.szPname);
+            devices  << QString::fromUtf8(caps.szPname);
         }
         else
         {
@@ -254,7 +254,7 @@ QStringList UBWaveRecorder::waveInDevices()
 
         if (mixerGetDevCaps(i, &caps, sizeof(caps)) == MMSYSERR_NOERROR)
         {
-            qDebug() << "Mixer: "  << QString::fromWCharArray(caps.szPname);
+            qDebug() << "Mixer: "  << QString::fromUtf8(caps.szPname);
         }
     }
 
