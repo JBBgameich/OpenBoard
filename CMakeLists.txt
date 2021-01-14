@@ -59,6 +59,15 @@ find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+if (WIN32)
+    find_package(JPEG REQUIRED)
+    find_package(Freetype REQUIRED)
+    find_package(TIFF REQUIRED)
+    find_package(PNG REQUIRED)
+    find_package(OpenJPEG REQUIRED)
+    find_package(LCMS2 REQUIRED)
+endif()
+
 #
 # Main sources
 #
@@ -424,6 +433,22 @@ target_link_directories(openboard
     ${FFMPEG_LIBRARY_DIRS}
 )
 
+if (WIN32)
+    target_link_libraries(openboard
+        winmm.dll
+        wmvcore.dll
+
+        # Poppler builds a static library on MSVC, but doesn't tell us which libraries it used
+        # Link against them ourselves
+        JPEG::JPEG
+        TIFF::TIFF
+        PNG::PNG
+        LCMS2::LCMS2
+        ${OPENJPEG_LIBRARIES}
+        ${FREETYPE_LIBRARIES}
+    )
+endif()
+
 target_link_libraries(openboard
     Qt5::Multimedia
     Qt5::MultimediaWidgets
@@ -440,6 +465,7 @@ target_link_libraries(openboard
     OpenSSL::Crypto
     ${QUAZIP_LIBRARIES}
     ${FFMPEG_LIBRARIES}
+    ${Poppler_LIBRARIES}
     ZLIB::ZLIB
 )
 
