@@ -45,7 +45,7 @@ void UBPlatformUtils::init()
 
 QString UBPlatformUtils::applicationResourcesDirectory()
 {
-    return QApplication::applicationDirPath();
+    return QApplication::applicationDirPath() + "/../share/OpenBoard/";
 }
 
 
