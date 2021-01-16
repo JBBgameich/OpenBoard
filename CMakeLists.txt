@@ -59,14 +59,7 @@ find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(PkgConfig REQUIRED)
 
-if (WIN32)
-    find_package(JPEG REQUIRED)
-    find_package(Freetype REQUIRED)
-    find_package(TIFF REQUIRED)
-    find_package(PNG REQUIRED)
-    find_package(OpenJPEG REQUIRED)
-    find_package(LCMS2 REQUIRED)
-endif()
+include(PopplerStaticFix)
 
 #
 # Main sources
@@ -285,7 +278,7 @@ set(OPENBOARD_SOURCES
 #
 # Platform specific sources
 #
-if(UNIX AND NOT APPLE) ## Linux and *BSD
+if(UNIX AND NOT APPLE) # Linux and *BSD
     set(OPENBOARD_SOURCES
         ${OPENBOARD_SOURCES}
         src/desktop/UBWindowCapture_linux.cpp
@@ -437,15 +430,6 @@ if (WIN32)
     target_link_libraries(openboard
         winmm.dll
         wmvcore.dll
-
-        # Poppler builds a static library on MSVC, but doesn't tell us which libraries it used
-        # Link against them ourselves
-        JPEG::JPEG
-        TIFF::TIFF
-        PNG::PNG
-        LCMS2::LCMS2
-        ${OPENJPEG_LIBRARIES}
-        ${FREETYPE_LIBRARIES}
     )
 endif()
 
