@@ -19,6 +19,22 @@ fedora-33:
   script:
    - ./ci_scripts/build.sh
 
+windows:
+  tags:
+   - shared-windows
+   - windows
+   - windows-1809
+  before_script:
+   - choco install -y python
+   - choco install -y python2
+   - choco install -y git
+   - choco install -y visualstudio2019-workload-nativedesktop
+  script:
+   - git clone -q --depth=1 https://invent.kde.org/packaging/craftmaster.git C:\CraftMaster\CraftMaster
+   - git clone -q --depth=1 -b work/openboard https://invent.kde.org/jbbgameich/craft-blueprints-kde.git C:\CraftMaster\blueprints\
+   - C:\Python39\python.exe C:\CraftMaster\CraftMaster\CraftMaster.py --config ci_scripts/CraftMaster.ini -c --no-cache -i poppler
+   - C:\Python39\python.exe C:\CraftMaster\CraftMaster\CraftMaster.py --config ci_scripts/CraftMaster.ini -c nextboard
+
 cache:
   paths:
     - ccache/
