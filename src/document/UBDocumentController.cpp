@@ -539,7 +539,14 @@ bool UBDocumentTreeModel::setData(const QModelIndex &index, const QVariant &valu
         if (!index.isValid() || value.toString().isEmpty()) {
             return false;
         }
-        setNewName(index, value.toString());
+
+        QString fullNewName = value.toString();
+        if (isCatalog(index))
+        {
+            fullNewName.replace('/', '-');
+        }
+
+        setNewName(index, fullNewName);
         return true;
     }
     return QAbstractItemModel::setData(index, value, role);
@@ -1019,7 +1026,7 @@ QString UBDocumentTreeModel::virtualPathForIndex(const QModelIndex &pIndex) cons
     return virtualDirForIndex(pIndex) + "/" + curNode->nodeName();
 }
 
-QStringList UBDocumentTreeModel::nodeNameList(const QModelIndex &pIndex) const
+QStringList UBDocumentTreeModel::nodeNameList(const QModelIndex &pIndex, bool distinctNodeType) const
 {
     QStringList result;
 
@@ -1028,8 +1035,23 @@ QStringList UBDocumentTreeModel::nodeNameList(const QModelIndex &pIndex) const
         return QStringList();
     }
 
-    foreach (UBDocumentTreeNode *curNode, catalog->children()) {
-        result << curNode->nodeName();
+    foreach (UBDocumentTreeNode *curNode, catalog->children())
+    {
+        if (distinctNodeType)
+        {
+            if (curNode->nodeType() == UBDocumentTreeNode::Catalog)
+            {
+                result << "folder - " + curNode->nodeName();
+            }
+            else
+            {
+                result << curNode->nodeName();
+            }
+        }
+        else
+        {
+            result << curNode->nodeName();
+        }
     }
 
     return result;
@@ -1070,9 +1092,12 @@ QModelIndex UBDocumentTreeModel::goTo(const QString &dir)
         QString curLevelName = pathList.takeFirst();
         if (searchingNode) {
             searchingNode = false;
-            for (int i = 0; i < rowCount(parentIndex); ++i) {
+            int irowCount = rowCount(parentIndex);
+            for (int i = 0; i < irowCount; ++i) {
                 QModelIndex curChildIndex = index(i, 0, parentIndex);
-                if (nodeFromIndex(curChildIndex)->nodeName() == curLevelName) {
+                UBDocumentTreeNode* currentNode = nodeFromIndex(curChildIndex);
+                if (currentNode->nodeName() == curLevelName && currentNode->nodeType() == UBDocumentTreeNode::Catalog)
+                {
                     searchingNode = true;
                     parentIndex = curChildIndex;
                     break;
@@ -1157,7 +1182,6 @@ void UBDocumentTreeModel::setNewName(const QModelIndex &index, const QString &ne
     QString magicSeparator = "+!##s";
     if (isCatalog(index)) {
         QString fullNewName = newName;
-        fullNewName.replace('/', '-');
         if (!newName.contains(magicSeparator)) {
             indexNode->setNodeName(fullNewName);
             QString virtualDir = virtualDirForIndex(index);
