@@ -835,6 +835,10 @@
         <source>Color 5</source>
         <translation>Colore 5</translation>
     </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
+        <translation>disegna linee di griglia intermedie</translation>
+    </message>
 </context>
 <context>
     <name>PasswordDialog</name>
@@ -936,6 +940,10 @@
     <message>
         <source>Grid size</source>
         <translation>Dimensione della griglia</translation>
+    </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
+        <translation>disegna linee di griglia intermedie</translation>
     </message>
 </context>
 <context>
@@ -1113,7 +1121,7 @@
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Svuota il cestino</translation>
+        <translation type="vanished">Svuota il cestino</translation>
     </message>
     <message>
         <source>Are you sure you want to empty trash?</source>
@@ -1161,7 +1169,7 @@
     </message>
     <message>
         <source>Empty</source>
-        <translation type="vanished">Vuoto</translation>
+        <translation>Vuoto</translation>
     </message>
     <message>
         <source>Trash</source>
@@ -1229,10 +1237,6 @@
     <message>
         <source>Title page</source>
         <translation>Frontespizio</translation>
-    </message>
-    <message>
-        <source>Empty My Documents</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2221,6 +2225,10 @@ Vuoi ignorare gli errori per questo host?</translation>
         <source>Cache</source>
         <translation>Cache</translation>
     </message>
+    <message>
+        <source>Axes</source>
+        <translation>Assi</translation>
+    </message>
 </context>
 <context>
     <name>UBTrapFlashController</name>
@@ -2584,7 +2592,7 @@ Si prega di riavviare l&apos;applicazione per accedere ai documenti aggiornati.<
     <name>XPDFRenderer</name>
     <message>
         <source>Processing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Processo in corso…</translation>
     </message>
 </context>
 <context>
@@ -2942,11 +2950,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>PDF Rendering</source>
-        <translation type="unfinished"></translation>
+        <translation>rendering PDF</translation>
     </message>
     <message>
         <source>Enable quality loss to increase zoom performances</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Permettere una perdita di qualità per aumentare le prestazioni dello zoom</translation>
+    </message>
+    <message>
+        <source>Improve zoom execution time (can slightly affect rendering quality)</source>
+        <translation>Migliorare la velocità dello zoom (può influire leggermente sulla qualità del rendering)</translation>
     </message>
 </context>
 <context>

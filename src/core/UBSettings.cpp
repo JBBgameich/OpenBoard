@@ -50,6 +50,7 @@ int UBSettings::crossSize = 24;
 int UBSettings::defaultCrossSize = 24;
 int UBSettings::minCrossSize = 12;
 int UBSettings::maxCrossSize = 96; //TODO: user-settable?
+bool UBSettings::intermediateLines = false;
 int UBSettings::colorPaletteSize = 5;
 int UBSettings::objectFrameWidth = 20;
 int UBSettings::boardMargin = 10;
@@ -441,6 +442,15 @@ void UBSettings::init()
     communityPsw = new UBSetting(this, "Community", "Password", "");
     communityCredentialsPersistence = new UBSetting(this,"Community", "CredentialsPersistence",false);
 
+    enableToolAxes = new UBSetting(this, "Board", "EnableToolAxes", false);
+    enableIntermediateLines = new UBSetting(this, "Board", "EnableIntermediateLines", false);
+
+    if (enableToolAxes->get().toBool())
+    {
+        // add axes tool id to list
+        UBToolsManager::manager()->addTool(UBToolsManager::manager()->axes);
+    }
+
     QStringList uris = UBToolsManager::manager()->allToolIDs();
 
     favoritesNativeToolUris = new UBSetting(this, "App", "FavoriteToolURIs", uris);
@@ -479,6 +489,8 @@ void UBSettings::init()
     showDateColumnOnAlphabeticalSort = new UBSetting(this, "Document", "ShowDateColumnOnAlphabeticalSort", false);
     emptyTrashForOlderDocuments = new UBSetting(this, "Document", "emptyTrashForOlderDocuments", false);
     emptyTrashDaysValue = new UBSetting(this, "Document", "emptyTrashDaysValue", 30);
+
+    pointerDiameter = value("Board/PointerDiameter", pointerDiameter).toInt();
 
     cleanNonPersistentSettings();
     checkNewSettings();

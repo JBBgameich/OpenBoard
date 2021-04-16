@@ -827,6 +827,10 @@
         <source>Color 5</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDialog</name>
@@ -923,6 +927,10 @@
     <name>UBBackgroundPalette</name>
     <message>
         <source>Grid size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1155,11 +1163,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Empty My Documents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty Trash</source>
+        <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2008,6 +2012,10 @@ Do you want to ignore these errors for this host?</source>
         <source>Cache</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Axes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UBTrapFlashController</name>
@@ -2700,7 +2708,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable quality loss to increase zoom performances</source>
+        <source>Improve zoom execution time (can slightly affect rendering quality)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

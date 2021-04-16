@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation>Strg + T</translation>
+        <translation>Strg+T</translation>
     </message>
     <message>
         <source>Backgrounds</source>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Ctrl+Z</source>
-        <translation>Strg + Z</translation>
+        <translation>Strg+Z</translation>
     </message>
     <message>
         <source>Redo</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Ctrl+Y</source>
-        <translation>Strg + Y</translation>
+        <translation>Strg+Y</translation>
     </message>
     <message>
         <source>Previous</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Ctrl+D</source>
-        <translation>Strg + D</translation>
+        <translation>Strg+D</translation>
     </message>
     <message>
         <source>Web Browsing</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Ctrl+W</source>
-        <translation>Strg + W</translation>
+        <translation>Strg+W</translation>
     </message>
     <message>
         <source>Line</source>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation>Strg + B</translation>
+        <translation>Strg+B</translation>
     </message>
     <message>
         <source>Erase</source>
@@ -273,7 +273,7 @@
     </message>
     <message>
         <source>Ctrl+L</source>
-        <translation>Strg + L</translation>
+        <translation>Strg+L</translation>
     </message>
     <message>
         <source>Show Desktop</source>
@@ -285,7 +285,7 @@
     </message>
     <message>
         <source>Ctrl+Shift+H</source>
-        <translation>Strg + Umschalt + H</translation>
+        <translation>Strg+Umschalt+H</translation>
     </message>
     <message>
         <source>Bigger</source>
@@ -353,7 +353,7 @@
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation>Strg + O</translation>
+        <translation>Strg+O</translation>
     </message>
     <message>
         <source>Duplicate</source>
@@ -545,7 +545,7 @@
     </message>
     <message>
         <source>Ctrl+I</source>
-        <translation>Strg + I</translation>
+        <translation>Strg+I</translation>
     </message>
     <message>
         <source>Erase Annotation</source>
@@ -553,7 +553,7 @@
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation>Strg + E</translation>
+        <translation>Strg+E</translation>
     </message>
     <message>
         <source>Marker</source>
@@ -565,7 +565,7 @@
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation>Strg + M</translation>
+        <translation>Strg+M</translation>
     </message>
     <message>
         <source>Selector</source>
@@ -577,7 +577,7 @@
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation>Strg + F</translation>
+        <translation>Strg+F</translation>
     </message>
     <message>
         <source>Hand</source>
@@ -597,7 +597,7 @@
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation>Strg + G</translation>
+        <translation>Strg+G</translation>
     </message>
     <message>
         <source>Draw Lines</source>
@@ -605,7 +605,7 @@
     </message>
     <message>
         <source>Ctrl+J</source>
-        <translation>Strg + J</translation>
+        <translation>Strg+J</translation>
     </message>
     <message>
         <source>Text</source>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation>Strg + K</translation>
+        <translation>Strg+K</translation>
     </message>
     <message>
         <source>Capture</source>
@@ -757,7 +757,7 @@
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation>Strg + H</translation>
+        <translation>Strg+H</translation>
     </message>
     <message>
         <source>OpenBoard</source>
@@ -834,6 +834,10 @@
     <message>
         <source>Color 5</source>
         <translation>Farbe 5</translation>
+    </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
+        <translation>Gitter-Zwischenlinien zeichnen</translation>
     </message>
 </context>
 <context>
@@ -936,6 +940,10 @@
     <message>
         <source>Grid size</source>
         <translation>Gittergrösse</translation>
+    </message>
+    <message>
+        <source>Draw intermediate grid lines</source>
+        <translation>Gitter-Zwischenlinien zeichnen</translation>
     </message>
 </context>
 <context>
@@ -1113,7 +1121,7 @@
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Papierkorb leeren</translation>
+        <translation type="vanished">Papierkorb leeren</translation>
     </message>
     <message>
         <source>Are you sure you want to empty trash?</source>
@@ -1161,7 +1169,7 @@
     </message>
     <message>
         <source>Empty</source>
-        <translation type="vanished">Leeren</translation>
+        <translation>Leeren</translation>
     </message>
     <message>
         <source>Trash</source>
@@ -1232,7 +1240,7 @@
     </message>
     <message>
         <source>Empty My Documents</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Eigene Dokumente leeren</translation>
     </message>
 </context>
 <context>
@@ -2226,6 +2234,10 @@ Miniaturansicht der Seite %1 wird geladen</translation>
         <source>Cache</source>
         <translation>Zwischenspeicher</translation>
     </message>
+    <message>
+        <source>Axes</source>
+        <translation>Achsen</translation>
+    </message>
 </context>
 <context>
     <name>UBTrapFlashController</name>
@@ -2589,7 +2601,7 @@ Bitte starten Sie die Anwendung erneut, um auf die aktualisierten Dokumente zugr
     <name>XPDFRenderer</name>
     <message>
         <source>Processing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitung…</translation>
     </message>
 </context>
 <context>
@@ -2947,11 +2959,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>PDF Rendering</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF-Wiedergabe</translation>
     </message>
     <message>
         <source>Enable quality loss to increase zoom performances</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zulassen eines Qualitätsverlusts zur Erhöhung der Zoomleistung</translation>
+    </message>
+    <message>
+        <source>Improve zoom execution time (can slightly affect rendering quality)</source>
+        <translation>Die Zoomgeschwindigkeit verbessern (kann die Renderqualität geringfügig beeinträchtigen)</translation>
     </message>
 </context>
 <context>
