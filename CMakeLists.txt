@@ -237,6 +237,7 @@ set(OPENBOARD_SOURCES
     src/podcast/intranet/UBIntranetPodcastPublisher.cpp
     src/podcast/youtube/UBYouTubePublisher.cpp
     src/tools/UBAbstractDrawRuler.cpp
+    src/tools/UBGraphicsAxes.cpp
     src/tools/UBGraphicsCache.cpp
     src/tools/UBGraphicsCompass.cpp
     src/tools/UBGraphicsCurtainItem.cpp
